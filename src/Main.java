@@ -1,21 +1,23 @@
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     public final static double SCREEN_WIDTH = Game.TILE_SIZE * Game.GRID_COLS;
     public final static double SCREEN_HEIGHT = Game.TILE_SIZE * Game.GRID_ROWS;
-    public static Window window = Window.Menu;
+
+    private static Stage primaryStage;
+    private static Scene scene;
+    private static Group root;
+    private static Window window;
 
     @Override
     public void start(Stage primaryStage) {
+
+        Main.primaryStage = primaryStage;
 
         // Set the window title and disable resizing
         primaryStage.setTitle("Snake vs Blocks");
@@ -26,50 +28,55 @@ public class Main extends Application {
 
         // Initialize the root Node
         Group root = new Group();
-
-        // Initialize the Canvas
-        Canvas canvas = new Canvas(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
-
-        // Add Canvas to root Node
-        root.getChildren().add(canvas);
+        Main.root = root;
 
         // Initialize the Scene
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+        Main.scene = scene;
 
         // Set Scene and show Stage
         primaryStage.setScene(scene);
         primaryStage.show();
 
         // Start the animation loop
-        animationLoop(canvas.getGraphicsContext2D());
+        animationLoop();
     }
 
-    private void animationLoop(GraphicsContext gc) {
+    private void animationLoop() {
+
+        // Set the default window to Menu
+        window = Window.Menu;
 
         // Initialize a Game object
-        Game game = new Game(gc);
+        Game game = new Game(Main.root);
 
-        // Set some global attributes
-        gc.setTextAlign(TextAlignment.CENTER);
-        gc.setTextBaseline(VPos.CENTER);
-
-        // initialize AnimationTimer
+        // Initialize animationTimer
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 switch (Main.window) {
-                    case Menu: game.showMenu();
-                        break;
-                    case Game: // Show game play
-                        break;
-                    case LeaderBoard: // Show leader board
-                        break;
+                    case Menu: {
+                        Main.primaryStage.setTitle("Snake Vs Blocks - Menu");
+                        game.showMenu();
+                    } break;
+                    case Gameplay: {
+                        Main.primaryStage.setTitle("Snake Vs Blocks");
+                        game.showGameplay();
+                    } break;
+                    case Leaderboard: {
+                        Main.primaryStage.setTitle("Snake Vs Blocks - Leaderboard");
+                        game.showLeaderboard();
+                    } break;
                 }
             }
         };
 
         // Start the animationTimer
         animationTimer.start();
+    }
+
+    public static void setWindow(Window window) {
+        Main.window = window;
     }
 
     public static void main(String[] args) {

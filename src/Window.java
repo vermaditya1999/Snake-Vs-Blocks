@@ -1,5 +1,5 @@
 public enum Window {
     Menu,
-    LeaderBoard,
-    Game
+    Leaderboard,
+    Gameplay
 }
