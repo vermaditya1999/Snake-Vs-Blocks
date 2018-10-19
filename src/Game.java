@@ -9,6 +9,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
+import java.util.ArrayList;
+
 public class Game {
     public final static int GRID_ROWS = 8;
     public final static int GRID_COLS = 5;
@@ -118,6 +120,7 @@ public class Game {
     private class Gameplay {
 
         private GraphicsContext gpGC = gpCanvas.getGraphicsContext2D();
+        ArrayList<Burst> bursts = new ArrayList<Burst>();
 
         {
             gpGC.setTextAlign(TextAlignment.CENTER);
@@ -127,6 +130,13 @@ public class Game {
                 if (event.getCode() == KeyCode.ESCAPE) {
                     setWindow(Window.Menu);
                 }
+            });
+
+            gpCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+                double x = event.getX();
+                double y = event.getY();
+
+                bursts.add(new Burst(x, y));
             });
         }
 
@@ -139,7 +149,17 @@ public class Game {
             // Temporary text
             gpGC.setFill(Color.WHITE);
             gpGC.setFont(new Font(64));
-            gpGC.fillText("Gameplay", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+            gpGC.fillText("Gameplay", SCREEN_WIDTH / 2, TILE_SIZE);
+
+            for (int i = bursts.size() - 1; i >= 0; i--) {
+                Burst b = bursts.get(i);
+
+                if (b.isDead()) {
+                    bursts.remove(i);
+                } else {
+                    b.show(gpGC);
+                }
+            }
         }
     }
 

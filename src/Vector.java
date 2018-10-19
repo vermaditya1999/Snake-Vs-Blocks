@@ -12,8 +12,8 @@ public class Vector {
     public static Vector random() {
         Random rnd = new Random();
 
-        double x = rnd.nextDouble();
-        double y = rnd.nextDouble();
+        double x = rnd.nextDouble() * 2 - 1;
+        double y = rnd.nextDouble() * 2 - 1;
 
         double mag = Math.sqrt(x * x + y * y);
 
@@ -51,5 +51,9 @@ public class Vector {
             x /= mag;
             y /= mag;
         }
+    }
+
+    public Vector copy() {
+        return new Vector(x, y);
     }
 }
