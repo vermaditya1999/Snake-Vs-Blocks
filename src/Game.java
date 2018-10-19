@@ -96,7 +96,7 @@ public class Game {
 
         public void showMenu() {
 
-            // set background
+            // Set background
             menuGC.setFill(Color.BLACK);
             menuGC.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -107,10 +107,10 @@ public class Game {
             menuGC.fillText("Vs", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - TILE_SIZE - 10);
             menuGC.fillText("Blocks", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 20);
 
-            // Leader board
+            // Leaderboard button
             menuGC.fillRect(TILE_SIZE, (GRID_ROWS - 3) * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-            // Play game
+            // Play game button
             menuGC.fillRect(3 * TILE_SIZE, (GRID_ROWS - 3) * TILE_SIZE, TILE_SIZE, TILE_SIZE);
         }
     }
@@ -136,6 +136,7 @@ public class Game {
             gpGC.setFill(Color.BLACK);
             gpGC.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
+            // Temporary text
             gpGC.setFill(Color.WHITE);
             gpGC.setFont(new Font(64));
             gpGC.fillText("Gameplay", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
@@ -158,9 +159,12 @@ public class Game {
         }
 
         public void showLeaderboard() {
+
+            // Set background
             lbGC.setFill(Color.BLACK);
             lbGC.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
+            // Temporary text
             lbGC.setFill(Color.WHITE);
             lbGC.setFont(new Font(64));
             lbGC.fillText("Leaderboard", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
@@ -172,15 +176,20 @@ public class Game {
             case Menu: {
                 Game.window = Window.Menu;
                 menuCanvas.toFront();
-            } break;
+            }
+            break;
+
             case Gameplay: {
                 Game.window = Window.Gameplay;
                 gpCanvas.toFront();
-            } break;
+            }
+            break;
+
             case Leaderboard: {
                 Game.window = Window.Leaderboard;
                 lbCanvas.toFront();
-            } break;
+            }
+            break;
         }
     }
 }
