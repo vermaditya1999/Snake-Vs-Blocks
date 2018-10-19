@@ -12,7 +12,11 @@ import javafx.scene.text.TextAlignment;
 public class Game {
     public final static int GRID_ROWS = 8;
     public final static int GRID_COLS = 5;
+
     public final static double TILE_SIZE = 75;
+
+    public final static double SCREEN_WIDTH = Game.TILE_SIZE * Game.GRID_COLS;
+    public final static double SCREEN_HEIGHT = Game.TILE_SIZE * Game.GRID_ROWS;
 
     public static Window window = Window.Menu;
 
@@ -20,21 +24,23 @@ public class Game {
     private boolean savedState;
 
     private Canvas menuCanvas;
-    private Canvas gameplayCanvas;
-    private Canvas leaderboardCanvas;
+    private Canvas gpCanvas;
+    private Canvas lbCanvas;
 
     private Menu menu;
     private Gameplay gameplay;
     private Leaderboard leaderboard;
 
     public Game(Group root) {
-        menuCanvas = new Canvas(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
-        gameplayCanvas = new Canvas(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
-        leaderboardCanvas = new Canvas(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
-        gameplayCanvas.setFocusTraversable(true);
+        menuCanvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
+        gpCanvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
+        lbCanvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+        // Detect KeyEvents
+        gpCanvas.setFocusTraversable(true);
 
         // Menu canvas, added at the end will be on the top
-        root.getChildren().addAll(gameplayCanvas, leaderboardCanvas, menuCanvas);
+        root.getChildren().addAll(gpCanvas, lbCanvas, menuCanvas);
 
         menu = new Menu();
         gameplay = new Gameplay();
@@ -54,27 +60,26 @@ public class Game {
     }
 
     private class Menu {
-        private double width = Main.SCREEN_WIDTH;
-        private double height = Main.SCREEN_HEIGHT;
-        private double tile = Game.TILE_SIZE;
+
         private GraphicsContext menuGC = menuCanvas.getGraphicsContext2D();
 
         {
             menuGC.setTextAlign(TextAlignment.CENTER);
             menuGC.setTextBaseline(VPos.CENTER);
+
             menuCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
                 double x = event.getX();
                 double y = event.getY();
 
                 // Leaderboard button
-                if ((x >= tile && x <= 2 * tile) &&
-                        (y >= (GRID_ROWS - 3) * tile && y <= (GRID_ROWS - 2) * tile)) {
+                if ((x >= TILE_SIZE && x <= 2 * TILE_SIZE) &&
+                        (y >= (GRID_ROWS - 3) * TILE_SIZE && y <= (GRID_ROWS - 2) * TILE_SIZE)) {
                     setWindow(Window.Leaderboard);
                 }
 
                 // Play Game button
-                if ((x >= 3 * tile && x <= 4 * tile) &&
-                        (y >= (GRID_ROWS - 3) * tile && y <= (GRID_ROWS - 2) * tile)) {
+                if ((x >= 3 * TILE_SIZE && x <= 4 * TILE_SIZE) &&
+                        (y >= (GRID_ROWS - 3) * TILE_SIZE && y <= (GRID_ROWS - 2) * TILE_SIZE)) {
                     setWindow(Window.Gameplay);
                 }
             });
@@ -84,59 +89,60 @@ public class Game {
 
             // set background
             menuGC.setFill(Color.rgb(32, 32, 32));
-            menuGC.fillRect(0, 0, width, height);
+            menuGC.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
             menuGC.setFill(Color.WHITE);
 
             menuGC.setFont(new Font(64));
-            menuGC.fillText("Snake", width / 2, height / 2 - 2 * tile);
-            menuGC.fillText("Vs", width / 2, height / 2 - tile - 10);
-            menuGC.fillText("Blocks", width / 2, height / 2 - 20);
+            menuGC.fillText("Snake", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 2 * TILE_SIZE);
+            menuGC.fillText("Vs", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - TILE_SIZE - 10);
+            menuGC.fillText("Blocks", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 20);
 
             // Leader board
-            menuGC.fillRect(tile, (GRID_ROWS - 3) * tile, tile, tile);
+            menuGC.fillRect(TILE_SIZE, (GRID_ROWS - 3) * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
             // Play game
-            menuGC.fillRect(3 * tile, (GRID_ROWS - 3) * tile, tile, tile);
+            menuGC.fillRect(3 * TILE_SIZE, (GRID_ROWS - 3) * TILE_SIZE, TILE_SIZE, TILE_SIZE);
         }
     }
 
     private class Gameplay {
-        private double width = Main.SCREEN_WIDTH;
-        private double height = Main.SCREEN_HEIGHT;
-        private double tile = Game.TILE_SIZE;
-        private GraphicsContext gpGC = gameplayCanvas.getGraphicsContext2D();
+        private GraphicsContext gpGC = gpCanvas.getGraphicsContext2D();
+
+        private double x, y;
 
         {
-            gpGC.setTextAlign(TextAlignment.CENTER);
-            gpGC.setTextBaseline(VPos.CENTER);
-            gameplayCanvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            gpCanvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
                 if (event.getCode() == KeyCode.ESCAPE) {
                     setWindow(Window.Menu);
                 }
             });
+
+            gpCanvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+                x = event.getX();
+                y = event.getY();
+            });
         }
 
         public void showGameplay() {
-            gpGC.setFill(Color.BLACK);
-            gpGC.fillRect(0, 0, width, height);
 
+            // Set background
+            gpGC.setFill(Color.rgb(55, 63, 81));
+            gpGC.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+            // Draw circle
             gpGC.setFill(Color.WHITE);
-            gpGC.setFont(new Font(64));
-            gpGC.fillText("GamePlay", width / 2, height / 2);
+            gpGC.fillOval(x, y, 25, 25);
         }
     }
 
     private class Leaderboard {
-        private double width = Main.SCREEN_WIDTH;
-        private double height = Main.SCREEN_HEIGHT;
-        private double tile = Game.TILE_SIZE;
-        private GraphicsContext lbGC = leaderboardCanvas.getGraphicsContext2D();
+        private GraphicsContext lbGC = lbCanvas.getGraphicsContext2D();
 
         {
             lbGC.setTextAlign(TextAlignment.CENTER);
             lbGC.setTextBaseline(VPos.CENTER);
-            leaderboardCanvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            lbCanvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
                 if (event.getCode() == KeyCode.ESCAPE) {
                     setWindow(Window.Menu);
                 }
@@ -145,11 +151,11 @@ public class Game {
 
         public void showLeaderboard() {
             lbGC.setFill(Color.BLACK);
-            lbGC.fillRect(0, 0, width, height);
+            lbGC.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
             lbGC.setFill(Color.WHITE);
             lbGC.setFont(new Font(64));
-            lbGC.fillText("Leaderboard", width / 2, height / 2);
+            lbGC.fillText("Leaderboard", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
         }
     }
 
@@ -161,11 +167,11 @@ public class Game {
             } break;
             case Gameplay: {
                 Game.window = Window.Gameplay;
-                gameplayCanvas.toFront();
+                gpCanvas.toFront();
             } break;
             case Leaderboard: {
                 Game.window = Window.Leaderboard;
-                leaderboardCanvas.toFront();
+                lbCanvas.toFront();
             } break;
         }
     }

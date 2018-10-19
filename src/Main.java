@@ -6,9 +6,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public final static double SCREEN_WIDTH = Game.TILE_SIZE * Game.GRID_COLS;
-    public final static double SCREEN_HEIGHT = Game.TILE_SIZE * Game.GRID_ROWS;
-
     private static Stage primaryStage;
     private static Scene scene;
     private static Group root;
@@ -25,12 +22,10 @@ public class Main extends Application {
         primaryStage.sizeToScene();
 
         // Initialize the root Node
-        Group root = new Group();
-        Main.root = root;
+        Main.root = new Group();
 
         // Initialize the Scene
-        Scene scene = new Scene(root, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
-        Main.scene = scene;
+        Main.scene = new Scene(root, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
         // Set Scene and show Stage
         primaryStage.setScene(scene);
