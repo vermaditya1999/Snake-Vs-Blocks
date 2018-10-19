@@ -97,7 +97,7 @@ public class Game {
         public void showMenu() {
 
             // set background
-            menuGC.setFill(Color.rgb(32, 32, 32));
+            menuGC.setFill(Color.BLACK);
             menuGC.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
             menuGC.setFill(Color.WHITE);
@@ -116,41 +116,40 @@ public class Game {
     }
 
     private class Gameplay {
+
         private GraphicsContext gpGC = gpCanvas.getGraphicsContext2D();
 
-        private double x, y;
-
         {
+            gpGC.setTextAlign(TextAlignment.CENTER);
+            gpGC.setTextBaseline(VPos.CENTER);
+
             gpCanvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
                 if (event.getCode() == KeyCode.ESCAPE) {
                     setWindow(Window.Menu);
                 }
-            });
-
-            gpCanvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
-                x = event.getX();
-                y = event.getY();
             });
         }
 
         public void showGameplay() {
 
             // Set background
-            gpGC.setFill(Color.rgb(55, 63, 81));
+            gpGC.setFill(Color.BLACK);
             gpGC.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-            // Draw circle
             gpGC.setFill(Color.WHITE);
-            gpGC.fillOval(x, y, 25, 25);
+            gpGC.setFont(new Font(64));
+            gpGC.fillText("Gameplay", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
         }
     }
 
     private class Leaderboard {
+
         private GraphicsContext lbGC = lbCanvas.getGraphicsContext2D();
 
         {
             lbGC.setTextAlign(TextAlignment.CENTER);
             lbGC.setTextBaseline(VPos.CENTER);
+
             lbCanvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
                 if (event.getCode() == KeyCode.ESCAPE) {
                     setWindow(Window.Menu);
