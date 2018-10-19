@@ -154,7 +154,7 @@ public class Game {
             for (int i = bursts.size() - 1; i >= 0; i--) {
                 Burst b = bursts.get(i);
 
-                if (b.isDead()) {
+                if (b.isOver()) {
                     bursts.remove(i);
                 } else {
                     b.show(gpGC);

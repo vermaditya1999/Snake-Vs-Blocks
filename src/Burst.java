@@ -17,7 +17,7 @@ public class Burst {
         particles.add(new Particle(x, y));
     }
 
-    public boolean isDead() {
+    public boolean isOver() {
         return particles.size() == 0;
     }
 
