@@ -6,8 +6,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public final static double SCREEN_WIDTH = 400;
-    public final static double SCREEN_HEIGHT = 640;
+    public final static double SCREEN_WIDTH = Game.TILE_SIZE * Game.GRID_COLS;
+    public final static double SCREEN_HEIGHT = Game.TILE_SIZE * Game.GRID_ROWS;
 
     @Override
     public void start(Stage primaryStage) {
