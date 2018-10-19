@@ -68,13 +68,13 @@ public class Game {
 
                 // Leaderboard button
                 if ((x >= tile && x <= 2 * tile) &&
-                        (y >= (GRID_ROWS - 3) * tile && y <= (GRID_ROWS - 1) * tile)) {
+                        (y >= (GRID_ROWS - 3) * tile && y <= (GRID_ROWS - 2) * tile)) {
                     setWindow(Window.Leaderboard);
                 }
 
                 // Play Game button
                 if ((x >= 3 * tile && x <= 4 * tile) &&
-                        (y >= (GRID_ROWS - 3) * tile && y <= (GRID_ROWS - 1) * tile)) {
+                        (y >= (GRID_ROWS - 3) * tile && y <= (GRID_ROWS - 2) * tile)) {
                     setWindow(Window.Gameplay);
                 }
             });
