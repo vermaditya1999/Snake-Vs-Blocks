@@ -17,39 +17,39 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        // set the window title and disable resizing
+        // Set the window title and disable resizing
         primaryStage.setTitle("Snake vs Blocks");
         primaryStage.setResizable(false);
 
-        // avoid the unnecessary padding on right and bottom
+        // Avoid the unnecessary padding on right and bottom
         primaryStage.sizeToScene();
 
-        // initialize the root node
+        // Initialize the root Node
         Group root = new Group();
 
-        // initialize the canvas
+        // Initialize the Canvas
         Canvas canvas = new Canvas(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 
-        // add canvas to root node
+        // Add Canvas to root Node
         root.getChildren().add(canvas);
 
-        // initialize the scene
+        // Initialize the Scene
         Scene scene = new Scene(root);
 
-        // set the scene and show the stage
+        // Set Scene and show Stage
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        // start the animation loop
+        // Start the animation loop
         animationLoop(canvas.getGraphicsContext2D());
     }
 
     private void animationLoop(GraphicsContext gc) {
 
-        // initialize a Game object
+        // Initialize a Game object
         Game game = new Game(gc);
 
-        // set some global attributes
+        // Set some global attributes
         gc.setTextAlign(TextAlignment.CENTER);
         gc.setTextBaseline(VPos.CENTER);
 
@@ -60,15 +60,15 @@ public class Main extends Application {
                 switch (Main.window) {
                     case Menu: game.showMenu();
                         break;
-                    case Game: // show game play
+                    case Game: // Show game play
                         break;
-                    case LeaderBoard: // show leader board
+                    case LeaderBoard: // Show leader board
                         break;
                 }
             }
         };
 
-        // star the animation timer
+        // Start the animationTimer
         animationTimer.start();
     }
 
