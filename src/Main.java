@@ -18,8 +18,7 @@ public class Main extends Application {
 
         Main.primaryStage = primaryStage;
 
-        // Set the window title and disable resizing
-        primaryStage.setTitle("Snake vs Blocks");
+        // Disable resizing
         primaryStage.setResizable(false);
 
         // Avoid the unnecessary padding on right and bottom
