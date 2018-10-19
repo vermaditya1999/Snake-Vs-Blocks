@@ -1,8 +1,9 @@
-import javafx.event.EventHandler;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -12,6 +13,8 @@ public class Game {
     public final static int GRID_ROWS = 8;
     public final static int GRID_COLS = 5;
     public final static double TILE_SIZE = 75;
+
+    public static Window window = Window.Menu;
 
     // True only if there's a saved game available
     private boolean savedState;
@@ -28,6 +31,7 @@ public class Game {
         menuCanvas = new Canvas(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         gameplayCanvas = new Canvas(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         leaderboardCanvas = new Canvas(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+        gameplayCanvas.setFocusTraversable(true);
 
         // Menu canvas, added at the end will be on the top
         root.getChildren().addAll(gameplayCanvas, leaderboardCanvas, menuCanvas);
@@ -58,23 +62,20 @@ public class Game {
         {
             menuGC.setTextAlign(TextAlignment.CENTER);
             menuGC.setTextBaseline(VPos.CENTER);
-            menuCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    double x = event.getX();
-                    double y = event.getY();
+            menuCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+                double x = event.getX();
+                double y = event.getY();
 
-                    if ((x >= tile && x <= 2 * tile) &&
-                            (y >= (GRID_ROWS - 2) * tile && y <= (GRID_ROWS - 1) * tile)) {
-                        Main.setWindow(Window.Leaderboard);
-                        leaderboardCanvas.toFront();
-                    }
+                // Leaderboard button
+                if ((x >= tile && x <= 2 * tile) &&
+                        (y >= (GRID_ROWS - 3) * tile && y <= (GRID_ROWS - 1) * tile)) {
+                    setWindow(Window.Leaderboard);
+                }
 
-                    if ((x >= 3 * tile && x <= 4 * tile) &&
-                            (y >= (GRID_ROWS - 2) * tile && y <= (GRID_ROWS - 1) * tile)) {
-                        Main.setWindow(Window.Gameplay);
-                        gameplayCanvas.toFront();
-                    }
+                // Play Game button
+                if ((x >= 3 * tile && x <= 4 * tile) &&
+                        (y >= (GRID_ROWS - 3) * tile && y <= (GRID_ROWS - 1) * tile)) {
+                    setWindow(Window.Gameplay);
                 }
             });
         }
@@ -92,19 +93,11 @@ public class Game {
             menuGC.fillText("Vs", width / 2, height / 2 - tile - 10);
             menuGC.fillText("Blocks", width / 2, height / 2 - 20);
 
-            menuGC.setFont(new Font(32));
-            menuGC.fillText("Click to Play", width / 2, height / 2 + tile);
-
-            // Info menu
-            menuGC.fillRect(0, 0, tile, tile);
-
             // Leader board
-            menuGC.setFill(Color.BLANCHEDALMOND);
-            menuGC.fillRect(tile, (GRID_ROWS - 2) * tile, tile, tile);
+            menuGC.fillRect(tile, (GRID_ROWS - 3) * tile, tile, tile);
 
             // Play game
-            menuGC.setFill(Color.AQUAMARINE);
-            menuGC.fillRect(3 * tile, (GRID_ROWS - 2) * tile, tile, tile);
+            menuGC.fillRect(3 * tile, (GRID_ROWS - 3) * tile, tile, tile);
         }
     }
 
@@ -117,11 +110,9 @@ public class Game {
         {
             gpGC.setTextAlign(TextAlignment.CENTER);
             gpGC.setTextBaseline(VPos.CENTER);
-            gameplayCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    Main.setWindow(Window.Menu);
-                    menuCanvas.toFront();
+            gameplayCanvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+                if (event.getCode() == KeyCode.ESCAPE) {
+                    setWindow(Window.Menu);
                 }
             });
         }
@@ -145,11 +136,9 @@ public class Game {
         {
             lbGC.setTextAlign(TextAlignment.CENTER);
             lbGC.setTextBaseline(VPos.CENTER);
-            leaderboardCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    Main.setWindow(Window.Menu);
-                    menuCanvas.toFront();
+            leaderboardCanvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+                if (event.getCode() == KeyCode.ESCAPE) {
+                    setWindow(Window.Menu);
                 }
             });
         }
@@ -161,6 +150,23 @@ public class Game {
             lbGC.setFill(Color.WHITE);
             lbGC.setFont(new Font(64));
             lbGC.fillText("Leaderboard", width / 2, height / 2);
+        }
+    }
+
+    private void setWindow(Window w) {
+        switch (w) {
+            case Menu: {
+                Game.window = Window.Menu;
+                menuCanvas.toFront();
+            } break;
+            case Gameplay: {
+                Game.window = Window.Gameplay;
+                gameplayCanvas.toFront();
+            } break;
+            case Leaderboard: {
+                Game.window = Window.Leaderboard;
+                leaderboardCanvas.toFront();
+            } break;
         }
     }
 }

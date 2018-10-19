@@ -12,7 +12,6 @@ public class Main extends Application {
     private static Stage primaryStage;
     private static Scene scene;
     private static Group root;
-    private static Window window;
 
     @Override
     public void start(Stage primaryStage) {
@@ -44,9 +43,6 @@ public class Main extends Application {
 
     private void animationLoop() {
 
-        // Set the default window to Menu
-        window = Window.Menu;
-
         // Initialize a Game object
         Game game = new Game(Main.root);
 
@@ -54,17 +50,17 @@ public class Main extends Application {
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                switch (Main.window) {
+                switch (Game.window) {
                     case Menu: {
-                        Main.primaryStage.setTitle("Snake Vs Blocks - Menu");
+                        primaryStage.setTitle("Snake Vs Blocks - Menu");
                         game.showMenu();
                     } break;
                     case Gameplay: {
-                        Main.primaryStage.setTitle("Snake Vs Blocks");
+                        primaryStage.setTitle("Snake Vs Blocks");
                         game.showGameplay();
                     } break;
                     case Leaderboard: {
-                        Main.primaryStage.setTitle("Snake Vs Blocks - Leaderboard");
+                        primaryStage.setTitle("Snake Vs Blocks - Leaderboard");
                         game.showLeaderboard();
                     } break;
                 }
@@ -73,10 +69,6 @@ public class Main extends Application {
 
         // Start the animationTimer
         animationTimer.start();
-    }
-
-    public static void setWindow(Window window) {
-        Main.window = window;
     }
 
     public static void main(String[] args) {
