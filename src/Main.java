@@ -5,7 +5,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
@@ -13,6 +12,7 @@ public class Main extends Application {
 
     public final static double SCREEN_WIDTH = Game.TILE_SIZE * Game.GRID_COLS;
     public final static double SCREEN_HEIGHT = Game.TILE_SIZE * Game.GRID_ROWS;
+    public static Window window = Window.Menu;
 
     @Override
     public void start(Stage primaryStage) {
@@ -52,13 +52,19 @@ public class Main extends Application {
         // set some global attributes
         gc.setTextAlign(TextAlignment.CENTER);
         gc.setTextBaseline(VPos.CENTER);
-        gc.setStroke(Color.WHITE);
 
         // initialize AnimationTimer
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-
+                switch (Main.window) {
+                    case Menu: game.showMenu();
+                        break;
+                    case Game: // show game play
+                        break;
+                    case LeaderBoard: // show leader board
+                        break;
+                }
             }
         };
 
