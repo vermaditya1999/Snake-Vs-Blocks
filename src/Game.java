@@ -174,19 +174,19 @@ public class Game {
     private void setWindow(Window w) {
         switch (w) {
             case Menu: {
-                Game.window = Window.Menu;
+                window = Window.Menu;
                 menuCanvas.toFront();
             }
             break;
 
             case Gameplay: {
-                Game.window = Window.Gameplay;
+                window = Window.Gameplay;
                 gpCanvas.toFront();
             }
             break;
 
             case Leaderboard: {
-                Game.window = Window.Leaderboard;
+                window = Window.Leaderboard;
                 lbCanvas.toFront();
             }
             break;

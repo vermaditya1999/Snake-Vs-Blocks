@@ -48,15 +48,20 @@ public class Main extends Application {
                     case Menu: {
                         primaryStage.setTitle("Snake Vs Blocks - Menu");
                         game.showMenu();
-                    } break;
+                    }
+                    break;
+
                     case Gameplay: {
                         primaryStage.setTitle("Snake Vs Blocks");
                         game.showGameplay();
-                    } break;
+                    }
+                    break;
+
                     case Leaderboard: {
                         primaryStage.setTitle("Snake Vs Blocks - Leaderboard");
                         game.showLeaderboard();
-                    } break;
+                    }
+                    break;
                 }
             }
         };
