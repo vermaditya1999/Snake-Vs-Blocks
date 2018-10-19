@@ -32,16 +32,25 @@ public class Game {
     private Leaderboard leaderboard;
 
     public Game(Group root) {
+        initCanvas();
+
+        root.getChildren().addAll(gpCanvas, lbCanvas, menuCanvas);
+
+        initWindows();
+    }
+
+    private void initCanvas() {
         menuCanvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
         gpCanvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
         lbCanvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-        // Detect KeyEvents
+        // Enable KeyEvent detection
+        menuCanvas.setFocusTraversable(true);
         gpCanvas.setFocusTraversable(true);
+        lbCanvas.setFocusTraversable(true);
+    }
 
-        // Menu canvas, added at the end will be on the top
-        root.getChildren().addAll(gpCanvas, lbCanvas, menuCanvas);
-
+    private void initWindows() {
         menu = new Menu();
         gameplay = new Gameplay();
         leaderboard = new Leaderboard();
