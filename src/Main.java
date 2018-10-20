@@ -45,29 +45,27 @@ public class Main extends Application {
             @Override
             public void handle(long now) {
                 switch (Game.window) {
-                    case Menu: {
-                        primaryStage.setTitle("Snake Vs Blocks - Menu");
+                    case Menu:
                         game.showMenu();
-                    }
-                    break;
+                        break;
 
-                    case Gameplay: {
-                        primaryStage.setTitle("Snake Vs Blocks");
+                    case Gameplay:
                         game.showGameplay();
-                    }
-                    break;
+                        break;
 
-                    case Leaderboard: {
-                        primaryStage.setTitle("Snake Vs Blocks - Leaderboard");
+                    case Leaderboard:
                         game.showLeaderboard();
-                    }
-                    break;
+                        break;
                 }
             }
         };
 
         // Start the animationTimer
         animationTimer.start();
+    }
+
+    public static void setTitle(String title) {
+        primaryStage.setTitle(title);
     }
 
     public static void main(String[] args) {
