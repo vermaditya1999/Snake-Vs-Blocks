@@ -194,18 +194,21 @@ public class Game {
     private void setWindow(Window w) {
         switch (w) {
             case Menu: {
+                Main.setTitle("Snake Vs Blocks - Menu");
                 window = Window.Menu;
                 menuCanvas.toFront();
             }
             break;
 
             case Gameplay: {
+                Main.setTitle("Snake Vs Blocks");
                 window = Window.Gameplay;
                 gpCanvas.toFront();
             }
             break;
 
             case Leaderboard: {
+                Main.setTitle("Snake Vs Blocks - Leaderboard");
                 window = Window.Leaderboard;
                 lbCanvas.toFront();
             }
