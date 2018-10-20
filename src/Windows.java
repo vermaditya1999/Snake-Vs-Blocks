@@ -1,4 +1,4 @@
-public enum Window {
+public enum Windows {
     Menu,
     Leaderboard,
     Gameplay
