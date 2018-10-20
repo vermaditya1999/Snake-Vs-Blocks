@@ -5,8 +5,8 @@ import javafx.scene.text.TextAlignment;
 
 abstract public class Window {
 
-    private Canvas canvas;
-    private GraphicsContext gc;
+    protected Canvas canvas;
+    protected GraphicsContext gc;
 
     public Window() {
         // Initialize the canvas
@@ -33,4 +33,10 @@ abstract public class Window {
     }
 
     abstract protected void addEventHandlers();
+
+    abstract public void show();
+
+    public void bringCanvasToFront() {
+        canvas.toFront();
+    }
 }
