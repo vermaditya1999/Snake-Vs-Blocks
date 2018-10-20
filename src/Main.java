@@ -11,9 +11,9 @@ public class Main extends Application {
     private static Group root;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) {
 
-        Main.primaryStage = primaryStage;
+        primaryStage = stage;
 
         // Set title
         primaryStage.setTitle("Snake Vs Blocks - Menu");
@@ -21,14 +21,14 @@ public class Main extends Application {
         // Disable resizing
         primaryStage.setResizable(false);
 
-        // Avoid the unnecessary padding on right and bottom
+        // Avoid unnecessary padding on right and bottom
         primaryStage.sizeToScene();
 
         // Initialize the root Node
-        Main.root = new Group();
+        root = new Group();
 
         // Initialize the Scene
-        Main.scene = new Scene(root, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+        scene = new Scene(root, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
         // Set Scene and show Stage
         primaryStage.setScene(scene);
@@ -41,7 +41,7 @@ public class Main extends Application {
     private void animationLoop() {
 
         // Initialize a Game object
-        Game game = new Game(Main.root);
+        Game game = new Game(root);
 
         // Initialize animationTimer
         AnimationTimer animationTimer = new AnimationTimer() {
