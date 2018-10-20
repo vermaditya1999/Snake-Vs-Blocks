@@ -15,9 +15,6 @@ public class Main extends Application {
 
         primaryStage = stage;
 
-        // Set title
-        primaryStage.setTitle("Snake Vs Blocks - Menu");
-
         // Disable resizing
         primaryStage.setResizable(false);
 
@@ -47,7 +44,7 @@ public class Main extends Application {
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                switch (Game.window) {
+                switch (Game.currentWindow) {
                     case Menu:
                         game.showMenu();
                         break;

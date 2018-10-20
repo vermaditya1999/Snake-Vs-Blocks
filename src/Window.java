@@ -1,16 +1,25 @@
 import javafx.geometry.VPos;
+import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.TextAlignment;
 
 abstract public class Window {
 
+    protected Game game;
     protected Canvas canvas;
     protected GraphicsContext gc;
 
-    public Window() {
+    public Window(Game game, Group root) {
+
+        // Set the game
+        this.game = game;
+
         // Initialize the canvas
         canvas = new Canvas(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+
+        // Add canvas to the root group
+        root.getChildren().add(canvas);
 
         // Initialize the GraphicsContext
         gc = canvas.getGraphicsContext2D();
