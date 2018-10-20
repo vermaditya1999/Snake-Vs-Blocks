@@ -3,7 +3,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 
@@ -41,7 +40,7 @@ public class Gameplay extends Window {
 
         // Temporary text
         gc.setFill(Color.WHITE);
-        gc.setFont(new Font(64));
+
         gc.fillText("Gameplay", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 
         for (int i = bursts.size() - 1; i >= 0; i--) {

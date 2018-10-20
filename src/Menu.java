@@ -1,7 +1,6 @@
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class Menu extends Window {
 
@@ -38,7 +37,6 @@ public class Menu extends Window {
 
         gc.setFill(Color.WHITE);
 
-        gc.setFont(new Font(64));
         gc.fillText("Snake", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 - 2 * Game.TILE_SIZE);
         gc.fillText("Vs", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 - Game.TILE_SIZE - 10);
         gc.fillText("Blocks", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 - 20);
