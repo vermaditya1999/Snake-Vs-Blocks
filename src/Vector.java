@@ -12,12 +12,14 @@ public class Vector {
     public static Vector random() {
         Random rnd = new Random();
 
+        // Random x and y in range (-1, 1)
         double x = rnd.nextDouble() * 2 - 1;
         double y = rnd.nextDouble() * 2 - 1;
 
-        double mag = Math.sqrt(x * x + y * y);
+        Vector v = new Vector(x, y);
+        v.normalize();
 
-        return new Vector(x, y);
+        return v;
     }
 
     Vector(double x, double y) {
