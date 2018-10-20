@@ -22,6 +22,16 @@ public class Vector {
         return v;
     }
 
+    // Add two vectors and return the resultant Vector
+    public static Vector add(Vector first, Vector second) {
+        return new Vector(first.x + second.x, first.y + second.y);
+    }
+
+    // Subtract second Vector from first Vector and return the resultant Vector
+    public static Vector sub(Vector first, Vector second) {
+        return new Vector(first.x - second.x, first.y - second.y);
+    }
+
     Vector(double x, double y) {
         this.x = x;
         this.y = y;
@@ -53,6 +63,11 @@ public class Vector {
             x /= mag;
             y /= mag;
         }
+    }
+
+    public void setMag(double m) {
+        this.normalize();
+        this.mult(m);
     }
 
     public Vector copy() {
