@@ -15,6 +15,9 @@ public class Main extends Application {
 
         Main.primaryStage = primaryStage;
 
+        // Set title
+        primaryStage.setTitle("Snake Vs Blocks - Menu");
+
         // Disable resizing
         primaryStage.setResizable(false);
 
