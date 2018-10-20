@@ -6,6 +6,7 @@ public class Particle {
     private Vector vel;
     private Vector acc;
 
+    private double radius;
     private double alpha;
 
     public Particle(double x, double y) {
@@ -15,22 +16,24 @@ public class Particle {
         acc.mult(-0.01);
         vel.mult(5);
 
+        radius = 5;
         alpha = 1;
     }
 
     public boolean isDead() {
-        return alpha <= 0;
+        return alpha <= 0 || radius <= 0;
     }
 
     public void update() {
         vel.add(acc);
         pos.add(vel);
 
+        radius -= 0.25;
         alpha -= 0.025;
     }
 
     public void show(GraphicsContext gc) {
         gc.setFill(Color.rgb(255, 255, 255, alpha));
-        gc.fillOval(pos.x, pos.y, 10, 10);
+        gc.fillOval(pos.x, pos.y, radius * 2, radius * 2);
     }
 }
