@@ -11,7 +11,7 @@ public class Game {
     public final static double SCREEN_WIDTH = Game.TILE_SIZE * Game.GRID_COLS;
     public final static double SCREEN_HEIGHT = Game.TILE_SIZE * Game.GRID_ROWS;
 
-    public Windows currentWindow;
+    private Windows currentWindow;
 
     private Menu menu;
     private Gameplay gameplay;
