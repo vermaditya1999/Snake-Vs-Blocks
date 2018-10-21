@@ -8,6 +8,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        // Set title
+        primaryStage.setTitle("Snake Vs Blocks");
+
         // Disable resizing
         primaryStage.setResizable(false);
 
