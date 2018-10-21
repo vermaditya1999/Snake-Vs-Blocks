@@ -5,14 +5,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private Stage primaryStage;
-    private Scene scene;
-    private Group root;
-
     @Override
-    public void start(Stage stage) {
-
-        primaryStage = stage;
+    public void start(Stage primaryStage) {
 
         // Disable resizing
         primaryStage.setResizable(false);
@@ -21,10 +15,10 @@ public class Main extends Application {
         primaryStage.sizeToScene();
 
         // Initialize the root Node
-        root = new Group();
+        Group root = new Group();
 
         // Initialize the Scene
-        scene = new Scene(root, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+        Scene scene = new Scene(root, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
         // Set Scene and show Stage
         primaryStage.setScene(scene);
