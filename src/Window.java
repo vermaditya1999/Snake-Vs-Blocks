@@ -11,22 +11,19 @@ abstract public class Window {
     protected Canvas canvas;
     protected GraphicsContext gc;
 
-    public Window(Game game, Group root) {
+    public Window(Game _game, Group root) {
 
         // Set the game
-        this.game = game;
+        game = _game;
 
         // Initialize the canvas
         canvas = new Canvas(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
-        // Add canvas to the root group
-        root.getChildren().add(canvas);
-
         // Initialize the GraphicsContext
         gc = canvas.getGraphicsContext2D();
 
-        // Enable KeyEvent detection
-        canvas.setFocusTraversable(true);
+        // Add canvas to the root group
+        root.getChildren().add(canvas);
 
         // Load defaults
         loadDefaults();
@@ -36,6 +33,9 @@ abstract public class Window {
     }
 
     private void loadDefaults() {
+
+        // Enable KeyEvent detection
+        canvas.setFocusTraversable(true);
 
         // Set Text Align and Baseline to CENTER
         gc.setTextAlign(TextAlignment.CENTER);
