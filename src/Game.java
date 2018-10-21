@@ -12,9 +12,6 @@ public class Game {
 
     public Windows currentWindow;
 
-    // True only if there's a saved game available
-    private boolean savedState;
-
     private Menu menu;
     private Gameplay gameplay;
     private Leaderboard leaderboard;
