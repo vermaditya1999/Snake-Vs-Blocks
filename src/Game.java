@@ -1,3 +1,4 @@
+import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 
 public class Game {
@@ -25,18 +26,9 @@ public class Game {
 
         // Set the starting window to Menu
         setWindow(Windows.Menu);
-    }
 
-    public void showMenu() {
-        menu.show();
-    }
-
-    public void showGameplay() {
-        gameplay.show();
-    }
-
-    public void showLeaderboard() {
-        leaderboard.show();
+        // Start the animation loop
+        animationLoop();
     }
 
     public void setWindow(Windows w) {
@@ -61,7 +53,29 @@ public class Game {
         }
     }
 
-    public Windows getCurrentWindow() {
-        return currentWindow;
+    private void animationLoop() {
+
+        // Initialize animationTimer
+        AnimationTimer animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                switch (currentWindow) {
+                    case Menu:
+                        menu.show();
+                        break;
+
+                    case Gameplay:
+                        gameplay.show();
+                        break;
+
+                    case Leaderboard:
+                        leaderboard.show();
+                        break;
+                }
+            }
+        };
+
+        // Start the animationTimer
+        animationTimer.start();
     }
 }

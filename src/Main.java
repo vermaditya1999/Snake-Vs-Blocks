@@ -1,4 +1,3 @@
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -31,37 +30,8 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        // Start the animation loop
-        animationLoop();
-    }
-
-    private void animationLoop() {
-
-        // Initialize a Game object
+        // Initialize the Game object
         Game game = new Game(root);
-
-        // Initialize animationTimer
-        AnimationTimer animationTimer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                switch (game.getCurrentWindow()) {
-                    case Menu:
-                        game.showMenu();
-                        break;
-
-                    case Gameplay:
-                        game.showGameplay();
-                        break;
-
-                    case Leaderboard:
-                        game.showLeaderboard();
-                        break;
-                }
-            }
-        };
-
-        // Start the animationTimer
-        animationTimer.start();
     }
 
     public static void main(String[] args) {
