@@ -44,7 +44,7 @@ public class Main extends Application {
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                switch (Game.currentWindow) {
+                switch (game.getCurrentWindow()) {
                     case Menu:
                         game.showMenu();
                         break;

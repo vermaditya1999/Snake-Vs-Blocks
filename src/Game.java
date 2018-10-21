@@ -10,7 +10,7 @@ public class Game {
     public final static double SCREEN_WIDTH = Game.TILE_SIZE * Game.GRID_COLS;
     public final static double SCREEN_HEIGHT = Game.TILE_SIZE * Game.GRID_ROWS;
 
-    public static Windows currentWindow;
+    public Windows currentWindow;
 
     // True only if there's a saved game available
     private boolean savedState;
@@ -62,5 +62,9 @@ public class Game {
             }
             break;
         }
+    }
+
+    public Windows getCurrentWindow() {
+        return currentWindow;
     }
 }
