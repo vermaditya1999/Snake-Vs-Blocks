@@ -14,15 +14,15 @@ public class Game {
     private Windows currentWindow;
 
     private Menu menu;
-    private Gameplay gameplay;
-    private Leaderboard leaderboard;
+    private GamePlay gameplay;
+    private LeaderBoard leaderboard;
 
     public Game(Group root) {
 
         // Initialize the Windows
         menu = new Menu(this, root);
-        gameplay = new Gameplay(this, root);
-        leaderboard = new Leaderboard(this, root);
+        gameplay = new GamePlay(this, root);
+        leaderboard = new LeaderBoard(this, root);
 
         // Set the starting window to Menu
         setWindow(Windows.Menu);

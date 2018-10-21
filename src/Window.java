@@ -11,10 +11,10 @@ abstract public class Window {
     protected Canvas canvas;
     protected GraphicsContext gc;
 
-    public Window(Game _game, Group root) {
+    public Window(Game game, Group root) {
 
         // Set the game
-        game = _game;
+        this.game = game;
 
         // Initialize the canvas
         canvas = new Canvas(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);

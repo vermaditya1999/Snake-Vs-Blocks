@@ -6,12 +6,12 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-public class Gameplay extends Window {
+public class GamePlay extends Window {
 
     // Temporary field for demonstration
     ArrayList<Burst> bursts = new ArrayList<Burst>();
 
-    public Gameplay(Game game, Group root) {
+    public GamePlay(Game game, Group root) {
         super(game, root);
     }
 
@@ -40,9 +40,9 @@ public class Gameplay extends Window {
 
         // Temporary text
         gc.setFill(Color.WHITE);
-
         gc.fillText("GamePlay", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 
+        // Burst for demonstration
         for (int i = bursts.size() - 1; i >= 0; i--) {
             Burst b = bursts.get(i);
 

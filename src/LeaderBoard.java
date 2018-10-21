@@ -3,9 +3,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
-public class Leaderboard extends Window {
+public class LeaderBoard extends Window {
 
-    public Leaderboard(Game game, Group root) {
+    public LeaderBoard(Game game, Group root) {
         super(game, root);
     }
 
@@ -27,7 +27,6 @@ public class Leaderboard extends Window {
 
         // Temporary text
         gc.setFill(Color.WHITE);
-
         gc.fillText("LeaderBoard", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
     }
 }
