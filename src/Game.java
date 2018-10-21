@@ -10,7 +10,7 @@ public class Game {
     public final static double SCREEN_WIDTH = Game.TILE_SIZE * Game.GRID_COLS;
     public final static double SCREEN_HEIGHT = Game.TILE_SIZE * Game.GRID_ROWS;
 
-    public static Windows currentWindow = Windows.Menu;
+    public static Windows currentWindow;
 
     // True only if there's a saved game available
     private boolean savedState;
@@ -45,21 +45,18 @@ public class Game {
     public void setWindow(Windows w) {
         switch (w) {
             case Menu: {
-                Main.setTitle("Snake Vs Blocks - Menu");
                 currentWindow = Windows.Menu;
                 menu.bringCanvasToFront();
             }
             break;
 
             case Gameplay: {
-                Main.setTitle("Snake Vs Blocks");
                 currentWindow = Windows.Gameplay;
                 gameplay.bringCanvasToFront();
             }
             break;
 
             case Leaderboard: {
-                Main.setTitle("Snake Vs Blocks - Leaderboard");
                 currentWindow = Windows.Leaderboard;
                 leaderboard.bringCanvasToFront();
             }

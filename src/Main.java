@@ -6,9 +6,9 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private static Stage primaryStage;
-    private static Scene scene;
-    private static Group root;
+    private Stage primaryStage;
+    private Scene scene;
+    private Group root;
 
     @Override
     public void start(Stage stage) {
@@ -62,10 +62,6 @@ public class Main extends Application {
 
         // Start the animationTimer
         animationTimer.start();
-    }
-
-    public static void setTitle(String title) {
-        primaryStage.setTitle(title);
     }
 
     public static void main(String[] args) {
