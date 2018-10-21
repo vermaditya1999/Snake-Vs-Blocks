@@ -39,14 +39,14 @@ public class Game {
             }
             break;
 
-            case Gameplay: {
-                currentWindow = Windows.Gameplay;
+            case GamePlay: {
+                currentWindow = Windows.GamePlay;
                 gameplay.bringCanvasToFront();
             }
             break;
 
-            case Leaderboard: {
-                currentWindow = Windows.Leaderboard;
+            case LeaderBoard: {
+                currentWindow = Windows.LeaderBoard;
                 leaderboard.bringCanvasToFront();
             }
             break;
@@ -64,11 +64,11 @@ public class Game {
                         menu.show();
                         break;
 
-                    case Gameplay:
+                    case GamePlay:
                         gameplay.show();
                         break;
 
-                    case Leaderboard:
+                    case LeaderBoard:
                         leaderboard.show();
                         break;
                 }

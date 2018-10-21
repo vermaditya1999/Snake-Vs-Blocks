@@ -1,5 +1,5 @@
 public enum Windows {
     Menu,
-    Leaderboard,
-    Gameplay
+    LeaderBoard,
+    GamePlay
 }

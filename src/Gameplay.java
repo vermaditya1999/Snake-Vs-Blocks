@@ -41,7 +41,7 @@ public class Gameplay extends Window {
         // Temporary text
         gc.setFill(Color.WHITE);
 
-        gc.fillText("Gameplay", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
+        gc.fillText("GamePlay", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 
         for (int i = bursts.size() - 1; i >= 0; i--) {
             Burst b = bursts.get(i);

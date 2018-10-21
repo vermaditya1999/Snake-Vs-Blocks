@@ -28,6 +28,6 @@ public class Leaderboard extends Window {
         // Temporary text
         gc.setFill(Color.WHITE);
 
-        gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
+        gc.fillText("LeaderBoard", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
     }
 }
