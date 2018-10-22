@@ -1,3 +1,4 @@
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -24,6 +25,22 @@ public class Menu extends Window {
             if ((x >= 3 * Game.TILE_SIZE && x <= 4 * Game.TILE_SIZE) &&
                     (y >= (Game.GRID_ROWS - 3) * Game.TILE_SIZE && y <= (Game.GRID_ROWS - 2) * Game.TILE_SIZE)) {
                 windowController.setWindow(Windows.GamePlay);
+            }
+        });
+
+        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+            double x = event.getX();
+            double y = event.getY();
+
+            // LeaderBoard button
+            if ((x >= Game.TILE_SIZE && x <= 2 * Game.TILE_SIZE) &&
+                    (y >= (Game.GRID_ROWS - 3) * Game.TILE_SIZE && y <= (Game.GRID_ROWS - 2) * Game.TILE_SIZE)) {
+                canvas.setCursor(Cursor.HAND);
+            } else if ((x >= 3 * Game.TILE_SIZE && x <= 4 * Game.TILE_SIZE) &&
+                    (y >= (Game.GRID_ROWS - 3) * Game.TILE_SIZE && y <= (Game.GRID_ROWS - 2) * Game.TILE_SIZE)) {
+                canvas.setCursor(Cursor.HAND);
+            } else {
+                canvas.setCursor(Cursor.DEFAULT);
             }
         });
     }

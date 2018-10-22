@@ -1,3 +1,4 @@
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -10,9 +11,16 @@ public class GamePlay extends Window {
 
     // Temporary field for demonstration
     ArrayList<Burst> bursts = new ArrayList<Burst>();
-    
+
     public GamePlay(WindowController wc, Group root) {
         super(wc, root);
+    }
+
+    @Override
+    protected void loadDefaults() {
+        super.loadDefaults();
+
+        canvas.setCursor(Cursor.NONE);
     }
 
     @Override

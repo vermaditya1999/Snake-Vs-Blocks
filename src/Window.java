@@ -32,7 +32,7 @@ abstract public class Window {
         addEventHandlers();
     }
 
-    private void loadDefaults() {
+    protected void loadDefaults() {
 
         // Enable KeyEvent detection
         canvas.setFocusTraversable(true);
