@@ -17,15 +17,12 @@ public class Game implements WindowController {
 
     HashMap<Windows, Window> windows;
 
-//    private Window menu;
-//    private Window gamePlay;
-//    private Window leaderBoard;
-
     public Game(Group root) {
 
         // Instantiate the windows HashMap
         windows = new HashMap<Windows, Window>();
 
+        // Put all the instantiated windows in the HashMap
         windows.put(Windows.Menu, new Menu(this, root));
         windows.put(Windows.GamePlay, new GamePlay(this, root));
         windows.put(Windows.LeaderBoard, new LeaderBoard(this, root));
@@ -53,7 +50,11 @@ public class Game implements WindowController {
 
     @Override
     public void setWindow(Windows window) {
+
+        // Update the currentWindow field
         currentWindow = window;
-        windows.get(window).bringCanvasToFront();
+
+        // Bring the window to front
+        windows.get(window).bringToFront();
     }
 }

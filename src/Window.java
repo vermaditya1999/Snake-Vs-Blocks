@@ -45,7 +45,7 @@ abstract public class Window {
         gc.setFont(new Font("Consolas", 60));
     }
 
-    public void bringCanvasToFront() {
+    public void bringToFront() {
         canvas.toFront();
     }
 
