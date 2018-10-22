@@ -1,3 +1,4 @@
 public interface WindowController {
-    public void setWindow(Windows window);
+
+    void setWindow(Windows window);
 }
