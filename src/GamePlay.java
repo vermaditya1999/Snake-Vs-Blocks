@@ -10,7 +10,7 @@ public class GamePlay extends Window {
 
     // Temporary field for demonstration
     ArrayList<Burst> bursts = new ArrayList<Burst>();
-
+    
     public GamePlay(WindowController wc, Group root) {
         super(wc, root);
     }

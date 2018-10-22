@@ -45,11 +45,11 @@ abstract public class Window {
         gc.setFont(new Font("Consolas", 60));
     }
 
-    abstract protected void addEventHandlers();
-
-    abstract public void show();
-
     public void bringCanvasToFront() {
         canvas.toFront();
     }
+
+    abstract protected void addEventHandlers();
+
+    abstract public void show();
 }

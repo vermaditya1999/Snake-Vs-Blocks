@@ -1,6 +1,8 @@
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 
+import java.util.HashMap;
+
 public class Game implements WindowController {
 
     public final static int GRID_ROWS = 8;
@@ -13,16 +15,20 @@ public class Game implements WindowController {
 
     private Windows currentWindow;
 
-    private Window menu;
-    private Window gamePlay;
-    private Window leaderBoard;
+    HashMap<Windows, Window> windows;
+
+//    private Window menu;
+//    private Window gamePlay;
+//    private Window leaderBoard;
 
     public Game(Group root) {
 
-        // Initialize the Windows
-        menu = new Menu(this, root);
-        gamePlay = new GamePlay(this, root);
-        leaderBoard = new LeaderBoard(this, root);
+        // Instantiate the windows HashMap
+        windows = new HashMap<Windows, Window>();
+
+        windows.put(Windows.Menu, new Menu(this, root));
+        windows.put(Windows.GamePlay, new GamePlay(this, root));
+        windows.put(Windows.LeaderBoard, new LeaderBoard(this, root));
 
         // Set the starting window to Menu
         setWindow(Windows.Menu);
@@ -37,19 +43,7 @@ public class Game implements WindowController {
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                switch (currentWindow) {
-                    case Menu:
-                        menu.show();
-                        break;
-
-                    case GamePlay:
-                        gamePlay.show();
-                        break;
-
-                    case LeaderBoard:
-                        leaderBoard.show();
-                        break;
-                }
+                windows.get(currentWindow).show();
             }
         };
 
@@ -58,25 +52,8 @@ public class Game implements WindowController {
     }
 
     @Override
-    public void setWindow(Windows w) {
-        switch (w) {
-            case Menu: {
-                currentWindow = Windows.Menu;
-                menu.bringCanvasToFront();
-            }
-            break;
-
-            case GamePlay: {
-                currentWindow = Windows.GamePlay;
-                gamePlay.bringCanvasToFront();
-            }
-            break;
-
-            case LeaderBoard: {
-                currentWindow = Windows.LeaderBoard;
-                leaderBoard.bringCanvasToFront();
-            }
-            break;
-        }
+    public void setWindow(Windows window) {
+        currentWindow = window;
+        windows.get(window).bringCanvasToFront();
     }
 }
