@@ -11,15 +11,15 @@ public class GamePlay extends Window {
     // Temporary field for demonstration
     ArrayList<Burst> bursts = new ArrayList<Burst>();
 
-    public GamePlay(Game game, Group root) {
-        super(game, root);
+    public GamePlay(WindowController wc, Group root) {
+        super(wc, root);
     }
 
     @Override
     protected void addEventHandlers() {
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
-                game.setWindow(Windows.Menu);
+                windowController.setWindow(Windows.Menu);
             }
         });
 

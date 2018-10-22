@@ -5,15 +5,15 @@ import javafx.scene.paint.Color;
 
 public class LeaderBoard extends Window {
 
-    public LeaderBoard(Game game, Group root) {
-        super(game, root);
+    public LeaderBoard(WindowController wc, Group root) {
+        super(wc, root);
     }
 
     @Override
     protected void addEventHandlers() {
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
-                game.setWindow(Windows.Menu);
+                windowController.setWindow(Windows.Menu);
             }
         });
     }

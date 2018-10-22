@@ -7,14 +7,14 @@ import javafx.scene.text.TextAlignment;
 
 abstract public class Window {
 
-    protected Game game;
+    protected WindowController windowController;
     protected Canvas canvas;
     protected GraphicsContext gc;
 
-    public Window(Game game, Group root) {
+    public Window(WindowController wc, Group root) {
 
-        // Set the game
-        this.game = game;
+        // Set the windowController
+        windowController = wc;
 
         // Initialize the canvas
         canvas = new Canvas(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);

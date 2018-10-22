@@ -1,7 +1,7 @@
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 
-public class Game {
+public class Game implements WindowController {
 
     public final static int GRID_ROWS = 8;
     public final static int GRID_COLS = 5;
@@ -31,28 +31,6 @@ public class Game {
         animationLoop();
     }
 
-    public void setWindow(Windows w) {
-        switch (w) {
-            case Menu: {
-                currentWindow = Windows.Menu;
-                menu.bringCanvasToFront();
-            }
-            break;
-
-            case GamePlay: {
-                currentWindow = Windows.GamePlay;
-                gameplay.bringCanvasToFront();
-            }
-            break;
-
-            case LeaderBoard: {
-                currentWindow = Windows.LeaderBoard;
-                leaderboard.bringCanvasToFront();
-            }
-            break;
-        }
-    }
-
     private void animationLoop() {
 
         // Initialize animationTimer
@@ -77,5 +55,28 @@ public class Game {
 
         // Start the animationTimer
         animationTimer.start();
+    }
+
+    @Override
+    public void setWindow(Windows w) {
+        switch (w) {
+            case Menu: {
+                currentWindow = Windows.Menu;
+                menu.bringCanvasToFront();
+            }
+            break;
+
+            case GamePlay: {
+                currentWindow = Windows.GamePlay;
+                gameplay.bringCanvasToFront();
+            }
+            break;
+
+            case LeaderBoard: {
+                currentWindow = Windows.LeaderBoard;
+                leaderboard.bringCanvasToFront();
+            }
+            break;
+        }
     }
 }

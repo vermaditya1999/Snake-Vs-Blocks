@@ -4,8 +4,8 @@ import javafx.scene.paint.Color;
 
 public class Menu extends Window {
 
-    public Menu(Game game, Group root) {
-        super(game, root);
+    public Menu(WindowController wc, Group root) {
+        super(wc, root);
     }
 
     @Override
@@ -17,13 +17,13 @@ public class Menu extends Window {
             // LeaderBoard button
             if ((x >= Game.TILE_SIZE && x <= 2 * Game.TILE_SIZE) &&
                     (y >= (Game.GRID_ROWS - 3) * Game.TILE_SIZE && y <= (Game.GRID_ROWS - 2) * Game.TILE_SIZE)) {
-                game.setWindow(Windows.LeaderBoard);
+                windowController.setWindow(Windows.LeaderBoard);
             }
 
             // Play Game button
             if ((x >= 3 * Game.TILE_SIZE && x <= 4 * Game.TILE_SIZE) &&
                     (y >= (Game.GRID_ROWS - 3) * Game.TILE_SIZE && y <= (Game.GRID_ROWS - 2) * Game.TILE_SIZE)) {
-                game.setWindow(Windows.GamePlay);
+                windowController.setWindow(Windows.GamePlay);
             }
         });
     }
