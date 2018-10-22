@@ -14,15 +14,15 @@ public class Game implements WindowController {
     private Windows currentWindow;
 
     private Window menu;
-    private Window gameplay;
-    private Window leaderboard;
+    private Window gamePlay;
+    private Window leaderBoard;
 
     public Game(Group root) {
 
         // Initialize the Windows
         menu = new Menu(this, root);
-        gameplay = new GamePlay(this, root);
-        leaderboard = new LeaderBoard(this, root);
+        gamePlay = new GamePlay(this, root);
+        leaderBoard = new LeaderBoard(this, root);
 
         // Set the starting window to Menu
         setWindow(Windows.Menu);
@@ -43,11 +43,11 @@ public class Game implements WindowController {
                         break;
 
                     case GamePlay:
-                        gameplay.show();
+                        gamePlay.show();
                         break;
 
                     case LeaderBoard:
-                        leaderboard.show();
+                        leaderBoard.show();
                         break;
                 }
             }
@@ -68,13 +68,13 @@ public class Game implements WindowController {
 
             case GamePlay: {
                 currentWindow = Windows.GamePlay;
-                gameplay.bringCanvasToFront();
+                gamePlay.bringCanvasToFront();
             }
             break;
 
             case LeaderBoard: {
                 currentWindow = Windows.LeaderBoard;
-                leaderboard.bringCanvasToFront();
+                leaderBoard.bringCanvasToFront();
             }
             break;
         }
