@@ -13,9 +13,9 @@ public class Game implements WindowController {
 
     private Windows currentWindow;
 
-    private Menu menu;
-    private GamePlay gameplay;
-    private LeaderBoard leaderboard;
+    private Window menu;
+    private Window gameplay;
+    private Window leaderboard;
 
     public Game(Group root) {
 
