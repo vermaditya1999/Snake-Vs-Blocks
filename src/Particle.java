@@ -14,7 +14,7 @@ public class Particle {
         vel = Vector.random();
         acc = vel.copy();
         acc.mult(-0.01);
-        vel.mult(5);
+        vel.mult(4);
 
         radius = 5;
         alpha = 1;
