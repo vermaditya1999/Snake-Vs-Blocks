@@ -29,9 +29,12 @@ public class Game implements WindowController {
 
         // Set the starting window to Menu
         setWindow(Windows.Menu);
+
+        // Start the animationLoop
+        animationLoop();
     }
 
-    public void run() {
+    private void animationLoop() {
 
         // Initialize animationTimer
         AnimationTimer animationTimer = new AnimationTimer() {
