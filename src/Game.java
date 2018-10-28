@@ -15,6 +15,7 @@ public class Game implements WindowController {
 
     private Windows currentWindow;
 
+    // HashMap from Windows enum constant to Windows object
     HashMap<Windows, Window> windows;
 
     public Game(Group root) {
