@@ -77,6 +77,12 @@ public class GamePlay extends Window {
             double mouseX = event.getX();
             double mouseY = event.getY();
 
+            if (paused) {
+                if (playButton.isHovered(mouseX, mouseY)) {
+                    paused = !paused;
+                }
+            }
+
             // Burst for demonstration
 //            bursts.add(new Burst(mouseX, mouseY));
         });
@@ -97,8 +103,6 @@ public class GamePlay extends Window {
                 } else {
                     canvas.setCursor(Cursor.DEFAULT);
                 }
-            } else {
-                canvas.setCursor(Cursor.NONE);
             }
 
         });

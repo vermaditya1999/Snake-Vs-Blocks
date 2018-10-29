@@ -6,14 +6,14 @@ import javafx.scene.paint.Color;
 
 public class Menu extends Window {
 
-    private Button playGameBtn;
-    private Button leaderBoardBtn;
+    private Button pgBtn;
+    private Button lbBtn;
 
     public Menu(WindowController wc, Group root) {
         super(wc, root);
 
-        playGameBtn = new Button(Game.TILE_SIZE, (Game.NUM_ROWS - 3) * Game.TILE_SIZE);
-        leaderBoardBtn = new Button(3 * Game.TILE_SIZE, (Game.NUM_ROWS - 3) * Game.TILE_SIZE);
+        lbBtn = new Button(2 * Game.TILE_SIZE - Game.TILE_SIZE / 2, 6 * Game.TILE_SIZE);
+        pgBtn = new Button(3 * Game.TILE_SIZE + Game.TILE_SIZE / 2, 6 * Game.TILE_SIZE);
     }
 
     @Override
@@ -30,12 +30,12 @@ public class Menu extends Window {
             double mouseY = event.getY();
 
             // LeaderBoard button
-            if (leaderBoardBtn.isHovered(mouseX, mouseY)) {
+            if (lbBtn.isHovered(mouseX, mouseY)) {
                 windowController.setWindow(Windows.LeaderBoard);
             }
 
             // Play Game button
-            if (playGameBtn.isHovered(mouseX, mouseY)) {
+            if (pgBtn.isHovered(mouseX, mouseY)) {
                 windowController.setWindow(Windows.GamePlay);
             }
         });
@@ -51,7 +51,7 @@ public class Menu extends Window {
             double mouseY = event.getY();
 
             // LeaderBoard button
-            if (leaderBoardBtn.isHovered(mouseX, mouseY) || playGameBtn.isHovered(mouseX, mouseY)) {
+            if (lbBtn.isHovered(mouseX, mouseY) || pgBtn.isHovered(mouseX, mouseY)) {
                 canvas.setCursor(Cursor.HAND);
             } else {
                 canvas.setCursor(Cursor.DEFAULT);
@@ -73,10 +73,10 @@ public class Menu extends Window {
         gc.fillText("Blocks", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 - 20);
 
         // LeaderBoard button
-        leaderBoardBtn.show(gc);
+        lbBtn.show(gc);
 
         // Play game button
-        playGameBtn.show(gc);
+        pgBtn.show(gc);
     }
 
     @Override
