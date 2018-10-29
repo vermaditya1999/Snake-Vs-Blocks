@@ -6,8 +6,14 @@ import javafx.scene.paint.Color;
 
 public class Menu extends Window {
 
+    private Button playGameBtn;
+    private Button leaderBoardBtn;
+
     public Menu(WindowController wc, Group root) {
         super(wc, root);
+
+        playGameBtn = new Button(Game.TILE_SIZE, (Game.NUM_ROWS - 3) * Game.TILE_SIZE);
+        leaderBoardBtn = new Button(3 * Game.TILE_SIZE, (Game.NUM_ROWS - 3) * Game.TILE_SIZE);
     }
 
     @Override
@@ -20,18 +26,16 @@ public class Menu extends Window {
                 windowController.passEvent(currentWindow, event);
             }
 
-            double x = event.getX();
-            double y = event.getY();
+            double mouseX = event.getX();
+            double mouseY = event.getY();
 
             // LeaderBoard button
-            if ((x >= Game.TILE_SIZE && x <= 2 * Game.TILE_SIZE) &&
-                    (y >= (Game.NUM_ROWS - 3) * Game.TILE_SIZE && y <= (Game.NUM_ROWS - 2) * Game.TILE_SIZE)) {
+            if (leaderBoardBtn.isHovered(mouseX, mouseY)) {
                 windowController.setWindow(Windows.LeaderBoard);
             }
 
             // Play Game button
-            if ((x >= 3 * Game.TILE_SIZE && x <= 4 * Game.TILE_SIZE) &&
-                    (y >= (Game.NUM_ROWS - 3) * Game.TILE_SIZE && y <= (Game.NUM_ROWS - 2) * Game.TILE_SIZE)) {
+            if (playGameBtn.isHovered(mouseX, mouseY)) {
                 windowController.setWindow(Windows.GamePlay);
             }
         });
@@ -43,14 +47,11 @@ public class Menu extends Window {
                 windowController.passEvent(currentWindow, event);
             }
 
-            double x = event.getX();
-            double y = event.getY();
+            double mouseX = event.getX();
+            double mouseY = event.getY();
 
             // LeaderBoard button
-            if ((x >= Game.TILE_SIZE && x <= 2 * Game.TILE_SIZE) &&
-                    (y >= (Game.NUM_ROWS - 3) * Game.TILE_SIZE && y <= (Game.NUM_ROWS - 2) * Game.TILE_SIZE) ||
-                (x >= 3 * Game.TILE_SIZE && x <= 4 * Game.TILE_SIZE) &&
-                    (y >= (Game.NUM_ROWS - 3) * Game.TILE_SIZE && y <= (Game.NUM_ROWS - 2) * Game.TILE_SIZE)) {
+            if (leaderBoardBtn.isHovered(mouseX, mouseY) || playGameBtn.isHovered(mouseX, mouseY)) {
                 canvas.setCursor(Cursor.HAND);
             } else {
                 canvas.setCursor(Cursor.DEFAULT);
@@ -72,10 +73,10 @@ public class Menu extends Window {
         gc.fillText("Blocks", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 - 20);
 
         // LeaderBoard button
-        gc.fillRect(Game.TILE_SIZE, (Game.NUM_ROWS - 3) * Game.TILE_SIZE, Game.TILE_SIZE, Game.TILE_SIZE);
+        leaderBoardBtn.show(gc);
 
         // Play game button
-        gc.fillRect(3 * Game.TILE_SIZE, (Game.NUM_ROWS - 3) * Game.TILE_SIZE, Game.TILE_SIZE, Game.TILE_SIZE);
+        playGameBtn.show(gc);
     }
 
     @Override

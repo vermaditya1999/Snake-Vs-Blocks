@@ -9,6 +9,7 @@ public class PlayButton {
     }
 
     public void show(GraphicsContext gc) {
+
         gc.setFill(Color.WHITE);
 
         double[] xPoints = {pos.x - 50, pos.x - 50, pos.x + 50};

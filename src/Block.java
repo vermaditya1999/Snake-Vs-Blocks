@@ -12,8 +12,8 @@ public class Block {
 
     /**
      * Block constructor
-     * @param x Horizontal grid number of the block
-     * @param y Vertical grid number of the block
+     * @param x Horizontal grid coordinate of the block
+     * @param y Vertical grid coordinate of the block
      */
     public Block(int x, int y) {
 
