@@ -22,7 +22,7 @@ public class GamePlay extends Window {
         super(wc, root);
 
         paused = false;
-//        playButton = new PlayButton(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
+        playButton = new PlayButton(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
     }
 
     @Override
@@ -54,11 +54,11 @@ public class GamePlay extends Window {
             double mouseY = event.getY();
 
             if (paused) {
-//                if (playButton.isHovered(mouseX, mouseY)) {
-//                    canvas.setCursor(Cursor.HAND);
-//                } else {
+                if (playButton.isHovered(mouseX, mouseY)) {
+                    canvas.setCursor(Cursor.HAND);
+                } else {
                     canvas.setCursor(Cursor.DEFAULT);
-//                }
+                }
             } else {
                 canvas.setCursor(Cursor.NONE);
             }
@@ -74,8 +74,8 @@ public class GamePlay extends Window {
         gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
         // Temporary text
-//        gc.setFill(Color.WHITE);
-//        gc.fillText("GamePlay", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
+        gc.setFill(Color.WHITE);
+        gc.fillText("GamePlay", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 
         /*
          * The pause overlay is shown when the escape key is pressed.
@@ -108,7 +108,7 @@ public class GamePlay extends Window {
             gc.applyEffect(new GaussianBlur());
 
             // Resume game button
-//            playButton.show(gc);
+            playButton.show(gc);
         }
     }
 }

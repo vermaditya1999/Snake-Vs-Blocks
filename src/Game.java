@@ -56,6 +56,6 @@ public class Game implements WindowController {
         currentWindow = window;
 
         // Bring the window to front
-        windows.get(window).bringToFront();
+        windows.get(currentWindow).bringToFront();
     }
 }
