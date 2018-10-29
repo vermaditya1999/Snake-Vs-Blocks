@@ -2,7 +2,6 @@ import javafx.event.Event;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 public class LeaderBoard extends Window {
