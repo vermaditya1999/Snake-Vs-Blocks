@@ -17,13 +17,13 @@ public class Menu extends Window {
 
             // LeaderBoard button
             if ((x >= Game.TILE_SIZE && x <= 2 * Game.TILE_SIZE) &&
-                    (y >= (Game.GRID_ROWS - 3) * Game.TILE_SIZE && y <= (Game.GRID_ROWS - 2) * Game.TILE_SIZE)) {
+                    (y >= (Game.NUM_ROWS - 3) * Game.TILE_SIZE && y <= (Game.NUM_ROWS - 2) * Game.TILE_SIZE)) {
                 windowController.setWindow(Windows.LeaderBoard);
             }
 
             // Play Game button
             if ((x >= 3 * Game.TILE_SIZE && x <= 4 * Game.TILE_SIZE) &&
-                    (y >= (Game.GRID_ROWS - 3) * Game.TILE_SIZE && y <= (Game.GRID_ROWS - 2) * Game.TILE_SIZE)) {
+                    (y >= (Game.NUM_ROWS - 3) * Game.TILE_SIZE && y <= (Game.NUM_ROWS - 2) * Game.TILE_SIZE)) {
                 windowController.setWindow(Windows.GamePlay);
             }
         });
@@ -34,9 +34,9 @@ public class Menu extends Window {
 
             // LeaderBoard button
             if ((x >= Game.TILE_SIZE && x <= 2 * Game.TILE_SIZE) &&
-                    (y >= (Game.GRID_ROWS - 3) * Game.TILE_SIZE && y <= (Game.GRID_ROWS - 2) * Game.TILE_SIZE) ||
+                    (y >= (Game.NUM_ROWS - 3) * Game.TILE_SIZE && y <= (Game.NUM_ROWS - 2) * Game.TILE_SIZE) ||
                 (x >= 3 * Game.TILE_SIZE && x <= 4 * Game.TILE_SIZE) &&
-                    (y >= (Game.GRID_ROWS - 3) * Game.TILE_SIZE && y <= (Game.GRID_ROWS - 2) * Game.TILE_SIZE)) {
+                    (y >= (Game.NUM_ROWS - 3) * Game.TILE_SIZE && y <= (Game.NUM_ROWS - 2) * Game.TILE_SIZE)) {
                 canvas.setCursor(Cursor.HAND);
             } else {
                 canvas.setCursor(Cursor.DEFAULT);
@@ -58,9 +58,9 @@ public class Menu extends Window {
         gc.fillText("Blocks", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 - 20);
 
         // LeaderBoard button
-        gc.fillRect(Game.TILE_SIZE, (Game.GRID_ROWS - 3) * Game.TILE_SIZE, Game.TILE_SIZE, Game.TILE_SIZE);
+        gc.fillRect(Game.TILE_SIZE, (Game.NUM_ROWS - 3) * Game.TILE_SIZE, Game.TILE_SIZE, Game.TILE_SIZE);
 
         // Play game button
-        gc.fillRect(3 * Game.TILE_SIZE, (Game.GRID_ROWS - 3) * Game.TILE_SIZE, Game.TILE_SIZE, Game.TILE_SIZE);
+        gc.fillRect(3 * Game.TILE_SIZE, (Game.NUM_ROWS - 3) * Game.TILE_SIZE, Game.TILE_SIZE, Game.TILE_SIZE);
     }
 }
