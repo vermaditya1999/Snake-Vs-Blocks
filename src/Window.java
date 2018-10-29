@@ -1,3 +1,4 @@
+import javafx.event.Event;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
@@ -52,4 +53,6 @@ abstract public class Window {
     abstract protected void addEventHandlers();
 
     abstract public void show();
+
+    abstract public void fireEvent(Event event);
 }

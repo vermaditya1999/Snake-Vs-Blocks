@@ -1,3 +1,4 @@
+import javafx.event.Event;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
@@ -11,7 +12,14 @@ public class Menu extends Window {
 
     @Override
     protected void addEventHandlers() {
+
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+
+            Windows currentWindow = windowController.currentWindow();
+            if (currentWindow != Windows.Menu) {
+                windowController.passEvent(currentWindow, event);
+            }
+
             double x = event.getX();
             double y = event.getY();
 
@@ -29,6 +37,12 @@ public class Menu extends Window {
         });
 
         canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+
+            Windows currentWindow = windowController.currentWindow();
+            if (currentWindow != Windows.Menu) {
+                windowController.passEvent(currentWindow, event);
+            }
+
             double x = event.getX();
             double y = event.getY();
 
@@ -62,5 +76,10 @@ public class Menu extends Window {
 
         // Play game button
         gc.fillRect(3 * Game.TILE_SIZE, (Game.NUM_ROWS - 3) * Game.TILE_SIZE, Game.TILE_SIZE, Game.TILE_SIZE);
+    }
+
+    @Override
+    public void fireEvent(Event event) {
+        canvas.fireEvent(event.copyFor(canvas, canvas));
     }
 }

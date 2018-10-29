@@ -1,3 +1,4 @@
+import javafx.event.Event;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.effect.GaussianBlur;
@@ -7,26 +8,44 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GamePlay extends Window {
 
     // Temporary field for demonstration
     ArrayList<Burst> bursts = new ArrayList<Burst>();
 
+    // Temporary Blocks for testing
+    ArrayList<Block> blocks = new ArrayList<Block>();
+
+    // The initial speed should be 2 and it should increase in multiples of 2 only
+    private double speed;
+
     // True if game is paused
     private boolean paused;
 
-    PlayButton playButton;
+    private PlayButton playButton;
 
     public GamePlay(WindowController wc, Group root) {
+
         super(wc, root);
 
+        Random random = new Random();
+        for (int i = 1; i <= 5; i++) {
+            int choose = random.nextInt(2);
+            if (choose == 1) {
+                blocks.add(new Block(i, 1));
+            }
+        }
+
+        speed = 4;
         paused = false;
         playButton = new PlayButton(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
     }
 
     @Override
     protected void loadDefaults() {
+
         super.loadDefaults();
 
         canvas.setCursor(Cursor.NONE);
@@ -34,22 +53,41 @@ public class GamePlay extends Window {
 
     @Override
     protected void addEventHandlers() {
+
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+
+            Windows currentWindow = windowController.currentWindow();
+            if (currentWindow != Windows.GamePlay) {
+                windowController.passEvent(currentWindow, event);
+            }
+
             if (event.getCode() == KeyCode.ESCAPE) {
-                windowController.setWindow(Windows.Menu);
+//                windowController.setWindow(Windows.Menu);
                 paused = !paused;
             }
         });
 
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+
+            Windows currentWindow = windowController.currentWindow();
+            if (currentWindow != Windows.GamePlay) {
+                windowController.passEvent(currentWindow, event);
+            }
+
             double mouseX = event.getX();
             double mouseY = event.getY();
 
             // Burst for demonstration
-            bursts.add(new Burst(mouseX, mouseY));
+//            bursts.add(new Burst(mouseX, mouseY));
         });
 
         canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+
+            Windows currentWindow = windowController.currentWindow();
+            if (currentWindow != Windows.GamePlay) {
+                windowController.passEvent(currentWindow, event);
+            }
+
             double mouseX = event.getX();
             double mouseY = event.getY();
 
@@ -74,8 +112,8 @@ public class GamePlay extends Window {
         gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
         // Temporary text
-        gc.setFill(Color.WHITE);
-        gc.fillText("GamePlay", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
+//        gc.setFill(Color.WHITE);
+//        gc.fillText("GamePlay", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 
         /*
          * The pause overlay is shown when the escape key is pressed.
@@ -85,9 +123,16 @@ public class GamePlay extends Window {
 
             // Update the game here
 
+            // Update blocks
+            for (Block block : blocks) {
+                block.update(speed);
+            }
         }
 
         // Show the game here
+        for (Block block : blocks) {
+            block.show(gc);
+        }
 
         // Bursts aren't paused
         gc.setFill(Color.WHITE);
@@ -110,5 +155,10 @@ public class GamePlay extends Window {
             // Resume game button
             playButton.show(gc);
         }
+    }
+
+    @Override
+    public void fireEvent(Event event) {
+        canvas.fireEvent(event.copyFor(canvas, canvas));
     }
 }

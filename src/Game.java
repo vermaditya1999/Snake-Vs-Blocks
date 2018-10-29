@@ -1,5 +1,6 @@
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
+import javafx.event.Event;
 
 import java.util.HashMap;
 
@@ -57,5 +58,15 @@ public class Game implements WindowController {
 
         // Bring the window to front
         windows.get(currentWindow).bringToFront();
+    }
+
+    @Override
+    public Windows currentWindow() {
+        return currentWindow;
+    }
+
+    @Override
+    public void passEvent(Windows window, Event event) {
+        windows.get(window).fireEvent(event);
     }
 }

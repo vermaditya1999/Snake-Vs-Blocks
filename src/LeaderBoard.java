@@ -1,3 +1,4 @@
+import javafx.event.Event;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -13,6 +14,12 @@ public class LeaderBoard extends Window {
     @Override
     protected void addEventHandlers() {
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+
+            Windows currentWindow = windowController.currentWindow();
+            if (currentWindow != Windows.LeaderBoard) {
+                windowController.passEvent(currentWindow, event);
+            }
+
             if (event.getCode() == KeyCode.ESCAPE) {
                 windowController.setWindow(Windows.Menu);
             }
@@ -29,5 +36,10 @@ public class LeaderBoard extends Window {
         // Temporary text
         gc.setFill(Color.WHITE);
         gc.fillText("LeaderBoard", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
+    }
+
+    @Override
+    public void fireEvent(Event event) {
+        canvas.fireEvent(event.copyFor(canvas, canvas));
     }
 }
