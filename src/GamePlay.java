@@ -59,11 +59,10 @@ public class GamePlay extends Window {
             Windows currentWindow = windowController.currentWindow();
             if (currentWindow != Windows.GamePlay) {
                 windowController.passEvent(currentWindow, event);
-            }
-
-            if (event.getCode() == KeyCode.ESCAPE) {
-//                windowController.setWindow(Windows.Menu);
-                paused = !paused;
+            } else {
+                if (event.getCode() == KeyCode.ESCAPE) {
+                    paused = !paused;
+                }
             }
         });
 
@@ -72,19 +71,19 @@ public class GamePlay extends Window {
             Windows currentWindow = windowController.currentWindow();
             if (currentWindow != Windows.GamePlay) {
                 windowController.passEvent(currentWindow, event);
-            }
+            } else {
+                double mouseX = event.getX();
+                double mouseY = event.getY();
 
-            double mouseX = event.getX();
-            double mouseY = event.getY();
+                if (paused) {
+                    if (playButton.isHovered(mouseX, mouseY)) {
+//                        paused = !paused;
 
-            if (paused) {
-                if (playButton.isHovered(mouseX, mouseY)) {
-                    paused = !paused;
+                        // Switch to Menu temporarily
+                        windowController.setWindow(Windows.Menu);
+                    }
                 }
             }
-
-            // Burst for demonstration
-//            bursts.add(new Burst(mouseX, mouseY));
         });
 
         canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
@@ -92,19 +91,18 @@ public class GamePlay extends Window {
             Windows currentWindow = windowController.currentWindow();
             if (currentWindow != Windows.GamePlay) {
                 windowController.passEvent(currentWindow, event);
-            }
+            } else {
+                double mouseX = event.getX();
+                double mouseY = event.getY();
 
-            double mouseX = event.getX();
-            double mouseY = event.getY();
-
-            if (paused) {
-                if (playButton.isHovered(mouseX, mouseY)) {
-                    canvas.setCursor(Cursor.HAND);
-                } else {
-                    canvas.setCursor(Cursor.DEFAULT);
+                if (paused) {
+                    if (playButton.isHovered(mouseX, mouseY)) {
+                        canvas.setCursor(Cursor.HAND);
+                    } else {
+                        canvas.setCursor(Cursor.DEFAULT);
+                    }
                 }
             }
-
         });
     }
 

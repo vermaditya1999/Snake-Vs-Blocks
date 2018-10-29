@@ -17,10 +17,10 @@ public class LeaderBoard extends Window {
             Windows currentWindow = windowController.currentWindow();
             if (currentWindow != Windows.LeaderBoard) {
                 windowController.passEvent(currentWindow, event);
-            }
-
-            if (event.getCode() == KeyCode.ESCAPE) {
-                windowController.setWindow(Windows.Menu);
+            } else {
+                if (event.getCode() == KeyCode.ESCAPE) {
+                    windowController.setWindow(Windows.Menu);
+                }
             }
         });
     }

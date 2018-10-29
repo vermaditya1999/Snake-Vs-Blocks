@@ -22,21 +22,23 @@ public class Menu extends Window {
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
+
             if (currentWindow != Windows.Menu) {
                 windowController.passEvent(currentWindow, event);
-            }
+            } else {
 
-            double mouseX = event.getX();
-            double mouseY = event.getY();
+                double mouseX = event.getX();
+                double mouseY = event.getY();
 
-            // LeaderBoard button
-            if (lbBtn.isHovered(mouseX, mouseY)) {
-                windowController.setWindow(Windows.LeaderBoard);
-            }
+                // LeaderBoard button
+                if (lbBtn.isHovered(mouseX, mouseY)) {
+                    windowController.setWindow(Windows.LeaderBoard);
+                }
 
-            // Play Game button
-            if (pgBtn.isHovered(mouseX, mouseY)) {
-                windowController.setWindow(Windows.GamePlay);
+                // Play Game button
+                if (pgBtn.isHovered(mouseX, mouseY)) {
+                    windowController.setWindow(Windows.GamePlay);
+                }
             }
         });
 
@@ -45,17 +47,18 @@ public class Menu extends Window {
             Windows currentWindow = windowController.currentWindow();
             if (currentWindow != Windows.Menu) {
                 windowController.passEvent(currentWindow, event);
-            }
-
-            double mouseX = event.getX();
-            double mouseY = event.getY();
-
-            // LeaderBoard button
-            if (lbBtn.isHovered(mouseX, mouseY) || pgBtn.isHovered(mouseX, mouseY)) {
-                canvas.setCursor(Cursor.HAND);
             } else {
-                canvas.setCursor(Cursor.DEFAULT);
+                double mouseX = event.getX();
+                double mouseY = event.getY();
+
+                // LeaderBoard button
+                if (lbBtn.isHovered(mouseX, mouseY) || pgBtn.isHovered(mouseX, mouseY)) {
+                    canvas.setCursor(Cursor.HAND);
+                } else {
+                    canvas.setCursor(Cursor.DEFAULT);
+                }
             }
+
         });
     }
 
