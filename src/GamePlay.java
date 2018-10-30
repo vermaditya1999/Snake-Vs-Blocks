@@ -151,6 +151,9 @@ public class GamePlay extends Window {
         // Show the pause overlay
         if (paused) {
 
+            gc.setFill(new Color(0, 0, 0, 0.5));
+            gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+
             // Blur the background
             gc.applyEffect(new GaussianBlur());
 
