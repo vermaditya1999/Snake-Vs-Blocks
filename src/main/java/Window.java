@@ -54,7 +54,9 @@ abstract public class Window {
 
     abstract protected void show();
 
-    abstract protected void fireEvent(Event event);
+    protected void fireEvent(Event event) {
+        canvas.fireEvent(event.copyFor(canvas, canvas));
+    }
 
     public void bringToFront() {
         canvas.toFront();
