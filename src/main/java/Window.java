@@ -11,6 +11,9 @@ abstract public class Window {
     protected Canvas canvas;
     protected GraphicsContext gc;
 
+    protected double mouseX;
+    protected double mouseY;
+
     public Window(WindowController wc, Group root) {
 
         // Set the windowController
@@ -32,7 +35,7 @@ abstract public class Window {
         addEventHandlers();
     }
 
-    protected void loadDefaults() {
+    private void loadDefaults() {
 
         // Enable KeyEvent detection
         canvas.setFocusTraversable(true);
@@ -42,13 +45,18 @@ abstract public class Window {
         gc.setTextBaseline(VPos.CENTER);
     }
 
-    public void bringToFront() {
-        canvas.toFront();
+    protected void resetMouseVars() {
+        mouseX = 0;
+        mouseY = 0;
     }
 
     abstract protected void addEventHandlers();
 
-    abstract public void show();
+    abstract protected void show();
 
-    abstract public void fireEvent(Event event);
+    abstract protected void fireEvent(Event event);
+
+    public void bringToFront() {
+        canvas.toFront();
+    }
 }
