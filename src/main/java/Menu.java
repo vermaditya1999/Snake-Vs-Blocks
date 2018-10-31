@@ -7,7 +7,7 @@ import javafx.scene.text.Font;
 
 public class Menu extends Window {
 
-    public static final Color BG_COLOR = Color.rgb(79,53,88);
+    public static final Color BG_COLOR = Color.rgb(79,53,78);
 
     private MenuButton pgBtn;
     private MenuButton lbBtn;
@@ -15,11 +15,13 @@ public class Menu extends Window {
     private double mouseX;
     private double mouseY;
 
-    public Menu(WindowController wc, Group root) {
-        super(wc, root);
-
+    {
         pgBtn = new MenuButton("Start Game", Game.SCREEN_HEIGHT / 2);
         lbBtn = new MenuButton("Leaderboard", Game.SCREEN_HEIGHT / 2 + Game.TILE_SIZE);
+    }
+
+    public Menu(WindowController wc, Group root) {
+        super(wc, root);
     }
 
     @Override
