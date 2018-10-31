@@ -73,10 +73,8 @@ public class Menu extends Window {
 
         gc.setFill(Color.WHITE);
 
-        gc.setFont(new Font("Consolas", 75));
-        gc.fillText("Vs", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 1.75);
-
         gc.setFont(new Font("Consolas", 65));
+        gc.fillText("Vs", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 1.75);
         gc.fillText("Snake", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
         gc.fillText("Blocks", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 2.5);
 
