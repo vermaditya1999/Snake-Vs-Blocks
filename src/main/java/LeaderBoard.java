@@ -12,11 +12,12 @@ import java.util.Random;
 
 public class LeaderBoard extends Window {
 
+    public static final Color BG_COLOR = Color.rgb(79,53,78);
+
     private ArrayList<EntryBar> entryList;
+    private int maxSize;
 
     private BackButton backBtn;
-
-    private int maxSize;
 
     public LeaderBoard(WindowController wc, Group root) {
         super(wc, root);
@@ -140,7 +141,7 @@ public class LeaderBoard extends Window {
     public void show() {
 
         // Set background
-        gc.setFill(Color.rgb(42,54,59));
+        gc.setFill(LeaderBoard.BG_COLOR);
         gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
         // Back Button
