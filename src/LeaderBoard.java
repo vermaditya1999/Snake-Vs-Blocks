@@ -1,17 +1,94 @@
 import javafx.event.Event;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class LeaderBoard extends Window {
 
+    private ArrayList<EntryBar> entryList;
+
+    private BackButton backBtn;
+
+    private int maxSize;
+
     public LeaderBoard(WindowController wc, Group root) {
         super(wc, root);
+
+        entryList = new ArrayList<EntryBar>();
+        backBtn = new BackButton();
+        maxSize = 10;
+
+        Random random = new Random();
+
+        addEntry("Bruce Wayne", random.nextInt(1000));
+        addEntry("Clark Kent", random.nextInt(1000));
+        addEntry("Shayera Hol", random.nextInt(1000));
+        addEntry("Tony Stark", random.nextInt(1000));
+        addEntry("Steve Rogers", random.nextInt(1000));
+        addEntry("T'Challa", random.nextInt(1000));
+        addEntry("Peter Parker", random.nextInt(1000));
+        addEntry("John Stewart", random.nextInt(1000));
+    }
+
+    public boolean isEligibleScore(int score) {
+        return ((entryList.size() < maxSize) ||
+               (!entryList.isEmpty() && (score > entryList.get(entryList.size() - 1).getScore())));
+    }
+
+    /**
+     * This method is called only when the entry is eligible to be inserted in the leaderboard.
+     * Use isEligibleScore method before calling this method.
+     */
+    public void addEntry(String name, int score) {
+
+        if (entryList.size() < maxSize) {
+            boolean added = false;
+            for (int i = 0; i < entryList.size(); i++) {
+                int curScore = entryList.get(i).getScore();
+                if (score > curScore) {
+                    entryList.add(i, new EntryBar(name, score));
+                    added = true;
+                    break;
+                }
+            }
+            if (!added) {
+                entryList.add(new EntryBar(name, score));
+            }
+        } else {
+            for (int i = 0; i < entryList.size(); i++) {
+                int curScore = entryList.get(i).getScore();
+                if (score > curScore) {
+                    entryList.add(i, new EntryBar(name, score));
+                    break;
+                }
+            }
+            entryList.remove(maxSize);
+        }
+    }
+
+    private void horizontalRule() {
+
+        gc.setStroke(Color.rgb(255,132,124));
+        gc.setLineWidth(5.0);
+
+        gc.beginPath();
+        gc.moveTo(0, Game.TILE_SIZE * 1.25);
+        gc.lineTo(Game.SCREEN_WIDTH, Game.TILE_SIZE * 1.25);
+        gc.closePath();
+
+        gc.stroke();
     }
 
     @Override
     protected void addEventHandlers() {
+
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
@@ -23,18 +100,64 @@ public class LeaderBoard extends Window {
                 }
             }
         });
+
+        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+
+            Windows currentWindow = windowController.currentWindow();
+            if (currentWindow != Windows.LeaderBoard) {
+                windowController.passEvent(currentWindow, event);
+            } else {
+
+                double mouseX = event.getX();
+                double mouseY = event.getY();
+
+                if (backBtn.isHovered(mouseX, mouseY)) {
+                    canvas.setCursor(Cursor.HAND);
+                } else {
+                    canvas.setCursor(Cursor.DEFAULT);
+                }
+            }
+        });
+
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+            Windows currentWindow = windowController.currentWindow();
+            if (currentWindow != Windows.LeaderBoard) {
+                windowController.passEvent(currentWindow, event);
+            } else {
+
+                double mouseX = event.getX();
+                double mouseY = event.getY();
+
+                if (backBtn.isHovered(mouseX, mouseY)) {
+                    windowController.setWindow(Windows.Menu);
+                }
+            }
+        });
     }
 
     @Override
     public void show() {
 
         // Set background
-        gc.setFill(Color.BLACK);
+        gc.setFill(Color.rgb(42,54,59));
         gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
-        // Temporary text
+        // Back Button
+        backBtn.show(gc);
+
+        // Leader-board heading
         gc.setFill(Color.WHITE);
-        gc.fillText("LeaderBoard", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
+        gc.setFont(new Font("Consolas", 45));
+        gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 0.80);
+
+        // Horizontal RUle
+        horizontalRule();
+
+        // Show Entry Bars
+        for (int rank = 1; rank <= entryList.size(); rank++) {
+            entryList.get(rank - 1).show(gc, rank);
+        }
     }
 
     @Override
