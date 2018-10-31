@@ -16,7 +16,7 @@ public class BackButton {
     public void show(GraphicsContext gc) {
 
         gc.setStroke(Color.WHITE);
-        gc.setLineWidth(2.0);
+        gc.setLineWidth(3.0);
         gc.setLineJoin(StrokeLineJoin.ROUND);
 
         gc.beginPath();
