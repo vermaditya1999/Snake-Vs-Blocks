@@ -15,7 +15,6 @@ public class LeaderBoard extends Window {
 
     private ArrayList<EntryBar> entryList;
     private int maxSize;
-
     private BackButton backBtn;
 
     {
@@ -37,6 +36,8 @@ public class LeaderBoard extends Window {
         addEntry("T'Challa", random.nextInt(1000));
         addEntry("Peter Parker", random.nextInt(1000));
         addEntry("John Stewart", random.nextInt(1000));
+        addEntry("Doctor Strange", random.nextInt(1000));
+        addEntry("I am Groot", random.nextInt(1000));
     }
 
     public boolean isEligibleScore(int score) {
@@ -92,8 +93,8 @@ public class LeaderBoard extends Window {
             if (currentWindow != Windows.LeaderBoard) {
                 windowController.passEvent(currentWindow, event);
             } else {
-                double mouseX = event.getX();
-                double mouseY = event.getY();
+                mouseX = event.getX();
+                mouseY = event.getY();
             }
         });
 
@@ -134,7 +135,7 @@ public class LeaderBoard extends Window {
         // Leaderboard heading
         gc.setFill(Color.WHITE);
         gc.setFont(new Font("Consolas", 45));
-        gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 0.80);
+        gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 
         // Show Entry Bars
         for (int rank = 1; rank <= entryList.size(); rank++) {
