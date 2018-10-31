@@ -26,6 +26,8 @@ public class GamePlay extends Window {
 
     private PlayButton playButton;
 
+    private BackButton backButton;
+
     public GamePlay(WindowController wc, Group root) {
 
         super(wc, root);
@@ -41,6 +43,7 @@ public class GamePlay extends Window {
         speed = 4;
         paused = false;
         playButton = new PlayButton(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
+        backButton = new BackButton();
     }
 
     @Override
@@ -77,9 +80,8 @@ public class GamePlay extends Window {
 
                 if (paused) {
                     if (playButton.isHovered(mouseX, mouseY)) {
-//                        paused = !paused;
-
-                        // Switch to Menu temporarily
+                        paused = !paused;
+                    } else if (backButton.isHovered(mouseX, mouseY)) {
                         windowController.setWindow(Windows.Menu);
                     }
                 }
@@ -96,7 +98,7 @@ public class GamePlay extends Window {
                 double mouseY = event.getY();
 
                 if (paused) {
-                    if (playButton.isHovered(mouseX, mouseY)) {
+                    if (playButton.isHovered(mouseX, mouseY) || backButton.isHovered(mouseX, mouseY)) {
                         canvas.setCursor(Cursor.HAND);
                     } else {
                         canvas.setCursor(Cursor.DEFAULT);
@@ -159,6 +161,8 @@ public class GamePlay extends Window {
 
             // Resume game button
             playButton.show(gc);
+
+            backButton.show(gc);
         }
     }
 
