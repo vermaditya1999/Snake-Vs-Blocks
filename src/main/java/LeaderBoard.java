@@ -43,10 +43,6 @@ public class LeaderBoard extends Window {
                (!entryList.isEmpty() && (score > entryList.get(entryList.size() - 1).getScore())));
     }
 
-    /**
-     * This method is called only when the entry is eligible to be inserted in the leaderboard.
-     * Use isEligibleScore method before calling this method.
-     */
     public void addEntry(String name, int score) {
 
         if (entryList.size() < maxSize) {
@@ -72,19 +68,6 @@ public class LeaderBoard extends Window {
             }
             entryList.remove(maxSize);
         }
-    }
-
-    private void horizontalRule() {
-
-        gc.setStroke(Color.rgb(255,132,124));
-        gc.setLineWidth(5.0);
-
-        gc.beginPath();
-        gc.moveTo(0, Game.TILE_SIZE * 1.25);
-        gc.lineTo(Game.SCREEN_WIDTH, Game.TILE_SIZE * 1.25);
-        gc.closePath();
-
-        gc.stroke();
     }
 
     @Override
@@ -147,13 +130,10 @@ public class LeaderBoard extends Window {
         // Back Button
         backBtn.show(gc);
 
-        // Leader-board heading
+        // Leaderboard heading
         gc.setFill(Color.WHITE);
         gc.setFont(new Font("Consolas", 45));
         gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 0.80);
-
-        // Horizontal RUle
-        horizontalRule();
 
         // Show Entry Bars
         for (int rank = 1; rank <= entryList.size(); rank++) {
