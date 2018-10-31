@@ -1,4 +1,3 @@
-import javafx.event.Event;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
@@ -93,15 +92,8 @@ public class LeaderBoard extends Window {
             if (currentWindow != Windows.LeaderBoard) {
                 windowController.passEvent(currentWindow, event);
             } else {
-
                 double mouseX = event.getX();
                 double mouseY = event.getY();
-
-                if (backBtn.isHovered(mouseX, mouseY)) {
-                    canvas.setCursor(Cursor.HAND);
-                } else {
-                    canvas.setCursor(Cursor.DEFAULT);
-                }
             }
         });
 
@@ -125,6 +117,13 @@ public class LeaderBoard extends Window {
     @Override
     public void show() {
 
+        // Set mouse pointer
+        if (backBtn.isHovered(mouseX, mouseY)) {
+            canvas.setCursor(Cursor.HAND);
+        } else {
+            canvas.setCursor(Cursor.DEFAULT);
+        }
+
         // Set background
         gc.setFill(LeaderBoard.BG_COLOR);
         gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
@@ -141,10 +140,5 @@ public class LeaderBoard extends Window {
         for (int rank = 1; rank <= entryList.size(); rank++) {
             entryList.get(rank - 1).show(gc, rank);
         }
-    }
-
-    @Override
-    public void fireEvent(Event event) {
-        canvas.fireEvent(event.copyFor(canvas, canvas));
     }
 }
