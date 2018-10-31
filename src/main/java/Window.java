@@ -3,7 +3,6 @@ import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
 abstract public class Window {
@@ -41,9 +40,6 @@ abstract public class Window {
         // Set Text Align and Baseline to CENTER
         gc.setTextAlign(TextAlignment.CENTER);
         gc.setTextBaseline(VPos.CENTER);
-
-        // Set default font and font size
-        gc.setFont(new Font("Consolas", 60));
     }
 
     public void bringToFront() {
