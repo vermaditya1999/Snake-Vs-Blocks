@@ -3,17 +3,21 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class Menu extends Window {
 
-    private Button pgBtn;
-    private Button lbBtn;
+    private MenuButton pgBtn;
+    private MenuButton lbBtn;
+
+    private double mouseX;
+    private double mouseY;
 
     public Menu(WindowController wc, Group root) {
         super(wc, root);
 
-        lbBtn = new Button(2 * Game.TILE_SIZE - Game.TILE_SIZE / 2, 6 * Game.TILE_SIZE);
-        pgBtn = new Button(3 * Game.TILE_SIZE + Game.TILE_SIZE / 2, 6 * Game.TILE_SIZE);
+        pgBtn = new MenuButton("Start Game", Game.SCREEN_HEIGHT / 2);
+        lbBtn = new MenuButton("Leaderboard", Game.SCREEN_HEIGHT / 2 + Game.TILE_SIZE);
     }
 
     @Override
@@ -27,15 +31,10 @@ public class Menu extends Window {
                 windowController.passEvent(currentWindow, event);
             } else {
 
-                double mouseX = event.getX();
-                double mouseY = event.getY();
-
-                // LeaderBoard button
                 if (lbBtn.isHovered(mouseX, mouseY)) {
                     windowController.setWindow(Windows.LeaderBoard);
                 }
 
-                // Play Game button
                 if (pgBtn.isHovered(mouseX, mouseY)) {
                     windowController.setWindow(Windows.GamePlay);
                 }
@@ -48,15 +47,8 @@ public class Menu extends Window {
             if (currentWindow != Windows.Menu) {
                 windowController.passEvent(currentWindow, event);
             } else {
-                double mouseX = event.getX();
-                double mouseY = event.getY();
-
-                // LeaderBoard button
-                if (lbBtn.isHovered(mouseX, mouseY) || pgBtn.isHovered(mouseX, mouseY)) {
-                    canvas.setCursor(Cursor.HAND);
-                } else {
-                    canvas.setCursor(Cursor.DEFAULT);
-                }
+                mouseX = event.getX();
+                mouseY = event.getY();
             }
 
         });
@@ -65,15 +57,23 @@ public class Menu extends Window {
     @Override
     public void show() {
 
+        // Set mouse pointer
+        if (lbBtn.isHovered(mouseX, mouseY) || pgBtn.isHovered(mouseX, mouseY)) {
+            canvas.setCursor(Cursor.HAND);
+        } else {
+            canvas.setCursor(Cursor.DEFAULT);
+        }
+
         // Set background
-        gc.setFill(Color.BLACK);
+        gc.setFill(Color.rgb(79,53,88));
         gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
         // Game name
+        gc.setFont(new Font("Consolas", 60));
         gc.setFill(Color.WHITE);
-        gc.fillText("Snake", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 - 2 * Game.TILE_SIZE);
-        gc.fillText("Vs", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 - Game.TILE_SIZE - 10);
-        gc.fillText("Blocks", Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 - 20);
+        gc.fillText("Snake", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
+        gc.fillText("Vs", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 1.75);
+        gc.fillText("Blocks", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 2.5);
 
         // LeaderBoard button
         lbBtn.show(gc);
