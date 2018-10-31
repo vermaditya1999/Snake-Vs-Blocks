@@ -19,12 +19,14 @@ public class LeaderBoard extends Window {
 
     private BackButton backBtn;
 
+    {
+        backBtn = new BackButton();
+        entryList = new ArrayList<EntryBar>();
+        maxSize = 10;
+    }
+
     public LeaderBoard(WindowController wc, Group root) {
         super(wc, root);
-
-        entryList = new ArrayList<EntryBar>();
-        backBtn = new BackButton();
-        maxSize = 10;
 
         Random random = new Random();
 
