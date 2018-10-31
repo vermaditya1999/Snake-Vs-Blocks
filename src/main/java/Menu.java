@@ -1,4 +1,3 @@
-import javafx.event.Event;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
@@ -11,9 +10,6 @@ public class Menu extends Window {
 
     private MenuButton pgBtn;
     private MenuButton lbBtn;
-
-    private double mouseX;
-    private double mouseY;
 
     {
         pgBtn = new MenuButton("Start Game", Game.SCREEN_HEIGHT / 2);
@@ -60,30 +56,21 @@ public class Menu extends Window {
         });
     }
 
-    private void resetMouseVars() {
-        mouseX = 0;
-        mouseY = 0;
-    }
-
     @Override
     public void show() {
 
-        // Set hover properties of buttons
         pgBtn.setHovered(pgBtn.isHovered(mouseX, mouseY));
         lbBtn.setHovered(lbBtn.isHovered(mouseX, mouseY));
 
-        // Set mouse pointer
         if (pgBtn.isHovered(mouseX, mouseY) || lbBtn.isHovered(mouseX, mouseY)) {
             canvas.setCursor(Cursor.HAND);
         } else {
             canvas.setCursor(Cursor.DEFAULT);
         }
 
-        // Set background
         gc.setFill(Menu.BG_COLOR);
         gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
-        // Display Game title
         gc.setFill(Color.WHITE);
 
         gc.setFont(new Font("Consolas", 75));
@@ -93,15 +80,8 @@ public class Menu extends Window {
         gc.fillText("Snake", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
         gc.fillText("Blocks", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 2.5);
 
-        // LeaderBoard button
         lbBtn.show(gc);
 
-        // Play game button
         pgBtn.show(gc);
-    }
-
-    @Override
-    public void fireEvent(Event event) {
-        canvas.fireEvent(event.copyFor(canvas, canvas));
     }
 }
