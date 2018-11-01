@@ -20,14 +20,16 @@ public class GamePlay extends Window {
     // The initial speed should be 2 and it should increase in multiples of 2 only
     private double speed;
     private boolean paused;
-    private PlayButton playButton;
     private HomeButton homeButton;
+    private ResumeButton resumeButton;
+    private RestartButton restartButton;
 
     {
         speed = 4;
         paused = false;
-        playButton = new PlayButton(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
+        resumeButton = new ResumeButton();
         homeButton = new HomeButton();
+        restartButton = new RestartButton();
     }
 
     public GamePlay(WindowController wc, Group root) {
@@ -65,7 +67,7 @@ public class GamePlay extends Window {
                 windowController.passEvent(currentWindow, event);
             } else {
                 if (paused) {
-                    if (playButton.isHovered(mouseX, mouseY)) {
+                    if (resumeButton.isHovered(mouseX, mouseY)) {
                         paused = !paused;
                     } else if (homeButton.isHovered(mouseX, mouseY)) {
                         resetMouseVars();
@@ -91,7 +93,7 @@ public class GamePlay extends Window {
     public void show() {
 
         if (paused) {
-            if (playButton.isHovered(mouseX, mouseY) || homeButton.isHovered(mouseX, mouseY)) {
+            if (resumeButton.isHovered(mouseX, mouseY) || homeButton.isHovered(mouseX, mouseY) || restartButton.isHovered(mouseX, mouseY)) {
                 canvas.setCursor(Cursor.HAND);
             } else {
                 canvas.setCursor(Cursor.DEFAULT);
@@ -138,13 +140,11 @@ public class GamePlay extends Window {
             gc.setFill(new Color(0, 0, 0, 0.75));
             gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
-            // Blur the background
             gc.applyEffect(new BoxBlur(10, 10, 10));
 
-            // Resume game button
-            playButton.show(gc);
-
             homeButton.show(gc);
+            resumeButton.show(gc);
+            restartButton.show(gc);
         }
     }
 }
