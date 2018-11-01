@@ -1,7 +1,6 @@
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.effect.BoxBlur;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -22,7 +21,7 @@ public class GamePlay extends Window {
     private double speed;
     private boolean paused;
     private PlayButton playButton;
-    private BackButton backButton;
+    private HomeButton homeButton;
 
     public GamePlay(WindowController wc, Group root) {
 
@@ -39,7 +38,7 @@ public class GamePlay extends Window {
         speed = 4;
         paused = false;
         playButton = new PlayButton(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
-        backButton = new BackButton();
+        homeButton = new HomeButton();
     }
 
     @Override
@@ -66,7 +65,7 @@ public class GamePlay extends Window {
                 if (paused) {
                     if (playButton.isHovered(mouseX, mouseY)) {
                         paused = !paused;
-                    } else if (backButton.isHovered(mouseX, mouseY)) {
+                    } else if (homeButton.isHovered(mouseX, mouseY)) {
                         windowController.setWindow(Windows.Menu);
                     }
                 }
@@ -89,7 +88,7 @@ public class GamePlay extends Window {
     public void show() {
 
         if (paused) {
-            if (playButton.isHovered(mouseX, mouseY) || backButton.isHovered(mouseX, mouseY)) {
+            if (playButton.isHovered(mouseX, mouseY) || homeButton.isHovered(mouseX, mouseY)) {
                 canvas.setCursor(Cursor.HAND);
             } else {
                 canvas.setCursor(Cursor.DEFAULT);
@@ -142,7 +141,7 @@ public class GamePlay extends Window {
             // Resume game button
             playButton.show(gc);
 
-            backButton.show(gc);
+            homeButton.show(gc);
         }
     }
 }

@@ -2,12 +2,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineJoin;
 
-public class BackButton {
+public class HomeButton {
 
     private double[] xPoints;
     private double[] yPoints;
 
-    public BackButton() {
+    public HomeButton() {
 
         xPoints = new double[]{35, 15, 22, 22};
         yPoints = new double[]{25, 25, 18, 32};
