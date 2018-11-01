@@ -23,6 +23,13 @@ public class GamePlay extends Window {
     private PlayButton playButton;
     private HomeButton homeButton;
 
+    {
+        speed = 4;
+        paused = false;
+        playButton = new PlayButton(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
+        homeButton = new HomeButton();
+    }
+
     public GamePlay(WindowController wc, Group root) {
 
         super(wc, root);
@@ -34,11 +41,6 @@ public class GamePlay extends Window {
                 blocks.add(new Block(i, 1));
             }
         }
-
-        speed = 4;
-        paused = false;
-        playButton = new PlayButton(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
-        homeButton = new HomeButton();
     }
 
     @Override
@@ -66,6 +68,7 @@ public class GamePlay extends Window {
                     if (playButton.isHovered(mouseX, mouseY)) {
                         paused = !paused;
                     } else if (homeButton.isHovered(mouseX, mouseY)) {
+                        resetMouseVars();
                         windowController.setWindow(Windows.Menu);
                     }
                 }

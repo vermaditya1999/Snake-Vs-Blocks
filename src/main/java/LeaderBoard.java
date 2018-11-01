@@ -18,9 +18,9 @@ public class LeaderBoard extends Window {
     private HomeButton homeButton;
 
     {
-        homeButton = new HomeButton();
         entryList = new ArrayList<EntryBar>();
         maxSize = 10;
+        homeButton = new HomeButton();
     }
 
     public LeaderBoard(WindowController wc, Group root) {
@@ -82,6 +82,7 @@ public class LeaderBoard extends Window {
                 windowController.passEvent(currentWindow, event);
             } else {
                 if (event.getCode() == KeyCode.ESCAPE) {
+                    resetMouseVars();
                     windowController.setWindow(Windows.Menu);
                 }
             }
@@ -109,6 +110,7 @@ public class LeaderBoard extends Window {
                 double mouseY = event.getY();
 
                 if (homeButton.isHovered(mouseX, mouseY)) {
+                    resetMouseVars();
                     windowController.setWindow(Windows.Menu);
                 }
             }
