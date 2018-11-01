@@ -1,14 +1,15 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class PlayButton {
+public class ResumeButton {
 
     private Vector pos;
 
-    private double size = 50;
+    private double size;
 
-    public PlayButton(double x, double y) {
-        pos = new Vector(x, y);
+    {
+        pos = new Vector(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
+        size = Game.TILE_SIZE * 0.75;
     }
 
     public void show(GraphicsContext gc) {
