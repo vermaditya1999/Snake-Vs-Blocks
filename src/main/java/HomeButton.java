@@ -1,36 +1,24 @@
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeLineJoin;
+import javafx.scene.image.Image;
 
 public class HomeButton {
 
-    private double[] xPoints;
-    private double[] yPoints;
+    private Vector pos;
+    private Image image;
+    private double size;
 
-    public HomeButton() {
-
-        xPoints = new double[]{35, 15, 22, 22};
-        yPoints = new double[]{25, 25, 18, 32};
+    {
+        pos = new Vector(Game.TILE_SIZE / 3, Game.TILE_SIZE / 3);
+        image = new Image("home.png");
+        size = Game.TILE_SIZE / 3;
     }
 
     public void show(GraphicsContext gc) {
 
-        gc.setStroke(Color.WHITE);
-        gc.setLineWidth(3.0);
-        gc.setLineJoin(StrokeLineJoin.ROUND);
-
-        gc.beginPath();
-        gc.moveTo(xPoints[0], yPoints[0]);
-        gc.lineTo(xPoints[1], yPoints[1]);
-        gc.lineTo(xPoints[2], yPoints[2]);
-        gc.moveTo(xPoints[1], yPoints[1]);
-        gc.lineTo(xPoints[3], yPoints[3]);
-        gc.closePath();
-
-        gc.stroke();
+        gc.drawImage(image, pos.x - size / 2, pos.y - size / 2, size, size);
     }
 
     public boolean isHovered(double mouseX, double mouseY) {
-        return mouseX >= xPoints[1] && mouseX <= xPoints[0] && mouseY >= yPoints[2] && mouseY <= yPoints[3];
+        return Math.abs(mouseX - pos.x) <= size / 2 && Math.abs(mouseY - pos.y) <= size / 2;
     }
 }
