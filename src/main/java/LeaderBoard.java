@@ -13,12 +13,12 @@ public class LeaderBoard extends Window {
 
     public static final Color BG_COLOR = Color.rgb(79,53,78);
 
-    private ArrayList<EntryBar> entryList;
+    private ArrayList<EntryBar> entryBars;
     private int maxSize;
     private BackButton backButton;
 
     {
-        entryList = new ArrayList<EntryBar>();
+        entryBars = new ArrayList<EntryBar>();
         maxSize = 10;
         backButton = new BackButton();
     }
@@ -41,34 +41,34 @@ public class LeaderBoard extends Window {
     }
 
     public boolean isEligibleScore(int score) {
-        return ((entryList.size() < maxSize) ||
-               (!entryList.isEmpty() && (score > entryList.get(entryList.size() - 1).getScore())));
+        return ((entryBars.size() < maxSize) ||
+                (!entryBars.isEmpty() && (score > entryBars.get(entryBars.size() - 1).getScore())));
     }
 
     public void addEntry(String name, int score) {
 
-        if (entryList.size() < maxSize) {
+        if (entryBars.size() < maxSize) {
             boolean added = false;
-            for (int i = 0; i < entryList.size(); i++) {
-                int curScore = entryList.get(i).getScore();
+            for (int i = 0; i < entryBars.size(); i++) {
+                int curScore = entryBars.get(i).getScore();
                 if (score > curScore) {
-                    entryList.add(i, new EntryBar(name, score));
+                    entryBars.add(i, new EntryBar(name, score));
                     added = true;
                     break;
                 }
             }
             if (!added) {
-                entryList.add(new EntryBar(name, score));
+                entryBars.add(new EntryBar(name, score));
             }
         } else {
-            for (int i = 0; i < entryList.size(); i++) {
-                int curScore = entryList.get(i).getScore();
+            for (int i = 0; i < entryBars.size(); i++) {
+                int curScore = entryBars.get(i).getScore();
                 if (score > curScore) {
-                    entryList.add(i, new EntryBar(name, score));
+                    entryBars.add(i, new EntryBar(name, score));
                     break;
                 }
             }
-            entryList.remove(maxSize);
+            entryBars.remove(maxSize);
         }
     }
 
@@ -120,6 +120,12 @@ public class LeaderBoard extends Window {
     @Override
     public void show() {
 
+        // Set Entry bars' hovered variable
+        for (int rank = 1; rank <= entryBars.size(); rank++) {
+            EntryBar entryBar = entryBars.get(rank - 1);
+            entryBar.setHovered(entryBar.isHovered(mouseX, mouseY));
+        }
+
         // Set mouse pointer
         if (backButton.isHovered(mouseX, mouseY)) {
             canvas.setCursor(Cursor.HAND);
@@ -140,8 +146,8 @@ public class LeaderBoard extends Window {
         gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 
         // Show Entry Bars
-        for (int rank = 1; rank <= entryList.size(); rank++) {
-            entryList.get(rank - 1).show(gc, rank);
+        for (int rank = 1; rank <= entryBars.size(); rank++) {
+            entryBars.get(rank - 1).show(gc, rank);
         }
     }
 }
