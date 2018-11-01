@@ -8,12 +8,12 @@ public class Menu extends Window {
 
     public static final Color BG_COLOR = Color.rgb(79,53,78);
 
-    private MenuButton pgBtn;
-    private MenuButton lbBtn;
+    private MenuButton startGameButton;
+    private MenuButton leaderBoardButton;
 
     {
-        pgBtn = new MenuButton("Start Game", Game.SCREEN_HEIGHT / 2);
-        lbBtn = new MenuButton("Leaderboard", Game.SCREEN_HEIGHT / 2 + Game.TILE_SIZE);
+        startGameButton = new MenuButton("Start Game", Game.SCREEN_HEIGHT / 2);
+        leaderBoardButton = new MenuButton("Leaderboard", Game.SCREEN_HEIGHT / 2 + Game.TILE_SIZE);
     }
 
     public Menu(WindowController wc, Group root) {
@@ -31,12 +31,12 @@ public class Menu extends Window {
                 windowController.passEvent(currentWindow, event);
             } else {
 
-                if (lbBtn.isHovered(mouseX, mouseY)) {
+                if (leaderBoardButton.isHovered(mouseX, mouseY)) {
                     resetMouseVars();
                     windowController.setWindow(Windows.LeaderBoard);
                 }
 
-                if (pgBtn.isHovered(mouseX, mouseY)) {
+                if (startGameButton.isHovered(mouseX, mouseY)) {
                     resetMouseVars();
                     windowController.setWindow(Windows.GamePlay);
                 }
@@ -59,10 +59,10 @@ public class Menu extends Window {
     @Override
     public void show() {
 
-        pgBtn.setHovered(pgBtn.isHovered(mouseX, mouseY));
-        lbBtn.setHovered(lbBtn.isHovered(mouseX, mouseY));
+        startGameButton.setHovered(startGameButton.isHovered(mouseX, mouseY));
+        leaderBoardButton.setHovered(leaderBoardButton.isHovered(mouseX, mouseY));
 
-        if (pgBtn.isHovered(mouseX, mouseY) || lbBtn.isHovered(mouseX, mouseY)) {
+        if (startGameButton.isHovered(mouseX, mouseY) || leaderBoardButton.isHovered(mouseX, mouseY)) {
             canvas.setCursor(Cursor.HAND);
         } else {
             canvas.setCursor(Cursor.DEFAULT);
@@ -78,8 +78,8 @@ public class Menu extends Window {
         gc.fillText("Snake", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
         gc.fillText("Blocks", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 2.5);
 
-        lbBtn.show(gc);
+        leaderBoardButton.show(gc);
 
-        pgBtn.show(gc);
+        startGameButton.show(gc);
     }
 }
