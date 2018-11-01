@@ -7,7 +7,6 @@ public class Destroyer extends Token {
     public Destroyer(double x, double y){
 
         super(x, y);
-
     }
 
     @Override
