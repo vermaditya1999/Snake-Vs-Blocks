@@ -15,12 +15,12 @@ public class LeaderBoard extends Window {
 
     private ArrayList<EntryBar> entryList;
     private int maxSize;
-    private HomeButton homeButton;
+    private BackButton backButton;
 
     {
         entryList = new ArrayList<EntryBar>();
         maxSize = 10;
-        homeButton = new HomeButton();
+        backButton = new BackButton();
     }
 
     public LeaderBoard(WindowController wc, Group root) {
@@ -109,7 +109,7 @@ public class LeaderBoard extends Window {
                 double mouseX = event.getX();
                 double mouseY = event.getY();
 
-                if (homeButton.isHovered(mouseX, mouseY)) {
+                if (backButton.isHovered(mouseX, mouseY)) {
                     resetMouseVars();
                     windowController.setWindow(Windows.Menu);
                 }
@@ -121,7 +121,7 @@ public class LeaderBoard extends Window {
     public void show() {
 
         // Set mouse pointer
-        if (homeButton.isHovered(mouseX, mouseY)) {
+        if (backButton.isHovered(mouseX, mouseY)) {
             canvas.setCursor(Cursor.HAND);
         } else {
             canvas.setCursor(Cursor.DEFAULT);
@@ -132,7 +132,7 @@ public class LeaderBoard extends Window {
         gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
         // Back Button
-        homeButton.show(gc);
+        backButton.show(gc);
 
         // Leaderboard heading
         gc.setFill(Color.WHITE);

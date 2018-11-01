@@ -20,13 +20,13 @@ public class GamePlay extends Window {
     // The initial speed should be 2 and it should increase in multiples of 2 only
     private double speed;
     private boolean paused;
-    private HomeButton homeButton;
+    private BackButton backButton;
     private ResumeButton resumeButton;
     private RestartButton restartButton;
 
     {
         resumeButton = new ResumeButton();
-        homeButton = new HomeButton();
+        backButton = new BackButton();
         restartButton = new RestartButton();
     }
 
@@ -74,7 +74,7 @@ public class GamePlay extends Window {
                 if (paused) {
                     if (resumeButton.isHovered(mouseX, mouseY)) {
                         paused = false;
-                    } else if (homeButton.isHovered(mouseX, mouseY)) {
+                    } else if (backButton.isHovered(mouseX, mouseY)) {
                         newGamePlay();
                         resetMouseVars();
                         windowController.setWindow(Windows.Menu);
@@ -101,7 +101,7 @@ public class GamePlay extends Window {
     public void show() {
 
         if (paused) {
-            if (resumeButton.isHovered(mouseX, mouseY) || homeButton.isHovered(mouseX, mouseY) || restartButton.isHovered(mouseX, mouseY)) {
+            if (resumeButton.isHovered(mouseX, mouseY) || backButton.isHovered(mouseX, mouseY) || restartButton.isHovered(mouseX, mouseY)) {
                 canvas.setCursor(Cursor.HAND);
             } else {
                 canvas.setCursor(Cursor.DEFAULT);
@@ -150,7 +150,7 @@ public class GamePlay extends Window {
 
             gc.applyEffect(new BoxBlur(10, 10, 10));
 
-            homeButton.show(gc);
+            backButton.show(gc);
             resumeButton.show(gc);
             restartButton.show(gc);
         }
