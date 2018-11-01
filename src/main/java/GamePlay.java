@@ -25,8 +25,6 @@ public class GamePlay extends Window {
     private RestartButton restartButton;
 
     {
-        speed = 4;
-        paused = false;
         resumeButton = new ResumeButton();
         homeButton = new HomeButton();
         restartButton = new RestartButton();
@@ -35,12 +33,15 @@ public class GamePlay extends Window {
     public GamePlay(WindowController wc, Group root) {
         super(wc, root);
 
-        startGamePlay();
+        newGamePlay();
     }
 
-    private void startGamePlay() {
-        Random random = new Random();
+    private void newGamePlay() {
+        speed = 4;
+        paused = false;
         blocks.clear();
+
+        Random random = new Random();
         for (int i = 1; i <= 5; i++) {
             int choose = random.nextInt(2);
             if (choose == 1) {
@@ -74,11 +75,11 @@ public class GamePlay extends Window {
                     if (resumeButton.isHovered(mouseX, mouseY)) {
                         paused = false;
                     } else if (homeButton.isHovered(mouseX, mouseY)) {
+                        newGamePlay();
                         resetMouseVars();
                         windowController.setWindow(Windows.Menu);
                     } else if (restartButton.isHovered(mouseX, mouseY)) {
-                        paused = false;
-                        startGamePlay();
+                        newGamePlay();
                     }
                 }
             }
