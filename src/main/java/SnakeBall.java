@@ -2,14 +2,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class Ball {
+public class SnakeBall {
 
     private final float radius = 20;
     private int value;
 
     private Vector pos;
 
-    public Ball(int x, int y) {
+    public SnakeBall(int x, int y) {
 
         pos = new Vector(x, y);
 
