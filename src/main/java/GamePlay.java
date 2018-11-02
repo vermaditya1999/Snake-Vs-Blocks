@@ -6,23 +6,23 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Iterator;
 import java.util.Random;
 
 public class GamePlay extends Window {
 
     // Temporary burst for demonstration
-    ArrayList<Burst> bursts = new ArrayList<Burst>();
+    LinkedList<Burst> bursts = new LinkedList<Burst>();
 
     // Temporary Blocks for testing
-    ArrayList<Block> blocks = new ArrayList<Block>();
+    LinkedList<Block> blocks = new LinkedList<Block>();
 
     // Temporary Walls for testing
-    ArrayList<Wall> walls = new ArrayList<Wall>();
+    LinkedList<Wall> walls = new LinkedList<Wall>();
 
     // Temporary Tokens for testing
-    ArrayList<Token> tokens = new ArrayList<Token>();
+    LinkedList<Token> tokens = new LinkedList<Token>();
 
     // The initial speed should be 2 and it should increase in multiples of 2 only
     private double speed;
