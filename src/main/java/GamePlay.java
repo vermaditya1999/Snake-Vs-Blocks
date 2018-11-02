@@ -24,6 +24,9 @@ public class GamePlay extends Window {
     // Temporary Tokens for testing
     LinkedList<Token> tokens = new LinkedList<Token>();
 
+    // Temporary Snake for testing
+    Snake snake = new Snake();
+
     // The initial speed should be 2 and it should increase in multiples of 2 only
     private double speed;
     private boolean paused;
@@ -199,6 +202,7 @@ public class GamePlay extends Window {
 
             // Update the game here
 
+            // Quasi random procedural generation of the infinite map
             trigger += speed;
             if (trigger % (Game.TILE_SIZE * 5) == 0) {
                 populate();
@@ -238,7 +242,7 @@ public class GamePlay extends Window {
                 }
             }
 
-            // Update Blocks
+            // Update blocks
             Iterator blockIterator = blocks.iterator();
             while (blockIterator.hasNext()) {
                 Block block = (Block) blockIterator.next();
@@ -249,7 +253,7 @@ public class GamePlay extends Window {
                 }
             }
 
-            // Update Walls
+            // Update walls
             Iterator wallIterator = walls.iterator();
             while (wallIterator.hasNext()) {
                 Wall wall = (Wall) wallIterator.next();
@@ -270,6 +274,10 @@ public class GamePlay extends Window {
                     token.update(speed);
                 }
             }
+
+            // Update snake
+            snake.update(mouseX, mouseY);
+
         }
 
         // Show the game here, cause even if the game is pause, we have to show it
@@ -288,6 +296,9 @@ public class GamePlay extends Window {
         for (Token token : tokens) {
             token.show(gc);
         }
+
+        // Show snake
+        snake.show(gc);
 
         // Update and show bursts, they aren't paused. Will look kinda cool :P
         gc.setFill(Color.WHITE);
