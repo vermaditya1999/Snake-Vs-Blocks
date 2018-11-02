@@ -71,14 +71,25 @@ public class GamePlay extends Window {
         for (int i = 1; i <= 5; i++) {
 
             // 50% chances of a block
-            int choose = random.nextInt(3);
+            int choose = random.nextInt(4);
             if (choose <= 1) {
                 blocks.add(new Block(i, -2));
 
                 // 33% chance of a wall, given there is a block
                 choose = random.nextInt(3);
                 if (choose == 1) {
-                    walls.add(new Wall(i, -2));
+
+                    boolean flag = false;
+                    for (Token token : tokens) {
+                        if (token.pos.x == ((i - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2) &&
+                           (token.pos.y == -Game.TILE_SIZE / 2 || token.pos.y == -2 * Game.TILE_SIZE + Game.TILE_SIZE / 2)) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag) {
+                        walls.add(new Wall(i, -2));
+                    }
                 }
             } else {
 
