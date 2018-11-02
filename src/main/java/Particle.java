@@ -48,6 +48,6 @@ public class Particle {
     public void show(GraphicsContext gc) {
 //        gc.setFill(Color.rgb(r, g, b, alpha));
         gc.setFill(Color.rgb(255, 255, 255, alpha));
-        gc.fillOval(pos.x, pos.y, radius * 2, radius * 2);
+        gc.fillOval(pos.x - radius, pos.y - radius, radius * 2, radius * 2);
     }
 }
