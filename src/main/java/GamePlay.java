@@ -6,23 +6,23 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Iterator;
 import java.util.Random;
 
 public class GamePlay extends Window {
 
     // Temporary burst for demonstration
-    ArrayList<Burst> bursts = new ArrayList<>();
+    LinkedList<Burst> bursts = new LinkedList<Burst>();
 
     // Temporary Blocks for testing
-    ArrayList<Block> blocks = new ArrayList<Block>();
+    LinkedList<Block> blocks = new LinkedList<Block>();
 
     // Temporary Walls for testing
-    ArrayList<Wall> walls = new ArrayList<Wall>();
+    LinkedList<Wall> walls = new LinkedList<Wall>();
 
     // Temporary Tokens for testing
-    ArrayList<Token> tokens = new ArrayList<Token>();
+    LinkedList<Token> tokens = new LinkedList<Token>();
 
     // Temporary Snake for testing
     Snake snake = new Snake();
@@ -73,22 +73,34 @@ public class GamePlay extends Window {
 
         for (int i = 1; i <= 5; i++) {
 
-            // 30% chances of a block
-            int choose = random.nextInt(3);
-            if (choose == 1) {
+            // 50% chances of a block
+            int choose = random.nextInt(4);
+            if (choose <= 1) {
                 blocks.add(new Block(i, -2));
 
-                // 50% chance of a wall, given there is a block
-                choose = random.nextInt(2);
+                // 33% chance of a wall, given there is a block
+                choose = random.nextInt(3);
                 if (choose == 1) {
-                    walls.add(new Wall(i, -2));
+
+                    // Check any overlap of existing tokens with wall
+                    boolean flag = false;
+                    for (Token token : tokens) {
+                        if (token.pos.x == ((i - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2) &&
+                           (token.pos.y == -Game.TILE_SIZE / 2 || token.pos.y == -2 * Game.TILE_SIZE + Game.TILE_SIZE / 2)) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag) {
+                        walls.add(new Wall(i, -2));
+                    }
                 }
             } else {
 
                 // No Block, Wall has been added, a token can be added
                 choose = random.nextInt(15);
                 if (choose == 1) {
-                    choose = random.nextInt(4);
+                    choose = random.nextInt(5);
                     switch (choose) {
                         case 0:
                             tokens.add(new Shield(i, -2));
@@ -101,6 +113,9 @@ public class GamePlay extends Window {
                             break;
                         case 3:
                             tokens.add(new Destroyer(i, -2));
+                            break;
+                        case 4:
+                            tokens.add(new Coin(i, -2));
                             break;
                     }
                 }
@@ -194,22 +209,35 @@ public class GamePlay extends Window {
                 trigger = 0;
             } else if (trigger % Game.TILE_SIZE == 0) {
 
-                // We can add a token here, probability 1% each
+                /* Probabilities of tokens:
+                 * PickupBall : 7%
+                 * Coin : 5%
+                 * Magnet : 1%
+                 * Shield : 1%
+                 * Destroyer : 1%
+                 */
                 for (int i = 1; i <= 5; i++) {
                     int choose = random.nextInt(100);
-                    switch (choose) {
-                        case 10:
-                            tokens.add(new Shield(i, -2));
-                            break;
-                        case 30:
-                            tokens.add(new Magnet(i, -2));
-                            break;
-                        case 40:
-                            tokens.add(new PickupBall(i, -2));
-                            break;
-                        case 70:
-                            tokens.add(new Destroyer(i, -2));
-                            break;
+
+                    if (choose == 1) {
+                        tokens.add(new Shield(i, -2));
+                        break;
+
+                    } else if (choose == 2) {
+                        tokens.add(new Magnet(i, -2));
+                        break;
+
+                    } else if (choose == 3){
+                        tokens.add(new Destroyer(i, -2));
+                        break;
+
+                    } else if (choose <= 10) {
+                        tokens.add(new PickupBall(i, -2));
+                        break;
+
+                    } else if (choose <= 15) {
+                        tokens.add(new Coin( i, -2));
+                        break;
                     }
                 }
             }

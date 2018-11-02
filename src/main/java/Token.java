@@ -4,13 +4,13 @@ public abstract class Token {
 
     protected float radius;
 
-    protected Vector pos;
+    public Vector pos;
 
     {
         radius = 10;
     }
 
-    public Token (double x, double y){
+    public Token(double x, double y) {
 
         pos = new Vector((x - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2, (y - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2);
     }
@@ -24,4 +24,5 @@ public abstract class Token {
     public boolean isOver() {
         return pos.y - radius >= Game.SCREEN_HEIGHT;
     }
+
 }
