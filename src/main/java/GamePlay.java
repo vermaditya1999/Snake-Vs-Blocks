@@ -79,6 +79,7 @@ public class GamePlay extends Window {
                 choose = random.nextInt(3);
                 if (choose == 1) {
 
+                    // Check any overlap of existing tokens with wall
                     boolean flag = false;
                     for (Token token : tokens) {
                         if (token.pos.x == ((i - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2) &&
@@ -204,7 +205,13 @@ public class GamePlay extends Window {
                 trigger = 0;
             } else if (trigger % Game.TILE_SIZE == 0) {
 
-                // We can add a token here, probability 1% each
+                /* Probabilities of tokens:
+                 * PickupBall : 7%
+                 * Coin : 5%
+                 * Magnet : 1%
+                 * Shield : 1%
+                 * Destroyer : 1%
+                 */
                 for (int i = 1; i <= 5; i++) {
                     int choose = random.nextInt(100);
 
