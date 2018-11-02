@@ -70,13 +70,13 @@ public class GamePlay extends Window {
 
         for (int i = 1; i <= 5; i++) {
 
-            // 30% chances of a block
+            // 50% chances of a block
             int choose = random.nextInt(3);
-            if (choose == 1) {
+            if (choose <= 1) {
                 blocks.add(new Block(i, -2));
 
-                // 50% chance of a wall, given there is a block
-                choose = random.nextInt(2);
+                // 33% chance of a wall, given there is a block
+                choose = random.nextInt(3);
                 if (choose == 1) {
                     walls.add(new Wall(i, -2));
                 }
@@ -85,7 +85,7 @@ public class GamePlay extends Window {
                 // No Block, Wall has been added, a token can be added
                 choose = random.nextInt(15);
                 if (choose == 1) {
-                    choose = random.nextInt(4);
+                    choose = random.nextInt(5);
                     switch (choose) {
                         case 0:
                             tokens.add(new Shield(i, -2));
@@ -98,6 +98,9 @@ public class GamePlay extends Window {
                             break;
                         case 3:
                             tokens.add(new Destroyer(i, -2));
+                            break;
+                        case 4:
+                            tokens.add(new Coin(i, -2));
                             break;
                     }
                 }
@@ -193,19 +196,26 @@ public class GamePlay extends Window {
                 // We can add a token here, probability 1% each
                 for (int i = 1; i <= 5; i++) {
                     int choose = random.nextInt(100);
-                    switch (choose) {
-                        case 10:
-                            tokens.add(new Shield(i, -2));
-                            break;
-                        case 30:
-                            tokens.add(new Magnet(i, -2));
-                            break;
-                        case 40:
-                            tokens.add(new PickupBall(i, -2));
-                            break;
-                        case 70:
-                            tokens.add(new Destroyer(i, -2));
-                            break;
+
+                    if (choose == 1) {
+                        tokens.add(new Shield(i, -2));
+                        break;
+
+                    } else if (choose == 2) {
+                        tokens.add(new Magnet(i, -2));
+                        break;
+
+                    } else if (choose == 3){
+                        tokens.add(new Destroyer(i, -2));
+                        break;
+
+                    } else if (choose <= 10) {
+                        tokens.add(new PickupBall(i, -2));
+                        break;
+
+                    } else if (choose <= 15) {
+                        tokens.add(new Coin( i, -2));
+                        break;
                     }
                 }
             }
