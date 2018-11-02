@@ -1,6 +1,6 @@
 import javafx.animation.AnimationTimer;
-import javafx.scene.Group;
 import javafx.event.Event;
+import javafx.scene.Group;
 
 import java.util.HashMap;
 
@@ -9,7 +9,8 @@ public class Game implements WindowController {
     public final static int NUM_ROWS = 8;
     public final static int NUM_COLS = 5;
 
-    public final static double TILE_SIZE = 76;
+    // Divisors of 72 : 1,2,3,4,6,8,9,12,18,24,36,72
+    public final static double TILE_SIZE = 72;
 
     public final static double SCREEN_WIDTH = Game.TILE_SIZE * Game.NUM_COLS;
     public final static double SCREEN_HEIGHT = Game.TILE_SIZE * Game.NUM_ROWS;
