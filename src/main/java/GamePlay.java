@@ -5,6 +5,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.util.LinkedList;
 import java.util.Iterator;
@@ -26,6 +27,12 @@ public class GamePlay extends Window {
 
     // Temporary Snake for testing
     Snake snake = new Snake();
+
+    // Score
+    private int score;
+
+    // Number of coins collected
+    private int numCoins;
 
     // The initial speed should be 2 and it should increase in multiples of 2 only
     private double speed;
@@ -52,6 +59,8 @@ public class GamePlay extends Window {
     }
 
     private void newGamePlay() {
+        numCoins = 0;
+        score = 0;
         speed = 4;
         trigger = 0;
         paused = false;
@@ -300,6 +309,12 @@ public class GamePlay extends Window {
         // Show snake
         snake.show(gc);
 
+        // Show score
+        showScore();
+
+        // Show total coins collected
+        showNumCoins();
+
         // Update and show bursts, they aren't paused. Will look kinda cool :P
         gc.setFill(Color.WHITE);
         for (int i = bursts.size() - 1; i >= 0; i--) {
@@ -325,4 +340,26 @@ public class GamePlay extends Window {
             restartButton.show(gc);
         }
     }
+
+    private void showScore() {
+
+        gc.setFont(new Font("Consolas", 30));
+        gc.setFill(Color.WHITE);
+        gc.fillText(Integer.toString(score), Game.TILE_SIZE / 2, Game.TILE_SIZE / 2);
+
+    }
+
+    private void showNumCoins() {
+
+        gc.setFill(Color.YELLOW);
+        gc.fillRect(Game.SCREEN_WIDTH - Game.TILE_SIZE - Token.RADIUS,
+                    Game.TILE_SIZE / 2 - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+
+        gc.setFont(new Font("Consolas", 30));
+        gc.setFill(Color.WHITE);
+        gc.fillText(Integer.toString(numCoins), Game.SCREEN_WIDTH - Game.TILE_SIZE /2,
+                Game.TILE_SIZE / 2 );
+
+    }
+
 }
