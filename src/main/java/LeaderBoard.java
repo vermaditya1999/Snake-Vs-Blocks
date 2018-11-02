@@ -13,12 +13,12 @@ public class LeaderBoard extends Window {
 
     public static final Color BG_COLOR = Color.rgb(57, 8, 49);
 
-    private ArrayList<EntryBar> entryBars;
+    private ArrayList<EntryPane> entryPanes;
     private int maxSize;
     private BackButton backButton;
 
     {
-        entryBars = new ArrayList<EntryBar>();
+        entryPanes = new ArrayList<EntryPane>();
         maxSize = 10;
         backButton = new BackButton();
     }
@@ -41,34 +41,34 @@ public class LeaderBoard extends Window {
     }
 
     public boolean isEligibleScore(int score) {
-        return ((entryBars.size() < maxSize) ||
-                (!entryBars.isEmpty() && (score > entryBars.get(entryBars.size() - 1).getScore())));
+        return ((entryPanes.size() < maxSize) ||
+                (!entryPanes.isEmpty() && (score > entryPanes.get(entryPanes.size() - 1).getScore())));
     }
 
     public void addEntry(String name, int score) {
 
-        if (entryBars.size() < maxSize) {
+        if (entryPanes.size() < maxSize) {
             boolean added = false;
-            for (int i = 0; i < entryBars.size(); i++) {
-                int curScore = entryBars.get(i).getScore();
+            for (int i = 0; i < entryPanes.size(); i++) {
+                int curScore = entryPanes.get(i).getScore();
                 if (score > curScore) {
-                    entryBars.add(i, new EntryBar(name, score));
+                    entryPanes.add(i, new EntryPane(name, score));
                     added = true;
                     break;
                 }
             }
             if (!added) {
-                entryBars.add(new EntryBar(name, score));
+                entryPanes.add(new EntryPane(name, score));
             }
         } else {
-            for (int i = 0; i < entryBars.size(); i++) {
-                int curScore = entryBars.get(i).getScore();
+            for (int i = 0; i < entryPanes.size(); i++) {
+                int curScore = entryPanes.get(i).getScore();
                 if (score > curScore) {
-                    entryBars.add(i, new EntryBar(name, score));
+                    entryPanes.add(i, new EntryPane(name, score));
                     break;
                 }
             }
-            entryBars.remove(maxSize);
+            entryPanes.remove(maxSize);
         }
     }
 
@@ -121,9 +121,9 @@ public class LeaderBoard extends Window {
     public void show() {
 
         // Set Entry bars' hovered variable
-        for (int rank = 1; rank <= entryBars.size(); rank++) {
-            EntryBar entryBar = entryBars.get(rank - 1);
-            entryBar.setHovered(entryBar.isHovered(mouseX, mouseY));
+        for (int rank = 1; rank <= entryPanes.size(); rank++) {
+            EntryPane entryPane = entryPanes.get(rank - 1);
+            entryPane.setHovered(entryPane.isHovered(mouseX, mouseY));
         }
 
         // Set mouse pointer
@@ -146,8 +146,8 @@ public class LeaderBoard extends Window {
         gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 
         // Show Entry Bars
-        for (int rank = 1; rank <= entryBars.size(); rank++) {
-            entryBars.get(rank - 1).show(gc, rank);
+        for (int rank = 1; rank <= entryPanes.size(); rank++) {
+            entryPanes.get(rank - 1).show(gc, rank);
         }
     }
 }

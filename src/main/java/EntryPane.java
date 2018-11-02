@@ -2,7 +2,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class EntryBar {
+public class EntryPane {
 
     public static final double RADIUS = Game.TILE_SIZE / 5;
 
@@ -15,12 +15,12 @@ public class EntryBar {
 
     {
         pos = new Vector(Game.SCREEN_WIDTH / 2, 0);
-        height = EntryBar.RADIUS * 2;
+        height = EntryPane.RADIUS * 2;
         width = Game.TILE_SIZE * 3.5;
         hovered = false;
     }
 
-    public EntryBar(String name, int score) {
+    public EntryPane(String name, int score) {
         this.name = name;
         this.score = score;
     }
@@ -36,12 +36,12 @@ public class EntryBar {
         // Show hover bar
         if (hovered) {
             gc.setFill(Color.WHITE);
-            gc.fillRect(pos.x - width / 2 + EntryBar.RADIUS, pos.y - height / 2, width, height);
+            gc.fillRect(pos.x - width / 2 + EntryPane.RADIUS, pos.y - height / 2, width, height);
         }
 
         // Show rank label
         gc.setFill(Color.WHITE);
-        gc.fillOval(Game.TILE_SIZE - EntryBar.RADIUS, pos.y - EntryBar.RADIUS, EntryBar.RADIUS * 2, EntryBar.RADIUS * 2);
+        gc.fillOval(Game.TILE_SIZE - EntryPane.RADIUS, pos.y - EntryPane.RADIUS, EntryPane.RADIUS * 2, EntryPane.RADIUS * 2);
 
         // Show rank
         gc.setFill(LeaderBoard.BG_COLOR);
