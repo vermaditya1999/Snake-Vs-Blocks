@@ -19,7 +19,7 @@ public class Block {
 
         // Temporary value
         Random random = new Random();
-        value = random.nextInt(10);
+        value = 1 + random.nextInt(10);
 
         pos = new Vector((x - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2, (y - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2);
     }
@@ -44,6 +44,6 @@ public class Block {
     }
 
     public boolean isOver() {
-        return pos.y >= (Game.NUM_ROWS + 1) * Game.TILE_SIZE;
+        return pos.y - Game.TILE_SIZE / 2 >= Game.SCREEN_HEIGHT;
     }
 }
