@@ -14,12 +14,13 @@ public class Shield extends Token{
 
         // Display Shield
         // To be changed later
-        gc.setFill(Color.RED);
-        gc.fillRect(pos.x, pos.y,20,20);
+        gc.setFill(Color.CORNSILK);
+        gc.fillRect(pos.x - radius, pos.y - radius, 2 * radius, 2 * radius);
 
         // Display text
+        gc.setFill(Color.WHITE);
         gc.setFont(new Font("Consolas", 15));
-        gc.fillText("Shield", pos.x, pos.y + 2*radius);
+        gc.fillText("Shield", pos.x, pos.y + 2.5 * radius);
 
     }
 }

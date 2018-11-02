@@ -14,12 +14,13 @@ public class PickupBall extends Token{
 
         // Display pickup ball
         // To be changed later
-        gc.setFill(Color.BROWN);
-        gc.fillRect(pos.x, pos.y,20,20);
+        gc.setFill(Color.PAPAYAWHIP);
+        gc.fillRect(pos.x - radius, pos.y - radius, 2 * radius, 2 * radius);
 
         // Display text
-        gc.setFont(new Font("Consolas", 20));
-        gc.fillText("PB", pos.x, pos.y + 2*radius);
+        gc.setFill(Color.WHITE);
+        gc.setFont(new Font("Consolas", 15));
+        gc.fillText("Ball", pos.x, pos.y + 2.5 * radius);
 
     }
 }

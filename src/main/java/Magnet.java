@@ -14,12 +14,13 @@ public class Magnet extends Token {
 
         // Display Magnet
         // To be changed later
-        gc.setFill(Color.BROWN);
-        gc.fillRect(pos.x, pos.y,20,20);
+        gc.setFill(Color.DARKSLATEBLUE);
+        gc.fillRect(pos.x - radius, pos.y - radius, 2 * radius, 2 * radius);
 
         // Display text
+        gc.setFill(Color.WHITE);
         gc.setFont(new Font("Consolas", 15));
-        gc.fillText("Magnet", pos.x, pos.y + 2*radius);
+        gc.fillText("Magnet", pos.x, pos.y + 2.5 * radius);
 
     }
 }
