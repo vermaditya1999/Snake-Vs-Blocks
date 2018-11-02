@@ -6,7 +6,7 @@ import javafx.scene.text.Font;
 
 public class Menu extends Window {
 
-    public static final Color BG_COLOR = Color.rgb(79,53,78);
+    public static final Color BG_COLOR = Color.rgb(57, 8, 49);
 
     private MenuButton startGameButton;
     private MenuButton leaderBoardButton;

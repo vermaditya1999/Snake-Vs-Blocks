@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class LeaderBoard extends Window {
 
-    public static final Color BG_COLOR = Color.rgb(79,53,78);
+    public static final Color BG_COLOR = Color.rgb(57, 8, 49);
 
     private ArrayList<EntryBar> entryBars;
     private int maxSize;
