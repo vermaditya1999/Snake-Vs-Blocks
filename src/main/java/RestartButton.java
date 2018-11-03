@@ -9,7 +9,7 @@ public class RestartButton {
 
     {
         pos = new Vector(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 + Game.TILE_SIZE * 2.5);
-        image = new Image("restart.png");
+        image = new Image("images/restart.png");
         size = Game.TILE_SIZE;
     }
 
