@@ -8,7 +8,7 @@ public class EntryPane {
     private Vector pos;
     private double height;
     private double width;
-    private String name;
+    private String date;
     private int score;
     private boolean hovered;
 
@@ -19,8 +19,8 @@ public class EntryPane {
         hovered = false;
     }
 
-    public EntryPane(String name, int score) {
-        this.name = name;
+    public EntryPane(String date, int score) {
+        this.date = date;
         this.score = score;
     }
 
@@ -53,8 +53,8 @@ public class EntryPane {
             gc.setFill(LeaderBoard.FG_COLOR);
         }
 
-        // Show name and score
-        gc.fillText(name, pos.x, pos.y);
+        // Show date and score
+        gc.fillText(date, pos.x, pos.y);
         gc.fillText(Integer.toString(score), pos.x + Game.TILE_SIZE * 1.5, pos.y);
     }
 
