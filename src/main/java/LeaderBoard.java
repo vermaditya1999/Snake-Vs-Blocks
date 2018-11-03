@@ -11,7 +11,8 @@ import java.util.Random;
 
 public class LeaderBoard extends Window {
 
-    public static final Color BG_COLOR = Color.rgb(57, 8, 49);
+    public static final Color BG_COLOR = Color.rgb(245, 245, 245);
+    public static final Color FG_COLOR = Color.rgb(60, 60, 60);
 
     private ArrayList<EntryPane> entryPanes;
     private int maxSize;
@@ -138,10 +139,10 @@ public class LeaderBoard extends Window {
         gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
         // Back Button
-        backButton.show(gc);
+        backButton.show(gc, LeaderBoard.FG_COLOR);
 
         // Leaderboard heading
-        gc.setFill(Color.WHITE);
+        gc.setFill(LeaderBoard.FG_COLOR);
         gc.setFont(new Font("Consolas", 45));
         gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 

@@ -1,5 +1,4 @@
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class EntryPane {
@@ -35,23 +34,23 @@ public class EntryPane {
 
         // Show hover bar
         if (hovered) {
-            gc.setFill(Color.WHITE);
+            gc.setFill(LeaderBoard.FG_COLOR);
             gc.fillRect(pos.x - width / 2 + EntryPane.RADIUS, pos.y - height / 2, width, height);
         }
 
         // Show rank label
-        gc.setFill(Color.WHITE);
+        gc.setFill(LeaderBoard.FG_COLOR);
         gc.fillOval(Game.TILE_SIZE - EntryPane.RADIUS, pos.y - EntryPane.RADIUS, EntryPane.RADIUS * 2, EntryPane.RADIUS * 2);
 
         // Show rank
         gc.setFill(LeaderBoard.BG_COLOR);
-        gc.fillText(Integer.toString(rank), Game.TILE_SIZE , Game.TILE_SIZE * 1.25 + (Game.TILE_SIZE * rank) * 0.60);
+        gc.fillText(Integer.toString(rank), Game.TILE_SIZE, Game.TILE_SIZE * 1.25 + (Game.TILE_SIZE * rank) * 0.60 + 1);
 
         // Set fill color for text
         if (hovered) {
             gc.setFill(LeaderBoard.BG_COLOR);
         } else {
-            gc.setFill(Color.WHITE);
+            gc.setFill(LeaderBoard.FG_COLOR);
         }
 
         // Show name and score
