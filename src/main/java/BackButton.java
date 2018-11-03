@@ -13,9 +13,9 @@ public class BackButton {
         yPoints = new double[]{25, 25, 18, 32};
     }
 
-    public void show(GraphicsContext gc) {
+    public void show(GraphicsContext gc, Color color) {
 
-        gc.setStroke(Color.WHITE);
+        gc.setStroke(color);
         gc.setLineWidth(2.0);
         gc.setLineJoin(StrokeLineJoin.ROUND);
 

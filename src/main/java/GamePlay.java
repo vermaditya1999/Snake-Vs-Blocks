@@ -323,7 +323,7 @@ public class GamePlay extends Window {
 
             gc.applyEffect(new BoxBlur(10, 10, 10));
 
-            backButton.show(gc);
+            backButton.show(gc, Color.WHITE);
             resumeButton.show(gc);
             restartButton.show(gc);
         }
