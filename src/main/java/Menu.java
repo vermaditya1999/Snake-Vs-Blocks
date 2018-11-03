@@ -39,7 +39,7 @@ public class Menu extends Window {
         prevScore = 641;
 
         // Set temporary value for demonstration
-        savedGame = true;
+        savedGame = false;
 
         // Initialize the menuButtons HashMap
         menuButtons = new HashMap<MenuButtons, MenuButton>();
@@ -51,10 +51,19 @@ public class Menu extends Window {
     private void addMenuButtons() {
 
         double gap = 0.75;
-        menuButtons.put(MenuButtons.ResumeGame, new MenuButton("Resume Game", Game.SCREEN_HEIGHT / 2 + gap * Game.TILE_SIZE));
-        menuButtons.put(MenuButtons.StartGame, new MenuButton("Start Game", Game.SCREEN_HEIGHT / 2 + 2 * gap * Game.TILE_SIZE));
-        menuButtons.put(MenuButtons.Leaderboard, new MenuButton("Leaderboard", Game.SCREEN_HEIGHT / 2 + 3 * gap * Game.TILE_SIZE));
-        menuButtons.put(MenuButtons.Exit, new MenuButton("Exit", Game.SCREEN_HEIGHT / 2 + 4 * gap * Game.TILE_SIZE));
+        double offset = gap * Game.TILE_SIZE;
+
+        // Add resume button only if there is a saved game
+        if (savedGame) {
+            menuButtons.put(MenuButtons.ResumeGame, new MenuButton("Resume Game", Game.SCREEN_HEIGHT / 2 + gap * Game.TILE_SIZE));
+        } else {
+            offset = 0;  // No Resume Game button, set offset to 0
+        }
+
+        // Add rest of the buttons
+        menuButtons.put(MenuButtons.StartGame, new MenuButton("Start Game", Game.SCREEN_HEIGHT / 2 + gap * Game.TILE_SIZE + offset));
+        menuButtons.put(MenuButtons.Leaderboard, new MenuButton("Leaderboard", Game.SCREEN_HEIGHT / 2 + 2 * gap * Game.TILE_SIZE + offset));
+        menuButtons.put(MenuButtons.Exit, new MenuButton("Exit", Game.SCREEN_HEIGHT / 2 + 3 * gap * Game.TILE_SIZE + offset));
     }
 
     @Override
