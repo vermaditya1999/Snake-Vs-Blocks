@@ -6,11 +6,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-import java.util.LinkedList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class GamePlay extends Window {
+
+    public static final Color BG_COLOR = Color.rgb(57, 8, 49);
 
     // Temporary burst for demonstration
     LinkedList<Burst> bursts = new LinkedList<Burst>();
@@ -191,7 +193,8 @@ public class GamePlay extends Window {
             }
         }
 
-        gc.setFill(Color.BLACK);
+        // Set background
+        gc.setFill(GamePlay.BG_COLOR);
         gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
         /*
