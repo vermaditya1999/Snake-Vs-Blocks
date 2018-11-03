@@ -3,7 +3,6 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,9 +12,6 @@ public class Menu extends Window {
 
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
-
-    public static final Font GOTHAM = Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/Gotham-Light.otf"), 65);
-    public static final Font MUSEO = Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/Museo-100.otf"), 60);
 
     private enum MenuButtons {
         ResumeGame,
@@ -143,14 +139,14 @@ public class Menu extends Window {
 
 
         // Show game title
-        gc.setFont(GOTHAM);
+        gc.setFont(Game.GOTHAM);
         gc.setFill(Menu.FG_COLOR);
         gc.fillText("Snake", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
         gc.fillText("vs", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 1.75);
         gc.fillText("Blocks", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 2.5);
 
         // Show previous score
-        gc.setFont(MUSEO);
+        gc.setFont(Game.MUSEO);
         gc.setFill(Menu.FG_COLOR);
         gc.fillText(Integer.toString(prevScore), Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 - Game.TILE_SIZE / 3);
 
