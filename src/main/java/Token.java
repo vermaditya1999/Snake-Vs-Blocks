@@ -2,13 +2,9 @@ import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Token {
 
-    protected float radius;
+    public final static double RADIUS = 10;
 
     public Vector pos;
-
-    {
-        radius = 10;
-    }
 
     public Token(double x, double y) {
 
@@ -22,7 +18,7 @@ public abstract class Token {
     }
 
     public boolean isOver() {
-        return pos.y - radius >= Game.SCREEN_HEIGHT;
+        return pos.y - Token.RADIUS >= Game.SCREEN_HEIGHT;
     }
 
 }
