@@ -33,6 +33,9 @@ public class Menu extends Window {
     // Score of the previous score
     private int prevScore;
 
+    // Info button
+    private InfoButton infoButton;
+
     public Menu(WindowController wc, Group root) {
         super(wc, root);
 
@@ -47,6 +50,9 @@ public class Menu extends Window {
 
         // Add menu buttons
         addMenuButtons();
+
+        // Add info button
+        infoButton = new InfoButton();
     }
 
     private void addMenuButtons() {
@@ -120,6 +126,9 @@ public class Menu extends Window {
                 hovered = true;
             }
         }
+        if (infoButton.isHovered(mouseX, mouseY)) {
+            hovered = true;
+        }
 
         // Set cursor
         if (hovered) {
@@ -163,5 +172,8 @@ public class Menu extends Window {
             MenuButton menuButton = (MenuButton) entry.getValue();
             menuButton.show(gc);
         }
+
+        // Show Info button
+        infoButton.show(gc);
     }
 }
