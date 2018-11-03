@@ -29,16 +29,16 @@ public class LeaderBoard extends Window {
 
         Random random = new Random();
 
-        addEntry("Bruce Wayne", random.nextInt(1000));
-        addEntry("Clark Kent", random.nextInt(1000));
-        addEntry("Shayera Hol", random.nextInt(1000));
-        addEntry("Tony Stark", random.nextInt(1000));
-        addEntry("Steve Rogers", random.nextInt(1000));
-        addEntry("T'Challa", random.nextInt(1000));
-        addEntry("Peter Parker", random.nextInt(1000));
-        addEntry("John Stewart", random.nextInt(1000));
-        addEntry("Doctor Strange", random.nextInt(1000));
-        addEntry("I am Groot", random.nextInt(1000));
+        addEntry("23-08-2018", random.nextInt(1000));
+        addEntry("12-07-2011", random.nextInt(1000));
+        addEntry("13-05-3012", random.nextInt(1000));
+        addEntry("16-12-2018", random.nextInt(1000));
+        addEntry("21-04-2000", random.nextInt(1000));
+        addEntry("29-05-1999", random.nextInt(1000));
+        addEntry("30-08-1856", random.nextInt(1000));
+        addEntry("01-07-2000", random.nextInt(1000));
+        addEntry("31-11-2018", random.nextInt(1000));
+        addEntry("06-01-2011", random.nextInt(1000));
     }
 
     public boolean isEligibleScore(int score) {
