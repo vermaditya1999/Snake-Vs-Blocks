@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
@@ -85,6 +86,11 @@ public class Menu extends Window {
                 if (menuButtons.get(MenuButtons.StartGame).isHovered(mouseX, mouseY)) {
                     resetMouseVars();
                     windowController.setWindow(Windows.GamePlay);
+                }
+
+                if (menuButtons.get(MenuButtons.Exit).isHovered(mouseX, mouseY)) {
+                    resetMouseVars();
+                    Platform.exit();
                 }
             }
         });
