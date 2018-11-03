@@ -25,13 +25,12 @@ public class MenuButton {
     public void show(GraphicsContext gc) {
 
         // Show button
+        gc.setLineWidth(2.0);
+        gc.setStroke(Menu.FG_COLOR);
+        gc.strokeRect(Game.SCREEN_WIDTH / 2 - width / 2, posY - height / 2, width, height);
         if (hovered) {
             gc.setFill(Menu.FG_COLOR);
             gc.fillRect(Game.SCREEN_WIDTH / 2 - width / 2, posY - height / 2, width, height);
-        } else {
-            gc.setLineWidth(2.0);
-            gc.setStroke(Menu.FG_COLOR);
-            gc.strokeRect(Game.SCREEN_WIDTH / 2 - width / 2, posY - height / 2, width, height);
         }
 
         // Set font
