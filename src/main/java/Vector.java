@@ -32,6 +32,11 @@ public class Vector {
         return new Vector(first.x - second.x, first.y - second.y);
     }
 
+    // Returns the distance between two Vectors
+    public static double dist(Vector first, Vector second) {
+        return Vector.sub(first, second).mag();
+    }
+
     Vector(double x, double y) {
         this.x = x;
         this.y = y;
