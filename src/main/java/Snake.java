@@ -27,23 +27,47 @@ public class Snake {
     // Prerequisite: Snake has at least one ball
     public void addBall() {
 
-        SnakeBall tail = snake.get(snake.size() - 1);
-        snake.add(new SnakeBall(tail.pos.x, tail.pos.y + 2 * SnakeBall.RADIUS));
+        Vector tail = snake.get(snake.size() - 1).getPos();
+        snake.add(new SnakeBall(tail.x, tail.y + 2 * SnakeBall.RADIUS));
     }
 
     // Prerequisite: Snake has at least one ball
     public void update(double mouseX, double mouseY) {
 
         // Set the coordinates of the head to the coordinates of mouse
-        SnakeBall head = snake.get(0);
-        head.pos.x = mouseX;
+        Vector head = snake.get(0).getPos();
+        head.x = mouseX;
 
         // Update rest of the balls
         for (int i = 1; i < snake.size(); i++) {
-            SnakeBall prev = snake.get(i - 1);
-            SnakeBall cur = snake.get(i);
+            Vector prev = snake.get(i - 1).getPos();
+            Vector cur = snake.get(i).getPos();
 
-            cur.pos.x = lerp(prev.pos.x, cur.pos.x, 0.5);
+            // The direction vector
+            // Direction: From prev to cur
+            // Magnitude: SnakeBall.RADIUS * 2
+            Vector dir = Vector.sub(cur, prev);
+            dir.normalize();
+            dir.mult(SnakeBall.RADIUS * 2);
+
+            // The down vector
+            // Direction: Downwards
+            // Magnitude: SnakeBall.RADIUS * 2
+            Vector down = new Vector(0, SnakeBall.RADIUS * 2);
+
+            // The slant vector
+            // Direction: From dir to down
+            // Magnitude: Experimental hardcoded value
+            // Could we make it better by multiplying teh slant according to the distance between
+            // prev and cur?
+            Vector slant = Vector.sub(down, dir);
+            slant.mult(0.18);
+
+            // Make dir vector to actually point the desired location
+            dir.add(slant);
+            dir.add(prev);
+
+            cur.set(dir);
         }
     }
 
