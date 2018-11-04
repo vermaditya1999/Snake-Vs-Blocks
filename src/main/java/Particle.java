@@ -41,8 +41,8 @@ public class Particle {
         vel.add(acc);
         pos.add(vel);
 
-        radius -= 0.35;
-//        alpha -= 0.025;
+        radius -= 0.25;
+        alpha -= 0.025;
     }
 
     public void show(GraphicsContext gc) {
