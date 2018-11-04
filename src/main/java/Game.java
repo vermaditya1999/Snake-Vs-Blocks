@@ -58,7 +58,7 @@ public class Game implements WindowController {
         currentWindow = window;
 
         // Bring the window to front
-        windows.get(currentWindow).bringToFront();
+        windows.get(currentWindow).toFront();
     }
 
     @Override
@@ -67,7 +67,8 @@ public class Game implements WindowController {
     }
 
     @Override
-    public void passEvent(Windows window, Event event) {
-        windows.get(window).fireEvent(event);
+    public void passEvent(Windows windowEnum, Event event) {
+        Window window = windows.get(windowEnum);
+        window.fireEvent(event.copyFor(window, window));
     }
 }

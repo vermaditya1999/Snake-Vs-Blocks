@@ -75,7 +75,7 @@ public class LeaderBoard extends Window {
     @Override
     protected void addEventHandlers() {
 
-        canvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+        addEventHandler(KeyEvent.KEY_PRESSED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
             if (currentWindow != Windows.LeaderBoard) {
@@ -88,7 +88,7 @@ public class LeaderBoard extends Window {
             }
         });
 
-        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+        addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
             if (currentWindow != Windows.LeaderBoard) {
@@ -99,7 +99,7 @@ public class LeaderBoard extends Window {
             }
         });
 
-        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
             if (currentWindow != Windows.LeaderBoard) {
@@ -128,9 +128,9 @@ public class LeaderBoard extends Window {
 
         // Set mouse pointer
         if (backButton.isHovered(mouseX, mouseY)) {
-            canvas.setCursor(Cursor.HAND);
+            setCursor(Cursor.HAND);
         } else {
-            canvas.setCursor(Cursor.DEFAULT);
+            setCursor(Cursor.DEFAULT);
         }
 
         // Set background

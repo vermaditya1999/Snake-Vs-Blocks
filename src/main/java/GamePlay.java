@@ -67,7 +67,7 @@ public class GamePlay extends Window {
         paused = false;
 
         // Set mouse cursor
-        canvas.setCursor(Cursor.NONE);
+        setCursor(Cursor.NONE);
 
         // Clear blocks
         blocks.clear();
@@ -139,7 +139,7 @@ public class GamePlay extends Window {
     @Override
     protected void addEventHandlers() {
 
-        canvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+        addEventHandler(KeyEvent.KEY_PRESSED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
             if (currentWindow != Windows.GamePlay) {
@@ -151,7 +151,7 @@ public class GamePlay extends Window {
             }
         });
 
-        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+        addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
             if (currentWindow != Windows.GamePlay) {
@@ -162,7 +162,7 @@ public class GamePlay extends Window {
 
                         // When resume button is pressed, set paused = true
                         paused = false;
-                        canvas.setCursor(Cursor.NONE);
+                        setCursor(Cursor.NONE);
                     } else if (backButton.isHovered(mouseX, mouseY)) {
 
                         // When back button is pressed, reset and create new game, then go back to main menu
@@ -180,7 +180,7 @@ public class GamePlay extends Window {
             }
         });
 
-        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+        addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
             if (currentWindow != Windows.GamePlay) {
@@ -199,9 +199,9 @@ public class GamePlay extends Window {
 
         if (paused) {
             if (resumeButton.isHovered(mouseX, mouseY) || backButton.isHovered(mouseX, mouseY) || restartButton.isHovered(mouseX, mouseY)) {
-                canvas.setCursor(Cursor.HAND);
+                setCursor(Cursor.HAND);
             } else {
-                canvas.setCursor(Cursor.DEFAULT);
+                setCursor(Cursor.DEFAULT);
             }
         }
 
