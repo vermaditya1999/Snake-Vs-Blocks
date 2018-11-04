@@ -60,7 +60,7 @@ public class Snake {
             // Could we make it better by multiplying teh slant according to the distance between
             // prev and cur?
             Vector slant = Vector.sub(down, dir);
-            slant.mult(0.18);
+            slant.mult(0.2);
 
             // Make dir vector to actually point the desired location
             dir.add(slant);
@@ -76,5 +76,10 @@ public class Snake {
         for (SnakeBall snakeBall : snake) {
             snakeBall.show(gc);
         }
+    }
+
+    // Prerequisite: Snake has at least one ball
+    public Vector getHeadVector() {
+        return snake.get(0).getPos();
     }
 }
