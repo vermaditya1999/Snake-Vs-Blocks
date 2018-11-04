@@ -142,7 +142,7 @@ public class LeaderBoard extends Window {
 
         // Leaderboard heading
         gc.setFill(LeaderBoard.FG_COLOR);
-        gc.setFont(Game.GOTHAM_MEDIUM);
+        gc.setFont(Fonts.GOTHAM_MEDIUM);
         gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 
         // Show Entry Bars

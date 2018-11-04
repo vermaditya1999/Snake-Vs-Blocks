@@ -1,16 +1,10 @@
 import javafx.animation.AnimationTimer;
 import javafx.event.Event;
 import javafx.scene.Group;
-import javafx.scene.text.Font;
 
 import java.util.HashMap;
 
 public class Game implements WindowController {
-
-    public static final Font GOTHAM_LARGE = Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/Gotham-Light.otf"), 65);
-    public static final Font GOTHAM_MEDIUM = Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/Gotham-Light.otf"), 45);
-    public static final Font GOTHAM_SMALL = Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/Gotham-Light.otf"), 25);
-    public static final Font MUSEO = Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/Museo-100.otf"), 60);
 
     public final static int NUM_ROWS = 8;
     public final static int NUM_COLS = 5;

@@ -350,7 +350,7 @@ public class GamePlay extends Window {
     private void showScore() {
 
 //        gc.setFont(new Font("Consolas", 30));
-        gc.setFont(Game.GOTHAM_SMALL);
+        gc.setFont(Fonts.GOTHAM_SMALL);
         gc.setFill(Color.WHITE);
         gc.fillText(Integer.toString(score), Game.TILE_SIZE / 2, Game.TILE_SIZE / 2);
 
@@ -363,7 +363,7 @@ public class GamePlay extends Window {
                     Game.TILE_SIZE / 2 - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
 
 //        gc.setFont(new Font("Consolas", 30));
-        gc.setFont(Game.GOTHAM_SMALL);
+        gc.setFont(Fonts.GOTHAM_SMALL);
         gc.setFill(Color.WHITE);
         gc.fillText(Integer.toString(numCoins), Game.SCREEN_WIDTH - Game.TILE_SIZE /2,
                 Game.TILE_SIZE / 2 );
