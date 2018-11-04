@@ -47,8 +47,7 @@ public class Snake {
             // Direction: From prev to cur
             // Magnitude: SnakeBall.RADIUS * 2
             Vector dir = Vector.sub(cur, prev);
-            dir.normalize();
-            dir.mult(SnakeBall.RADIUS * 2);
+            dir.setMag(SnakeBall.RADIUS * 2);
 
             // The down vector
             // Direction: Downwards
