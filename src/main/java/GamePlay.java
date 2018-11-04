@@ -142,7 +142,7 @@ public class GamePlay extends Window {
         addEventHandler(KeyEvent.KEY_PRESSED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
-            if (currentWindow != Windows.GamePlay) {
+            if (currentWindow != Windows.GAMEPLAY) {
                 windowController.passEvent(currentWindow, event);
             } else {
                 if (event.getCode() == KeyCode.ESCAPE) {
@@ -154,7 +154,7 @@ public class GamePlay extends Window {
         addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
-            if (currentWindow != Windows.GamePlay) {
+            if (currentWindow != Windows.GAMEPLAY) {
                 windowController.passEvent(currentWindow, event);
             } else {
                 if (paused) {
@@ -168,7 +168,7 @@ public class GamePlay extends Window {
                         // When back button is pressed, reset and create new game, then go back to main menu
                         resetMouseVars();
                         newGamePlay();
-                        windowController.setWindow(Windows.Menu);
+                        windowController.setWindow(Windows.MENU);
                     } else if (restartButton.isHovered(mouseX, mouseY)) {
 
                         // When restart button is pressed, simply create a new gameplay
@@ -183,7 +183,7 @@ public class GamePlay extends Window {
         addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
-            if (currentWindow != Windows.GamePlay) {
+            if (currentWindow != Windows.GAMEPLAY) {
                 windowController.passEvent(currentWindow, event);
             } else {
 

@@ -78,12 +78,12 @@ public class LeaderBoard extends Window {
         addEventHandler(KeyEvent.KEY_PRESSED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
-            if (currentWindow != Windows.LeaderBoard) {
+            if (currentWindow != Windows.LEADERBOARD) {
                 windowController.passEvent(currentWindow, event);
             } else {
                 if (event.getCode() == KeyCode.ESCAPE) {
                     resetMouseVars();
-                    windowController.setWindow(Windows.Menu);
+                    windowController.setWindow(Windows.MENU);
                 }
             }
         });
@@ -91,7 +91,7 @@ public class LeaderBoard extends Window {
         addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
-            if (currentWindow != Windows.LeaderBoard) {
+            if (currentWindow != Windows.LEADERBOARD) {
                 windowController.passEvent(currentWindow, event);
             } else {
                 mouseX = event.getX();
@@ -102,7 +102,7 @@ public class LeaderBoard extends Window {
         addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
-            if (currentWindow != Windows.LeaderBoard) {
+            if (currentWindow != Windows.LEADERBOARD) {
                 windowController.passEvent(currentWindow, event);
             } else {
 
@@ -111,7 +111,7 @@ public class LeaderBoard extends Window {
 
                 if (backButton.isHovered(mouseX, mouseY)) {
                     resetMouseVars();
-                    windowController.setWindow(Windows.Menu);
+                    windowController.setWindow(Windows.MENU);
                 }
             }
         });
@@ -140,10 +140,10 @@ public class LeaderBoard extends Window {
         // Back Button
         backButton.show(gc, LeaderBoard.FG_COLOR);
 
-        // Leaderboard heading
+        // LEADERBOARD heading
         gc.setFill(LeaderBoard.FG_COLOR);
         gc.setFont(Fonts.GOTHAM_MEDIUM);
-        gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
+        gc.fillText("LEADERBOARD", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 
         // Show Entry Bars
         for (int rank = 1; rank <= entryPanes.size(); rank++) {

@@ -26,12 +26,12 @@ public class Game implements WindowController {
         windows = new HashMap<Windows, Window>();
 
         // Put all the instantiated windows in the HashMap
-        windows.put(Windows.Menu, new Menu(this, root));
-        windows.put(Windows.GamePlay, new GamePlay(this, root));
-        windows.put(Windows.LeaderBoard, new LeaderBoard(this, root));
+        windows.put(Windows.MENU, new Menu(this, root));
+        windows.put(Windows.GAMEPLAY, new GamePlay(this, root));
+        windows.put(Windows.LEADERBOARD, new LeaderBoard(this, root));
 
         // Set the starting window to Menu
-        setWindow(Windows.Menu);
+        setWindow(Windows.MENU);
 
         // Start the animationLoop
         animationLoop();

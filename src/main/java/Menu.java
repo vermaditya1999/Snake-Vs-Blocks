@@ -14,10 +14,10 @@ public class Menu extends Window {
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
 
     private enum MenuButtons {
-        ResumeGame,
-        StartGame,
-        Leaderboard,
-        Exit
+        RESUME_GAME,
+        START_GAME,
+        LEADERBOARD,
+        EXIT
     }
 
     // ArrayList to hold all menu buttons
@@ -58,15 +58,15 @@ public class Menu extends Window {
 
         // Add resume button only if there is a saved game
         if (savedGame) {
-            menuButtons.put(MenuButtons.ResumeGame, new MenuButton("Resume Game", Game.SCREEN_HEIGHT / 2 + gap * Game.TILE_SIZE));
+            menuButtons.put(MenuButtons.RESUME_GAME, new MenuButton("Resume Game", Game.SCREEN_HEIGHT / 2 + gap * Game.TILE_SIZE));
         } else {
             offset = 0;  // No Resume Game button, set offset to 0
         }
 
         // Add rest of the buttons
-        menuButtons.put(MenuButtons.StartGame, new MenuButton("Start Game", Game.SCREEN_HEIGHT / 2 + gap * Game.TILE_SIZE + offset));
-        menuButtons.put(MenuButtons.Leaderboard, new MenuButton("Leaderboard", Game.SCREEN_HEIGHT / 2 + 2 * gap * Game.TILE_SIZE + offset));
-        menuButtons.put(MenuButtons.Exit, new MenuButton("Exit", Game.SCREEN_HEIGHT / 2 + 3 * gap * Game.TILE_SIZE + offset));
+        menuButtons.put(MenuButtons.START_GAME, new MenuButton("Start Game", Game.SCREEN_HEIGHT / 2 + gap * Game.TILE_SIZE + offset));
+        menuButtons.put(MenuButtons.LEADERBOARD, new MenuButton("Leaderboard", Game.SCREEN_HEIGHT / 2 + 2 * gap * Game.TILE_SIZE + offset));
+        menuButtons.put(MenuButtons.EXIT, new MenuButton("Exit", Game.SCREEN_HEIGHT / 2 + 3 * gap * Game.TILE_SIZE + offset));
     }
 
     @Override
@@ -76,21 +76,21 @@ public class Menu extends Window {
 
             Windows currentWindow = windowController.currentWindow();
 
-            if (currentWindow != Windows.Menu) {
+            if (currentWindow != Windows.MENU) {
                 windowController.passEvent(currentWindow, event);
             } else {
 
-                if (menuButtons.get(MenuButtons.Leaderboard).isHovered(mouseX, mouseY)) {
+                if (menuButtons.get(MenuButtons.LEADERBOARD).isHovered(mouseX, mouseY)) {
                     resetMouseVars();
-                    windowController.setWindow(Windows.LeaderBoard);
+                    windowController.setWindow(Windows.LEADERBOARD);
                 }
 
-                if (menuButtons.get(MenuButtons.StartGame).isHovered(mouseX, mouseY)) {
+                if (menuButtons.get(MenuButtons.START_GAME).isHovered(mouseX, mouseY)) {
                     resetMouseVars();
-                    windowController.setWindow(Windows.GamePlay);
+                    windowController.setWindow(Windows.GAMEPLAY);
                 }
 
-                if (menuButtons.get(MenuButtons.Exit).isHovered(mouseX, mouseY)) {
+                if (menuButtons.get(MenuButtons.EXIT).isHovered(mouseX, mouseY)) {
                     resetMouseVars();
                     Platform.exit();
                 }
@@ -100,7 +100,7 @@ public class Menu extends Window {
         addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 
             Windows currentWindow = windowController.currentWindow();
-            if (currentWindow != Windows.Menu) {
+            if (currentWindow != Windows.MENU) {
                 windowController.passEvent(currentWindow, event);
             } else {
                 mouseX = event.getX();
