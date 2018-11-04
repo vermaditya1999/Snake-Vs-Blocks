@@ -174,7 +174,7 @@ public class GamePlay extends Window {
                         newGamePlay();
                     }
                 } else {
-                    bursts.add(new Burst(mouseX, mouseY));
+                    bursts.add(new Burst(mouseX, Game.SCREEN_HEIGHT / 2 + Game.TILE_SIZE));
                 }
             }
         });
