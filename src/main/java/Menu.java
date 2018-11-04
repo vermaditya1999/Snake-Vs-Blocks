@@ -4,7 +4,7 @@ import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public class Menu extends Window {
     }
 
     // ArrayList to hold all menu buttons
-    private HashMap<MenuButtons, MenuButton> menuButtons;
+    private EnumMap<MenuButtons, MenuButton> menuButtons;
 
     // Boolean variable true if a saved game is available
     private boolean savedGame;
@@ -42,7 +42,7 @@ public class Menu extends Window {
         savedGame = false;
 
         // Initialize the menuButtons HashMap
-        menuButtons = new HashMap<MenuButtons, MenuButton>();
+        menuButtons = new EnumMap<MenuButtons, MenuButton>(MenuButtons.class);
 
         // Add menu buttons
         addMenuButtons();

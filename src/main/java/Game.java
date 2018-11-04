@@ -2,7 +2,7 @@ import javafx.animation.AnimationTimer;
 import javafx.event.Event;
 import javafx.scene.Group;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 
 public class Game implements WindowController {
 
@@ -18,12 +18,12 @@ public class Game implements WindowController {
     private Windows currentWindow;
 
     // HashMap from Windows enum constant to Windows object
-    private HashMap<Windows, Window> windows;
+    private EnumMap<Windows, Window> windows;
 
     public Game(Group root) {
 
         // Instantiate the windows HashMap
-        windows = new HashMap<Windows, Window>();
+        windows = new EnumMap<Windows, Window>(Windows.class);
 
         // Put all the instantiated windows in the HashMap
         windows.put(Windows.MENU, new Menu(this, root));
