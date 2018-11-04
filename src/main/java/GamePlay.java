@@ -213,11 +213,9 @@ public class GamePlay extends Window {
          * The pause overlay is shown when the escape key is pressed.
          * The paused variable is set true when the pause overlay is shown.
          */
+
+        // Update the game here
         if (!paused) {
-
-            // Update the game here
-
-            // Quasi random procedural generation of the infinite map
             trigger += speed;
             if (trigger % (Game.TILE_SIZE * 5) == 0) {
                 populate();
@@ -283,6 +281,7 @@ public class GamePlay extends Window {
             Iterator tokenIterator = tokens.iterator();
             while (tokenIterator.hasNext()) {
                 Token token = (Token) tokenIterator.next();
+                token.collide(snake.getHeadVector());  // Collision Detection
                 if (token.isOver()) {
                     tokenIterator.remove();
                 } else {
