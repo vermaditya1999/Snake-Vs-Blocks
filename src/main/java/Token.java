@@ -25,9 +25,7 @@ public abstract class Token implements Collideable {
     }
 
     @Override
-    public void collide(Vector snakeHead) {
-        if (Vector.sub(snakeHead, pos).mag() <= (SnakeBall.RADIUS + Token.RADIUS)) {
-            dead = true;
-        }
+    public void collide(Vector snakeHeadVector) {
+        dead = Vector.dist(snakeHeadVector, pos) <= (SnakeBall.RADIUS + Token.RADIUS);
     }
 }
