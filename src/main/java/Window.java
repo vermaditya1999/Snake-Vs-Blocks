@@ -46,8 +46,8 @@ abstract public class Window {
     }
 
     protected void resetMouseVars() {
-        mouseX = 0;
-        mouseY = 0;
+        mouseX = Game.SCREEN_WIDTH / 2;
+        mouseY = Game.SCREEN_HEIGHT / 2;
     }
 
     abstract protected void addEventHandlers();
