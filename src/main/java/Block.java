@@ -1,6 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 import java.util.Random;
 
@@ -35,7 +34,7 @@ public class Block {
 
         // Show value
         gc.setFill(Color.BLACK);
-        gc.setFont(new Font("Consolas", 48));
+        gc.setFont(Game.GOTHAM_MEDIUM);
         gc.fillText(Integer.toString(value), pos.x, pos.y);
     }
 

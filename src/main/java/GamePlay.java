@@ -5,7 +5,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -346,7 +345,8 @@ public class GamePlay extends Window {
 
     private void showScore() {
 
-        gc.setFont(new Font("Consolas", 30));
+//        gc.setFont(new Font("Consolas", 30));
+        gc.setFont(Game.GOTHAM_SMALL);
         gc.setFill(Color.WHITE);
         gc.fillText(Integer.toString(score), Game.TILE_SIZE / 2, Game.TILE_SIZE / 2);
 
@@ -358,7 +358,8 @@ public class GamePlay extends Window {
         gc.fillRect(Game.SCREEN_WIDTH - Game.TILE_SIZE - Token.RADIUS,
                     Game.TILE_SIZE / 2 - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
 
-        gc.setFont(new Font("Consolas", 30));
+//        gc.setFont(new Font("Consolas", 30));
+        gc.setFont(Game.GOTHAM_SMALL);
         gc.setFill(Color.WHITE);
         gc.fillText(Integer.toString(numCoins), Game.SCREEN_WIDTH - Game.TILE_SIZE /2,
                 Game.TILE_SIZE / 2 );

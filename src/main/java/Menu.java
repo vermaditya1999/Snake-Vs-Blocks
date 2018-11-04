@@ -139,7 +139,7 @@ public class Menu extends Window {
 
 
         // Show game title
-        gc.setFont(Game.GOTHAM);
+        gc.setFont(Game.GOTHAM_LARGE);
         gc.setFill(Menu.FG_COLOR);
         gc.fillText("Snake", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
         gc.fillText("vs", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 1.75);

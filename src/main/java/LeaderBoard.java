@@ -4,7 +4,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -143,7 +142,7 @@ public class LeaderBoard extends Window {
 
         // Leaderboard heading
         gc.setFill(LeaderBoard.FG_COLOR);
-        gc.setFont(new Font("Consolas", 45));
+        gc.setFont(Game.GOTHAM_MEDIUM);
         gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 
         // Show Entry Bars
