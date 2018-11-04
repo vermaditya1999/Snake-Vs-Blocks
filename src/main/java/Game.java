@@ -7,7 +7,9 @@ import java.util.HashMap;
 
 public class Game implements WindowController {
 
-    public static final Font GOTHAM = Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/Gotham-Light.otf"), 65);
+    public static final Font GOTHAM_LARGE = Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/Gotham-Light.otf"), 65);
+    public static final Font GOTHAM_MEDIUM = Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/Gotham-Light.otf"), 45);
+    public static final Font GOTHAM_SMALL = Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/Gotham-Light.otf"), 25);
     public static final Font MUSEO = Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/Museo-100.otf"), 60);
 
     public final static int NUM_ROWS = 8;
