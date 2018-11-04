@@ -73,4 +73,9 @@ public class Vector {
     public Vector copy() {
         return new Vector(x, y);
     }
+
+    public void set(Vector v) {
+        x = v.x;
+        y = v.y;
+    }
 }
