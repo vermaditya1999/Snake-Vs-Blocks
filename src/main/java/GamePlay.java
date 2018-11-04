@@ -162,6 +162,7 @@ public class GamePlay extends Window {
 
                         // When resume button is pressed, set paused = true
                         paused = false;
+                        canvas.setCursor(Cursor.NONE);
                     } else if (backButton.isHovered(mouseX, mouseY)) {
 
                         // When back button is pressed, reset and create new game, then go back to main menu
