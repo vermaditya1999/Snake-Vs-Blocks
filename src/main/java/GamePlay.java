@@ -66,6 +66,9 @@ public class GamePlay extends Window {
         trigger = 0;
         paused = false;
 
+        // Set mouse cursor
+        canvas.setCursor(Cursor.NONE);
+
         // Clear blocks
         blocks.clear();
 
@@ -162,8 +165,8 @@ public class GamePlay extends Window {
                     } else if (backButton.isHovered(mouseX, mouseY)) {
 
                         // When back button is pressed, reset and create new game, then go back to main menu
-                        newGamePlay();
                         resetMouseVars();
+                        newGamePlay();
                         windowController.setWindow(Windows.Menu);
                     } else if (restartButton.isHovered(mouseX, mouseY)) {
 
