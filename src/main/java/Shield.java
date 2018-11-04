@@ -2,9 +2,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class Shield extends Token{
+public class Shield extends Token {
 
-    public Shield(double x, double y){
+    public Shield(double x, double y) {
 
         super(x, y);
     }

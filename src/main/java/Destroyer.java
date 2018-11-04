@@ -4,7 +4,7 @@ import javafx.scene.text.Font;
 
 public class Destroyer extends Token {
 
-    public Destroyer(double x, double y){
+    public Destroyer(double x, double y) {
 
         super(x, y);
     }

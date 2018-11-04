@@ -99,7 +99,7 @@ public class GamePlay extends Window {
                     boolean flag = false;
                     for (Token token : tokens) {
                         if (token.pos.x == ((i - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2) &&
-                           (token.pos.y == -Game.TILE_SIZE / 2 || token.pos.y == -2 * Game.TILE_SIZE + Game.TILE_SIZE / 2)) {
+                                (token.pos.y == -Game.TILE_SIZE / 2 || token.pos.y == -2 * Game.TILE_SIZE + Game.TILE_SIZE / 2)) {
                             flag = true;
                             break;
                         }
@@ -240,7 +240,7 @@ public class GamePlay extends Window {
                         tokens.add(new Magnet(i, -2));
                         break;
 
-                    } else if (choose == 3){
+                    } else if (choose == 3) {
                         tokens.add(new Destroyer(i, -2));
                         break;
 
@@ -249,7 +249,7 @@ public class GamePlay extends Window {
                         break;
 
                     } else if (choose <= 15) {
-                        tokens.add(new Coin( i, -2));
+                        tokens.add(new Coin(i, -2));
                         break;
                     }
                 }
@@ -359,13 +359,13 @@ public class GamePlay extends Window {
 
         gc.setFill(Color.YELLOW);
         gc.fillRect(Game.SCREEN_WIDTH - Game.TILE_SIZE - Token.RADIUS,
-                    Game.TILE_SIZE / 2 - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+                Game.TILE_SIZE / 2 - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
 
 //        gc.setFont(new Font("Consolas", 30));
         gc.setFont(Fonts.GOTHAM_SMALL);
         gc.setFill(Color.WHITE);
-        gc.fillText(Integer.toString(numCoins), Game.SCREEN_WIDTH - Game.TILE_SIZE /2,
-                Game.TILE_SIZE / 2 );
+        gc.fillText(Integer.toString(numCoins), Game.SCREEN_WIDTH - Game.TILE_SIZE / 2,
+                Game.TILE_SIZE / 2);
 
     }
 

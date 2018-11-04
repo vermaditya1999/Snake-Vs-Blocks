@@ -11,6 +11,7 @@ public class Block {
 
     /**
      * Block constructor
+     *
      * @param x Horizontal grid coordinate of the block
      * @param y Vertical grid coordinate of the block
      */

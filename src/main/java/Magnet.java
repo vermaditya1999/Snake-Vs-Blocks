@@ -4,7 +4,7 @@ import javafx.scene.text.Font;
 
 public class Magnet extends Token {
 
-    public Magnet(double x, double y){
+    public Magnet(double x, double y) {
 
         super(x, y);
     }

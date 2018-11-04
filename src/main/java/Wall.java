@@ -10,7 +10,7 @@ public class Wall {
     private Vector pos;
     private double length;
 
-    public Wall (double x, double y){
+    public Wall(double x, double y) {
 
         // Here pos is the top coordinate of the wall
         pos = new Vector((x - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2, y * Game.TILE_SIZE);
@@ -23,11 +23,11 @@ public class Wall {
         }
     }
 
-    public void show(GraphicsContext gc){
+    public void show(GraphicsContext gc) {
 
         gc.setLineWidth(4);
         gc.setStroke(Color.WHITE);
-        gc.strokeLine(pos.x, pos.y, pos.x, pos.y + length );
+        gc.strokeLine(pos.x, pos.y, pos.x, pos.y + length);
     }
 
     public void update(double speed) {

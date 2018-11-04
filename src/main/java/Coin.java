@@ -4,7 +4,7 @@ import javafx.scene.text.Font;
 
 public class Coin extends Token {
 
-    public Coin (int x, int y){
+    public Coin(int x, int y) {
 
         super(x, y);
     }
