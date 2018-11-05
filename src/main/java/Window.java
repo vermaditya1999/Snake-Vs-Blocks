@@ -41,11 +41,6 @@ abstract public class Window extends Canvas {
         gc.setTextBaseline(VPos.CENTER);
     }
 
-    protected void resetMouseVars() {
-        mouseX = Game.SCREEN_WIDTH / 2;
-        mouseY = Game.SCREEN_HEIGHT / 2;
-    }
-
     abstract protected void addEventHandlers();
 
     abstract protected void show();
