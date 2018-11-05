@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
 
 public class LeaderBoard extends Window {
 
@@ -25,18 +24,16 @@ public class LeaderBoard extends Window {
         entryPanes = new ArrayList<EntryPane>();
         backButton = new BackButton();
 
-        Random random = new Random();
-
-        addEntry(random.nextInt(1000));
-        addEntry(random.nextInt(1000));
-        addEntry(random.nextInt(1000));
-        addEntry(random.nextInt(1000));
-        addEntry(random.nextInt(1000));
-        addEntry(random.nextInt(1000));
-        addEntry(random.nextInt(1000));
-        addEntry(random.nextInt(1000));
-        addEntry(random.nextInt(1000));
-        addEntry(random.nextInt(1000));
+        addEntry(Random.nextInt(1000));
+        addEntry(Random.nextInt(1000));
+        addEntry(Random.nextInt(1000));
+        addEntry(Random.nextInt(1000));
+        addEntry(Random.nextInt(1000));
+        addEntry(Random.nextInt(1000));
+        addEntry(Random.nextInt(1000));
+        addEntry(Random.nextInt(1000));
+        addEntry(Random.nextInt(1000));
+        addEntry(Random.nextInt(1000));
     }
 
 //    public boolean isEligibleScore(int score) {

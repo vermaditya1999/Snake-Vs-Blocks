@@ -2,13 +2,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-import java.util.Random;
-
 public class PickupBall extends Token {
 
     private int value;
-
-    private static Random random = new Random();
 
     public PickupBall(double x, double y) {
 
@@ -24,7 +20,7 @@ public class PickupBall extends Token {
          * 4 : 3%
          * 5 : 2%
          */
-        int choose = random.nextInt(100);
+        int choose = Random.nextInt(100);
         if (choose < 60) {
             value = 1;
         } else if (choose < 90) {

@@ -1,8 +1,6 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import java.util.Random;
-
 public class Block {
 
     private int value;
@@ -17,9 +15,7 @@ public class Block {
      */
     public Block(int x, int y) {
 
-        // Temporary value
-        Random random = new Random();
-        value = 1 + random.nextInt(10);
+        value = 1 + Random.nextInt(10);
 
         pos = new Vector((x - 1) * App.TILE_SIZE + App.TILE_SIZE / 2, (y - 1) * App.TILE_SIZE + App.TILE_SIZE / 2);
     }

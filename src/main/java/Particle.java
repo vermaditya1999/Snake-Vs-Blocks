@@ -1,11 +1,7 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import java.util.Random;
-
 public class Particle {
-
-    private static Random random = new Random();
 
     private Vector pos;
     private Vector vel;
@@ -28,9 +24,9 @@ public class Particle {
         radius = 6;
         alpha = 1;
 
-        r = random.nextInt(256);
-        g = random.nextInt(256);
-        b = random.nextInt(256);
+        r = Random.nextInt(256);
+        g = Random.nextInt(256);
+        b = Random.nextInt(256);
     }
 
     public boolean isDead() {

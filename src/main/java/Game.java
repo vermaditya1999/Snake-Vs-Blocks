@@ -9,7 +9,6 @@ import javafx.scene.text.Font;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Random;
 
 public class Game extends Window {
 
@@ -34,8 +33,6 @@ public class Game extends Window {
     private ResumeButton resumeButton;
     private RestartButton restartButton;
 
-    private Random random;
-
     public Game(WindowController wc, Group root) {
         super(wc, root);
 
@@ -43,7 +40,6 @@ public class Game extends Window {
         resumeButton = new ResumeButton();
         backButton = new BackButton();
         restartButton = new RestartButton();
-        random = new Random();
 
         // Initialize collections
         bursts = new LinkedList<Burst>();
@@ -89,12 +85,12 @@ public class Game extends Window {
         for (int i = 1; i <= 5; i++) {
 
             // 50% chances of a block
-            int choose = random.nextInt(4);
+            int choose = Random.nextInt(4);
             if (choose <= 1) {
                 blocks.add(new Block(i, -2));
 
                 // 33% chance of a wall, given there is a block
-                choose = random.nextInt(3);
+                choose = Random.nextInt(3);
                 if (choose == 1) {
 
                     // Check any overlap of existing tokens with wall
@@ -113,9 +109,9 @@ public class Game extends Window {
             } else {
 
                 // No Block, Wall has been added, a token can be added
-                choose = random.nextInt(15);
+                choose = Random.nextInt(15);
                 if (choose == 1) {
-                    choose = random.nextInt(5);
+                    choose = Random.nextInt(5);
                     switch (choose) {
                         case 0:
                             tokens.add(new Shield(i, -2));
@@ -231,7 +227,7 @@ public class Game extends Window {
                  * Destroyer : 1%
                  */
                 for (int i = 1; i <= 5; i++) {
-                    int choose = random.nextInt(100);
+                    int choose = Random.nextInt(100);
 
                     if (choose == 1) {
                         tokens.add(new Shield(i, -2));

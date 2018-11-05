@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Vector {
 
     // X component of the Vector
@@ -10,11 +8,9 @@ public class Vector {
 
     // Returns a random unit Vector
     public static Vector random() {
-        Random rnd = new Random();
-
         // Random x and y in range (-1, 1)
-        double x = rnd.nextDouble() * 2 - 1;
-        double y = rnd.nextDouble() * 2 - 1;
+        double x = Random.nextDouble() * 2 - 1;
+        double y = Random.nextDouble() * 2 - 1;
 
         Vector v = new Vector(x, y);
         v.normalize();

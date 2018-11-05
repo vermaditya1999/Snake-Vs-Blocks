@@ -1,11 +1,7 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import java.util.Random;
-
 public class Wall {
-
-    private static Random random = new Random();
 
     private Vector pos;
     private double length;
@@ -17,7 +13,7 @@ public class Wall {
         length = App.TILE_SIZE;
 
         // 30% chances of double length wall
-        int choose = random.nextInt(3);
+        int choose = Random.nextInt(3);
         if (choose == 1) {
             length += App.TILE_SIZE;
         }
