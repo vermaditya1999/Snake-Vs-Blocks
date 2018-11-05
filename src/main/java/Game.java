@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class GamePlay extends Window {
+public class Game extends Window {
 
     public static final Color BG_COLOR = Color.rgb(57, 8, 49);
 
@@ -36,7 +36,7 @@ public class GamePlay extends Window {
 
     private Random random;
 
-    public GamePlay(WindowController wc, Group root) {
+    public Game(WindowController wc, Group root) {
         super(wc, root);
 
         // Initialize buttons
@@ -207,7 +207,7 @@ public class GamePlay extends Window {
         }
 
         // Set background
-        gc.setFill(GamePlay.BG_COLOR);
+        gc.setFill(Game.BG_COLOR);
         gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
         /*
