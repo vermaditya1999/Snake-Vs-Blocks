@@ -15,15 +15,15 @@ public class GamePlay extends Window {
 
     public static final Color BG_COLOR = Color.rgb(57, 8, 49);
 
-    private LinkedList<Burst> bursts = new LinkedList<Burst>();
+    private LinkedList<Burst> bursts;
 
-    private LinkedList<Block> blocks = new LinkedList<Block>();
+    private LinkedList<Block> blocks;
 
-    private LinkedList<Wall> walls = new LinkedList<Wall>();
+    private LinkedList<Wall> walls;
 
-    private LinkedList<Token> tokens = new LinkedList<Token>();
+    private LinkedList<Token> tokens;
 
-    private Snake snake = new Snake();
+    private Snake snake;
 
     private int score;
     private int numCoins;
@@ -44,6 +44,15 @@ public class GamePlay extends Window {
         backButton = new BackButton();
         restartButton = new RestartButton();
         random = new Random();
+
+        // Initialize collections
+        bursts = new LinkedList<Burst>();
+        blocks = new LinkedList<Block>();
+        walls = new LinkedList<Wall>();
+        tokens = new LinkedList<Token>();
+
+        // Initialize Snake
+        snake = new Snake();
     }
 
     public void newGamePlay() {
@@ -52,6 +61,9 @@ public class GamePlay extends Window {
         speed = 4;
         trigger = 0;
         paused = false;
+
+        mouseX = Game.SCREEN_WIDTH / 2;
+        mouseY = Game.SCREEN_HEIGHT / 2 + Game.TILE_SIZE;
 
         // Set mouse cursor
         setCursor(Cursor.NONE);
@@ -128,7 +140,7 @@ public class GamePlay extends Window {
 
         addEventHandler(KeyEvent.KEY_PRESSED, event -> {
 
-            Windows currentWindow = windowController.currentWindow();
+            Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.GAMEPLAY) {
                 windowController.passEvent(currentWindow, event);
             } else {
@@ -140,7 +152,7 @@ public class GamePlay extends Window {
 
         addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
 
-            Windows currentWindow = windowController.currentWindow();
+            Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.GAMEPLAY) {
                 windowController.passEvent(currentWindow, event);
             } else {
@@ -168,7 +180,7 @@ public class GamePlay extends Window {
 
         addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 
-            Windows currentWindow = windowController.currentWindow();
+            Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.GAMEPLAY) {
                 windowController.passEvent(currentWindow, event);
             } else {
