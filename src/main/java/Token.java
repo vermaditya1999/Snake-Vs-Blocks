@@ -10,7 +10,7 @@ public abstract class Token implements Collideable {
 
     public Token(double x, double y) {
 
-        pos = new Vector((x - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2, (y - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2);
+        pos = new Vector((x - 1) * App.TILE_SIZE + App.TILE_SIZE / 2, (y - 1) * App.TILE_SIZE + App.TILE_SIZE / 2);
         dead = false;
     }
 
@@ -21,7 +21,7 @@ public abstract class Token implements Collideable {
     }
 
     public boolean isOver() {
-        return dead || (pos.y - Token.RADIUS >= Game.SCREEN_HEIGHT);
+        return dead || (pos.y - Token.RADIUS >= App.SCREEN_HEIGHT);
     }
 
     @Override

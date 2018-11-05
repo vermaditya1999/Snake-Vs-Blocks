@@ -21,7 +21,7 @@ public class Block {
         Random random = new Random();
         value = 1 + random.nextInt(10);
 
-        pos = new Vector((x - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2, (y - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2);
+        pos = new Vector((x - 1) * App.TILE_SIZE + App.TILE_SIZE / 2, (y - 1) * App.TILE_SIZE + App.TILE_SIZE / 2);
     }
 
     public void show(GraphicsContext gc) {
@@ -31,7 +31,7 @@ public class Block {
 
         // Display block
         gc.setFill(Color.WHITE);
-        gc.fillRoundRect(pos.x - Game.TILE_SIZE / 2 + xOffset, pos.y - Game.TILE_SIZE / 2 + yOffset, Game.TILE_SIZE - 2 * xOffset, Game.TILE_SIZE - 2 * yOffset, 10, 10);
+        gc.fillRoundRect(pos.x - App.TILE_SIZE / 2 + xOffset, pos.y - App.TILE_SIZE / 2 + yOffset, App.TILE_SIZE - 2 * xOffset, App.TILE_SIZE - 2 * yOffset, 10, 10);
 
         // Show value
         gc.setFill(Color.BLACK);
@@ -44,6 +44,6 @@ public class Block {
     }
 
     public boolean isOver() {
-        return pos.y - Game.TILE_SIZE / 2 >= Game.SCREEN_HEIGHT;
+        return pos.y - App.TILE_SIZE / 2 >= App.SCREEN_HEIGHT;
     }
 }

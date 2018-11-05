@@ -3,8 +3,8 @@ import javafx.scene.text.Font;
 
 public class MenuButton {
 
-    private static final double height = Game.TILE_SIZE / 2;
-    private static final double width = Game.TILE_SIZE * 3;
+    private static final double height = App.TILE_SIZE / 2;
+    private static final double width = App.TILE_SIZE * 3;
 
     private String text;
     private double posY;
@@ -20,10 +20,10 @@ public class MenuButton {
         // Show button
         gc.setLineWidth(2.0);
         gc.setStroke(Menu.FG_COLOR);
-        gc.strokeRect(Game.SCREEN_WIDTH / 2 - width / 2, posY - height / 2, width, height);
+        gc.strokeRect(App.SCREEN_WIDTH / 2 - width / 2, posY - height / 2, width, height);
         if (hovered) {
             gc.setFill(Menu.FG_COLOR);
-            gc.fillRect(Game.SCREEN_WIDTH / 2 - width / 2, posY - height / 2, width, height);
+            gc.fillRect(App.SCREEN_WIDTH / 2 - width / 2, posY - height / 2, width, height);
         }
 
         // Set font
@@ -35,10 +35,10 @@ public class MenuButton {
         } else {
             gc.setFill(Menu.FG_COLOR);
         }
-        gc.fillText(text, Game.SCREEN_WIDTH / 2, posY);
+        gc.fillText(text, App.SCREEN_WIDTH / 2, posY);
     }
 
     public boolean isHovered(double mouseX, double mouseY) {
-        return hovered = Math.abs(mouseX - Game.SCREEN_WIDTH / 2) <= width / 2 && Math.abs(mouseY - posY) <= height / 2;
+        return hovered = Math.abs(mouseX - App.SCREEN_WIDTH / 2) <= width / 2 && Math.abs(mouseY - posY) <= height / 2;
     }
 }

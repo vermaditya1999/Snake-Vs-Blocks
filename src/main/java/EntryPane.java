@@ -3,7 +3,7 @@ import javafx.scene.text.Font;
 
 public class EntryPane {
 
-    public static final double RADIUS = Game.TILE_SIZE / 5;
+    public static final double RADIUS = App.TILE_SIZE / 5;
 
     private Vector pos;
     private double height;
@@ -13,9 +13,9 @@ public class EntryPane {
     private boolean hovered;
 
     {
-        pos = new Vector(Game.SCREEN_WIDTH / 2, 0);
+        pos = new Vector(App.SCREEN_WIDTH / 2, 0);
         height = EntryPane.RADIUS * 2;
-        width = Game.TILE_SIZE * 3.5;
+        width = App.TILE_SIZE * 3.5;
         hovered = false;
     }
 
@@ -30,7 +30,7 @@ public class EntryPane {
         gc.setFont(new Font("Consolas", 20));
 
         // Set y coordinate of pos (Subject to rank)
-        pos.y = Game.TILE_SIZE * 1.25 + (Game.TILE_SIZE * rank) * 0.60;
+        pos.y = App.TILE_SIZE * 1.25 + (App.TILE_SIZE * rank) * 0.60;
 
         // Show hover bar
         if (hovered) {
@@ -40,11 +40,11 @@ public class EntryPane {
 
         // Show rank label
         gc.setFill(LeaderBoard.FG_COLOR);
-        gc.fillOval(Game.TILE_SIZE - EntryPane.RADIUS, pos.y - EntryPane.RADIUS, EntryPane.RADIUS * 2, EntryPane.RADIUS * 2);
+        gc.fillOval(App.TILE_SIZE - EntryPane.RADIUS, pos.y - EntryPane.RADIUS, EntryPane.RADIUS * 2, EntryPane.RADIUS * 2);
 
         // Show rank
         gc.setFill(LeaderBoard.BG_COLOR);
-        gc.fillText(Integer.toString(rank), Game.TILE_SIZE, Game.TILE_SIZE * 1.25 + (Game.TILE_SIZE * rank) * 0.60 + 1);
+        gc.fillText(Integer.toString(rank), App.TILE_SIZE, App.TILE_SIZE * 1.25 + (App.TILE_SIZE * rank) * 0.60 + 1);
 
         // Set fill color for text
         if (hovered) {
@@ -55,7 +55,7 @@ public class EntryPane {
 
         // Show date and score
         gc.fillText(date, pos.x, pos.y);
-        gc.fillText(Integer.toString(score), pos.x + Game.TILE_SIZE * 1.5, pos.y);
+        gc.fillText(Integer.toString(score), pos.x + App.TILE_SIZE * 1.5, pos.y);
     }
 
     public int getScore() {

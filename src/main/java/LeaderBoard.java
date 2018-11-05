@@ -135,7 +135,7 @@ public class LeaderBoard extends Window {
 
         // Set background
         gc.setFill(LeaderBoard.BG_COLOR);
-        gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+        gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
         // Back Button
         backButton.show(gc, LeaderBoard.FG_COLOR);
@@ -143,7 +143,7 @@ public class LeaderBoard extends Window {
         // Leaderboard heading
         gc.setFill(LeaderBoard.FG_COLOR);
         gc.setFont(Fonts.GOTHAM_MEDIUM);
-        gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
+        gc.fillText("Leaderboard", App.SCREEN_WIDTH / 2, App.TILE_SIZE);
 
         // Show Entry Bars
         for (int rank = 1; rank <= entryPanes.size(); rank++) {

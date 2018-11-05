@@ -8,9 +8,9 @@ public class RestartButton {
     private double size;
 
     {
-        pos = new Vector(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 + Game.TILE_SIZE * 2.5);
+        pos = new Vector(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE * 2.5);
         image = new Image("images/restart.png");
-        size = Game.TILE_SIZE;
+        size = App.TILE_SIZE;
     }
 
     public void show(GraphicsContext gc) {

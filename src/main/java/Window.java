@@ -13,7 +13,7 @@ abstract public class Window extends Canvas {
     protected double mouseY;
 
     public Window(WindowController wc, Group root) {
-        super(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+        super(App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
         // Set the windowController
         windowController = wc;

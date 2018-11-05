@@ -21,17 +21,17 @@ public class Main extends Application {
         Group root = new Group();
 
         // Initialize the Scene
-        Scene scene = new Scene(root, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+        Scene scene = new Scene(root, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
         // Set Scene and show Stage
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        // Initialize the Game object
-        Game game = new Game(root);
+        // Initialize the App object
+        App app = new App(root);
 
-        // Start the game
-        game.start();
+        // Start the app
+        app.start();
     }
 
     public static void main(String[] args) {

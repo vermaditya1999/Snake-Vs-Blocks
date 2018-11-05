@@ -54,19 +54,19 @@ public class Menu extends Window {
     private void addMenuButtons() {
 
         double gap = 0.75;
-        double offset = gap * Game.TILE_SIZE;
+        double offset = gap * App.TILE_SIZE;
 
         // Add resume button only if there is a saved game
         if (savedGame) {
-            menuButtons.put(MenuButtons.RESUME_GAME, new MenuButton("Resume Game", Game.SCREEN_HEIGHT / 2 + gap * Game.TILE_SIZE));
+            menuButtons.put(MenuButtons.RESUME_GAME, new MenuButton("Resume App", App.SCREEN_HEIGHT / 2 + gap * App.TILE_SIZE));
         } else {
-            offset = 0;  // No Resume Game button, set offset to 0
+            offset = 0;  // No Resume App button, set offset to 0
         }
 
         // Add rest of the buttons
-        menuButtons.put(MenuButtons.START_GAME, new MenuButton("Start Game", Game.SCREEN_HEIGHT / 2 + gap * Game.TILE_SIZE + offset));
-        menuButtons.put(MenuButtons.LEADERBOARD, new MenuButton("Leaderboard", Game.SCREEN_HEIGHT / 2 + 2 * gap * Game.TILE_SIZE + offset));
-        menuButtons.put(MenuButtons.EXIT, new MenuButton("Exit", Game.SCREEN_HEIGHT / 2 + 3 * gap * Game.TILE_SIZE + offset));
+        menuButtons.put(MenuButtons.START_GAME, new MenuButton("Start App", App.SCREEN_HEIGHT / 2 + gap * App.TILE_SIZE + offset));
+        menuButtons.put(MenuButtons.LEADERBOARD, new MenuButton("Leaderboard", App.SCREEN_HEIGHT / 2 + 2 * gap * App.TILE_SIZE + offset));
+        menuButtons.put(MenuButtons.EXIT, new MenuButton("Exit", App.SCREEN_HEIGHT / 2 + 3 * gap * App.TILE_SIZE + offset));
     }
 
     @Override
@@ -132,29 +132,29 @@ public class Menu extends Window {
 
         // Set background
         gc.setFill(Menu.BG_COLOR);
-        gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+        gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
 
         // Show game title
         gc.setFont(Fonts.GOTHAM_LARGE);
         gc.setFill(Menu.FG_COLOR);
-        gc.fillText("Snake", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
-        gc.fillText("vs", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 1.75);
-        gc.fillText("Blocks", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE * 2.5);
+        gc.fillText("Snake", App.SCREEN_WIDTH / 2, App.TILE_SIZE);
+        gc.fillText("vs", App.SCREEN_WIDTH / 2, App.TILE_SIZE * 1.75);
+        gc.fillText("Blocks", App.SCREEN_WIDTH / 2, App.TILE_SIZE * 2.5);
 
         // Show previous score
         gc.setFont(Fonts.MUSEO);
         gc.setFill(Menu.FG_COLOR);
-        gc.fillText(Integer.toString(prevScore), Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 - Game.TILE_SIZE / 3);
+        gc.fillText(Integer.toString(prevScore), App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
 
         // Show the horizontal rule, how to change its length with width of the prevScore?
         gc.setLineWidth(2.0);
         gc.setStroke(Menu.FG_COLOR);
         gc.beginPath();
-        gc.moveTo(0, Game.SCREEN_HEIGHT / 2 - Game.TILE_SIZE / 3);
-        gc.lineTo(Game.TILE_SIZE * 1.5, Game.SCREEN_HEIGHT / 2 - Game.TILE_SIZE / 3);
-        gc.moveTo(Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT / 2 - Game.TILE_SIZE / 3);
-        gc.lineTo(Game.SCREEN_WIDTH - Game.TILE_SIZE * 1.5, Game.SCREEN_HEIGHT / 2 - Game.TILE_SIZE / 3);
+        gc.moveTo(0, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
+        gc.lineTo(App.TILE_SIZE * 1.5, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
+        gc.moveTo(App.SCREEN_WIDTH, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
+        gc.lineTo(App.SCREEN_WIDTH - App.TILE_SIZE * 1.5, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
         gc.stroke();
         gc.closePath();
 

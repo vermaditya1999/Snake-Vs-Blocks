@@ -4,7 +4,7 @@ import javafx.scene.Group;
 
 import java.util.EnumMap;
 
-public class Game implements WindowController {
+public class App implements WindowController {
 
     public final static int NUM_ROWS = 8;
     public final static int NUM_COLS = 5;
@@ -12,8 +12,8 @@ public class Game implements WindowController {
     // Divisors of 72 : 1,2,3,4,6,8,9,12,18,24,36,72
     public final static double TILE_SIZE = 72;
 
-    public final static double SCREEN_WIDTH = Game.TILE_SIZE * Game.NUM_COLS;
-    public final static double SCREEN_HEIGHT = Game.TILE_SIZE * Game.NUM_ROWS;
+    public final static double SCREEN_WIDTH = App.TILE_SIZE * App.NUM_COLS;
+    public final static double SCREEN_HEIGHT = App.TILE_SIZE * App.NUM_ROWS;
 
     private static AnimationTimer animationTimer;
 
@@ -22,7 +22,7 @@ public class Game implements WindowController {
     // HashMap from Windows enum constant to Windows object
     private EnumMap<Windows, Window> windows;
 
-    public Game(Group root) {
+    public App(Group root) {
 
         // Instantiate the windows HashMap
         windows = new EnumMap<Windows, Window>(Windows.class);
@@ -42,7 +42,7 @@ public class Game implements WindowController {
 
     public void start() {
 
-        if (Game.animationTimer == null) {
+        if (App.animationTimer == null) {
 
             // Initialize animationTimer
             animationTimer = new AnimationTimer() {

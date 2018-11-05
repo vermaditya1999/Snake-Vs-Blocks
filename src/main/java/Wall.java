@@ -13,13 +13,13 @@ public class Wall {
     public Wall(double x, double y) {
 
         // Here pos is the top coordinate of the wall
-        pos = new Vector((x - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2, y * Game.TILE_SIZE);
-        length = Game.TILE_SIZE;
+        pos = new Vector((x - 1) * App.TILE_SIZE + App.TILE_SIZE / 2, y * App.TILE_SIZE);
+        length = App.TILE_SIZE;
 
         // 30% chances of double length wall
         int choose = random.nextInt(3);
         if (choose == 1) {
-            length += Game.TILE_SIZE;
+            length += App.TILE_SIZE;
         }
     }
 
@@ -35,6 +35,6 @@ public class Wall {
     }
 
     public boolean isOver() {
-        return pos.y >= Game.SCREEN_HEIGHT;
+        return pos.y >= App.SCREEN_HEIGHT;
     }
 }

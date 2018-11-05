@@ -65,8 +65,8 @@ public class GamePlay extends Window {
         trigger = 0;
         paused = false;
 
-        mouseX = Game.SCREEN_WIDTH / 2;
-        mouseY = Game.SCREEN_HEIGHT / 2 + Game.TILE_SIZE;
+        mouseX = App.SCREEN_WIDTH / 2;
+        mouseY = App.SCREEN_HEIGHT / 2 + App.TILE_SIZE;
 
         // Set mouse cursor
         setCursor(Cursor.NONE);
@@ -100,8 +100,8 @@ public class GamePlay extends Window {
                     // Check any overlap of existing tokens with wall
                     boolean flag = false;
                     for (Token token : tokens) {
-                        if (token.pos.x == ((i - 1) * Game.TILE_SIZE + Game.TILE_SIZE / 2) &&
-                                (token.pos.y == -Game.TILE_SIZE / 2 || token.pos.y == -2 * Game.TILE_SIZE + Game.TILE_SIZE / 2)) {
+                        if (token.pos.x == ((i - 1) * App.TILE_SIZE + App.TILE_SIZE / 2) &&
+                                (token.pos.y == -App.TILE_SIZE / 2 || token.pos.y == -2 * App.TILE_SIZE + App.TILE_SIZE / 2)) {
                             flag = true;
                             break;
                         }
@@ -176,7 +176,7 @@ public class GamePlay extends Window {
                         loadNewGame();
                     }
                 } else {
-                    bursts.add(new Burst(mouseX, Game.SCREEN_HEIGHT / 2 + Game.TILE_SIZE));
+                    bursts.add(new Burst(mouseX, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE));
                 }
             }
         });
@@ -208,7 +208,7 @@ public class GamePlay extends Window {
 
         // Set background
         gc.setFill(GamePlay.BG_COLOR);
-        gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+        gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
         /*
          * The pause overlay is shown when the escape key is pressed.
@@ -218,10 +218,10 @@ public class GamePlay extends Window {
         // Update the game here
         if (!paused) {
             trigger += speed;
-            if (trigger % (Game.TILE_SIZE * 5) == 0) {
+            if (trigger % (App.TILE_SIZE * 5) == 0) {
                 populate();
                 trigger = 0;
-            } else if (trigger % Game.TILE_SIZE == 0) {
+            } else if (trigger % App.TILE_SIZE == 0) {
 
                 /* Probabilities of tokens:
                  * PickupBall : 7%
@@ -318,17 +318,17 @@ public class GamePlay extends Window {
         // Show score
         gc.setFont(new Font("Consolas", 30));
         gc.setFill(Color.WHITE);
-        gc.fillText(Integer.toString(score), Game.TILE_SIZE / 2, Game.TILE_SIZE / 2);
+        gc.fillText(Integer.toString(score), App.TILE_SIZE / 2, App.TILE_SIZE / 2);
 
         // Show total coins collected
         gc.setFill(Color.YELLOW);
-        gc.fillRect(Game.SCREEN_WIDTH - Game.TILE_SIZE - Token.RADIUS,
-                Game.TILE_SIZE / 2 - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+        gc.fillRect(App.SCREEN_WIDTH - App.TILE_SIZE - Token.RADIUS,
+                App.TILE_SIZE / 2 - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
 
         gc.setFont(new Font("Consolas", 30));
         gc.setFill(Color.WHITE);
-        gc.fillText(Integer.toString(numCoins), Game.SCREEN_WIDTH - Game.TILE_SIZE / 2,
-                Game.TILE_SIZE / 2);
+        gc.fillText(Integer.toString(numCoins), App.SCREEN_WIDTH - App.TILE_SIZE / 2,
+                App.TILE_SIZE / 2);
 
         // Update and show bursts, they aren't paused. Will look kinda cool :P
         gc.setFill(Color.WHITE);
@@ -346,7 +346,7 @@ public class GamePlay extends Window {
         if (paused) {
 
             gc.setFill(new Color(0, 0, 0, 0.75));
-            gc.fillRect(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+            gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
             gc.applyEffect(new BoxBlur(10, 10, 10));
 

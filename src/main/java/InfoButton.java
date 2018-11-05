@@ -8,8 +8,8 @@ public class InfoButton {
     private boolean hovered;
 
     {
-        pos = new Vector(Game.TILE_SIZE / 3, Game.TILE_SIZE / 3);
-        radius = Game.TILE_SIZE / 6;
+        pos = new Vector(App.TILE_SIZE / 3, App.TILE_SIZE / 3);
+        radius = App.TILE_SIZE / 6;
     }
 
     public void show(GraphicsContext gc) {

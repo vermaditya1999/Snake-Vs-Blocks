@@ -11,7 +11,7 @@ public class Snake {
         snake = new LinkedList<SnakeBall>();
 
         // Add one initial ball
-        snake.add(new SnakeBall(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2 + Game.TILE_SIZE));
+        snake.add(new SnakeBall(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE));
 
         // Start with 10 balls
         for (int i = 0; i < 9; i++) {

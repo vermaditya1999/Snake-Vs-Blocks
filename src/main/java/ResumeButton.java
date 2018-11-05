@@ -8,8 +8,8 @@ public class ResumeButton {
     private double size;
 
     {
-        pos = new Vector(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
-        size = Game.TILE_SIZE * 0.75;
+        pos = new Vector(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
+        size = App.TILE_SIZE * 0.75;
     }
 
     public void show(GraphicsContext gc) {
