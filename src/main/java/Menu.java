@@ -74,32 +74,28 @@ public class Menu extends Window {
 
         addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
 
-            Windows currentWindow = windowController.currentWindow();
+            Windows currentWindow = windowController.getCurrentWindow();
 
             if (currentWindow != Windows.MENU) {
                 windowController.passEvent(currentWindow, event);
             } else {
 
                 if (menuButtons.get(MenuButtons.LEADERBOARD).isHovered(mouseX, mouseY)) {
-                    resetMouseVars();
                     windowController.setWindow(Windows.LEADERBOARD);
                 }
 
                 if (menuButtons.get(MenuButtons.START_GAME).isHovered(mouseX, mouseY)) {
-                    resetMouseVars();
                     windowController.setWindow(Windows.GAMEPLAY);
                 }
 
                 if (menuButtons.get(MenuButtons.EXIT).isHovered(mouseX, mouseY)) {
-                    resetMouseVars();
                     Platform.exit();
                 }
             }
         });
 
         addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
-
-            Windows currentWindow = windowController.currentWindow();
+            Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.MENU) {
                 windowController.passEvent(currentWindow, event);
             } else {
@@ -122,6 +118,7 @@ public class Menu extends Window {
                 hovered = true;
             }
         }
+
         if (infoButton.isHovered(mouseX, mouseY)) {
             hovered = true;
         }
