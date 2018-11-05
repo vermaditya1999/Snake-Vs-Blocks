@@ -53,9 +53,12 @@ public class GamePlay extends Window {
 
         // Initialize Snake
         snake = new Snake();
+
+        // Load a new game
+        loadNewGame();
     }
 
-    public void newGamePlay() {
+    public void loadNewGame() {
         numCoins = 0;
         score = 0;
         speed = 4;
@@ -165,12 +168,12 @@ public class GamePlay extends Window {
                     } else if (backButton.isHovered(mouseX, mouseY)) {
 
                         // When back button is pressed, create new game, then go back to main menu
-                        newGamePlay();
+                        loadNewGame();
                         windowController.setWindow(Windows.MENU);
                     } else if (restartButton.isHovered(mouseX, mouseY)) {
 
                         // When restart button is pressed, simply create a new gameplay
-                        newGamePlay();
+                        loadNewGame();
                     }
                 } else {
                     bursts.add(new Burst(mouseX, Game.SCREEN_HEIGHT / 2 + Game.TILE_SIZE));
