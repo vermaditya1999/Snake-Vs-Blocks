@@ -5,6 +5,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -14,52 +15,38 @@ public class GamePlay extends Window {
 
     public static final Color BG_COLOR = Color.rgb(57, 8, 49);
 
-    // Temporary burst for demonstration
-    LinkedList<Burst> bursts = new LinkedList<Burst>();
+    private LinkedList<Burst> bursts = new LinkedList<Burst>();
 
-    // Temporary Blocks for testing
-    LinkedList<Block> blocks = new LinkedList<Block>();
+    private LinkedList<Block> blocks = new LinkedList<Block>();
 
-    // Temporary Walls for testing
-    LinkedList<Wall> walls = new LinkedList<Wall>();
+    private LinkedList<Wall> walls = new LinkedList<Wall>();
 
-    // Temporary Tokens for testing
-    LinkedList<Token> tokens = new LinkedList<Token>();
+    private LinkedList<Token> tokens = new LinkedList<Token>();
 
-    // Temporary Snake for testing
-    Snake snake = new Snake();
+    private Snake snake = new Snake();
 
-    // Score
     private int score;
-
-    // Number of coins collected
     private int numCoins;
-
-    // The initial speed should be 2 and it should increase in multiples of 2 only
+    private int trigger;
     private double speed;
     private boolean paused;
     private BackButton backButton;
     private ResumeButton resumeButton;
     private RestartButton restartButton;
 
-    private int trigger;
-
     private Random random;
 
-    {
+    public GamePlay(WindowController wc, Group root) {
+        super(wc, root);
+
+        // Initialize buttons
         resumeButton = new ResumeButton();
         backButton = new BackButton();
         restartButton = new RestartButton();
         random = new Random();
     }
 
-    public GamePlay(WindowController wc, Group root) {
-        super(wc, root);
-
-        newGamePlay();
-    }
-
-    private void newGamePlay() {
+    public void newGamePlay() {
         numCoins = 0;
         score = 0;
         speed = 4;
@@ -165,8 +152,7 @@ public class GamePlay extends Window {
                         setCursor(Cursor.NONE);
                     } else if (backButton.isHovered(mouseX, mouseY)) {
 
-                        // When back button is pressed, reset and create new game, then go back to main menu
-                        resetMouseVars();
+                        // When back button is pressed, create new game, then go back to main menu
                         newGamePlay();
                         windowController.setWindow(Windows.MENU);
                     } else if (restartButton.isHovered(mouseX, mouseY)) {
@@ -315,10 +301,19 @@ public class GamePlay extends Window {
         snake.show(gc);
 
         // Show score
-        showScore();
+        gc.setFont(new Font("Consolas", 30));
+        gc.setFill(Color.WHITE);
+        gc.fillText(Integer.toString(score), Game.TILE_SIZE / 2, Game.TILE_SIZE / 2);
 
         // Show total coins collected
-        showNumCoins();
+        gc.setFill(Color.YELLOW);
+        gc.fillRect(Game.SCREEN_WIDTH - Game.TILE_SIZE - Token.RADIUS,
+                Game.TILE_SIZE / 2 - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+
+        gc.setFont(new Font("Consolas", 30));
+        gc.setFill(Color.WHITE);
+        gc.fillText(Integer.toString(numCoins), Game.SCREEN_WIDTH - Game.TILE_SIZE / 2,
+                Game.TILE_SIZE / 2);
 
         // Update and show bursts, they aren't paused. Will look kinda cool :P
         gc.setFill(Color.WHITE);
@@ -345,28 +340,4 @@ public class GamePlay extends Window {
             restartButton.show(gc);
         }
     }
-
-    private void showScore() {
-
-//        gc.setFont(new Font("Consolas", 30));
-        gc.setFont(Fonts.GOTHAM_SMALL);
-        gc.setFill(Color.WHITE);
-        gc.fillText(Integer.toString(score), Game.TILE_SIZE / 2, Game.TILE_SIZE / 2);
-
-    }
-
-    private void showNumCoins() {
-
-        gc.setFill(Color.YELLOW);
-        gc.fillRect(Game.SCREEN_WIDTH - Game.TILE_SIZE - Token.RADIUS,
-                Game.TILE_SIZE / 2 - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
-
-//        gc.setFont(new Font("Consolas", 30));
-        gc.setFont(Fonts.GOTHAM_SMALL);
-        gc.setFill(Color.WHITE);
-        gc.fillText(Integer.toString(numCoins), Game.SCREEN_WIDTH - Game.TILE_SIZE / 2,
-                Game.TILE_SIZE / 2);
-
-    }
-
 }
