@@ -144,7 +144,7 @@ public class Game extends Window {
         addEventHandler(KeyEvent.KEY_PRESSED, event -> {
 
             Windows currentWindow = windowController.getCurrentWindow();
-            if (currentWindow != Windows.GAMEPLAY) {
+            if (currentWindow != Windows.GAME) {
                 windowController.passEvent(currentWindow, event);
             } else {
                 if (event.getCode() == KeyCode.ESCAPE) {
@@ -156,7 +156,7 @@ public class Game extends Window {
         addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
 
             Windows currentWindow = windowController.getCurrentWindow();
-            if (currentWindow != Windows.GAMEPLAY) {
+            if (currentWindow != Windows.GAME) {
                 windowController.passEvent(currentWindow, event);
             } else {
                 if (paused) {
@@ -184,7 +184,7 @@ public class Game extends Window {
         addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 
             Windows currentWindow = windowController.getCurrentWindow();
-            if (currentWindow != Windows.GAMEPLAY) {
+            if (currentWindow != Windows.GAME) {
                 windowController.passEvent(currentWindow, event);
             } else {
 

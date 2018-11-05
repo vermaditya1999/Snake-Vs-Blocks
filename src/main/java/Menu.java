@@ -85,7 +85,7 @@ public class Menu extends Window {
                 }
 
                 if (menuButtons.get(MenuButtons.START_GAME).isHovered(mouseX, mouseY)) {
-                    windowController.setWindow(Windows.GAMEPLAY);
+                    windowController.setWindow(Windows.GAME);
                 }
 
                 if (menuButtons.get(MenuButtons.EXIT).isHovered(mouseX, mouseY)) {

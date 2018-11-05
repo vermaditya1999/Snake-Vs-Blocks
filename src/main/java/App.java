@@ -36,7 +36,7 @@ public class App implements WindowController {
 
     private void initWindows(Group root) {
         windows.put(Windows.MENU, new Menu(this, root));
-        windows.put(Windows.GAMEPLAY, new Game(this, root));
+        windows.put(Windows.GAME, new Game(this, root));
         windows.put(Windows.LEADERBOARD, new LeaderBoard(this, root));
     }
 
