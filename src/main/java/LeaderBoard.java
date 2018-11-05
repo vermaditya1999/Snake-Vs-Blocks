@@ -5,70 +5,72 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 public class LeaderBoard extends Window {
 
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
+    private static final int MAX_SIZE = 10;
 
     private ArrayList<EntryPane> entryPanes;
-    private int maxSize;
     private BackButton backButton;
-
-    {
-        entryPanes = new ArrayList<EntryPane>();
-        maxSize = 10;
-        backButton = new BackButton();
-    }
 
     public LeaderBoard(WindowController wc, Group root) {
         super(wc, root);
 
+        entryPanes = new ArrayList<EntryPane>();
+        backButton = new BackButton();
+
         Random random = new Random();
 
-        addEntry("23-08-2018", random.nextInt(1000));
-        addEntry("12-07-2011", random.nextInt(1000));
-        addEntry("13-05-3012", random.nextInt(1000));
-        addEntry("16-12-2018", random.nextInt(1000));
-        addEntry("21-04-2000", random.nextInt(1000));
-        addEntry("29-05-1999", random.nextInt(1000));
-        addEntry("30-08-1856", random.nextInt(1000));
-        addEntry("01-07-2000", random.nextInt(1000));
-        addEntry("31-11-2018", random.nextInt(1000));
-        addEntry("06-01-2011", random.nextInt(1000));
+        addEntry(random.nextInt(1000));
+        addEntry(random.nextInt(1000));
+        addEntry(random.nextInt(1000));
+        addEntry(random.nextInt(1000));
+        addEntry(random.nextInt(1000));
+        addEntry(random.nextInt(1000));
+        addEntry(random.nextInt(1000));
+        addEntry(random.nextInt(1000));
+        addEntry(random.nextInt(1000));
+        addEntry(random.nextInt(1000));
     }
 
-    public boolean isEligibleScore(int score) {
-        return ((entryPanes.size() < maxSize) ||
-                (!entryPanes.isEmpty() && (score > entryPanes.get(entryPanes.size() - 1).getScore())));
-    }
+//    public boolean isEligibleScore(int score) {
+//        return ((entryPanes.size() < MAX_SIZE) ||
+//                (!entryPanes.isEmpty() && (score > entryPanes.get(entryPanes.size() - 1).getScore())));
+//    }
 
-    public void addEntry(String name, int score) {
+    public void addEntry(int score) {
 
-        if (entryPanes.size() < maxSize) {
+        // Get current date in Simple Format
+        String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+
+        if (entryPanes.size() < MAX_SIZE) {
             boolean added = false;
             for (int i = 0; i < entryPanes.size(); i++) {
                 int curScore = entryPanes.get(i).getScore();
                 if (score > curScore) {
-                    entryPanes.add(i, new EntryPane(name, score));
+                    entryPanes.add(i, new EntryPane(date, score));
                     added = true;
                     break;
                 }
             }
             if (!added) {
-                entryPanes.add(new EntryPane(name, score));
+                entryPanes.add(new EntryPane(date, score));
             }
         } else {
             for (int i = 0; i < entryPanes.size(); i++) {
                 int curScore = entryPanes.get(i).getScore();
                 if (score > curScore) {
-                    entryPanes.add(i, new EntryPane(name, score));
+                    entryPanes.add(i, new EntryPane(date, score));
                     break;
                 }
             }
-            entryPanes.remove(maxSize);
+            entryPanes.remove(MAX_SIZE);
         }
     }
 
@@ -77,12 +79,11 @@ public class LeaderBoard extends Window {
 
         addEventHandler(KeyEvent.KEY_PRESSED, event -> {
 
-            Windows currentWindow = windowController.currentWindow();
+            Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.LEADERBOARD) {
                 windowController.passEvent(currentWindow, event);
             } else {
                 if (event.getCode() == KeyCode.ESCAPE) {
-                    resetMouseVars();
                     windowController.setWindow(Windows.MENU);
                 }
             }
@@ -90,7 +91,7 @@ public class LeaderBoard extends Window {
 
         addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 
-            Windows currentWindow = windowController.currentWindow();
+            Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.LEADERBOARD) {
                 windowController.passEvent(currentWindow, event);
             } else {
@@ -101,7 +102,7 @@ public class LeaderBoard extends Window {
 
         addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
-            Windows currentWindow = windowController.currentWindow();
+            Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.LEADERBOARD) {
                 windowController.passEvent(currentWindow, event);
             } else {
@@ -110,7 +111,6 @@ public class LeaderBoard extends Window {
                 double mouseY = event.getY();
 
                 if (backButton.isHovered(mouseX, mouseY)) {
-                    resetMouseVars();
                     windowController.setWindow(Windows.MENU);
                 }
             }
@@ -140,10 +140,10 @@ public class LeaderBoard extends Window {
         // Back Button
         backButton.show(gc, LeaderBoard.FG_COLOR);
 
-        // LEADERBOARD heading
+        // Leaderboard heading
         gc.setFill(LeaderBoard.FG_COLOR);
         gc.setFont(Fonts.GOTHAM_MEDIUM);
-        gc.fillText("LEADERBOARD", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
+        gc.fillText("Leaderboard", Game.SCREEN_WIDTH / 2, Game.TILE_SIZE);
 
         // Show Entry Bars
         for (int rank = 1; rank <= entryPanes.size(); rank++) {
