@@ -29,6 +29,9 @@ public class Main extends Application {
 
         // Initialize the Game object
         Game game = new Game(root);
+
+        // Start the game
+        game.start();
     }
 
     public static void main(String[] args) {
