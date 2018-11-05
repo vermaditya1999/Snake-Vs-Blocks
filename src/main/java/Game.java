@@ -15,6 +15,8 @@ public class Game implements WindowController {
     public final static double SCREEN_WIDTH = Game.TILE_SIZE * Game.NUM_COLS;
     public final static double SCREEN_HEIGHT = Game.TILE_SIZE * Game.NUM_ROWS;
 
+    private static AnimationTimer animationTimer;
+
     private Windows currentWindow;
 
     // HashMap from Windows enum constant to Windows object
@@ -25,30 +27,34 @@ public class Game implements WindowController {
         // Instantiate the windows HashMap
         windows = new EnumMap<Windows, Window>(Windows.class);
 
-        // Put all the instantiated windows in the HashMap
-        windows.put(Windows.MENU, new Menu(this, root));
-        windows.put(Windows.GAMEPLAY, new GamePlay(this, root));
-        windows.put(Windows.LEADERBOARD, new LeaderBoard(this, root));
+        // Initialize the windows and put them in the EnumMap
+        initWindows(root);
 
         // Set the starting window to Menu
         setWindow(Windows.MENU);
-
-        // Start the animationLoop
-        animationLoop();
     }
 
-    private void animationLoop() {
+    private void initWindows(Group root) {
+        windows.put(Windows.MENU, new Menu(this, root));
+        windows.put(Windows.GAMEPLAY, new GamePlay(this, root));
+        windows.put(Windows.LEADERBOARD, new LeaderBoard(this, root));
+    }
 
-        // Initialize animationTimer
-        AnimationTimer animationTimer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                windows.get(currentWindow).show();
-            }
-        };
+    public void start() {
 
-        // Start the animationTimer
-        animationTimer.start();
+        if (Game.animationTimer == null) {
+
+            // Initialize animationTimer
+            animationTimer = new AnimationTimer() {
+                @Override
+                public void handle(long now) {
+                    windows.get(currentWindow).show();
+                }
+            };
+
+            // Start the animationTimer
+            animationTimer.start();
+        }
     }
 
     @Override
@@ -62,7 +68,7 @@ public class Game implements WindowController {
     }
 
     @Override
-    public Windows currentWindow() {
+    public Windows getCurrentWindow() {
         return currentWindow;
     }
 
