@@ -3,19 +3,12 @@ import javafx.scene.text.Font;
 
 public class MenuButton {
 
+    private static final double height = Game.TILE_SIZE / 2;
+    private static final double width = Game.TILE_SIZE * 3;
+
     private String text;
-
     private double posY;
-
-    private double height;
-    private double width;
-
     private boolean hovered;
-
-    {
-        height = Game.TILE_SIZE / 2;
-        width = Game.TILE_SIZE * 3;
-    }
 
     public MenuButton(String text, double posY) {
         this.text = text;
