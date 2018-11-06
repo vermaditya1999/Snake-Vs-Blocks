@@ -174,7 +174,7 @@ public class Game extends Window {
                         loadNewGame();
                     }
                 } else {
-                    bursts.add(new Burst(mouseX, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE));
+                    bursts.add(new SmallBurst(mouseX, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE));
                     snake.removeBall();
                 }
             }
@@ -223,8 +223,8 @@ public class Game extends Window {
             } else if (trigger % App.TILE_SIZE == 0) {
 
                 /* Probabilities of tokens:
-                 * PickupBall : 7%
-                 * Coin : 5%
+                 * PickupBall : 5%
+                 * Coin : 3%
                  * Magnet : 1%
                  * Shield : 1%
                  * Destroyer : 1%
@@ -244,11 +244,11 @@ public class Game extends Window {
                         tokens.add(new Destroyer(i, -2));
                         break;
 
-                    } else if (choose <= 10) {
+                    } else if (choose <= 8) {
                         tokens.add(new PickupBall(i, -2));
                         break;
 
-                    } else if (choose <= 15) {
+                    } else if (choose <= 11) {
                         tokens.add(new Coin(i, -2));
                         break;
                     }
@@ -293,6 +293,16 @@ public class Game extends Window {
                         score += value;
                         snake.addBalls(value);
                         tokenIterator.remove();
+                    } else if (token.getClass().equals(Destroyer.class)) {
+                        tokenIterator.remove();
+                        Iterator it = blocks.iterator();
+                        while (it.hasNext()) {
+                            Block block = (Block) it.next();
+                            if (block.isOnScreen()) {
+                                bursts.add(new LargeBurst(block.getPosX(), block.getPosY()));
+                                it.remove();
+                            }
+                        }
                     }
                 }
 

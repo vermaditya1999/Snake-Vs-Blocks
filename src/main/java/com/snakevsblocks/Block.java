@@ -41,6 +41,18 @@ public class Block {
         pos.y += speed;
     }
 
+    public boolean isOnScreen() {
+        return (pos.y - App.TILE_SIZE / 2) >= 0;
+    }
+
+    public double getPosX() {
+        return pos.x;
+    }
+
+    public double getPosY() {
+        return pos.y;
+    }
+
     public boolean isOver() {
         return pos.y - App.TILE_SIZE / 2 >= App.SCREEN_HEIGHT;
     }
