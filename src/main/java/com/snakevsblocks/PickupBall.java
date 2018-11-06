@@ -37,6 +37,10 @@ public class PickupBall extends Token {
 
     }
 
+    public int getValue() {
+        return value;
+    }
+
     @Override
     public void show(GraphicsContext gc) {
 
