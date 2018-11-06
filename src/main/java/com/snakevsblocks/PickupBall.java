@@ -43,7 +43,7 @@ public class PickupBall extends Token {
         // Display pickup ball
         // To be changed later
         gc.setFill(Color.PAPAYAWHIP);
-        gc.fillRect(pos.x - Token.RADIUS, pos.y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+        gc.fillOval(pos.x - Token.RADIUS, pos.y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
 
         // Display text
         gc.setFill(Color.WHITE);
