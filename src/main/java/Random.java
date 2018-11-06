@@ -1,17 +1,11 @@
 public class Random {
-    public static java.util.Random random;
+    public final static java.util.Random RANDOM = new java.util.Random();
 
     public static int nextInt(int n) {
-        if (random == null) {
-            random = new java.util.Random();
-        }
-        return random.nextInt(n);
+        return RANDOM.nextInt(n);
     }
 
     public static double nextDouble() {
-        if (random == null) {
-            random = new java.util.Random();
-        }
-        return random.nextDouble();
+        return RANDOM.nextDouble();
     }
 }
