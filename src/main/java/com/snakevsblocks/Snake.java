@@ -34,6 +34,13 @@ public class Snake {
     }
 
     // Prerequisite: Snake has at least one ball
+    public void removeBall() {
+        if (snake.size() > 0) {
+            snake.removeLast();
+        }
+    }
+
+    // Prerequisite: Snake has at least one ball
     public void update(double mouseX, double mouseY) {
 
         // Set the coordinates of the head to the coordinates of mouse
