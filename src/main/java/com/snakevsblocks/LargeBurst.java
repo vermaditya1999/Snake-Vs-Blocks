@@ -9,8 +9,12 @@ public class LargeBurst extends Burst {
     public LargeBurst(double x, double y) {
         super(x, y);
 
-        num = 20;
-        particles.add(new LargeParticle(x, y));
+        num = 25;
+
+        for (int i = 0; i < num - 10; i++) {
+            particles.add(new LargeParticle(x, y));
+            num--;
+        }
     }
 
     @Override
