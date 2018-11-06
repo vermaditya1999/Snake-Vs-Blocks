@@ -15,8 +15,6 @@ public abstract class Burst {
         origin = new Vector(x, y);
         maxNum = 15;
         curNum = 0;
-
-        particles.add(new Particle(x, y));
     }
 
     public boolean isOver() {

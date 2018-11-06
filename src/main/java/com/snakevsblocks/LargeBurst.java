@@ -4,19 +4,19 @@ import javafx.scene.canvas.GraphicsContext;
 
 import java.util.Iterator;
 
-public class SmallBurst extends Burst {
+public class LargeBurst extends Burst {
 
-    public SmallBurst(double x, double y) {
+    public LargeBurst(double x, double y) {
         super(x, y);
 
-        particles.add(new SmallParticle(x, y));
+        particles.add(new LargeParticle(x, y));
     }
 
     @Override
     public void show(GraphicsContext gc) {
 
         if (curNum < maxNum) {
-            particles.add(new SmallParticle(origin.x, origin.y));
+            particles.add(new LargeParticle(origin.x, origin.y));
             curNum++;
         }
 
