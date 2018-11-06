@@ -31,7 +31,7 @@ public class Block {
 
         // Show value
         gc.setFill(Color.BLACK);
-        gc.setFont(Fonts.GOTHAM_MEDIUM);
+        gc.setFont(Font.GOTHAM_MEDIUM);
         gc.fillText(Integer.toString(value), pos.x, pos.y);
     }
 

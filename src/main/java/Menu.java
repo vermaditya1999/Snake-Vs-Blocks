@@ -136,14 +136,14 @@ public class Menu extends Window {
 
 
         // Show game title
-        gc.setFont(Fonts.GOTHAM_LARGE);
+        gc.setFont(Font.GOTHAM_LARGE);
         gc.setFill(Menu.FG_COLOR);
         gc.fillText("Snake", App.SCREEN_WIDTH / 2, App.TILE_SIZE);
         gc.fillText("vs", App.SCREEN_WIDTH / 2, App.TILE_SIZE * 1.75);
         gc.fillText("Blocks", App.SCREEN_WIDTH / 2, App.TILE_SIZE * 2.5);
 
         // Show previous score
-        gc.setFont(Fonts.MUSEO);
+        gc.setFont(Font.MUSEO);
         gc.setFill(Menu.FG_COLOR);
         gc.fillText(Integer.toString(prevScore), App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
 
