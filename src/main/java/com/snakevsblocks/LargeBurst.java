@@ -9,15 +9,16 @@ public class LargeBurst extends Burst {
     public LargeBurst(double x, double y) {
         super(x, y);
 
+        num = 20;
         particles.add(new LargeParticle(x, y));
     }
 
     @Override
     public void show(GraphicsContext gc) {
 
-        if (curNum < maxNum) {
+        if (num > 0) {
             particles.add(new LargeParticle(origin.x, origin.y));
-            curNum++;
+            num--;
         }
 
         Iterator it = particles.iterator();

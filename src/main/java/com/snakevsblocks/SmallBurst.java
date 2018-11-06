@@ -9,15 +9,16 @@ public class SmallBurst extends Burst {
     public SmallBurst(double x, double y) {
         super(x, y);
 
+        num = 10;
         particles.add(new SmallParticle(x, y));
     }
 
     @Override
     public void show(GraphicsContext gc) {
 
-        if (curNum < maxNum) {
+        if (num > 0) {
             particles.add(new SmallParticle(origin.x, origin.y));
-            curNum++;
+            num--;
         }
 
         Iterator it = particles.iterator();
