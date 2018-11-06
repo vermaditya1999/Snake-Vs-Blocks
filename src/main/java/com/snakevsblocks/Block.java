@@ -45,11 +45,11 @@ public class Block {
         return (pos.y - App.TILE_SIZE / 2) >= 0;
     }
 
-    public double getPosX() {
+    public double getX() {
         return pos.x;
     }
 
-    public double getPosY() {
+    public double getY() {
         return pos.y;
     }
 
