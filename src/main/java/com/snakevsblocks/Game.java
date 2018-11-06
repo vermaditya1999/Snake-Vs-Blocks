@@ -175,6 +175,7 @@ public class Game extends Window {
                     }
                 } else {
                     bursts.add(new Burst(mouseX, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE));
+                    snake.removeBall();
                 }
             }
         });
@@ -280,8 +281,23 @@ public class Game extends Window {
             Iterator tokenIterator = tokens.iterator();
             while (tokenIterator.hasNext()) {
                 Token token = (Token) tokenIterator.next();
-                token.collide(snake.getHeadVector());  // Collision Detection
-                if (token.isOver()) {
+
+                // Collide the tokens
+                token.collide(snake.getHeadVector());
+                if (token.isConsumed()) {
+                    if (token.getClass().equals(Coin.class)) {
+                        numCoins++;
+                        tokenIterator.remove();
+                    } else if (token.getClass().equals(PickupBall.class)) {
+                        int value = ((PickupBall) token).getValue();
+                        score += value;
+                        snake.addBalls(value);
+                        tokenIterator.remove();
+                    }
+                }
+
+                // Remove tokens if they are dead
+                if (token.isDead()) {
                     tokenIterator.remove();
                 } else {
                     token.update(speed);
@@ -320,7 +336,7 @@ public class Game extends Window {
 
         // Show total coins collected
         gc.setFill(Color.YELLOW);
-        gc.fillRect(App.SCREEN_WIDTH - App.TILE_SIZE - Token.RADIUS,
+        gc.fillOval(App.SCREEN_WIDTH - App.TILE_SIZE - Token.RADIUS,
                 App.TILE_SIZE / 2 - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
 
         gc.setFont(new Font("Consolas", 30));

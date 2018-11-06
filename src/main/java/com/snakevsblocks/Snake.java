@@ -35,7 +35,7 @@ public class Snake {
 
     // Prerequisite: Snake has at least one ball
     public void removeBall() {
-        if (snakeBalls.size() > 0) {
+        if (snakeBalls.size() > 1) {
             snakeBalls.removeLast();
         }
     }
