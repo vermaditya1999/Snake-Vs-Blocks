@@ -6,14 +6,14 @@ import java.util.LinkedList;
 
 public class Snake {
 
-    private LinkedList<SnakeBall> snake;
+    private LinkedList<SnakeBall> snakeBalls;
 
     public Snake() {
 
-        snake = new LinkedList<SnakeBall>();
+        snakeBalls = new LinkedList<SnakeBall>();
 
         // Add one initial ball
-        snake.add(new SnakeBall(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE));
+        snakeBalls.add(new SnakeBall(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE));
 
         // Start with 10 balls
         addBalls(9);
@@ -28,15 +28,15 @@ public class Snake {
     public void addBalls(int n) {
 
         for (int i = 0; i < n; i++) {
-            Vector tail = snake.get(snake.size() - 1).getPos();
-            snake.add(new SnakeBall(tail.x, tail.y + 2 * SnakeBall.RADIUS));
+            Vector tail = snakeBalls.get(snakeBalls.size() - 1).getPos();
+            snakeBalls.add(new SnakeBall(tail.x, tail.y + 2 * SnakeBall.RADIUS));
         }
     }
 
     // Prerequisite: Snake has at least one ball
     public void removeBall() {
-        if (snake.size() > 0) {
-            snake.removeLast();
+        if (snakeBalls.size() > 0) {
+            snakeBalls.removeLast();
         }
     }
 
@@ -44,13 +44,13 @@ public class Snake {
     public void update(double mouseX, double mouseY) {
 
         // Set the coordinates of the head to the coordinates of mouse
-        Vector head = snake.get(0).getPos();
+        Vector head = snakeBalls.get(0).getPos();
         head.x = mouseX;
 
         // Update rest of the balls
-        for (int i = 1; i < snake.size(); i++) {
-            Vector prev = snake.get(i - 1).getPos();
-            Vector cur = snake.get(i).getPos();
+        for (int i = 1; i < snakeBalls.size(); i++) {
+            Vector prev = snakeBalls.get(i - 1).getPos();
+            Vector cur = snakeBalls.get(i).getPos();
 
             // The direction vector
             // Direction: From prev to cur
@@ -82,13 +82,13 @@ public class Snake {
     public void show(GraphicsContext gc) {
 
         // Show all the balls
-        for (SnakeBall snakeBall : snake) {
+        for (SnakeBall snakeBall : snakeBalls) {
             snakeBall.show(gc);
         }
     }
 
     // Prerequisite: Snake has at least one ball
     public Vector getHeadVector() {
-        return snake.get(0).getPos();
+        return snakeBalls.get(0).getPos();
     }
 }
