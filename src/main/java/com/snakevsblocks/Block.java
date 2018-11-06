@@ -53,6 +53,10 @@ public class Block {
         return pos.y;
     }
 
+    public int getValue() {
+        return value;
+    }
+
     public boolean isOver() {
         return pos.y - App.TILE_SIZE / 2 >= App.SCREEN_HEIGHT;
     }
