@@ -16,9 +16,7 @@ public class Snake {
         snake.add(new SnakeBall(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE));
 
         // Start with 10 balls
-        for (int i = 0; i < 9; i++) {
-            addBall();
-        }
+        addBalls(9);
     }
 
     // Linear interpolation, reference: https://en.wikipedia.org/wiki/Linear_interpolation
@@ -27,10 +25,12 @@ public class Snake {
     }
 
     // Prerequisite: Snake has at least one ball
-    public void addBall() {
+    public void addBalls(int n) {
 
-        Vector tail = snake.get(snake.size() - 1).getPos();
-        snake.add(new SnakeBall(tail.x, tail.y + 2 * SnakeBall.RADIUS));
+        for (int i = 0; i < n; i++) {
+            Vector tail = snake.get(snake.size() - 1).getPos();
+            snake.add(new SnakeBall(tail.x, tail.y + 2 * SnakeBall.RADIUS));
+        }
     }
 
     // Prerequisite: Snake has at least one ball
