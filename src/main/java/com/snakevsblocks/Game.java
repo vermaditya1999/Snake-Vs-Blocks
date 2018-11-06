@@ -174,7 +174,6 @@ public class Game extends Window {
                         loadNewGame();
                     }
                 } else {
-                    bursts.add(new SmallBurst(mouseX, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE));
                     snake.removeBall();
                 }
             }
@@ -284,26 +283,32 @@ public class Game extends Window {
 
                 // Collide the tokens
                 token.collide(snake.getHeadVector());
+
+                // Handle collision
                 if (token.isConsumed()) {
                     if (token.getClass().equals(Coin.class)) {
                         numCoins++;
-                        tokenIterator.remove();
                     } else if (token.getClass().equals(PickupBall.class)) {
                         int value = ((PickupBall) token).getValue();
                         score += value;
                         snake.addBalls(value);
-                        tokenIterator.remove();
                     } else if (token.getClass().equals(Destroyer.class)) {
-                        tokenIterator.remove();
                         Iterator it = blocks.iterator();
                         while (it.hasNext()) {
                             Block block = (Block) it.next();
                             if (block.isOnScreen()) {
-                                bursts.add(new LargeBurst(block.getPosX(), block.getPosY()));
+                                bursts.add(new LargeBurst(block.getX(), block.getY()));
+                                score += block.getValue();
                                 it.remove();
                             }
                         }
                     }
+
+                    // Add SmallBurst
+                    bursts.add(new SmallBurst(token.getX(), token.getY()));
+
+                    // Remove token
+                    tokenIterator.remove();
                 }
 
                 // Remove tokens if they are dead
