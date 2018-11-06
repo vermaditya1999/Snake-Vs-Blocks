@@ -20,7 +20,7 @@ public class Particle {
         pos = new Vector(x, y);
         vel = Vector.random();
         acc = vel.copy();
-        acc.mult(-0.01);
+//        acc.mult(-0.01);
         vel.mult(5);
 
         radius = 6;
@@ -36,7 +36,7 @@ public class Particle {
     }
 
     public void update() {
-        vel.add(acc);
+//        vel.add(acc);
         pos.add(vel);
 
         radius -= 0.25;
