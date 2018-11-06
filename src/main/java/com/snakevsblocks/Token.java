@@ -30,6 +30,14 @@ public abstract class Token implements Collideable {
         return consumed;
     }
 
+    public double getX() {
+        return pos.x;
+    }
+
+    public double getY() {
+        return pos.y;
+    }
+
     @Override
     public void collide(Vector snakeHeadVector) {
         consumed = Vector.dist(snakeHeadVector, pos) <= (SnakeBall.RADIUS + Token.RADIUS);
