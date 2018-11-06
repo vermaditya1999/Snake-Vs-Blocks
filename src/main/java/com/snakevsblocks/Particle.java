@@ -4,17 +4,16 @@ import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Particle {
 
-    private Vector pos;
-    private Vector vel;
+    protected Vector pos;
+    protected Vector vel;
 
-    private double radius;
-    private double alpha;
+    protected double radius;
+    protected double alpha;
 
     public Particle(double x, double y) {
         pos = new Vector(x, y);
         vel = Vector.random();
         vel.mult(5);
-        radius = 6;
         alpha = 1;
     }
 
