@@ -1,3 +1,5 @@
+package com.snakevsblocks;
+
 import javafx.event.Event;
 
 public interface WindowController {

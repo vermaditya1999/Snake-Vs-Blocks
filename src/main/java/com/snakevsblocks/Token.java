@@ -1,3 +1,5 @@
+package com.snakevsblocks;
+
 import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Token implements Collideable {

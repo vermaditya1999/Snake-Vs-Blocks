@@ -1,10 +1,12 @@
+package com.snakevsblocks;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class Shield extends Token {
+public class Coin extends Token {
 
-    public Shield(double x, double y) {
+    public Coin(int x, int y) {
 
         super(x, y);
     }
@@ -12,15 +14,15 @@ public class Shield extends Token {
     @Override
     public void show(GraphicsContext gc) {
 
-        // Display Shield
+        // Display Coin
         // To be changed later
-        gc.setFill(Color.CORNSILK);
+        gc.setFill(Color.YELLOW);
         gc.fillRect(pos.x - Token.RADIUS, pos.y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
 
         // Display text
         gc.setFill(Color.WHITE);
         gc.setFont(new Font("Consolas", 15));
-        gc.fillText("Shield", pos.x, pos.y + 2.5 * Token.RADIUS);
+        gc.fillText("Coin", pos.x, pos.y + 2.5 * Token.RADIUS);
 
     }
 }

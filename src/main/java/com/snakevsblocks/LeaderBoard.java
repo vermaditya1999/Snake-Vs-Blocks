@@ -1,3 +1,5 @@
+package com.snakevsblocks;
+
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;

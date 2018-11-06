@@ -1,3 +1,5 @@
+package com.snakevsblocks;
+
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;

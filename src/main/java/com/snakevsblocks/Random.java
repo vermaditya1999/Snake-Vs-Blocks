@@ -1,3 +1,5 @@
+package com.snakevsblocks;
+
 public class Random {
     public final static java.util.Random RANDOM = new java.util.Random();
 

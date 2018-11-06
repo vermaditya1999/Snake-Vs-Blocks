@@ -1,3 +1,5 @@
+package com.snakevsblocks;
+
 public class Font {
 
     public static final javafx.scene.text.Font GOTHAM_LARGE = javafx.scene.text.Font.loadFont(Main.class.getClassLoader().getResourceAsStream("fonts/Gotham-Light.otf"), 65);

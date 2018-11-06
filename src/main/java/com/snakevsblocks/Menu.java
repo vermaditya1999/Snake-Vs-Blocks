@@ -1,3 +1,5 @@
+package com.snakevsblocks;
+
 import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -58,13 +60,13 @@ public class Menu extends Window {
 
         // Add resume button only if there is a saved game
         if (savedGame) {
-            menuButtons.put(MenuButtons.RESUME_GAME, new MenuButton("Resume App", App.SCREEN_HEIGHT / 2 + gap * App.TILE_SIZE));
+            menuButtons.put(MenuButtons.RESUME_GAME, new MenuButton("Resume Game", App.SCREEN_HEIGHT / 2 + gap * App.TILE_SIZE));
         } else {
             offset = 0;  // No Resume App button, set offset to 0
         }
 
         // Add rest of the buttons
-        menuButtons.put(MenuButtons.START_GAME, new MenuButton("Start App", App.SCREEN_HEIGHT / 2 + gap * App.TILE_SIZE + offset));
+        menuButtons.put(MenuButtons.START_GAME, new MenuButton("Start Game", App.SCREEN_HEIGHT / 2 + gap * App.TILE_SIZE + offset));
         menuButtons.put(MenuButtons.LEADERBOARD, new MenuButton("Leaderboard", App.SCREEN_HEIGHT / 2 + 2 * gap * App.TILE_SIZE + offset));
         menuButtons.put(MenuButtons.EXIT, new MenuButton("Exit", App.SCREEN_HEIGHT / 2 + 3 * gap * App.TILE_SIZE + offset));
     }

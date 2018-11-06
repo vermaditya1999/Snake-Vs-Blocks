@@ -1,3 +1,5 @@
+package com.snakevsblocks;
+
 public class Vector {
 
     // X component of the Vector
