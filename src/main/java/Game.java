@@ -143,8 +143,8 @@ public class Game extends Window {
             if (currentWindow != Windows.GAME) {
                 windowController.passEvent(currentWindow, event);
             } else {
-                if (event.getCode() == KeyCode.ESCAPE) {
-                    paused = !paused;
+                if (!paused && event.getCode() == KeyCode.ESCAPE) {
+                    paused = true;
                 }
             }
         });
@@ -163,7 +163,7 @@ public class Game extends Window {
                         setCursor(Cursor.NONE);
                     } else if (backButton.isHovered(mouseX, mouseY)) {
 
-                        // When back button is pressed, create new game, then go back to main menu
+                        // When back button is pressed, load new game, then go back to main menu
                         loadNewGame();
                         windowController.setWindow(Windows.MENU);
                     } else if (restartButton.isHovered(mouseX, mouseY)) {
