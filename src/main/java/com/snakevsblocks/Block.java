@@ -42,7 +42,7 @@ public class Block {
     }
 
     public boolean isOnScreen() {
-        return (pos.y - App.TILE_SIZE / 2) >= 0;
+        return pos.y >= 0;
     }
 
     public double getX() {
