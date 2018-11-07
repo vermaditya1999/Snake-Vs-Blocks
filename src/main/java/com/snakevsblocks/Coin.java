@@ -6,9 +6,20 @@ import javafx.scene.text.Font;
 
 public class Coin extends Token {
 
-    public Coin(int x, int y) {
+    public static boolean attractable = false;
 
+    public Coin(int x, int y) {
         super(x, y);
+    }
+
+    public void update(double speed, Vector snakeHeadVec) {
+        pos.y += speed;
+
+        if (attractable && pos.y >= snakeHeadVec.y) {
+            Vector dir = Vector.sub(snakeHeadVec, pos);
+            dir.setMag(35);
+            pos.add(dir);
+        }
     }
 
     @Override
