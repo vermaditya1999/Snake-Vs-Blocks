@@ -1,7 +1,6 @@
 package com.snakevsblocks;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.text.Font;
 
 public class MenuButton {
 
@@ -29,7 +28,7 @@ public class MenuButton {
         }
 
         // Set font
-        gc.setFont(new Font("Consolas", 20));
+        gc.setFont(Font.CONSOLAS_SMALL);
 
         // Show button text
         if (hovered) {

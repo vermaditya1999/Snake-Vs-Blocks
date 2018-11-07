@@ -35,7 +35,7 @@ public class Snake {
 
     // Prerequisite: Snake has at least one ball
     public void removeBall() {
-        if (snakeBalls.size() > 1) {
+        if (snakeBalls.size() > 0) {
             snakeBalls.removeLast();
         }
     }
@@ -85,6 +85,10 @@ public class Snake {
         for (SnakeBall snakeBall : snakeBalls) {
             snakeBall.show(gc);
         }
+    }
+
+    public boolean isDead() {
+        return snakeBalls.size() == 0;
     }
 
     // Prerequisite: Snake has at least one ball
