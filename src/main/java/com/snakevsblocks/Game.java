@@ -7,30 +7,28 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Game extends Window {
 
-    public static final Color BG_COLOR = Color.rgb(57, 8, 49);
-
-    private LinkedList<Burst> bursts;
-
-    private LinkedList<Block> blocks;
-
-    private LinkedList<Wall> walls;
-
-    private LinkedList<Token> tokens;
-
-    private Snake snake;
+    public static final Color BG_COLOR = Color.BLACK;
 
     private int score;
     private int numCoins;
     private int trigger;
     private double speed;
     private boolean paused;
+    private boolean gameOver;
+
+    private Snake snake;
+
+    private LinkedList<Burst> bursts;
+    private LinkedList<Block> blocks;
+    private LinkedList<Wall> walls;
+    private LinkedList<Token> tokens;
+
     private BackButton backButton;
     private ResumeButton resumeButton;
     private RestartButton restartButton;
@@ -38,47 +36,30 @@ public class Game extends Window {
     public Game(WindowController wc, Group root) {
         super(wc, root);
 
-        // Initialize buttons
         resumeButton = new ResumeButton();
         backButton = new BackButton();
         restartButton = new RestartButton();
 
-        // Initialize collections
-        bursts = new LinkedList<Burst>();
-        blocks = new LinkedList<Block>();
-        walls = new LinkedList<Wall>();
-        tokens = new LinkedList<Token>();
-
-        // Initialize Snake
-        snake = new Snake();
-
-        // Load a new game
         loadNewGame();
     }
 
     public void loadNewGame() {
         numCoins = 0;
         score = 0;
-        speed = 4;
         trigger = 0;
+        speed = 4;
         paused = false;
+        gameOver = false;
 
         mouseX = App.SCREEN_WIDTH / 2;
-        mouseY = App.SCREEN_HEIGHT / 2 + App.TILE_SIZE;
 
-        // Set mouse cursor
-        setCursor(Cursor.NONE);
+        snake = new Snake();
 
-        // Clear blocks
-        blocks.clear();
+        bursts = new LinkedList<Burst>();
+        blocks = new LinkedList<Block>();
+        walls = new LinkedList<Wall>();
+        tokens = new LinkedList<Token>();
 
-        // Clear walls
-        walls.clear();
-
-        // Clear tokens
-        tokens.clear();
-
-        // Populate the game
         populate();
     }
 
@@ -157,20 +138,17 @@ public class Game extends Window {
             if (currentWindow != Windows.GAME) {
                 windowController.passEvent(currentWindow, event);
             } else {
-                if (paused) {
+                if (gameOver) {
+                    if (restartButton.isHovered(mouseX, mouseY)) {
+                        loadNewGame();
+                    }
+                } else if (paused) {
                     if (resumeButton.isHovered(mouseX, mouseY)) {
-
-                        // When resume button is pressed, set paused = true
                         paused = false;
-                        setCursor(Cursor.NONE);
                     } else if (backButton.isHovered(mouseX, mouseY)) {
-
-                        // When back button is pressed, load new game, then go back to main menu
                         loadNewGame();
                         windowController.setWindow(Windows.MENU);
                     } else if (restartButton.isHovered(mouseX, mouseY)) {
-
-                        // When restart button is pressed, simply create a new gameplay
                         loadNewGame();
                     }
                 } else {
@@ -185,8 +163,6 @@ public class Game extends Window {
             if (currentWindow != Windows.GAME) {
                 windowController.passEvent(currentWindow, event);
             } else {
-
-                // Whenever mouse is moved, update the mouseX and mouseY variables
                 mouseX = event.getX();
                 mouseY = event.getY();
             }
@@ -196,136 +172,157 @@ public class Game extends Window {
     @Override
     public void show() {
 
-        if (paused) {
-            if (resumeButton.isHovered(mouseX, mouseY) || backButton.isHovered(mouseX, mouseY) || restartButton.isHovered(mouseX, mouseY)) {
+        // Set Cursor
+        if (gameOver) {
+            if (restartButton.isHovered(mouseX, mouseY)) {
                 setCursor(Cursor.HAND);
-            } else {
-                setCursor(Cursor.DEFAULT);
             }
+        } else if (paused) {
+            if (resumeButton.isHovered(mouseX, mouseY) ||
+                    backButton.isHovered(mouseX, mouseY) ||
+                    restartButton.isHovered(mouseX, mouseY)) {
+                setCursor(Cursor.HAND);
+            }
+        } else {
+            setCursor(Cursor.DEFAULT);
         }
 
         // Set background
         gc.setFill(Game.BG_COLOR);
         gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
-        /*
-         * The pause overlay is shown when the escape key is pressed.
-         * The paused variable is set true when the pause overlay is shown.
-         */
+        // Update and show the game
+        if (snake.isDead()) {
+            gameOver = true;
+            showGameOver();
+        } else {
+            if (!paused) {
+                updateGame();
+            }
+            showGame();
+            if (paused) {
+                showPauseOverlay();
+            }
+        }
+    }
 
-        // Update the game here
-        if (!paused) {
-            trigger += speed;
-            if (trigger % (App.TILE_SIZE * 5) == 0) {
-                populate();
-                trigger = 0;
-            } else if (trigger % App.TILE_SIZE == 0) {
+    private void updateGame() {
+        trigger += speed;
+        if (trigger % (App.TILE_SIZE * 3) == 0) {
+            populate();
+            trigger = 0;
+        } else if (trigger % App.TILE_SIZE == 0) {
 
-                /* Probabilities of tokens:
-                 * PickupBall : 5%
-                 * Coin : 3%
-                 * Magnet : 1%
-                 * Shield : 1%
-                 * Destroyer : 1%
-                 */
-                for (int i = 1; i <= 5; i++) {
-                    int choose = Random.nextInt(100);
+            /* Probabilities of tokens:
+             * PickupBall : 5%
+             * Coin : 3%
+             * Magnet : 1%
+             * Shield : 1%
+             * Destroyer : 1%
+             */
+            for (int i = 1; i <= 5; i++) {
+                int choose = Random.nextInt(100);
 
-                    if (choose == 1) {
-                        tokens.add(new Shield(i, -2));
-                        break;
+                if (choose == 1) {
+                    tokens.add(new Shield(i, -2));
+                    break;
 
-                    } else if (choose == 2) {
-                        tokens.add(new Magnet(i, -2));
-                        break;
+                } else if (choose == 2) {
+                    tokens.add(new Magnet(i, -2));
+                    break;
 
-                    } else if (choose == 3) {
-                        tokens.add(new Destroyer(i, -2));
-                        break;
+                } else if (choose == 3) {
+                    tokens.add(new Destroyer(i, -2));
+                    break;
 
-                    } else if (choose <= 8) {
-                        tokens.add(new PickupBall(i, -2));
-                        break;
+                } else if (choose <= 8) {
+                    tokens.add(new PickupBall(i, -2));
+                    break;
 
-                    } else if (choose <= 11) {
-                        tokens.add(new Coin(i, -2));
-                        break;
-                    }
+                } else if (choose <= 11) {
+                    tokens.add(new Coin(i, -2));
+                    break;
                 }
             }
+        }
 
-            // Update blocks
-            Iterator blockIterator = blocks.iterator();
-            while (blockIterator.hasNext()) {
-                Block block = (Block) blockIterator.next();
-                if (block.isOver()) {
-                    blockIterator.remove();
-                } else {
-                    block.update(speed);
-                }
+        // Update blocks
+        Iterator blockIterator = blocks.iterator();
+        while (blockIterator.hasNext()) {
+            Block block = (Block) blockIterator.next();
+            if (block.isOver()) {
+                blockIterator.remove();
+            } else {
+                block.update(speed);
             }
+        }
 
-            // Update walls
-            Iterator wallIterator = walls.iterator();
-            while (wallIterator.hasNext()) {
-                Wall wall = (Wall) wallIterator.next();
-                if (wall.isOver()) {
-                    wallIterator.remove();
-                } else {
-                    wall.update(speed);
-                }
+        // Update walls
+        Iterator wallIterator = walls.iterator();
+        while (wallIterator.hasNext()) {
+            Wall wall = (Wall) wallIterator.next();
+            if (wall.isOver()) {
+                wallIterator.remove();
+            } else {
+                wall.update(speed);
             }
+        }
 
-            // Update tokens
-            Iterator tokenIterator = tokens.iterator();
-            while (tokenIterator.hasNext()) {
-                Token token = (Token) tokenIterator.next();
+        // Update tokens
+        Iterator tokenIterator = tokens.iterator();
+        while (tokenIterator.hasNext()) {
+            Token token = (Token) tokenIterator.next();
+            Class tokenClass = token.getClass();
 
-                // Collide the tokens
-                token.collide(snake.getHeadVector());
+            // Collide the tokens
+            token.collide(snake.getHeadVector());
 
-                // Handle collision
-                if (token.isConsumed()) {
-                    if (token.getClass().equals(Coin.class)) {
-                        numCoins++;
-                    } else if (token.getClass().equals(PickupBall.class)) {
-                        int value = ((PickupBall) token).getValue();
-                        score += value;
-                        snake.addBalls(value);
-                    } else if (token.getClass().equals(Destroyer.class)) {
-                        Iterator it = blocks.iterator();
-                        while (it.hasNext()) {
-                            Block block = (Block) it.next();
-                            if (block.isOnScreen()) {
-                                bursts.add(new LargeBurst(block.getX(), block.getY()));
-                                score += block.getValue();
-                                it.remove();
-                            }
+            // Handle collision
+            if (token.isConsumed()) {
+                if (tokenClass.equals(Coin.class)) {
+                    numCoins++;  // Increase the coin count
+                } else if (tokenClass.equals(PickupBall.class)) {
+                    int value = ((PickupBall) token).getValue();
+                    score += value;
+                    snake.addBalls(value);
+                } else if (tokenClass.equals(Destroyer.class)) {
+                    Iterator it = blocks.iterator();
+                    while (it.hasNext()) {
+                        Block block = (Block) it.next();
+                        if (block.isOnScreen()) {
+                            bursts.add(new LargeBurst(block.getX(), block.getY()));
+                            score += block.getValue();
+                            it.remove();
                         }
                     }
-
-                    // Add SmallBurst
-                    bursts.add(new SmallBurst(token.getX(), token.getY()));
-
-                    // Remove token
-                    tokenIterator.remove();
+                } else if (tokenClass.equals(Magnet.class)) {
+                    Coin.attractable = true;
                 }
 
-                // Remove tokens if they are dead
-                if (token.isDead()) {
-                    tokenIterator.remove();
+                // Add SmallBurst
+                bursts.add(new SmallBurst(token.getX(), token.getY()));
+
+                // Remove token
+                tokenIterator.remove();
+            }
+
+            // Remove tokens if they are dead
+            if (token.isDead()) {
+                tokenIterator.remove();
+            } else {
+                if (tokenClass.equals(Coin.class)) {
+                    ((Coin) token).update(speed, snake.getHeadVector());
                 } else {
                     token.update(speed);
                 }
             }
-
-            // Update snake
-            snake.update(mouseX, mouseY);
-
         }
 
-        // Show the game here, cause even if the game is pause, we have to show it
+        // Update snake
+        snake.update(mouseX, mouseY);
+    }
 
+    private void showGame() {
         // Show blocks
         for (Block block : blocks) {
             block.show(gc);
@@ -345,7 +342,7 @@ public class Game extends Window {
         snake.show(gc);
 
         // Show score
-        gc.setFont(new Font("Consolas", 30));
+        gc.setFont(Font.CONSOLAS_MEDIUM);
         gc.setFill(Color.WHITE);
         gc.fillText(Integer.toString(score), App.TILE_SIZE / 2, App.TILE_SIZE / 2);
 
@@ -354,7 +351,7 @@ public class Game extends Window {
         gc.fillOval(App.SCREEN_WIDTH - App.TILE_SIZE - Token.RADIUS,
                 App.TILE_SIZE / 2 - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
 
-        gc.setFont(new Font("Consolas", 30));
+        gc.setFont(Font.CONSOLAS_MEDIUM);
         gc.setFill(Color.WHITE);
         gc.fillText(Integer.toString(numCoins), App.SCREEN_WIDTH - App.TILE_SIZE / 2,
                 App.TILE_SIZE / 2);
@@ -362,26 +359,36 @@ public class Game extends Window {
         // Update and show bursts, they aren't paused. Will look kinda cool :P
         gc.setFill(Color.WHITE);
         for (int i = bursts.size() - 1; i >= 0; i--) {
-            Burst b = bursts.get(i);
+            Burst burst = bursts.get(i);
 
-            if (b.isOver()) {
+            if (burst.isOver()) {
                 bursts.remove(i);
             } else {
-                b.show(gc);
+                burst.show(gc);
             }
         }
+    }
 
-        // Show the pause overlay
-        if (paused) {
+    private void showPauseOverlay() {
+        gc.setFill(new Color(0, 0, 0, 0.75));
+        gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
-            gc.setFill(new Color(0, 0, 0, 0.75));
-            gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
+        gc.applyEffect(new BoxBlur(10, 10, 10));
 
-            gc.applyEffect(new BoxBlur(10, 10, 10));
+        backButton.show(gc, Color.WHITE);
+        resumeButton.show(gc);
+        restartButton.show(gc);
+    }
 
-            backButton.show(gc, Color.WHITE);
-            resumeButton.show(gc);
-            restartButton.show(gc);
-        }
+    private void showGameOver() {
+        gc.setFont(Font.CONSOLAS_LARGE);
+        gc.setFill(Color.WHITE);
+        gc.fillText("GAME OVER", App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE);
+
+        gc.setFont(Font.CONSOLAS_LARGE);
+        gc.setFill(Color.WHITE);
+        gc.fillText(Integer.toString(score), App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE / 2);
+
+        restartButton.show(gc);
     }
 }
