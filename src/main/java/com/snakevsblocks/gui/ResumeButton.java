@@ -1,21 +1,19 @@
 package com.snakevsblocks.gui;
 
 import com.snakevsblocks.App;
-import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class ResumeButton {
-
-    private Vector pos;
+public class ResumeButton extends Button {
 
     private double size;
 
-    {
-        pos = new Vector(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
+    public ResumeButton(double x, double y) {
+        super(x, y);
         size = App.TILE_SIZE * 0.75;
     }
 
+    @Override
     public void show(GraphicsContext gc) {
 
         gc.setFill(Color.WHITE);
@@ -26,8 +24,8 @@ public class ResumeButton {
         gc.fillPolygon(xPoints, yPoints, 3);
     }
 
+    @Override
     public boolean isHovered(double mouseX, double mouseY) {
-
         return (mouseY >= pos.y - (size - (mouseX - pos.x)) / 2) &&
                 (mouseY <= pos.y + (size - (mouseX - pos.x)) / 2) &&
                 (mouseX >= pos.x - size);
