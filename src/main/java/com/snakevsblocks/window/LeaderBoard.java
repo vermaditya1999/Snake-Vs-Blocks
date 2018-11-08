@@ -1,12 +1,12 @@
 package com.snakevsblocks.window;
 
 import com.snakevsblocks.App;
-import com.snakevsblocks.gui.BackButton;
 import com.snakevsblocks.gui.EntryPane;
 import com.snakevsblocks.util.Font;
 import com.snakevsblocks.util.Random;
-import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -21,13 +21,11 @@ public class LeaderBoard extends Window {
     private static final int MAX_SIZE = 10;
 
     private LinkedList<EntryPane> entryPanes;
-    private BackButton backButton;
 
     public LeaderBoard(WindowController wc, Group root) {
         super(wc, root);
 
         entryPanes = new LinkedList<EntryPane>();
-        backButton = new BackButton();
 
         addEntry(Random.nextInt(1000));
         addEntry(Random.nextInt(1000));
@@ -70,6 +68,17 @@ public class LeaderBoard extends Window {
     @Override
     protected void addEventHandlers() {
 
+        addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            Windows currentWindow = windowController.getCurrentWindow();
+            if (currentWindow != Windows.LEADERBOARD) {
+                windowController.passEvent(currentWindow, event);
+            } else {
+                if (event.getCode().equals(KeyCode.ESCAPE)) {
+                    windowController.setWindow(Windows.MENU);
+                }
+            }
+        });
+
         addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 
             Windows currentWindow = windowController.getCurrentWindow();
@@ -78,18 +87,6 @@ public class LeaderBoard extends Window {
             } else {
                 mouseX = event.getX();
                 mouseY = event.getY();
-            }
-        });
-
-        addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-
-            Windows currentWindow = windowController.getCurrentWindow();
-            if (currentWindow != Windows.LEADERBOARD) {
-                windowController.passEvent(currentWindow, event);
-            } else {
-                if (backButton.isHovered(mouseX, mouseY)) {
-                    windowController.setWindow(Windows.MENU);
-                }
             }
         });
     }
@@ -103,19 +100,9 @@ public class LeaderBoard extends Window {
             entryPane.setHovered(entryPane.isHovered(mouseX, mouseY));
         }
 
-        // Set mouse pointer
-        if (backButton.isHovered(mouseX, mouseY)) {
-            setCursor(Cursor.HAND);
-        } else {
-            setCursor(Cursor.DEFAULT);
-        }
-
         // Set background
         gc.setFill(LeaderBoard.BG_COLOR);
         gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
-
-        // Back Button
-        backButton.show(gc, LeaderBoard.FG_COLOR);
 
         // Leaderboard heading
         gc.setFill(LeaderBoard.FG_COLOR);
