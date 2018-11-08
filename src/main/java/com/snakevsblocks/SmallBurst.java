@@ -14,7 +14,7 @@ public class SmallBurst extends Burst {
     }
 
     @Override
-    public void show(GraphicsContext gc) {
+    public void run(GraphicsContext gc) {
 
         if (num > 0) {
             particles.add(new SmallParticle(origin.x, origin.y));

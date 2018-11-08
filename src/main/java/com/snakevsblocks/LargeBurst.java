@@ -18,7 +18,7 @@ public class LargeBurst extends Burst {
     }
 
     @Override
-    public void show(GraphicsContext gc) {
+    public void run(GraphicsContext gc) {
 
         if (num > 0) {
             particles.add(new LargeParticle(origin.x, origin.y));
