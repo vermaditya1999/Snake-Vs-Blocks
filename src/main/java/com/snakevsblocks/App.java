@@ -1,5 +1,6 @@
 package com.snakevsblocks;
 
+import com.snakevsblocks.window.*;
 import javafx.animation.AnimationTimer;
 import javafx.event.Event;
 import javafx.scene.Group;
