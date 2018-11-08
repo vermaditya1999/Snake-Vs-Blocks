@@ -199,6 +199,8 @@ public class Game extends Window {
                 setCursor(Cursor.HAND);
             } else if (backButton.isHovered(mouseX, mouseY)) {
                 setCursor(Cursor.HAND);
+            } else {
+                setCursor(Cursor.DEFAULT);
             }
         } else if (paused) {
             if (resumeButton.isHovered(mouseX, mouseY) ||
