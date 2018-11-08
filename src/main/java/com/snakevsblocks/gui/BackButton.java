@@ -1,38 +1,27 @@
 package com.snakevsblocks.gui;
 
+import com.snakevsblocks.App;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeLineJoin;
+import javafx.scene.image.Image;
 
-public class BackButton {
+public class BackButton extends Button {
 
-    private double[] xPoints;
-    private double[] yPoints;
+    private Image image;
+    private double size;
 
-    public BackButton() {
-
-        xPoints = new double[]{35, 15, 22, 22};
-        yPoints = new double[]{25, 25, 18, 32};
+    public BackButton(double x, double y) {
+        super(x, y);
+        image = new Image("images/back.png");
+        size = App.TILE_SIZE / 2;
     }
 
-    public void show(GraphicsContext gc, Color color) {
-
-        gc.setStroke(color);
-        gc.setLineWidth(2.0);
-        gc.setLineJoin(StrokeLineJoin.ROUND);
-
-        gc.beginPath();
-        gc.moveTo(xPoints[0], yPoints[0]);
-        gc.lineTo(xPoints[1], yPoints[1]);
-        gc.lineTo(xPoints[2], yPoints[2]);
-        gc.moveTo(xPoints[1], yPoints[1]);
-        gc.lineTo(xPoints[3], yPoints[3]);
-        gc.closePath();
-
-        gc.stroke();
+    @Override
+    public void show(GraphicsContext gc) {
+        gc.drawImage(image, pos.x - size / 2, pos.y - size / 2, size, size);
     }
 
+    @Override
     public boolean isHovered(double mouseX, double mouseY) {
-        return mouseX >= xPoints[1] && mouseX <= xPoints[0] && mouseY >= yPoints[2] && mouseY <= yPoints[3];
+        return Math.abs(mouseX - pos.x) <= size / 2 && Math.abs(mouseY - pos.y) <= size / 2;
     }
 }
