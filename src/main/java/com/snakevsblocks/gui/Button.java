@@ -5,13 +5,13 @@ import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Button {
 
-    private Vector pos;
+    protected Vector pos;
 
     public Button(double x, double y) {
         pos = new Vector(x, y);
     }
 
-    abstract void show(GraphicsContext gc);
+    abstract public void show(GraphicsContext gc);
 
-    abstract void isHovered(GraphicsContext gc);
+    abstract public boolean isHovered(double mouseX, double mouseY);
 }
