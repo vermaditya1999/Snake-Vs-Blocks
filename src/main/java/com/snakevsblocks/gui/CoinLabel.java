@@ -15,7 +15,7 @@ public class CoinLabel extends Label {
     public void show(GraphicsContext gc) {
         gc.setFont(Font.CONSOLAS_MEDIUM);
         gc.setFill(Color.WHITE);
-        gc.fillText(Integer.toString(value), pos.x, pos.y);
+        gc.fillText(text, pos.x, pos.y);
 
         gc.setFill(Color.YELLOW);
         gc.fillOval(App.SCREEN_WIDTH - App.TILE_SIZE - Token.RADIUS,

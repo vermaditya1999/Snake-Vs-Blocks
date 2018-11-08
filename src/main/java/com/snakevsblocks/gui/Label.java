@@ -6,15 +6,14 @@ import javafx.scene.canvas.GraphicsContext;
 public abstract class Label {
 
     protected Vector pos;
-    protected int value;
+    protected String text;
 
-    public Label(int x, int y) {
+    public Label(double x, double y) {
         pos = new Vector(x, y);
-        value = 0;
     }
 
-    public void update(int value) {
-        this.value = value;
+    public void update(String text) {
+        this.text = text;
     }
 
     public abstract void show(GraphicsContext gc);
