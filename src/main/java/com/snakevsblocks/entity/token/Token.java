@@ -1,12 +1,12 @@
 package com.snakevsblocks.entity.token;
 
 import com.snakevsblocks.App;
-import com.snakevsblocks.entity.Collideable;
+import com.snakevsblocks.entity.Collidable;
 import com.snakevsblocks.entity.SnakeBall;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 
-public abstract class Token implements Collideable {
+public abstract class Token implements Collidable {
 
     public final static double RADIUS = 10;
 

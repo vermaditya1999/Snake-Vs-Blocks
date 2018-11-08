@@ -2,6 +2,6 @@ package com.snakevsblocks.entity;
 
 import com.snakevsblocks.util.Vector;
 
-public interface Collideable {
+public interface Collidable {
     void collide(Vector snakeHeadVector);
 }
