@@ -16,9 +16,9 @@ public class Game extends Window {
     public static final Color BG_COLOR = Color.BLACK;
 
     private int score;
-    private int numCoins;
+    private int coins;
+    private int speed;
     private int trigger;
-    private double speed;
     private boolean paused;
     private boolean gameOver;
 
@@ -29,12 +29,18 @@ public class Game extends Window {
     private LinkedList<Wall> walls;
     private LinkedList<Token> tokens;
 
+    private Label scoreLabel;
+    private Label coinLabel;
+
     private BackButton backButton;
     private ResumeButton resumeButton;
     private RestartButton restartButton;
 
     public Game(WindowController wc, Group root) {
         super(wc, root);
+
+        scoreLabel = new ScoreLabel();
+        coinLabel = new CoinLabel();
 
         resumeButton = new ResumeButton();
         backButton = new BackButton();
@@ -44,7 +50,7 @@ public class Game extends Window {
     }
 
     public void loadNewGame() {
-        numCoins = 0;
+        coins = 0;
         score = 0;
         trigger = 0;
         speed = 4;
@@ -91,7 +97,7 @@ public class Game extends Window {
                 }
             } else {
 
-                // No Block, Wall has been added, a token can be added
+                // No Block/ Wall has been added, a token can be added
                 choose = Random.nextInt(15);
                 if (choose == 1) {
                     choose = Random.nextInt(5);
@@ -141,6 +147,9 @@ public class Game extends Window {
                 if (gameOver) {
                     if (restartButton.isHovered(mouseX, mouseY)) {
                         loadNewGame();
+                    } else if (backButton.isHovered(mouseX, mouseY)) {
+                        loadNewGame();
+                        windowController.setWindow(Windows.MENU);
                     }
                 } else if (paused) {
                     if (resumeButton.isHovered(mouseX, mouseY)) {
@@ -152,6 +161,7 @@ public class Game extends Window {
                         loadNewGame();
                     }
                 } else {
+                    // Temporary: Remove a snakeBall on click
                     snake.removeBall();
                 }
             }
@@ -175,6 +185,8 @@ public class Game extends Window {
         // Set Cursor
         if (gameOver) {
             if (restartButton.isHovered(mouseX, mouseY)) {
+                setCursor(Cursor.HAND);
+            } else if (backButton.isHovered(mouseX, mouseY)) {
                 setCursor(Cursor.HAND);
             }
         } else if (paused) {
@@ -200,6 +212,7 @@ public class Game extends Window {
                 updateGame();
             }
             showGame();
+            runBursts();
             if (paused) {
                 showPauseOverlay();
             }
@@ -280,7 +293,7 @@ public class Game extends Window {
             // Handle collision
             if (token.isConsumed()) {
                 if (tokenClass.equals(Coin.class)) {
-                    numCoins++;  // Increase the coin count
+                    coins++;
                 } else if (tokenClass.equals(PickupBall.class)) {
                     int value = ((PickupBall) token).getValue();
                     score += value;
@@ -295,8 +308,6 @@ public class Game extends Window {
                             it.remove();
                         }
                     }
-                } else if (tokenClass.equals(Magnet.class)) {
-                    Coin.attractable = true;
                 }
 
                 // Add SmallBurst
@@ -310,19 +321,20 @@ public class Game extends Window {
             if (token.isDead()) {
                 tokenIterator.remove();
             } else {
-                if (tokenClass.equals(Coin.class)) {
-                    ((Coin) token).update(speed, snake.getHeadVector());
-                } else {
-                    token.update(speed);
-                }
+                token.update(speed);
             }
         }
 
         // Update snake
         snake.update(mouseX, mouseY);
+
+        // Update score and coin labels
+        scoreLabel.update(score);
+        coinLabel.update(coins);
     }
 
     private void showGame() {
+
         // Show blocks
         for (Block block : blocks) {
             block.show(gc);
@@ -341,32 +353,9 @@ public class Game extends Window {
         // Show snake
         snake.show(gc);
 
-        // Show score
-        gc.setFont(Font.CONSOLAS_MEDIUM);
-        gc.setFill(Color.WHITE);
-        gc.fillText(Integer.toString(score), App.TILE_SIZE / 2, App.TILE_SIZE / 2);
-
-        // Show total coins collected
-        gc.setFill(Color.YELLOW);
-        gc.fillOval(App.SCREEN_WIDTH - App.TILE_SIZE - Token.RADIUS,
-                App.TILE_SIZE / 2 - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
-
-        gc.setFont(Font.CONSOLAS_MEDIUM);
-        gc.setFill(Color.WHITE);
-        gc.fillText(Integer.toString(numCoins), App.SCREEN_WIDTH - App.TILE_SIZE / 2,
-                App.TILE_SIZE / 2);
-
-        // Update and show bursts, they aren't paused. Will look kinda cool :P
-        gc.setFill(Color.WHITE);
-        for (int i = bursts.size() - 1; i >= 0; i--) {
-            Burst burst = bursts.get(i);
-
-            if (burst.isOver()) {
-                bursts.remove(i);
-            } else {
-                burst.show(gc);
-            }
-        }
+        // Show Labels
+        scoreLabel.show(gc);
+        coinLabel.show(gc);
     }
 
     private void showPauseOverlay() {
@@ -389,6 +378,20 @@ public class Game extends Window {
         gc.setFill(Color.WHITE);
         gc.fillText(Integer.toString(score), App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE / 2);
 
+        backButton.show(gc, Color.WHITE);
         restartButton.show(gc);
+    }
+
+    private void runBursts() {
+        gc.setFill(Color.WHITE);
+        for (int i = bursts.size() - 1; i >= 0; i--) {
+            Burst burst = bursts.get(i);
+
+            if (burst.isOver()) {
+                bursts.remove(i);
+            } else {
+                burst.run(gc);
+            }
+        }
     }
 }
