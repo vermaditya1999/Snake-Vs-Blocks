@@ -20,5 +20,5 @@ public abstract class Burst {
         return particles.size() == 0;
     }
 
-    public abstract void show(GraphicsContext gc);
+    public abstract void run(GraphicsContext gc);
 }
