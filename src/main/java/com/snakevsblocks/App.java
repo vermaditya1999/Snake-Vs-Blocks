@@ -12,10 +12,10 @@ public class App implements WindowController {
     public final static int NUM_COLS = 5;
 
     // Divisors of 72 : 1,2,3,4,6,8,9,12,18,24,36,72
-    public final static double TILE_SIZE = 72;
+    public final static int TILE_SIZE = 72;
 
-    public final static double SCREEN_WIDTH = App.TILE_SIZE * App.NUM_COLS;
-    public final static double SCREEN_HEIGHT = App.TILE_SIZE * App.NUM_ROWS;
+    public final static int SCREEN_WIDTH = App.TILE_SIZE * App.NUM_COLS;
+    public final static int SCREEN_HEIGHT = App.TILE_SIZE * App.NUM_ROWS;
 
     private static AnimationTimer animationTimer;
 
