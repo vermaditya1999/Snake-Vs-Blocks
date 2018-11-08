@@ -53,9 +53,9 @@ public class Game extends Window {
         scoreLabel = new ScoreLabel();
         coinLabel = new CoinLabel();
 
-        resumeButton = new ResumeButton();
-        backButton = new BackButton();
-        restartButton = new RestartButton();
+        resumeButton = new ResumeButton(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
+        backButton = new BackButton(App.TILE_SIZE / 2, App.TILE_SIZE / 2);
+        restartButton = new RestartButton(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE * 2);
 
         loadNewGame();
     }
@@ -207,6 +207,8 @@ public class Game extends Window {
                     backButton.isHovered(mouseX, mouseY) ||
                     restartButton.isHovered(mouseX, mouseY)) {
                 setCursor(Cursor.HAND);
+            } else {
+                setCursor(Cursor.DEFAULT);
             }
         } else {
             setCursor(Cursor.DEFAULT);
@@ -377,7 +379,7 @@ public class Game extends Window {
 
         gc.applyEffect(new BoxBlur(10, 10, 10));
 
-        backButton.show(gc, Color.WHITE);
+        backButton.show(gc);
         resumeButton.show(gc);
         restartButton.show(gc);
     }
@@ -391,7 +393,7 @@ public class Game extends Window {
         gc.setFill(Color.WHITE);
         gc.fillText(Integer.toString(score), App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE / 2);
 
-        backButton.show(gc, Color.WHITE);
+        backButton.show(gc);
         restartButton.show(gc);
     }
 
