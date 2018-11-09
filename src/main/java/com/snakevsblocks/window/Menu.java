@@ -140,7 +140,6 @@ public class Menu extends Window {
         gc.setFill(Menu.BG_COLOR);
         gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
-
         // Show game title
         gc.setFont(Font.GOTHAM_LARGE);
         gc.setFill(Menu.FG_COLOR);

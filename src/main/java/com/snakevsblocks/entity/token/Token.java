@@ -5,7 +5,7 @@ import com.snakevsblocks.entity.SnakeBall;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 
-public abstract class Token implements Collidable {
+public abstract class Token implements Consumable {
 
     public final static double RADIUS = 10;
 
@@ -29,10 +29,6 @@ public abstract class Token implements Collidable {
         return pos.y - Token.RADIUS >= App.SCREEN_HEIGHT;
     }
 
-    public boolean isConsumed() {
-        return consumed;
-    }
-
     public double getX() {
         return pos.x;
     }
@@ -42,7 +38,12 @@ public abstract class Token implements Collidable {
     }
 
     @Override
-    public void collide(Vector snakeHeadVector) {
+    public boolean isConsumed() {
+        return consumed;
+    }
+
+    @Override
+    public void consume(Vector snakeHeadVector) {
         consumed = Vector.dist(snakeHeadVector, pos) <= (SnakeBall.RADIUS + Token.RADIUS);
     }
 }

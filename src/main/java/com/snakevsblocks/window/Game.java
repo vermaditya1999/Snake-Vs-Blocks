@@ -307,10 +307,10 @@ public class Game extends Window {
             Token token = (Token) tokenIterator.next();
             Class tokenClass = token.getClass();
 
-            // Collide the tokens
-            token.collide(snake.getHeadVector());
+            // Try to consume the tokens
+            token.consume(snake.getHeadVector());
 
-            // Handle collision
+            // Handle if consumed
             if (token.isConsumed()) {
                 if (tokenClass.equals(Coin.class)) {
                     coins++;
