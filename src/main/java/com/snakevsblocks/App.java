@@ -34,7 +34,7 @@ public class App implements WindowController {
         initWindows(root);
 
         // Set the starting window to Menu
-        setWindow(Windows.MENU);
+        setWindow(Windows.MENU, 0, 0);
     }
 
     private void initWindows(Group root) {
@@ -61,13 +61,16 @@ public class App implements WindowController {
     }
 
     @Override
-    public void setWindow(Windows window) {
+    public void setWindow(Windows window, double mouseX, double mouseY) {
 
         // Update the currentWindow field
         currentWindow = window;
 
         // Bring the window to front
         windows.get(currentWindow).toFront();
+
+        // Set mouse variables of window
+        windows.get(currentWindow).setMouse(mouseX, mouseY);
     }
 
     @Override

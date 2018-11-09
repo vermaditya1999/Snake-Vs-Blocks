@@ -165,14 +165,14 @@ public class Game extends Window {
                         loadNewGame();
                     } else if (backButton.isHovered(mouseX, mouseY)) {
                         loadNewGame();
-                        windowController.setWindow(Windows.MENU);
+                        windowController.setWindow(Windows.MENU, mouseX, mouseY);
                     }
                 } else if (paused) {
                     if (resumeButton.isHovered(mouseX, mouseY)) {
                         paused = false;
                     } else if (backButton.isHovered(mouseX, mouseY)) {
                         loadNewGame();
-                        windowController.setWindow(Windows.MENU);
+                        windowController.setWindow(Windows.MENU, mouseX, mouseY);
                     } else if (restartButton.isHovered(mouseX, mouseY)) {
                         loadNewGame();
                     }

@@ -74,7 +74,7 @@ public class LeaderBoard extends Window {
                 windowController.passEvent(currentWindow, event);
             } else {
                 if (event.getCode().equals(KeyCode.ESCAPE)) {
-                    windowController.setWindow(Windows.MENU);
+                    windowController.setWindow(Windows.MENU, mouseX, mouseY);
                 }
             }
         });
