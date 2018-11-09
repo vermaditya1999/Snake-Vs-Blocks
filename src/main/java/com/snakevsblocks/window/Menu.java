@@ -1,8 +1,8 @@
 package com.snakevsblocks.window;
 
 import com.snakevsblocks.App;
-import com.snakevsblocks.gui.InfoButton;
-import com.snakevsblocks.gui.MenuButton;
+import com.snakevsblocks.gui.button.InfoButton;
+import com.snakevsblocks.gui.button.MenuButton;
 import com.snakevsblocks.util.Font;
 import javafx.application.Platform;
 import javafx.scene.Cursor;

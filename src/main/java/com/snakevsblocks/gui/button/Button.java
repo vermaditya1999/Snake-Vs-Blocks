@@ -1,4 +1,4 @@
-package com.snakevsblocks.gui;
+package com.snakevsblocks.gui.button;
 
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;

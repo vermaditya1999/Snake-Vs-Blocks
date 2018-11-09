@@ -1,4 +1,4 @@
-package com.snakevsblocks.entity;
+package com.snakevsblocks.entity.token;
 
 import com.snakevsblocks.util.Vector;
 

@@ -1,4 +1,4 @@
-package com.snakevsblocks.gui;
+package com.snakevsblocks.gui.label;
 
 import com.snakevsblocks.util.Font;
 import javafx.scene.canvas.GraphicsContext;
