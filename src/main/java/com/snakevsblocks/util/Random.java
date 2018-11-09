@@ -1,7 +1,7 @@
 package com.snakevsblocks.util;
 
 public class Random {
-    public final static java.util.Random RANDOM = new java.util.Random();
+    private final static java.util.Random RANDOM = new java.util.Random();
 
     public static int nextInt(int n) {
         return RANDOM.nextInt(n);
