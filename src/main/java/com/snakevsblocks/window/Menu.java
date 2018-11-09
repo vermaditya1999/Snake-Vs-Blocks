@@ -97,6 +97,10 @@ public class Menu extends Window {
                 if (menuButtons.get(MenuButtons.EXIT).isHovered(mouseX, mouseY)) {
                     Platform.exit();
                 }
+
+                if (infoButton.isHovered(mouseX, mouseY)) {
+                    windowController.setWindow(Windows.INFO, mouseX, mouseY);
+                }
             }
         });
 
