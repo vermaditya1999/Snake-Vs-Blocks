@@ -68,8 +68,10 @@ public class Game extends Window {
     public void loadNewGame() {
         coins = 0;
         score = 0;
+
         trigger = 0;
         speed = 4;
+
         paused = false;
         gameOver = false;
 
@@ -305,20 +307,19 @@ public class Game extends Window {
         Iterator tokenIterator = tokens.iterator();
         while (tokenIterator.hasNext()) {
             Token token = (Token) tokenIterator.next();
-            Class tokenClass = token.getClass();
 
             // Try to consume the tokens
             token.consume(snake.getHeadVector());
 
             // Handle if consumed
             if (token.isConsumed()) {
-                if (tokenClass.equals(Coin.class)) {
+                if (token instanceof Coin) {
                     coins++;
-                } else if (tokenClass.equals(PickupBall.class)) {
+                } else if (token instanceof PickupBall) {
                     int value = ((PickupBall) token).getValue();
                     score += value;
                     snake.addBalls(value);
-                } else if (tokenClass.equals(Destroyer.class)) {
+                } else if (token instanceof Destroyer) {
                     Iterator it = blocks.iterator();
                     while (it.hasNext()) {
                         Block block = (Block) it.next();
