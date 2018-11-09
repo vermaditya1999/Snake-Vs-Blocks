@@ -44,6 +44,11 @@ abstract public class Window extends Canvas {
         gc.setTextBaseline(VPos.CENTER);
     }
 
+    public void setMouse(double mouseX, double mouseY) {
+        this.mouseX = mouseX;
+        this.mouseY = mouseY;
+    }
+
     abstract protected void addEventHandlers();
 
     abstract public void show();
