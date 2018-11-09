@@ -1,22 +1,21 @@
 package com.snakevsblocks.gui.button;
 
 import com.snakevsblocks.App;
-import com.snakevsblocks.util.Vector;
+import com.snakevsblocks.util.Font;
 import com.snakevsblocks.window.Menu;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.text.Font;
 
-public class InfoButton {
+public class InfoButton extends Button {
 
-    private Vector pos;
     private double radius;
     private boolean hovered;
 
-    {
-        pos = new Vector(App.TILE_SIZE / 3, App.TILE_SIZE / 3);
+    public InfoButton(double x, double y) {
+        super(x, y);
         radius = App.TILE_SIZE / 6;
     }
 
+    @Override
     public void show(GraphicsContext gc) {
 
         // Draw circle
@@ -34,10 +33,11 @@ public class InfoButton {
         } else {
             gc.setFill(Menu.FG_COLOR);
         }
-        gc.setFont(new Font("Consolas", 20));
+        gc.setFont(Font.CONSOLAS_SMALL);
         gc.fillText("i", pos.x, pos.y + 1);
     }
 
+    @Override
     public boolean isHovered(double mouseX, double mouseY) {
         return hovered = Math.abs(mouseX - pos.x) <= radius && Math.abs(mouseY - pos.y) <= radius;
     }

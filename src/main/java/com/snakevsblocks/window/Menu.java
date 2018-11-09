@@ -54,7 +54,7 @@ public class Menu extends Window {
         addMenuButtons();
 
         // Add info button
-        infoButton = new InfoButton();
+        infoButton = new InfoButton(App.TILE_SIZE / 3, App.TILE_SIZE / 3);
     }
 
     private void addMenuButtons() {
