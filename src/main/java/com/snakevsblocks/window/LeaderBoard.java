@@ -33,6 +33,10 @@ public class LeaderBoard extends Window {
         addScore(Random.nextInt(1000));
         addScore(Random.nextInt(1000));
         addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
     }
 
     public void addScore(int score) {
@@ -90,12 +94,6 @@ public class LeaderBoard extends Window {
     @Override
     public void show() {
 
-        // Set Entry bars' hovered variable
-        for (int rank = 1; rank <= scorePanes.size(); rank++) {
-            ScorePane scorePane = scorePanes.get(rank - 1);
-            scorePane.setHovered(scorePane.isHovered(mouseX, mouseY));
-        }
-
         // Set background
         gc.setFill(LeaderBoard.BG_COLOR);
         gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
@@ -105,14 +103,22 @@ public class LeaderBoard extends Window {
         gc.setFont(Font.GOTHAM_MEDIUM);
         gc.fillText("Leaderboard", App.SCREEN_WIDTH / 2, App.TILE_SIZE);
 
-        // Show Entry Bars
-        for (int rank = 1; rank <= scorePanes.size(); rank++) {
-            scorePanes.get(rank - 1).show(gc, rank);
-        }
-
         // Show message if there is no saved score
-        gc.setFont(Font.GOTHAM_SMALL);
-        gc.setFill(LeaderBoard.FG_COLOR);
-        gc.fillText("No games played :(", App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
+        if (scorePanes.size() == 0) {
+            gc.setFont(Font.GOTHAM_SMALL);
+            gc.setFill(LeaderBoard.FG_COLOR);
+            gc.fillText("No games played :(", App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
+        } else {
+            // Set Score bars' hovered variable
+            for (int rank = 1; rank <= scorePanes.size(); rank++) {
+                ScorePane scorePane = scorePanes.get(rank - 1);
+                scorePane.setHovered(scorePane.isHovered(mouseX, mouseY));
+            }
+
+            // Show Score Bars
+            for (int rank = 1; rank <= scorePanes.size(); rank++) {
+                scorePanes.get(rank - 1).show(gc, rank);
+            }
+        }
     }
 }
