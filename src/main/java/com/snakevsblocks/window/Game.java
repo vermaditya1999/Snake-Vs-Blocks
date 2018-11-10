@@ -29,7 +29,7 @@ import java.util.LinkedList;
 
 public class Game extends Window {
 
-    public static final Color BG_COLOR = Color.BLACK;
+    public static final Color BG_COLOR = Color.rgb(13, 19, 33);
 
     private int score;
     private int coins;
@@ -91,14 +91,14 @@ public class Game extends Window {
 
         for (int i = 1; i <= 5; i++) {
 
-            // 50% chances of a block
-            int choose = Random.nextInt(4);
-            if (choose <= 1) {
+            // 33% chances of a block
+            int choose = Random.nextInt(3);
+            if (choose == 0) {
                 blocks.add(new Block(i, -2));
 
-                // 33% chance of a wall, given there is a block
-                choose = Random.nextInt(3);
-                if (choose == 1) {
+                // 20% chance of a wall, given there is a block
+                choose = Random.nextInt(5);
+                if (choose == 0) {
 
                     // Check any overlap of existing tokens with wall
                     boolean flag = false;
