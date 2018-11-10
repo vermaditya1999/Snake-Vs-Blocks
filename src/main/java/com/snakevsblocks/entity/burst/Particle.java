@@ -1,12 +1,24 @@
 package com.snakevsblocks.entity.burst;
 
+import com.snakevsblocks.util.Random;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Particle {
 
+    public static final int COLORS[][] = {
+            {221, 202, 217},
+            {210, 255, 150},
+            {241, 232, 184},
+            {89, 248, 232},
+            {118, 153, 212},
+            {99, 180, 209},
+            {144, 252, 249}
+    };
+
     protected Vector pos;
     protected Vector vel;
+    protected int[] color;
 
     protected double radius;
     protected double alpha;
@@ -16,6 +28,7 @@ public abstract class Particle {
         vel = Vector.random();
         vel.mult(5);
         alpha = 1;
+        color = chooseColor();
     }
 
     public boolean isDead() {
@@ -26,6 +39,11 @@ public abstract class Particle {
         pos.add(vel);
         radius -= 0.25;
         alpha -= 0.025;
+    }
+
+    private int[] chooseColor() {
+        int choose = Random.nextInt(Particle.COLORS.length);
+        return Particle.COLORS[choose];
     }
 
     public abstract void show(GraphicsContext gc);
