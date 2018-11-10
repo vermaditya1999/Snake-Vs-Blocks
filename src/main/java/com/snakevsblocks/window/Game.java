@@ -249,33 +249,33 @@ public class Game extends Window {
         } else if (trigger % App.TILE_SIZE == 0) {
 
             /* Probabilities of tokens:
-             * PickupBall : 5%
-             * Coin : 3%
-             * Magnet : 1%
-             * Shield : 1%
-             * Destroyer : 1%
+             * Shield : 0.5%
+             * Magnet : 0.5%
+             * Destroyer : 0.5%
+             * Coin : 2%
+             * PickupBall : 4%
              */
             for (int i = 1; i <= 5; i++) {
-                int choose = Random.nextInt(100);
+                int choose = Random.nextInt(200);
 
-                if (choose == 1) {
+                if (choose == 0) {
                     tokens.add(new Shield(i, -2));
                     break;
 
-                } else if (choose == 2) {
+                } else if (choose == 1) {
                     tokens.add(new Magnet(i, -2));
                     break;
 
-                } else if (choose == 3) {
+                } else if (choose == 2) {
                     tokens.add(new Destroyer(i, -2));
                     break;
 
-                } else if (choose <= 8) {
-                    tokens.add(new PickupBall(i, -2));
+                } else if (choose <= 6) {
+                    tokens.add(new Coin(i, -2));
                     break;
 
-                } else if (choose <= 11) {
-                    tokens.add(new Coin(i, -2));
+                } else if (choose <= 14) {
+                    tokens.add(new PickupBall(i, -2));
                     break;
                 }
             }
