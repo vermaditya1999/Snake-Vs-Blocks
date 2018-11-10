@@ -33,10 +33,6 @@ public class LeaderBoard extends Window {
         addScore(Random.nextInt(1000));
         addScore(Random.nextInt(1000));
         addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
     }
 
     public void addScore(int score) {
@@ -113,5 +109,10 @@ public class LeaderBoard extends Window {
         for (int rank = 1; rank <= scorePanes.size(); rank++) {
             scorePanes.get(rank - 1).show(gc, rank);
         }
+
+        // Show message if there is no saved score
+        gc.setFont(Font.GOTHAM_SMALL);
+        gc.setFill(LeaderBoard.FG_COLOR);
+        gc.fillText("No games played :(", App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
     }
 }
