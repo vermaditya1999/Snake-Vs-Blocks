@@ -49,7 +49,7 @@ public class PickupBall extends Token {
         // Show value
         gc.setFont(Font.CONSOLAS_SMALL);
         gc.setFill(Color.WHITE);
-        gc.fillText(Integer.toString(value), pos.x, pos.y - SnakeBall.RADIUS - 10);
+        gc.fillText(Integer.toString(value), pos.x, pos.y - SnakeBall.RADIUS - 8);
 
         gc.setFill(SnakeBall.COLOR);
         gc.fillOval(pos.x - SnakeBall.RADIUS, pos.y - SnakeBall.RADIUS, 2 * SnakeBall.RADIUS, 2 * SnakeBall.RADIUS);  // Use SnakeBall Radius instead of Token Radius
