@@ -25,8 +25,7 @@ public class Wall {
     }
 
     public void show(GraphicsContext gc) {
-
-        gc.setLineWidth(4);
+        gc.setLineWidth(6);
         gc.setStroke(Color.WHITE);
         gc.strokeLine(pos.x, pos.y, pos.x, pos.y + length);
     }
