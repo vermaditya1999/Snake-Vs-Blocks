@@ -47,7 +47,7 @@ public class PickupBall extends Token {
     public void show(GraphicsContext gc) {
 
         // Show value
-        gc.setFont(Font.CONSOLAS_SMALL);
+        gc.setFont(Font.CONSOLAS_XSMALL);
         gc.setFill(Color.WHITE);
         gc.fillText(Integer.toString(value), pos.x, pos.y - SnakeBall.RADIUS - 8);
 
