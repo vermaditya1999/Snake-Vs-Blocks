@@ -9,16 +9,12 @@ import javafx.scene.paint.Color;
 
 public class Block {
 
+    public static final Color COLOR = Color.rgb(241, 233, 218);
+
     private int value;
 
     private Vector pos;
 
-    /**
-     * Block constructor
-     *
-     * @param x Horizontal grid coordinate of the block
-     * @param y Vertical grid coordinate of the block
-     */
     public Block(int x, int y) {
 
         value = 1 + Random.nextInt(10);
@@ -32,7 +28,7 @@ public class Block {
         double yOffset = 2;
 
         // Display block
-        gc.setFill(Color.WHITE);
+        gc.setFill(Block.COLOR);
         gc.fillRoundRect(pos.x - App.TILE_SIZE / 2 + xOffset, pos.y - App.TILE_SIZE / 2 + yOffset, App.TILE_SIZE - 2 * xOffset, App.TILE_SIZE - 2 * yOffset, 10, 10);
 
         // Show value
