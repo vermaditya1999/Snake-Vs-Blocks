@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 public class SnakeBall {
 
     public static final double RADIUS = 10;
-    public static final Color COLOR = Color.rgb(175, 224, 206);
+    public static final Color COLOR = Color.rgb(150, 204, 208);
 
     private Vector pos;
 
