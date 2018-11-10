@@ -1,28 +1,30 @@
 package com.snakevsblocks.entity.token;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class Destroyer extends Token {
 
-    public Destroyer(double x, double y) {
+    private Image image;
 
+    public Destroyer(double x, double y) {
         super(x, y);
+
+        try {
+            image = new Image("images/destroyer.png");
+        } catch (Exception ex) {
+            System.err.println("Invalid path!");
+        }
     }
 
     @Override
     public void show(GraphicsContext gc) {
-
-        // Display Destroyer
-        // To be changed later
-        gc.setFill(Color.HOTPINK);
-        gc.fillOval(pos.x - Token.RADIUS, pos.y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
-
-        // Display text
-        gc.setFill(Color.WHITE);
-        gc.setFont(new Font("Consolas", 15));
-        gc.fillText("Destroyer", pos.x, pos.y + 2.5 * Token.RADIUS);
-
+        if (image == null) {
+            gc.setFill(Color.HOTPINK);
+            gc.fillOval(pos.x - Token.RADIUS, pos.y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+        } else {
+            gc.drawImage(image, pos.x - Token.RADIUS, pos.y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+        }
     }
 }
