@@ -13,6 +13,6 @@ public class ScoreLabel extends Label {
     public void show(GraphicsContext gc) {
         gc.setFont(Font.CONSOLAS_MEDIUM);
         gc.setFill(Color.WHITE);
-        gc.fillText(text, pos.x, pos.y);
+        gc.fillText(text, pos.x, pos.y + 1);
     }
 }
