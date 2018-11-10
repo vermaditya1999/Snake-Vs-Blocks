@@ -1,5 +1,6 @@
 package com.snakevsblocks.entity.token;
 
+import com.snakevsblocks.entity.SnakeBall;
 import com.snakevsblocks.util.Random;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -44,6 +45,6 @@ public class PickupBall extends Token {
     @Override
     public void show(GraphicsContext gc) {
         gc.setFill(Color.PAPAYAWHIP);
-        gc.fillOval(pos.x - Token.RADIUS, pos.y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+        gc.fillOval(pos.x - SnakeBall.RADIUS, pos.y - SnakeBall.RADIUS, 2 * SnakeBall.RADIUS, 2 * SnakeBall.RADIUS);
     }
 }
