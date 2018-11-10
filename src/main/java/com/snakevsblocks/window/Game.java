@@ -55,8 +55,8 @@ public class Game extends Window {
     public Game(WindowController wc, Group root) {
         super(wc, root);
 
-        scoreLabel = new ScoreLabel(App.TILE_SIZE / 2, App.TILE_SIZE / 2);
-        coinLabel = new CoinLabel(App.SCREEN_WIDTH - App.TILE_SIZE, App.TILE_SIZE / 2);
+        scoreLabel = new ScoreLabel();
+        coinLabel = new CoinLabel();
 
         resumeButton = new ResumeButton(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
         backButton = new BackButton(App.TILE_SIZE / 2, App.TILE_SIZE / 2);

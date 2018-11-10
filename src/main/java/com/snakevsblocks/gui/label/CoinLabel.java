@@ -1,7 +1,6 @@
 package com.snakevsblocks.gui.label;
 
 import com.snakevsblocks.App;
-import com.snakevsblocks.entity.SnakeBall;
 import com.snakevsblocks.entity.token.Token;
 import com.snakevsblocks.util.Font;
 import javafx.scene.canvas.GraphicsContext;
@@ -13,8 +12,8 @@ public class CoinLabel extends Label {
 
     private Image image;
 
-    public CoinLabel(double x, double y) {
-        super(x, y);
+    public CoinLabel() {
+        super(App.SCREEN_WIDTH - App.TILE_SIZE / 2, App.TILE_SIZE / 2);
 
         try {
             image = new Image("images/coin.png");
@@ -26,11 +25,11 @@ public class CoinLabel extends Label {
     @Override
     public void show(GraphicsContext gc) {
 
-        gc.setTextAlign(TextAlignment.LEFT);
+        gc.setTextAlign(TextAlignment.RIGHT);
 
         gc.setFont(Font.CONSOLAS_MEDIUM);
         gc.setFill(Color.WHITE);
-        gc.fillText(text, pos.x + App.TILE_SIZE / 4 + (Token.RADIUS - SnakeBall.RADIUS), pos.y + 1);
+        gc.fillText(text, pos.x - Token.RADIUS - App.TILE_SIZE / 4, pos.y + 1);
 
         gc.setTextAlign(TextAlignment.CENTER);
 

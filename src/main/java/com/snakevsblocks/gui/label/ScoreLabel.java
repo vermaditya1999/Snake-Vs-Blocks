@@ -8,8 +8,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
 public class ScoreLabel extends Label {
-    public ScoreLabel(double x, double y) {
-        super(x, y);
+    public ScoreLabel() {
+        super(App.TILE_SIZE / 2, App.TILE_SIZE / 2);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ScoreLabel extends Label {
 
         gc.setFont(Font.CONSOLAS_MEDIUM);
         gc.setFill(Color.WHITE);
-        gc.fillText(text, pos.x + App.TILE_SIZE / 4, pos.y + 1);
+        gc.fillText(text, pos.x + SnakeBall.RADIUS + App.TILE_SIZE / 4, pos.y + 1);
 
         gc.setTextAlign(TextAlignment.CENTER);
 
