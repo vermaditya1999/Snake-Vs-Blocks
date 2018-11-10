@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 public class SnakeBall {
 
     public static final double RADIUS = 10;
+    public static final Color COLOR = Color.rgb(175, 224, 206);
 
     private Vector pos;
 
@@ -17,7 +18,7 @@ public class SnakeBall {
     public void show(GraphicsContext gc) {
 
         // Display ball
-        gc.setFill(Color.WHITE);
+        gc.setFill(SnakeBall.COLOR);
         gc.fillOval(pos.x - SnakeBall.RADIUS, pos.y - SnakeBall.RADIUS, 2 * SnakeBall.RADIUS, 2 * SnakeBall.RADIUS);
     }
 
