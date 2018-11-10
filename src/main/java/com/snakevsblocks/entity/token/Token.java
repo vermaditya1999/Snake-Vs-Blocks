@@ -7,7 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Token implements Consumable {
 
-    public final static double RADIUS = 10;
+    public final static double RADIUS = 15;
 
     public Vector pos;
 
