@@ -221,24 +221,22 @@ public class Game extends Window {
             setCursor(Cursor.DEFAULT);
         }
 
-        // Set background
-        gc.setFill(Game.BG_COLOR);
-        gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
-
-        // Update and show the game
         if (snake.isDead()) {
             gameOver = true;
-            showGameOver();
-        } else {
-            if (!paused) {
-                updateGame();
-            }
-            showGame();
-            runBursts();
-            if (paused) {
-                showPauseOverlay();
-            }
         }
+
+        // Update game if it is running
+        if (!(paused || gameOver)) {
+            updateGame();
+        }
+
+        showGame();
+        if (paused) {
+            showPauseOverlay();
+        } else if (gameOver) {
+            showGameOver();
+        }
+
     }
 
     private void updateGame() {
@@ -356,6 +354,10 @@ public class Game extends Window {
 
     private void showGame() {
 
+        // Set background
+        gc.setFill(Game.BG_COLOR);
+        gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
+
         // Show blocks
         for (Block block : blocks) {
             block.show(gc);
@@ -377,9 +379,13 @@ public class Game extends Window {
         // Show Labels
         scoreLabel.show(gc);
         coinLabel.show(gc);
+
+        // Run bursts
+        runBursts();
     }
 
     private void showPauseOverlay() {
+
         gc.setFill(new Color(0, 0, 0, 0.75));
         gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
@@ -391,6 +397,11 @@ public class Game extends Window {
     }
 
     private void showGameOver() {
+
+        gc.setFill(new Color(0, 0, 0, 0.75));
+        gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
+
+        gc.applyEffect(new BoxBlur(10, 10, 10));
         gc.setFont(Font.CONSOLAS_LARGE);
         gc.setFill(Color.WHITE);
         gc.fillText("GAME OVER", App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE);
