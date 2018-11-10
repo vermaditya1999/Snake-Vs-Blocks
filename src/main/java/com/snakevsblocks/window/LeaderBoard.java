@@ -1,7 +1,7 @@
 package com.snakevsblocks.window;
 
 import com.snakevsblocks.App;
-import com.snakevsblocks.gui.EntryPane;
+import com.snakevsblocks.gui.ScorePane;
 import com.snakevsblocks.util.Font;
 import com.snakevsblocks.util.Random;
 import javafx.scene.Group;
@@ -20,47 +20,47 @@ public class LeaderBoard extends Window {
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
     private static final int MAX_SIZE = 10;
 
-    private LinkedList<EntryPane> entryPanes;
+    private LinkedList<ScorePane> scorePanes;
 
     public LeaderBoard(WindowController wc, Group root) {
         super(wc, root);
 
-        entryPanes = new LinkedList<EntryPane>();
+        scorePanes = new LinkedList<ScorePane>();
 
-        addEntry(Random.nextInt(1000));
-        addEntry(Random.nextInt(1000));
-        addEntry(Random.nextInt(1000));
-        addEntry(Random.nextInt(1000));
-        addEntry(Random.nextInt(1000));
-        addEntry(Random.nextInt(1000));
-        addEntry(Random.nextInt(1000));
-        addEntry(Random.nextInt(1000));
-        addEntry(Random.nextInt(1000));
-        addEntry(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
+        addScore(Random.nextInt(1000));
     }
 
-    public void addEntry(int score) {
+    public void addScore(int score) {
 
         // Get current date
         String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 
         boolean added = false;
-        for (int i = 0; i < entryPanes.size(); i++) {
-            int curScore = entryPanes.get(i).getScore();
+        for (int i = 0; i < scorePanes.size(); i++) {
+            int curScore = scorePanes.get(i).getScore();
             if (score > curScore) {
-                entryPanes.add(i, new EntryPane(date, score));
+                scorePanes.add(i, new ScorePane(date, score));
                 added = true;
                 break;
             }
         }
 
         if (added) {
-            if (entryPanes.size() > MAX_SIZE) {
-                entryPanes.removeLast();
+            if (scorePanes.size() > MAX_SIZE) {
+                scorePanes.removeLast();
             }
         } else {
-            if (entryPanes.size() < MAX_SIZE) {
-                entryPanes.add(new EntryPane(date, score));
+            if (scorePanes.size() < MAX_SIZE) {
+                scorePanes.add(new ScorePane(date, score));
             }
         }
     }
@@ -95,9 +95,9 @@ public class LeaderBoard extends Window {
     public void show() {
 
         // Set Entry bars' hovered variable
-        for (int rank = 1; rank <= entryPanes.size(); rank++) {
-            EntryPane entryPane = entryPanes.get(rank - 1);
-            entryPane.setHovered(entryPane.isHovered(mouseX, mouseY));
+        for (int rank = 1; rank <= scorePanes.size(); rank++) {
+            ScorePane scorePane = scorePanes.get(rank - 1);
+            scorePane.setHovered(scorePane.isHovered(mouseX, mouseY));
         }
 
         // Set background
@@ -110,8 +110,8 @@ public class LeaderBoard extends Window {
         gc.fillText("Leaderboard", App.SCREEN_WIDTH / 2, App.TILE_SIZE);
 
         // Show Entry Bars
-        for (int rank = 1; rank <= entryPanes.size(); rank++) {
-            entryPanes.get(rank - 1).show(gc, rank);
+        for (int rank = 1; rank <= scorePanes.size(); rank++) {
+            scorePanes.get(rank - 1).show(gc, rank);
         }
     }
 }

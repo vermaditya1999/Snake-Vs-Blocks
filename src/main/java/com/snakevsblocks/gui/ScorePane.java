@@ -6,10 +6,10 @@ import com.snakevsblocks.util.Vector;
 import com.snakevsblocks.window.LeaderBoard;
 import javafx.scene.canvas.GraphicsContext;
 
-public class EntryPane {
+public class ScorePane {
 
     public static final double RADIUS = App.TILE_SIZE / 4;
-    private static final double HEIGHT = EntryPane.RADIUS * 2;
+    private static final double HEIGHT = ScorePane.RADIUS * 2;
     private static final double WIDTH = App.TILE_SIZE * 3.5;
 
     private Vector pos;
@@ -17,7 +17,7 @@ public class EntryPane {
     private int score;
     private boolean hovered;
 
-    public EntryPane(String date, int score) {
+    public ScorePane(String date, int score) {
         this.date = date;
         this.score = score;
         pos = new Vector(App.SCREEN_WIDTH / 2, 0);
@@ -35,16 +35,16 @@ public class EntryPane {
         // Show hover bar
         if (hovered) {
             gc.setFill(LeaderBoard.FG_COLOR);
-            gc.fillRect(pos.x - EntryPane.WIDTH / 2 + EntryPane.RADIUS, pos.y - EntryPane.HEIGHT / 2, EntryPane.WIDTH, EntryPane.HEIGHT);
+            gc.fillRect(pos.x - ScorePane.WIDTH / 2 + ScorePane.RADIUS, pos.y - ScorePane.HEIGHT / 2, ScorePane.WIDTH, ScorePane.HEIGHT);
         }
 
         // Show rank label
         gc.setFill(LeaderBoard.FG_COLOR);
-        gc.fillOval(App.TILE_SIZE - EntryPane.RADIUS, pos.y - EntryPane.RADIUS, EntryPane.RADIUS * 2, EntryPane.RADIUS * 2);
+        gc.fillOval(App.TILE_SIZE - ScorePane.RADIUS, pos.y - ScorePane.RADIUS, ScorePane.RADIUS * 2, ScorePane.RADIUS * 2);
 
         // Show rank
         gc.setFill(LeaderBoard.BG_COLOR);
-        gc.fillText(Integer.toString(rank), App.TILE_SIZE, pos.y + 1);
+        gc.fillText(Integer.toString(rank), App.TILE_SIZE, pos.y + 1);  // +1 to adjust the baseline with Consolas font
 
         // Set fill color for text
         if (hovered) {
@@ -67,6 +67,6 @@ public class EntryPane {
     }
 
     public boolean isHovered(double mouseX, double mouseY) {
-        return Math.abs(mouseX - pos.x) <= EntryPane.WIDTH / 2 && Math.abs(mouseY - pos.y) <= EntryPane.HEIGHT / 2;
+        return Math.abs(mouseX - pos.x) <= ScorePane.WIDTH / 2 && Math.abs(mouseY - pos.y) <= ScorePane.HEIGHT / 2;
     }
 }
