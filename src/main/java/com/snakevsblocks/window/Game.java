@@ -3,6 +3,7 @@ package com.snakevsblocks.window;
 import com.snakevsblocks.App;
 import com.snakevsblocks.entity.Block;
 import com.snakevsblocks.entity.Snake;
+import com.snakevsblocks.entity.SnakeBall;
 import com.snakevsblocks.entity.Wall;
 import com.snakevsblocks.entity.burst.Burst;
 import com.snakevsblocks.entity.burst.LargeBurst;
@@ -30,7 +31,7 @@ import java.util.LinkedList;
 
 public class Game extends Window {
 
-    public static final Color BG_COLOR = Color.rgb(13, 19, 33);
+    public static final Color BG_COLOR = Color.rgb(23, 29, 43);
 
     private int score;
     private int coins;
@@ -64,83 +65,6 @@ public class Game extends Window {
         restartButton = new RestartButton(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE * 2);
 
         loadNewGame();
-    }
-
-    public void loadNewGame() {
-        coins = 0;
-        score = 0;
-
-        trigger = 0;
-        speed = 4;
-
-        paused = false;
-        gameOver = false;
-
-        mouseX = App.SCREEN_WIDTH / 2;
-
-        snake = new Snake();
-
-        bursts = new LinkedList<Burst>();
-        blocks = new LinkedList<Block>();
-        walls = new LinkedList<Wall>();
-        tokens = new LinkedList<Token>();
-
-        populate();
-    }
-
-    private void populate() {
-
-        for (int i = 1; i <= 5; i++) {
-
-            // 33% chances of a block
-            int choose = Random.nextInt(3);
-            if (choose == 0) {
-                blocks.add(new Block(i, -2));
-
-                // 20% chance of a wall, given there is a block
-                choose = Random.nextInt(5);
-                if (choose == 0) {
-
-                    // Check any overlap of existing tokens with wall
-                    boolean flag = false;
-                    for (Token token : tokens) {
-                        Vector pos = token.getPos();
-                        if (pos.x == ((i - 1) * App.TILE_SIZE + App.TILE_SIZE / 2) &&
-                                (pos.y == -App.TILE_SIZE / 2 || pos.y == -2 * App.TILE_SIZE + App.TILE_SIZE / 2)) {
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if (!flag) {
-                        walls.add(new Wall(i, -2));
-                    }
-                }
-            } else {
-
-                // No Block/ Wall has been added, a token can be added
-                choose = Random.nextInt(15);
-                if (choose == 1) {
-                    choose = Random.nextInt(5);
-                    switch (choose) {
-                        case 0:
-                            tokens.add(new Shield(i, -2));
-                            break;
-                        case 1:
-                            tokens.add(new Magnet(i, -2));
-                            break;
-                        case 2:
-                            tokens.add(new PickupBall(i, -2));
-                            break;
-                        case 3:
-                            tokens.add(new Destroyer(i, -2));
-                            break;
-                        case 4:
-                            tokens.add(new Coin(i, -2));
-                            break;
-                    }
-                }
-            }
-        }
     }
 
     @Override
@@ -244,6 +168,83 @@ public class Game extends Window {
         }
     }
 
+    public void loadNewGame() {
+        coins = 0;
+        score = 0;
+
+        trigger = 0;
+        speed = 4;
+
+        paused = false;
+        gameOver = false;
+
+        mouseX = App.SCREEN_WIDTH / 2;
+
+        snake = new Snake();
+
+        bursts = new LinkedList<Burst>();
+        blocks = new LinkedList<Block>();
+        walls = new LinkedList<Wall>();
+        tokens = new LinkedList<Token>();
+
+        populate();
+    }
+
+    private void populate() {
+
+        for (int i = 1; i <= 5; i++) {
+
+            // 33% chances of a block
+            int choose = Random.nextInt(3);
+            if (choose == 0) {
+                blocks.add(new Block(i, -2));
+
+                // 20% chance of a wall, given there is a block
+                choose = Random.nextInt(5);
+                if (choose == 0) {
+
+                    // Check any overlap of existing tokens with wall
+                    boolean flag = false;
+                    for (Token token : tokens) {
+                        Vector pos = token.getPos();
+                        if (pos.x == ((i - 1) * App.TILE_SIZE + App.TILE_SIZE / 2) &&
+                                (pos.y == -App.TILE_SIZE / 2 || pos.y == -2 * App.TILE_SIZE + App.TILE_SIZE / 2)) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag) {
+                        walls.add(new Wall(i, -2));
+                    }
+                }
+            } else {
+
+                // No Block/ Wall has been added, a token can be added
+                choose = Random.nextInt(15);
+                if (choose == 1) {
+                    choose = Random.nextInt(5);
+                    switch (choose) {
+                        case 0:
+                            tokens.add(new Shield(i, -2));
+                            break;
+                        case 1:
+                            tokens.add(new Magnet(i, -2));
+                            break;
+                        case 2:
+                            tokens.add(new PickupBall(i, -2));
+                            break;
+                        case 3:
+                            tokens.add(new Destroyer(i, -2));
+                            break;
+                        case 4:
+                            tokens.add(new Coin(i, -2));
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
     private void updateGame() {
         trigger += speed;
         if (trigger % (App.TILE_SIZE * 3) == 0) {
@@ -327,7 +328,8 @@ public class Game extends Window {
                     while (it.hasNext()) {
                         Block block = (Block) it.next();
                         if (block.isOnScreen()) {
-                            bursts.add(new LargeBurst(block.getX(), block.getY()));
+                            Vector pos = block.getPos();
+                            bursts.add(new LargeBurst(pos.x, pos.y));
                             score += block.getValue();
                             it.remove();
                         }
@@ -346,6 +348,18 @@ public class Game extends Window {
                 tokenIterator.remove();
             } else {
                 token.update(speed);
+            }
+        }
+
+        // Temporary collision of snake with blocks
+        blockIterator = blocks.iterator();
+        while (blockIterator.hasNext()) {
+            Vector pos = ((Block) blockIterator.next()).getPos();
+            Vector head = snake.getHeadVector();
+            if ((Math.abs(head.x - pos.x) <= App.TILE_SIZE / 2) &&
+                    Math.abs(head.y - (pos.y + App.TILE_SIZE / 2)) <= SnakeBall.RADIUS / 2) {
+                blockIterator.remove();
+                bursts.add(new LargeBurst(head.x, head.y - SnakeBall.RADIUS));
             }
         }
 
