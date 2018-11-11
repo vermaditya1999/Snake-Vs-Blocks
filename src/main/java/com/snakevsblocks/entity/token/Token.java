@@ -9,7 +9,7 @@ public abstract class Token implements Consumable {
 
     public final static double RADIUS = 15;
 
-    public Vector pos;
+    protected Vector pos;
 
     public boolean consumed;
 
@@ -45,5 +45,9 @@ public abstract class Token implements Consumable {
     @Override
     public void consume(Vector snakeHeadVector) {
         consumed = Vector.dist(snakeHeadVector, pos) <= (SnakeBall.RADIUS + Token.RADIUS);
+    }
+
+    public Vector getPos() {
+        return pos.copy();
     }
 }
