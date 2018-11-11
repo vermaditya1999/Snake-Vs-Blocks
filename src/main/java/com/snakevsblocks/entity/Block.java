@@ -45,12 +45,8 @@ public class Block {
         return pos.y >= 0;
     }
 
-    public double getX() {
-        return pos.x;
-    }
-
-    public double getY() {
-        return pos.y;
+    public Vector getPos() {
+        return pos.copy();
     }
 
     public int getValue() {
