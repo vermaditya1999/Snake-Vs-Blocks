@@ -16,6 +16,7 @@ import com.snakevsblocks.gui.label.Label;
 import com.snakevsblocks.gui.label.ScoreLabel;
 import com.snakevsblocks.util.Font;
 import com.snakevsblocks.util.Random;
+import com.snakevsblocks.util.Vector;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.effect.BoxBlur;
@@ -103,8 +104,9 @@ public class Game extends Window {
                     // Check any overlap of existing tokens with wall
                     boolean flag = false;
                     for (Token token : tokens) {
-                        if (token.pos.x == ((i - 1) * App.TILE_SIZE + App.TILE_SIZE / 2) &&
-                                (token.pos.y == -App.TILE_SIZE / 2 || token.pos.y == -2 * App.TILE_SIZE + App.TILE_SIZE / 2)) {
+                        Vector pos = token.getPos();
+                        if (pos.x == ((i - 1) * App.TILE_SIZE + App.TILE_SIZE / 2) &&
+                                (pos.y == -App.TILE_SIZE / 2 || pos.y == -2 * App.TILE_SIZE + App.TILE_SIZE / 2)) {
                             flag = true;
                             break;
                         }
