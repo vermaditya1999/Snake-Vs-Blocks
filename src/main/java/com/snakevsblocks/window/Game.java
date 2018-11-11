@@ -158,8 +158,7 @@ public class Game extends Window {
                     } else if (paused) {
                         paused = false;
                     } else {
-                        loadNewGame();
-                        windowController.setWindow(Windows.MENU, mouseX, mouseY);
+                        exitGame();
                     }
                 }
             }
@@ -175,15 +174,13 @@ public class Game extends Window {
                     if (restartButton.isHovered(mouseX, mouseY)) {
                         loadNewGame();
                     } else if (backButton.isHovered(mouseX, mouseY)) {
-                        loadNewGame();
-                        windowController.setWindow(Windows.MENU, mouseX, mouseY);
+                        exitGame();
                     }
                 } else if (paused) {
                     if (resumeButton.isHovered(mouseX, mouseY)) {
                         paused = false;
                     } else if (backButton.isHovered(mouseX, mouseY)) {
-                        loadNewGame();
-                        windowController.setWindow(Windows.MENU, mouseX, mouseY);
+                        exitGame();
                     } else if (restartButton.isHovered(mouseX, mouseY)) {
                         loadNewGame();
                     }
@@ -433,5 +430,10 @@ public class Game extends Window {
                 burst.run(gc);
             }
         }
+    }
+
+    private void exitGame() {
+        loadNewGame();
+        windowController.setWindow(Windows.MENU, mouseX, mouseY);
     }
 }
