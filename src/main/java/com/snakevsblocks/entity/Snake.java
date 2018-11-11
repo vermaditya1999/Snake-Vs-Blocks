@@ -47,7 +47,7 @@ public class Snake {
 
         // Set the coordinates of the head to the coordinates of mouse
         Vector head = snakeBalls.get(0).getPos();
-        head.x = mouseX;
+        head.x = lerp(head.x, mouseX, 0.2);
 
         // Update rest of the balls
         for (int i = 1; i < snakeBalls.size(); i++) {
