@@ -152,8 +152,15 @@ public class Game extends Window {
             if (currentWindow != Windows.GAME) {
                 windowController.passEvent(currentWindow, event);
             } else {
-                if (!paused && event.getCode() == KeyCode.ESCAPE) {
-                    paused = true;
+                if (event.getCode() == KeyCode.ESCAPE) {
+                    if (!(paused || gameOver)) {
+                        paused = true;
+                    } else if (paused) {
+                        paused = false;
+                    } else {
+                        loadNewGame();
+                        windowController.setWindow(Windows.MENU, mouseX, mouseY);
+                    }
                 }
             }
         });
@@ -232,13 +239,12 @@ public class Game extends Window {
             updateGame();
         }
 
-        showGame();
+        showGamePlay();
         if (paused) {
             showPauseOverlay();
         } else if (gameOver) {
             showGameOver();
         }
-
     }
 
     private void updateGame() {
@@ -354,7 +360,7 @@ public class Game extends Window {
         coinLabel.update(Integer.toString(coins));
     }
 
-    private void showGame() {
+    private void showGamePlay() {
 
         // Set background
         gc.setFill(Game.BG_COLOR);
