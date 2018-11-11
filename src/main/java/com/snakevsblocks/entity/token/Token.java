@@ -7,19 +7,38 @@ import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Token implements Consumable {
 
-    public final static double RADIUS = 15;
+    public static final double RADIUS = 15;
+
+    private static final double INNER_RADIUS = 12;
 
     protected Vector pos;
+    protected double radius;
 
-    public boolean consumed;
+    private boolean shrinkDir;  // True if the token is shrinking
+    private boolean consumed;
 
     public Token(double x, double y) {
-
         pos = new Vector((x - 1) * App.TILE_SIZE + App.TILE_SIZE / 2, (y - 1) * App.TILE_SIZE + App.TILE_SIZE / 2);
+        radius = Token.RADIUS;
+        shrinkDir = true;
         consumed = false;
     }
 
-    public abstract void show(GraphicsContext gc);
+    public void show(GraphicsContext gc) {
+        if (radius <= Token.INNER_RADIUS) {
+            shrinkDir = false;
+            radius = Token.INNER_RADIUS;
+        } else if (radius >= Token.RADIUS) {
+            shrinkDir = true;
+            radius = Token.RADIUS;
+        }
+
+        if (shrinkDir) {
+            radius -= 0.1;
+        } else {
+            radius += 0.1;
+        }
+    }
 
     public void update(double speed) {
         pos.y += speed;

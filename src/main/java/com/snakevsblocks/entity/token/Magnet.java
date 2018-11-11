@@ -20,11 +20,13 @@ public class Magnet extends Token {
 
     @Override
     public void show(GraphicsContext gc) {
+        super.show(gc);
+
         if (image == null) {
             gc.setFill(Color.DARKSLATEBLUE);
-            gc.fillOval(pos.x - Token.RADIUS, pos.y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+            gc.fillOval(pos.x - radius, pos.y - radius, 2 * radius, 2 * radius);
         } else {
-            gc.drawImage(image, pos.x - Token.RADIUS, pos.y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+            gc.drawImage(image, pos.x - radius, pos.y - radius, 2 * radius, 2 * radius);
         }
     }
 }
