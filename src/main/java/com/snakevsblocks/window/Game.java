@@ -36,6 +36,7 @@ public class Game extends Window {
     private int score;
     private int coins;
     private int speed;
+
     private int trigger;
     private boolean paused;
     private boolean gameOver;
@@ -285,6 +286,9 @@ public class Game extends Window {
             }
         }
 
+        // Blocks, walls and tokens are updated with the game speed.
+        // They are removed from the Collection if they are out of the Screen
+
         // Update blocks
         Iterator blockIterator = blocks.iterator();
         while (blockIterator.hasNext()) {
@@ -324,6 +328,8 @@ public class Game extends Window {
                     score += value;
                     snake.addBalls(value);
                 } else if (token instanceof Destroyer) {
+
+                    // Destroy all blocks on the screen
                     Iterator it = blocks.iterator();
                     while (it.hasNext()) {
                         Block block = (Block) it.next();
@@ -334,17 +340,20 @@ public class Game extends Window {
                             it.remove();
                         }
                     }
+                } else if (token instanceof Magnet) {
+
+                } else if (token instanceof Shield) {
+
                 }
 
                 // Add SmallBurst
                 bursts.add(new SmallBurst(token.getX(), token.getY()));
 
-                // Remove token
+                // Remove token as it is consumed
                 tokenIterator.remove();
             }
 
-            // Remove tokens if they are dead
-            if (token.isDead()) {
+            if (token.isOver()) {
                 tokenIterator.remove();
             } else {
                 token.update(speed);
@@ -435,11 +444,11 @@ public class Game extends Window {
 
     private void runBursts() {
         gc.setFill(Color.WHITE);
-        for (int i = bursts.size() - 1; i >= 0; i--) {
-            Burst burst = bursts.get(i);
-
+        Iterator burstIterator = bursts.iterator();
+        while (burstIterator.hasNext()) {
+            Burst burst = (Burst) burstIterator.next();
             if (burst.isOver()) {
-                bursts.remove(i);
+                burstIterator.remove();
             } else {
                 burst.run(gc);
             }
