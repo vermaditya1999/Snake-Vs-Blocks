@@ -8,4 +8,6 @@ public interface WindowController {
     Windows getCurrentWindow();
 
     void passEvent(Windows window, Event event);
+
+    void setPrevScore(int score);
 }
