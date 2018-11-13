@@ -84,4 +84,9 @@ public class App implements WindowController {
         Window window = windows.get(windowEnum);
         window.fireEvent(event.copyFor(window, window));
     }
+
+    @Override
+    public void setPrevScore(int score) {
+        ((Menu) windows.get(Windows.MENU)).setPrevScore(score);
+    }
 }
