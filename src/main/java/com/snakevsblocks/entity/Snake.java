@@ -97,4 +97,8 @@ public class Snake {
     public Vector getHeadVector() {
         return snakeBalls.get(0).getPos();
     }
+
+    public int getLength() {
+        return snakeBalls.size();
+    }
 }
