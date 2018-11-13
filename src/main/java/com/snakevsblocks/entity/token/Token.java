@@ -44,7 +44,7 @@ public abstract class Token implements Consumable {
         pos.y += speed;
     }
 
-    public boolean isDead() {
+    public boolean isOver() {
         return pos.y - Token.RADIUS >= App.SCREEN_HEIGHT;
     }
 
