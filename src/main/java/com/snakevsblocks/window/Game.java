@@ -152,7 +152,9 @@ public class Game extends Window {
             setCursor(Cursor.DEFAULT);
         }
 
-        if (snake.isDead()) {
+        // Check if gameOver is already true, so that setPrevScore should be called only once per game
+        if (!gameOver && snake.isDead()) {
+            windowController.setPrevScore(score);
             gameOver = true;
         }
 
@@ -162,6 +164,7 @@ public class Game extends Window {
         }
 
         showGamePlay();
+
         if (paused) {
             showPauseOverlay();
         } else if (gameOver) {
@@ -286,8 +289,10 @@ public class Game extends Window {
             }
         }
 
-        // Blocks, walls and tokens are updated with the game speed.
-        // They are removed from the Collection if they are out of the Screen
+        /*
+         * Blocks, walls and tokens are updated with the game speed.
+         * They are removed from the Collection if they are out of the screen.
+         */
 
         // Update blocks
         Iterator blockIterator = blocks.iterator();
