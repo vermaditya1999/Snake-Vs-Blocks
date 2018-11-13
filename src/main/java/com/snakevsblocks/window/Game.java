@@ -152,7 +152,10 @@ public class Game extends Window {
             setCursor(Cursor.DEFAULT);
         }
 
-        // Check if gameOver is already true, so that setPrevScore should be called only once per game
+        /*
+         * The previous score of the game is set only when a game gets over.
+         * Check if gameOver is already true so that setPrevScore should be called only once per game.
+         */
         if (!gameOver && snake.isDead()) {
             windowController.setPrevScore(score);
             gameOver = true;
