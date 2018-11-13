@@ -86,7 +86,8 @@ public class App implements WindowController {
     }
 
     @Override
-    public void setPrevScore(int score) {
+    public void addScore(int score) {
         ((Menu) windows.get(Windows.MENU)).setPrevScore(score);
+        ((LeaderBoard) windows.get(Windows.LEADERBOARD)).addScore(score);
     }
 }

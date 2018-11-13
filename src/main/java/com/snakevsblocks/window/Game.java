@@ -157,7 +157,7 @@ public class Game extends Window {
          * Check if gameOver is already true so that setPrevScore should be called only once per game.
          */
         if (!gameOver && snake.isDead()) {
-            windowController.setPrevScore(score);
+            windowController.addScore(score);
             gameOver = true;
         }
 

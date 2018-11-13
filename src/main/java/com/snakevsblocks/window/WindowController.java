@@ -9,5 +9,5 @@ public interface WindowController {
 
     void passEvent(Windows window, Event event);
 
-    void setPrevScore(int score);
+    void addScore(int score);
 }
