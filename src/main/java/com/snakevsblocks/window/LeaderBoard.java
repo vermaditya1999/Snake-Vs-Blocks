@@ -3,7 +3,6 @@ package com.snakevsblocks.window;
 import com.snakevsblocks.App;
 import com.snakevsblocks.gui.ScorePane;
 import com.snakevsblocks.util.Font;
-import com.snakevsblocks.util.Random;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -24,19 +23,7 @@ public class LeaderBoard extends Window {
 
     public LeaderBoard(WindowController wc, Group root) {
         super(wc, root);
-
         scorePanes = new LinkedList<ScorePane>();
-
-        addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
-        addScore(Random.nextInt(1000));
     }
 
     public void addScore(int score) {
