@@ -178,4 +178,8 @@ public class Menu extends Window {
         // Show Info button
         infoButton.show(gc);
     }
+
+    public void setPrevScore(int prevScore) {
+        this.prevScore = prevScore;
+    }
 }
