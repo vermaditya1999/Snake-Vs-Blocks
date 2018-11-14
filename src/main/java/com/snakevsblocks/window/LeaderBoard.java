@@ -12,6 +12,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -135,5 +137,21 @@ public class LeaderBoard extends Window {
 
         // Show buttons
         backButton.show(gc);
+    }
+
+    public void serialize() {
+        ObjectOutputStream out = null;
+        try {
+            try {
+                out = new ObjectOutputStream(new FileOutputStream("lb.ser"));
+                out.writeObject(this);
+            } finally {
+                if (out != null) {
+                    out.close();
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

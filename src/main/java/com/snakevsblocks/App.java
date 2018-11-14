@@ -6,6 +6,9 @@ import javafx.event.Event;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.EnumMap;
 
 public class App implements WindowController {
@@ -45,19 +48,54 @@ public class App implements WindowController {
     }
 
     private void initWindows(Group root) {
-        canvasMap.put(Windows.MENU, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
-        windowMap.put(Windows.MENU, new Menu(this, canvasMap.get(Windows.MENU)));
+        deserializeWindows();
 
-        canvasMap.put(Windows.LEADERBOARD, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
-        windowMap.put(Windows.LEADERBOARD, new LeaderBoard(this, canvasMap.get(Windows.LEADERBOARD)));
+        // Check if the windows have already been deserialized, then only initialize new ones
+        if (!windowMap.containsKey(Windows.MENU)) {
+            canvasMap.put(Windows.MENU, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+            windowMap.put(Windows.MENU, new Menu(this, canvasMap.get(Windows.MENU)));
+        }
 
-        canvasMap.put(Windows.GAME, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
-        windowMap.put(Windows.GAME, new Game(this, canvasMap.get(Windows.GAME)));
+        if (!windowMap.containsKey(Windows.GAME)) {
+            canvasMap.put(Windows.GAME, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+            windowMap.put(Windows.GAME, new Game(this, canvasMap.get(Windows.GAME)));
+        }
 
-        canvasMap.put(Windows.INFO, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
-        windowMap.put(Windows.INFO, new Info(this, canvasMap.get(Windows.INFO)));
+        if (!windowMap.containsKey(Windows.LEADERBOARD)) {
+            canvasMap.put(Windows.LEADERBOARD, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+            windowMap.put(Windows.LEADERBOARD, new LeaderBoard(this, canvasMap.get(Windows.LEADERBOARD)));
+        }
 
+        if (!windowMap.containsKey(Windows.INFO)) {
+            canvasMap.put(Windows.INFO, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+            windowMap.put(Windows.INFO, new Info(this, canvasMap.get(Windows.INFO)));
+        }
+
+        // Add all the canvas to the root group of the JavaFx scene
         root.getChildren().addAll(canvasMap.values());
+    }
+
+    private void deserializeWindows() {
+        if ((new File("lb.ser")).exists()) {
+            try {
+                ObjectInputStream in = null;
+                try {
+                    in = new ObjectInputStream(new FileInputStream("lb.ser"));
+                    LeaderBoard leaderBoard = (LeaderBoard) in.readObject();
+
+                    canvasMap.put(Windows.LEADERBOARD, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+                    leaderBoard.init(this, canvasMap.get(Windows.LEADERBOARD));
+
+                    windowMap.put(Windows.LEADERBOARD, leaderBoard);
+                } finally {
+                    if (in != null) {
+                        in.close();
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public void start() {
@@ -103,7 +141,20 @@ public class App implements WindowController {
 
     @Override
     public void addScore(int score) {
+
+        // Set previous score in Menu
         ((Menu) windowMap.get(Windows.MENU)).setPrevScore(score);
+
+        // Set savedGame in Menu to false
+        ((Menu) windowMap.get(Windows.MENU)).setSavedGame(false);
+
+        // Reinitialize the Menu buttons
+        ((Menu) windowMap.get(Windows.MENU)).initMenuButtons();
+
+        // Add score to Leader-Board
         ((LeaderBoard) windowMap.get(Windows.LEADERBOARD)).addScore(score);
+
+        // Serialize Leader Board
+        ((LeaderBoard) windowMap.get(Windows.LEADERBOARD)).serialize();
     }
 }

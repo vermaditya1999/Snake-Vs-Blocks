@@ -73,7 +73,6 @@ public class Game extends Window {
     protected void addEventHandlers() {
 
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-
             Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.GAME) {
                 windowController.passEvent(currentWindow, event);
@@ -91,7 +90,6 @@ public class Game extends Window {
         });
 
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-
             Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.GAME) {
                 windowController.passEvent(currentWindow, event);
@@ -118,7 +116,6 @@ public class Game extends Window {
         });
 
         canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
-
             Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.GAME) {
                 windowController.passEvent(currentWindow, event);

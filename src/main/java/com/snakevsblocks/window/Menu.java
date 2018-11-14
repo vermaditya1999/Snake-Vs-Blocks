@@ -42,7 +42,7 @@ public class Menu extends Window {
         super(wc, canvas);
 
         // Set temporary value for demonstration
-        prevScore = 641;
+        prevScore = 0;
 
         // Set temporary value for demonstration
         savedGame = false;
@@ -57,7 +57,9 @@ public class Menu extends Window {
         infoButton = new InfoButton(App.TILE_SIZE / 3, App.TILE_SIZE / 3);
     }
 
-    private void initMenuButtons() {
+    public void initMenuButtons() {
+
+        menuButtons.clear();
 
         double gap = 0.75;
         double offset = gap * App.TILE_SIZE;
@@ -181,5 +183,9 @@ public class Menu extends Window {
 
     public void setPrevScore(int prevScore) {
         this.prevScore = prevScore;
+    }
+
+    public void setSavedGame(boolean savedGame) {
+        this.savedGame = savedGame;
     }
 }

@@ -17,22 +17,8 @@ abstract public class Window implements Serializable {
     protected double mouseX;
     protected double mouseY;
 
-    public Window(WindowController wc, Canvas canvas) {
-
-        // Set the windowController
-        windowController = wc;
-
-        // Set canvas
-        this.canvas = canvas;
-
-        // Initialize the GraphicsContext
-        gc = canvas.getGraphicsContext2D();
-
-        // Load defaults
-        loadDefaults();
-
-        // Add Event Handlers
-        addEventHandlers();
+    public Window(WindowController windowController, Canvas canvas) {
+        init(windowController, canvas);
     }
 
     private void loadDefaults() {
@@ -61,4 +47,12 @@ abstract public class Window implements Serializable {
     abstract protected void addEventHandlers();
 
     abstract public void show();
+
+    public void init(WindowController windowController, Canvas canvas) {
+        this.windowController = windowController;
+        this.canvas = canvas;
+        gc = canvas.getGraphicsContext2D();
+        loadDefaults();
+        addEventHandlers();
+    }
 }
