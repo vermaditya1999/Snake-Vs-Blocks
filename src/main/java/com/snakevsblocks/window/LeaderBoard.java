@@ -2,7 +2,10 @@ package com.snakevsblocks.window;
 
 import com.snakevsblocks.App;
 import com.snakevsblocks.gui.ScorePane;
+import com.snakevsblocks.gui.button.BackButton;
+import com.snakevsblocks.gui.button.BlackBackButton;
 import com.snakevsblocks.util.Font;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -21,9 +24,13 @@ public class LeaderBoard extends Window {
 
     private LinkedList<ScorePane> scorePanes;
 
+    private BackButton backButton;
+
     public LeaderBoard(WindowController wc, Group root) {
         super(wc, root);
         scorePanes = new LinkedList<ScorePane>();
+
+        backButton = new BlackBackButton(App.TILE_SIZE / 4 + 5, App.TILE_SIZE / 4);
     }
 
     public void addScore(int score) {
@@ -66,6 +73,17 @@ public class LeaderBoard extends Window {
             }
         });
 
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            Windows currentWindow = windowController.getCurrentWindow();
+            if (currentWindow != Windows.LEADERBOARD) {
+                windowController.passEvent(currentWindow, event);
+            } else {
+                if (backButton.isHovered(mouseX, mouseY)) {
+                    windowController.setWindow(Windows.MENU, mouseX, mouseY);
+                }
+            }
+        });
+
         canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 
             Windows currentWindow = windowController.getCurrentWindow();
@@ -80,6 +98,13 @@ public class LeaderBoard extends Window {
 
     @Override
     public void show() {
+
+        // Set cursor
+        if (backButton.isHovered(mouseX, mouseY)) {
+            canvas.setCursor(Cursor.HAND);
+        } else {
+            canvas.setCursor(Cursor.DEFAULT);
+        }
 
         // Set background
         gc.setFill(LeaderBoard.BG_COLOR);
@@ -107,5 +132,8 @@ public class LeaderBoard extends Window {
                 scorePanes.get(rank - 1).show(gc, rank);
             }
         }
+
+        // Show buttons
+        backButton.show(gc);
     }
 }

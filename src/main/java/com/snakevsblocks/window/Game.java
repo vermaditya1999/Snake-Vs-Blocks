@@ -12,7 +12,7 @@ import com.snakevsblocks.entity.token.*;
 import com.snakevsblocks.gui.button.BackButton;
 import com.snakevsblocks.gui.button.RestartButton;
 import com.snakevsblocks.gui.button.ResumeButton;
-import com.snakevsblocks.gui.button.WBackButton;
+import com.snakevsblocks.gui.button.WhiteBackButton;
 import com.snakevsblocks.gui.label.CoinLabel;
 import com.snakevsblocks.gui.label.Label;
 import com.snakevsblocks.gui.label.ScoreLabel;
@@ -63,7 +63,7 @@ public class Game extends Window {
         coinLabel = new CoinLabel();
 
         resumeButton = new ResumeButton(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
-        backButton = new WBackButton(App.TILE_SIZE / 2, App.TILE_SIZE / 2);
+        backButton = new WhiteBackButton(App.TILE_SIZE / 2, App.TILE_SIZE / 2);
         restartButton = new RestartButton(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE * 2);
 
         loadNewGame();
