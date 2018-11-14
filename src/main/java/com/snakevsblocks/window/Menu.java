@@ -78,7 +78,7 @@ public class Menu extends Window {
     @Override
     protected void addEventHandlers() {
 
-        addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
 
             Windows currentWindow = windowController.getCurrentWindow();
 
@@ -104,7 +104,7 @@ public class Menu extends Window {
             }
         });
 
-        addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
             Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.MENU) {
                 windowController.passEvent(currentWindow, event);
@@ -135,9 +135,9 @@ public class Menu extends Window {
 
         // Set cursor
         if (hovered) {
-            setCursor(Cursor.HAND);
+            canvas.setCursor(Cursor.HAND);
         } else {
-            setCursor(Cursor.DEFAULT);
+            canvas.setCursor(Cursor.DEFAULT);
         }
 
         // Set background

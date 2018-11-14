@@ -82,7 +82,7 @@ public class App implements WindowController {
     @Override
     public void passEvent(Windows windowEnum, Event event) {
         Window window = windows.get(windowEnum);
-        window.fireEvent(event.copyFor(window, window));
+        window.fireEvent(event);
     }
 
     @Override

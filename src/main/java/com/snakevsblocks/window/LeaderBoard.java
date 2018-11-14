@@ -55,7 +55,7 @@ public class LeaderBoard extends Window {
     @Override
     protected void addEventHandlers() {
 
-        addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+        canvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.LEADERBOARD) {
                 windowController.passEvent(currentWindow, event);
@@ -66,7 +66,7 @@ public class LeaderBoard extends Window {
             }
         });
 
-        addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 
             Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.LEADERBOARD) {

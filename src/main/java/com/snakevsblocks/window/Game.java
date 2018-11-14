@@ -71,7 +71,7 @@ public class Game extends Window {
     @Override
     protected void addEventHandlers() {
 
-        addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+        canvas.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
 
             Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.GAME) {
@@ -89,7 +89,7 @@ public class Game extends Window {
             }
         });
 
-        addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
 
             Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.GAME) {
@@ -116,7 +116,7 @@ public class Game extends Window {
             }
         });
 
-        addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 
             Windows currentWindow = windowController.getCurrentWindow();
             if (currentWindow != Windows.GAME) {
@@ -134,22 +134,22 @@ public class Game extends Window {
         // Set Cursor
         if (gameOver) {
             if (restartButton.isHovered(mouseX, mouseY)) {
-                setCursor(Cursor.HAND);
+                canvas.setCursor(Cursor.HAND);
             } else if (backButton.isHovered(mouseX, mouseY)) {
-                setCursor(Cursor.HAND);
+                canvas.setCursor(Cursor.HAND);
             } else {
-                setCursor(Cursor.DEFAULT);
+                canvas.setCursor(Cursor.DEFAULT);
             }
         } else if (paused) {
             if (resumeButton.isHovered(mouseX, mouseY) ||
                     backButton.isHovered(mouseX, mouseY) ||
                     restartButton.isHovered(mouseX, mouseY)) {
-                setCursor(Cursor.HAND);
+                canvas.setCursor(Cursor.HAND);
             } else {
-                setCursor(Cursor.DEFAULT);
+                canvas.setCursor(Cursor.DEFAULT);
             }
         } else {
-            setCursor(Cursor.DEFAULT);
+            canvas.setCursor(Cursor.DEFAULT);
         }
 
         /*
