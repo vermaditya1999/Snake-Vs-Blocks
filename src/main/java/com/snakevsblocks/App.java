@@ -117,6 +117,27 @@ public class App implements WindowController {
                 ex.printStackTrace();
             }
         }
+
+        if ((new File("game.ser")).exists()) {
+            try {
+                ObjectInputStream in = null;
+                try {
+                    in = new ObjectInputStream(new FileInputStream("game.ser"));
+                    Game game = (Game) in.readObject();
+
+                    canvasMap.put(Windows.GAME, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+                    game.init(this, canvasMap.get(Windows.GAME));
+
+                    windowMap.put(Windows.GAME, game);
+                } finally {
+                    if (in != null) {
+                        in.close();
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public void start() {
@@ -166,7 +187,7 @@ public class App implements WindowController {
         // Set previous score in Menu
         ((Menu) windowMap.get(Windows.MENU)).setPrevScore(score);
 
-        // Set savedGame in Menu to false
+        // Remove Resume button
         ((Menu) windowMap.get(Windows.MENU)).setSavedGame(false);
 
         // Reinitialize the Menu buttons
@@ -180,5 +201,21 @@ public class App implements WindowController {
 
         // Serialize Leader Board
         ((LeaderBoard) windowMap.get(Windows.LEADERBOARD)).serialize();
+    }
+
+    @Override
+    public void saveGame() {
+
+        // Serialize Game
+        ((Game) windowMap.get(Windows.GAME)).serialize();
+
+        // Enable Resume button
+        ((Menu) windowMap.get(Windows.MENU)).setSavedGame(true);
+
+        // Reinitialize the Menu buttons
+        ((Menu) windowMap.get(Windows.MENU)).initMenuButtons();
+
+        // Serialize Menu
+        ((Menu) windowMap.get(Windows.MENU)).serialize();
     }
 }

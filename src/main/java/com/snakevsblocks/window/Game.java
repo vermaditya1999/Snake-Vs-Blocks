@@ -27,6 +27,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -104,7 +106,8 @@ public class Game extends Window {
                     if (resumeButton.isHovered(mouseX, mouseY)) {
                         paused = false;
                     } else if (backButton.isHovered(mouseX, mouseY)) {
-                        exitGame();
+                        windowController.saveGame();
+                        windowController.setWindow(Windows.MENU, mouseX, mouseY);
                     } else if (restartButton.isHovered(mouseX, mouseY)) {
                         loadNewGame();
                     }
@@ -467,5 +470,21 @@ public class Game extends Window {
     private void exitGame() {
         loadNewGame();
         windowController.setWindow(Windows.MENU, mouseX, mouseY);
+    }
+
+    public void serialize() {
+        ObjectOutputStream out = null;
+        try {
+            try {
+                out = new ObjectOutputStream(new FileOutputStream("game.ser"));
+                out.writeObject(this);
+            } finally {
+                if (out != null) {
+                    out.close();
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

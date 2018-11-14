@@ -10,4 +10,6 @@ public interface WindowController {
     void passEvent(Windows window, Event event);
 
     void addScore(int score);
+
+    void saveGame();
 }

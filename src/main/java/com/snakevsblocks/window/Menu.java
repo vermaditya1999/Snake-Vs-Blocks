@@ -90,20 +90,16 @@ public class Menu extends Window {
                 windowController.passEvent(currentWindow, event);
             } else {
 
-                if (menuButtons.get(MenuButtons.LEADERBOARD).isHovered(mouseX, mouseY)) {
-                    windowController.setWindow(Windows.LEADERBOARD, mouseX, mouseY);
-                }
-
                 if (menuButtons.get(MenuButtons.START_GAME).isHovered(mouseX, mouseY)) {
                     windowController.setWindow(Windows.GAME, mouseX, mouseY);
-                }
-
-                if (menuButtons.get(MenuButtons.EXIT).isHovered(mouseX, mouseY)) {
+                } else if (menuButtons.get(MenuButtons.LEADERBOARD).isHovered(mouseX, mouseY)) {
+                    windowController.setWindow(Windows.LEADERBOARD, mouseX, mouseY);
+                } else if (menuButtons.get(MenuButtons.EXIT).isHovered(mouseX, mouseY)) {
                     Platform.exit();
-                }
-
-                if (infoButton.isHovered(mouseX, mouseY)) {
+                } else if (infoButton.isHovered(mouseX, mouseY)) {
                     windowController.setWindow(Windows.INFO, mouseX, mouseY);
+                } else if (menuButtons.get(MenuButtons.RESUME_GAME).isHovered(mouseX, mouseY)) {
+                    windowController.setWindow(Windows.GAME, mouseX, mouseY);
                 }
             }
         });
