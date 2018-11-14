@@ -372,12 +372,14 @@ public class Game extends Window {
         // Temporary collision of snake with blocks
         blockIterator = blocks.iterator();
         while (blockIterator.hasNext()) {
-            Vector pos = ((Block) blockIterator.next()).getPos();
+            Block block = (Block) blockIterator.next();
+            Vector pos = block.getPos();
             Vector head = snake.getHeadVector();
             if ((Math.abs(head.x - pos.x) <= App.TILE_SIZE / 2) &&
                     Math.abs(head.y - (pos.y + App.TILE_SIZE / 2)) <= SnakeBall.RADIUS / 2) {
-                blockIterator.remove();
                 bursts.add(new LargeBurst(head.x, head.y - SnakeBall.RADIUS));
+                score += block.getValue();
+                blockIterator.remove();
             }
         }
 
