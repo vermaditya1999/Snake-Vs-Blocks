@@ -4,7 +4,9 @@ import com.snakevsblocks.util.Random;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 
-public abstract class Particle {
+import java.io.Serializable;
+
+public abstract class Particle implements Serializable {
 
     public static final int COLORS[][] = {
             {221, 202, 217},

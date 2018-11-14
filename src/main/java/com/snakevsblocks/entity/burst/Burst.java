@@ -3,9 +3,10 @@ package com.snakevsblocks.entity.burst;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Burst {
+public abstract class Burst implements Serializable {
 
     protected ArrayList<Particle> particles;
     protected Vector origin;
