@@ -3,23 +3,15 @@ package com.snakevsblocks.gui.label;
 import com.snakevsblocks.App;
 import com.snakevsblocks.entity.token.Token;
 import com.snakevsblocks.util.Font;
+import com.snakevsblocks.util.Image;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
 public class CoinLabel extends Label {
 
-    private Image image;
-
     public CoinLabel() {
         super(App.SCREEN_WIDTH - App.TILE_SIZE / 2, App.TILE_SIZE / 2);
-
-        try {
-            image = new Image("img/coin.png");
-        } catch (Exception ex) {
-            System.err.println("Invalid path!");
-        }
     }
 
     @Override
@@ -33,11 +25,11 @@ public class CoinLabel extends Label {
 
         gc.setTextAlign(TextAlignment.CENTER);
 
-        if (image == null) {
+        if (Image.getCOIN() == null) {
             gc.setFill(Color.YELLOW);
             gc.fillOval(pos.x - Token.RADIUS, pos.y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
         } else {
-            gc.drawImage(image, pos.x - Token.RADIUS,
+            gc.drawImage(Image.getCOIN(), pos.x - Token.RADIUS,
                     pos.y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
         }
     }
