@@ -5,7 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 abstract public class BackButton extends Button {
 
-    private double size;
+    protected double size;
 
     public BackButton(double x, double y) {
         super(x, y);
