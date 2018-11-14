@@ -183,39 +183,43 @@ public class App implements WindowController {
 
     @Override
     public void addScore(int score) {
+        Menu menu = (Menu) windowMap.get(Windows.MENU);
+        LeaderBoard leaderBoard = (LeaderBoard) windowMap.get(Windows.LEADERBOARD);
 
         // Set previous score in Menu
-        ((Menu) windowMap.get(Windows.MENU)).setPrevScore(score);
+        menu.setPrevScore(score);
 
         // Remove Resume button
-        ((Menu) windowMap.get(Windows.MENU)).setSavedGame(false);
+        menu.setSavedGame(false);
 
         // Reinitialize the Menu buttons
-        ((Menu) windowMap.get(Windows.MENU)).initMenuButtons();
+        menu.initMenuButtons();
 
         // Serialize Menu
-        ((Menu) windowMap.get(Windows.MENU)).serialize();
+        menu.serialize();
 
         // Add score to Leader-Board
-        ((LeaderBoard) windowMap.get(Windows.LEADERBOARD)).addScore(score);
+        leaderBoard.addScore(score);
 
         // Serialize Leader Board
-        ((LeaderBoard) windowMap.get(Windows.LEADERBOARD)).serialize();
+        leaderBoard.serialize();
     }
 
     @Override
     public void saveGame() {
+        Game game = (Game) windowMap.get(Windows.GAME);
+        Menu menu = (Menu) windowMap.get(Windows.MENU);
 
         // Serialize Game
-        ((Game) windowMap.get(Windows.GAME)).serialize();
+        game.serialize();
 
         // Enable Resume button
-        ((Menu) windowMap.get(Windows.MENU)).setSavedGame(true);
+        menu.setSavedGame(true);
 
         // Reinitialize the Menu buttons
-        ((Menu) windowMap.get(Windows.MENU)).initMenuButtons();
+        menu.initMenuButtons();
 
         // Serialize Menu
-        ((Menu) windowMap.get(Windows.MENU)).serialize();
+        menu.serialize();
     }
 }
