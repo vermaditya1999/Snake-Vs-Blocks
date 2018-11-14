@@ -1,6 +1,5 @@
 package com.snakevsblocks.window;
 
-import com.snakevsblocks.App;
 import javafx.event.Event;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
@@ -17,7 +16,6 @@ abstract public class Window {
     protected double mouseY;
 
     public Window(WindowController wc, Canvas canvas) {
-        canvas = new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
         // Set the windowController
         windowController = wc;
