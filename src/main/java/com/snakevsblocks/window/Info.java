@@ -5,7 +5,7 @@ import com.snakevsblocks.gui.button.BackButton;
 import com.snakevsblocks.gui.button.BlackBackButton;
 import com.snakevsblocks.util.Font;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -18,8 +18,8 @@ public class Info extends Window {
 
     public BackButton backButton;
 
-    public Info(WindowController wc, Group root) {
-        super(wc, root);
+    public Info(WindowController wc, Canvas canvas) {
+        super(wc, canvas);
 
         backButton = new BlackBackButton(App.TILE_SIZE / 4 + 5, App.TILE_SIZE / 4);
     }

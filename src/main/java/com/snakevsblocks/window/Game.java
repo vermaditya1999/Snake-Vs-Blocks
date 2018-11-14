@@ -20,7 +20,7 @@ import com.snakevsblocks.util.Font;
 import com.snakevsblocks.util.Random;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -56,8 +56,8 @@ public class Game extends Window {
     private ResumeButton resumeButton;
     private RestartButton restartButton;
 
-    public Game(WindowController wc, Group root) {
-        super(wc, root);
+    public Game(WindowController wc, Canvas canvas) {
+        super(wc, canvas);
 
         scoreLabel = new ScoreLabel();
         coinLabel = new CoinLabel();

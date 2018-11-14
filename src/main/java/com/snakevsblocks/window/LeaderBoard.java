@@ -6,7 +6,7 @@ import com.snakevsblocks.gui.button.BackButton;
 import com.snakevsblocks.gui.button.BlackBackButton;
 import com.snakevsblocks.util.Font;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -26,8 +26,8 @@ public class LeaderBoard extends Window {
 
     private BackButton backButton;
 
-    public LeaderBoard(WindowController wc, Group root) {
-        super(wc, root);
+    public LeaderBoard(WindowController wc, Canvas canvas) {
+        super(wc, canvas);
         scorePanes = new LinkedList<ScorePane>();
 
         backButton = new BlackBackButton(App.TILE_SIZE / 4 + 5, App.TILE_SIZE / 4);

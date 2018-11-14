@@ -3,7 +3,6 @@ package com.snakevsblocks.window;
 import com.snakevsblocks.App;
 import javafx.event.Event;
 import javafx.geometry.VPos;
-import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.TextAlignment;
@@ -17,17 +16,17 @@ abstract public class Window {
     protected double mouseX;
     protected double mouseY;
 
-    public Window(WindowController wc, Group root) {
+    public Window(WindowController wc, Canvas canvas) {
         canvas = new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
         // Set the windowController
         windowController = wc;
 
+        // Set canvas
+        this.canvas = canvas;
+
         // Initialize the GraphicsContext
         gc = canvas.getGraphicsContext2D();
-
-        // Add canvas to the root group
-        root.getChildren().add(canvas);
 
         // Load defaults
         loadDefaults();

@@ -6,7 +6,7 @@ import com.snakevsblocks.gui.button.MenuButton;
 import com.snakevsblocks.util.Font;
 import javafx.application.Platform;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -38,8 +38,8 @@ public class Menu extends Window {
     // Info button
     private InfoButton infoButton;
 
-    public Menu(WindowController wc, Group root) {
-        super(wc, root);
+    public Menu(WindowController wc, Canvas canvas) {
+        super(wc, canvas);
 
         // Set temporary value for demonstration
         prevScore = 641;
