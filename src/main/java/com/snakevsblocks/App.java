@@ -96,6 +96,27 @@ public class App implements WindowController {
                 ex.printStackTrace();
             }
         }
+
+        if ((new File("menu.ser")).exists()) {
+            try {
+                ObjectInputStream in = null;
+                try {
+                    in = new ObjectInputStream(new FileInputStream("menu.ser"));
+                    Menu menu = (Menu) in.readObject();
+
+                    canvasMap.put(Windows.MENU, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+                    menu.init(this, canvasMap.get(Windows.MENU));
+
+                    windowMap.put(Windows.MENU, menu);
+                } finally {
+                    if (in != null) {
+                        in.close();
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public void start() {
@@ -150,6 +171,9 @@ public class App implements WindowController {
 
         // Reinitialize the Menu buttons
         ((Menu) windowMap.get(Windows.MENU)).initMenuButtons();
+
+        // Serialize Menu
+        ((Menu) windowMap.get(Windows.MENU)).serialize();
 
         // Add score to Leader-Board
         ((LeaderBoard) windowMap.get(Windows.LEADERBOARD)).addScore(score);

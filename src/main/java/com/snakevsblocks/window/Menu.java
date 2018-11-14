@@ -10,6 +10,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -187,5 +189,21 @@ public class Menu extends Window {
 
     public void setSavedGame(boolean savedGame) {
         this.savedGame = savedGame;
+    }
+
+    public void serialize() {
+        ObjectOutputStream out = null;
+        try {
+            try {
+                out = new ObjectOutputStream(new FileOutputStream("menu.ser"));
+                out.writeObject(this);
+            } finally {
+                if (out != null) {
+                    out.close();
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
