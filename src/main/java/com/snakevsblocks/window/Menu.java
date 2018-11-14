@@ -18,6 +18,8 @@ import java.util.Map;
 
 public class Menu extends Window {
 
+    public static final String PATH = "menu.ser";
+
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
 
@@ -191,7 +193,7 @@ public class Menu extends Window {
         ObjectOutputStream out = null;
         try {
             try {
-                out = new ObjectOutputStream(new FileOutputStream("menu.ser"));
+                out = new ObjectOutputStream(new FileOutputStream(Menu.PATH));
                 out.writeObject(this);
             } finally {
                 if (out != null) {

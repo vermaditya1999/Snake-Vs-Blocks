@@ -20,6 +20,8 @@ import java.util.LinkedList;
 
 public class LeaderBoard extends Window {
 
+    public static final String PATH = "lb.ser";
+
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
     private static final int MAX_SIZE = 10;
@@ -143,7 +145,7 @@ public class LeaderBoard extends Window {
         ObjectOutputStream out = null;
         try {
             try {
-                out = new ObjectOutputStream(new FileOutputStream("lb.ser"));
+                out = new ObjectOutputStream(new FileOutputStream(LeaderBoard.PATH));
                 out.writeObject(this);
             } finally {
                 if (out != null) {

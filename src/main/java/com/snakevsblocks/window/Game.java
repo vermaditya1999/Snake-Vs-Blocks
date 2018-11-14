@@ -34,6 +34,8 @@ import java.util.LinkedList;
 
 public class Game extends Window {
 
+    public static final String PATH = "game.ser";
+
     public static final Color BG_COLOR = Color.rgb(23, 29, 43);
 
     private int score;
@@ -476,7 +478,7 @@ public class Game extends Window {
         ObjectOutputStream out = null;
         try {
             try {
-                out = new ObjectOutputStream(new FileOutputStream("game.ser"));
+                out = new ObjectOutputStream(new FileOutputStream(Game.PATH));
                 out.writeObject(this);
             } finally {
                 if (out != null) {

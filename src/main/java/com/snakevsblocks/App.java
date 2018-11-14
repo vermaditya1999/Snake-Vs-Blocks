@@ -76,11 +76,11 @@ public class App implements WindowController {
     }
 
     private void deserializeWindows() {
-        if ((new File("lb.ser")).exists()) {
+        if ((new File(LeaderBoard.PATH)).exists()) {
             try {
                 ObjectInputStream in = null;
                 try {
-                    in = new ObjectInputStream(new FileInputStream("lb.ser"));
+                    in = new ObjectInputStream(new FileInputStream(LeaderBoard.PATH));
                     LeaderBoard leaderBoard = (LeaderBoard) in.readObject();
 
                     canvasMap.put(Windows.LEADERBOARD, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
@@ -97,11 +97,11 @@ public class App implements WindowController {
             }
         }
 
-        if ((new File("menu.ser")).exists()) {
+        if ((new File(Menu.PATH)).exists()) {
             try {
                 ObjectInputStream in = null;
                 try {
-                    in = new ObjectInputStream(new FileInputStream("menu.ser"));
+                    in = new ObjectInputStream(new FileInputStream(Menu.PATH));
                     Menu menu = (Menu) in.readObject();
 
                     canvasMap.put(Windows.MENU, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
@@ -118,11 +118,11 @@ public class App implements WindowController {
             }
         }
 
-        if ((new File("game.ser")).exists()) {
+        if ((new File(Game.PATH)).exists()) {
             try {
                 ObjectInputStream in = null;
                 try {
-                    in = new ObjectInputStream(new FileInputStream("game.ser"));
+                    in = new ObjectInputStream(new FileInputStream(Game.PATH));
                     Game game = (Game) in.readObject();
 
                     canvasMap.put(Windows.GAME, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
