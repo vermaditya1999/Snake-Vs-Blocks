@@ -9,7 +9,7 @@ public abstract class Token implements Consumable {
 
     public static final double RADIUS = 15;
 
-    private static final double INNER_RADIUS = 12;
+    private static final double INNER_RADIUS = 13;
 
     protected Vector pos;
     protected double radius;
@@ -34,9 +34,9 @@ public abstract class Token implements Consumable {
         }
 
         if (shrinkDir) {
-            radius -= 0.1;
+            radius -= 0.05;
         } else {
-            radius += 0.1;
+            radius += 0.05;
         }
     }
 
