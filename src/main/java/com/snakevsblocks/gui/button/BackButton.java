@@ -4,14 +4,14 @@ import com.snakevsblocks.App;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class BackButton extends Button {
+abstract public class BackButton extends Button {
 
     private Image image;
     private double size;
 
-    public BackButton(double x, double y) {
+    public BackButton(double x, double y, String url) {
         super(x, y);
-        image = new Image("images/back.png");
+        image = new Image(url);
         size = App.TILE_SIZE / 2;
     }
 
