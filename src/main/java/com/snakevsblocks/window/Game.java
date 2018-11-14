@@ -356,7 +356,8 @@ public class Game extends Window {
                 }
 
                 // Add SmallBurst
-                bursts.add(new SmallBurst(token.getX(), token.getY()));
+                Vector pos = token.getPos();
+                bursts.add(new SmallBurst(pos.x, pos.y));
 
                 // Remove token as it is consumed
                 tokenIterator.remove();

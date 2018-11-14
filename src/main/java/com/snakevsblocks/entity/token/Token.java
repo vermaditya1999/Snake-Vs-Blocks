@@ -50,14 +50,6 @@ public abstract class Token implements Consumable, Serializable {
         return pos.y - Token.RADIUS >= App.SCREEN_HEIGHT;
     }
 
-    public double getX() {
-        return pos.x;
-    }
-
-    public double getY() {
-        return pos.y;
-    }
-
     @Override
     public boolean isConsumed() {
         return consumed;
