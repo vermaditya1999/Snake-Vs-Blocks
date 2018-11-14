@@ -6,7 +6,9 @@ import com.snakevsblocks.util.Vector;
 import com.snakevsblocks.window.LeaderBoard;
 import javafx.scene.canvas.GraphicsContext;
 
-public class ScorePane {
+import java.io.Serializable;
+
+public class ScorePane implements Serializable {
 
     public static final double RADIUS = App.TILE_SIZE / 4;
     private static final double HEIGHT = ScorePane.RADIUS * 2;

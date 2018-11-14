@@ -3,7 +3,9 @@ package com.snakevsblocks.gui.label;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 
-public abstract class Label {
+import java.io.Serializable;
+
+public abstract class Label implements Serializable {
 
     protected Vector pos;
     protected String text;

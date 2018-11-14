@@ -5,7 +5,9 @@ import com.snakevsblocks.entity.SnakeBall;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 
-public abstract class Token implements Consumable {
+import java.io.Serializable;
+
+public abstract class Token implements Consumable, Serializable {
 
     public static final double RADIUS = 15;
 

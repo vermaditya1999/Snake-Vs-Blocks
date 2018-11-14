@@ -4,7 +4,9 @@ import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class SnakeBall {
+import java.io.Serializable;
+
+public class SnakeBall implements Serializable {
 
     public static final double RADIUS = 10;
     public static final Color COLOR = Color.rgb(150, 204, 208);

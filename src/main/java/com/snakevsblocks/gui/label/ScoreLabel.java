@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
 public class ScoreLabel extends Label {
+
     public ScoreLabel() {
         super(App.TILE_SIZE / 2, App.TILE_SIZE / 2);
     }

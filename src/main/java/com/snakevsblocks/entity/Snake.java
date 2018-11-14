@@ -4,9 +4,10 @@ import com.snakevsblocks.App;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Snake {
+public class Snake implements Serializable {
 
     private LinkedList<SnakeBall> snakeBalls;
 

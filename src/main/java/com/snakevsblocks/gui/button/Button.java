@@ -3,7 +3,9 @@ package com.snakevsblocks.gui.button;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 
-public abstract class Button {
+import java.io.Serializable;
+
+public abstract class Button implements Serializable {
 
     protected Vector pos;
 

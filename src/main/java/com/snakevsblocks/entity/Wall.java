@@ -6,7 +6,9 @@ import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Wall {
+import java.io.Serializable;
+
+public class Wall implements Serializable {
 
     private Vector pos;
     private double length;

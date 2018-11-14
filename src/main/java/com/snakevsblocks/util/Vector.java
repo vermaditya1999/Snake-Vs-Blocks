@@ -1,6 +1,8 @@
 package com.snakevsblocks.util;
 
-public class Vector {
+import java.io.Serializable;
+
+public class Vector implements Serializable {
 
     // X component of the Vector
     public double x;

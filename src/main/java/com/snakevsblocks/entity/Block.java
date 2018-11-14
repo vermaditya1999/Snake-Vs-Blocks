@@ -7,7 +7,9 @@ import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Block {
+import java.io.Serializable;
+
+public class Block implements Serializable {
 
     public static final Color COLOR = Color.rgb(241, 233, 218);
 
