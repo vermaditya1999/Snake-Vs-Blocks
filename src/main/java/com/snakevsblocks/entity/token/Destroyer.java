@@ -12,7 +12,7 @@ public class Destroyer extends Token {
         super(x, y);
 
         try {
-            image = new Image("images/destroyer.png");
+            image = new Image("img/destroyer.png");
         } catch (Exception ex) {
             System.err.println("Invalid path!");
         }

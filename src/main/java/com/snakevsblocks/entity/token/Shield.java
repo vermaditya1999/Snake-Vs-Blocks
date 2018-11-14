@@ -12,7 +12,7 @@ public class Shield extends Token {
         super(x, y);
 
         try {
-            image = new Image("images/shield.png");
+            image = new Image("img/shield.png");
         } catch (Exception ex) {
             System.err.println("Invalid path!");
         }

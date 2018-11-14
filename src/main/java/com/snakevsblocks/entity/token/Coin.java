@@ -12,7 +12,7 @@ public class Coin extends Token {
         super(x, y);
 
         try {
-            image = new Image("images/coin.png");
+            image = new Image("img/coin.png");
         } catch (Exception ex) {
             System.err.println("Invalid path!");
         }

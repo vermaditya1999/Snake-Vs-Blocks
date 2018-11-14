@@ -11,7 +11,7 @@ public class RestartButton extends Button {
 
     public RestartButton(double x, double y) {
         super(x, y);
-        image = new Image("images/restart.png");
+        image = new Image("img/restart.png");
         size = App.TILE_SIZE;
     }
 

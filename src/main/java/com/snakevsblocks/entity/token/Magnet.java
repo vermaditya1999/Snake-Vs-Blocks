@@ -12,7 +12,7 @@ public class Magnet extends Token {
         super(x, y);
 
         try {
-            image = new Image("images/magnet.png");
+            image = new Image("img/magnet.png");
         } catch (Exception ex) {
             System.err.println("Invalid path!");
         }

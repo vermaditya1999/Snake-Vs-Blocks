@@ -16,7 +16,7 @@ public class CoinLabel extends Label {
         super(App.SCREEN_WIDTH - App.TILE_SIZE / 2, App.TILE_SIZE / 2);
 
         try {
-            image = new Image("images/coin.png");
+            image = new Image("img/coin.png");
         } catch (Exception ex) {
             System.err.println("Invalid path!");
         }
