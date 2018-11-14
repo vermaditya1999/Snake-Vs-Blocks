@@ -4,6 +4,7 @@ import com.snakevsblocks.window.*;
 import javafx.animation.AnimationTimer;
 import javafx.event.Event;
 import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
 
 import java.util.EnumMap;
 
@@ -22,13 +23,19 @@ public class App implements WindowController {
 
     private Windows currentWindow;
 
-    // HashMap from Windows enum constant to Windows object
-    private EnumMap<Windows, Window> windows;
+    // EnumMap from Windows enum constant to Windows object
+    private EnumMap<Windows, Window> windowMap;
+
+    // EnumMap from Windows enum constant to Canvas for each Window
+    private EnumMap<Windows, Canvas> canvasMap;
 
     public App(Group root) {
 
-        // Instantiate the windows HashMap
-        windows = new EnumMap<Windows, Window>(Windows.class);
+        // Instantiate the windows EnumMap
+        windowMap = new EnumMap<Windows, Window>(Windows.class);
+
+        // Instantiate the canvas EnumMap
+        canvasMap = new EnumMap<Windows, Canvas>(Windows.class);
 
         // Initialize the windows and put them in the EnumMap
         initWindows(root);
@@ -38,10 +45,19 @@ public class App implements WindowController {
     }
 
     private void initWindows(Group root) {
-        windows.put(Windows.MENU, new Menu(this, root));
-        windows.put(Windows.GAME, new Game(this, root));
-        windows.put(Windows.LEADERBOARD, new LeaderBoard(this, root));
-        windows.put(Windows.INFO, new Info(this, root));
+        canvasMap.put(Windows.MENU, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+        windowMap.put(Windows.MENU, new Menu(this, canvasMap.get(Windows.MENU)));
+
+        canvasMap.put(Windows.LEADERBOARD, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+        windowMap.put(Windows.LEADERBOARD, new LeaderBoard(this, canvasMap.get(Windows.LEADERBOARD)));
+
+        canvasMap.put(Windows.GAME, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+        windowMap.put(Windows.GAME, new Game(this, canvasMap.get(Windows.GAME)));
+
+        canvasMap.put(Windows.INFO, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+        windowMap.put(Windows.INFO, new Info(this, canvasMap.get(Windows.INFO)));
+
+        root.getChildren().addAll(canvasMap.values());
     }
 
     public void start() {
@@ -52,7 +68,7 @@ public class App implements WindowController {
             animationTimer = new AnimationTimer() {
                 @Override
                 public void handle(long now) {
-                    windows.get(currentWindow).show();
+                    windowMap.get(currentWindow).show();
                 }
             };
 
@@ -68,10 +84,10 @@ public class App implements WindowController {
         currentWindow = window;
 
         // Bring the window to front
-        windows.get(currentWindow).toFront();
+        windowMap.get(currentWindow).toFront();
 
         // Set mouse variables of window
-        windows.get(currentWindow).setMouse(mouseX, mouseY);
+        windowMap.get(currentWindow).setMouse(mouseX, mouseY);
     }
 
     @Override
@@ -81,13 +97,13 @@ public class App implements WindowController {
 
     @Override
     public void passEvent(Windows windowEnum, Event event) {
-        Window window = windows.get(windowEnum);
+        Window window = windowMap.get(windowEnum);
         window.fireEvent(event);
     }
 
     @Override
     public void addScore(int score) {
-        ((Menu) windows.get(Windows.MENU)).setPrevScore(score);
-        ((LeaderBoard) windows.get(Windows.LEADERBOARD)).addScore(score);
+        ((Menu) windowMap.get(Windows.MENU)).setPrevScore(score);
+        ((LeaderBoard) windowMap.get(Windows.LEADERBOARD)).addScore(score);
     }
 }
