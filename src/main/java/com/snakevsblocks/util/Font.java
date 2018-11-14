@@ -11,6 +11,5 @@ public class Font {
     public static final javafx.scene.text.Font CONSOLAS_SMALL = new javafx.scene.text.Font("Consolas", 20);
     public static final javafx.scene.text.Font CONSOLAS_XSMALL = new javafx.scene.text.Font("Consolas", 15);
 
-
     public static final javafx.scene.text.Font MUSEO = javafx.scene.text.Font.loadFont(Font.class.getClassLoader().getResourceAsStream("fonts/Museo-100.otf"), 60);
 }
