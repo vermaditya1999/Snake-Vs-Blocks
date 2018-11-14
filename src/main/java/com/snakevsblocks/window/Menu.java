@@ -51,13 +51,13 @@ public class Menu extends Window {
         menuButtons = new EnumMap<MenuButtons, MenuButton>(MenuButtons.class);
 
         // Add menu buttons
-        addMenuButtons();
+        initMenuButtons();
 
         // Add info button
         infoButton = new InfoButton(App.TILE_SIZE / 3, App.TILE_SIZE / 3);
     }
 
-    private void addMenuButtons() {
+    private void initMenuButtons() {
 
         double gap = 0.75;
         double offset = gap * App.TILE_SIZE;
