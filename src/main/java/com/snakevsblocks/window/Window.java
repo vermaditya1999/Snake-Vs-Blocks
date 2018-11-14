@@ -6,11 +6,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.TextAlignment;
 
-abstract public class Window {
+import java.io.Serializable;
 
-    protected Canvas canvas;
-    protected WindowController windowController;
-    protected GraphicsContext gc;
+abstract public class Window implements Serializable {
+
+    protected transient Canvas canvas;
+    protected transient WindowController windowController;
+    protected transient GraphicsContext gc;
 
     protected double mouseX;
     protected double mouseY;
