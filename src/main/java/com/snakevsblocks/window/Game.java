@@ -34,7 +34,7 @@ import java.util.LinkedList;
 
 public class Game extends Window {
 
-    public static final String PATH = "game.ser";
+    public static final String PATH = App.PATH + "game.ser";
 
     public static final Color BG_COLOR = Color.rgb(23, 29, 43);
 

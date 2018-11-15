@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class Menu extends Window {
 
-    public static final String PATH = "menu.ser";
+    public static final String PATH = App.PATH + "menu.ser";
 
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
