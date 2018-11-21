@@ -230,4 +230,9 @@ public class App implements WindowController {
         // Serialize Menu
         menu.serialize();
     }
+
+    @Override
+    public void loadNewGame() {
+        ((Game) windowMap.get(Windows.GAME)).loadNewGame();
+    }
 }

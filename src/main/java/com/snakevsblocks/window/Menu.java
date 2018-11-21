@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.EnumMap;
@@ -91,17 +92,23 @@ public class Menu extends Window {
             if (currentWindow != Windows.MENU) {
                 windowController.passEvent(currentWindow, event);
             } else {
-
-                if (menuButtons.get(MenuButtons.START_GAME).isHovered(mouseX, mouseY)) {
+                if (savedGame && menuButtons.get(MenuButtons.RESUME_GAME).isHovered(mouseX, mouseY)) {
+                    // Show resume button only if there is a saved game
+                    windowController.setWindow(Windows.GAME, mouseX, mouseY);
+                } else if (menuButtons.get(MenuButtons.START_GAME).isHovered(mouseX, mouseY)) {
+                    // Remove saved files, if there are any and load new game
+                    File file = new File(Game.PATH);
+                    if (file.exists()) {
+                        file.delete();
+                    }
+                    windowController.loadNewGame();
                     windowController.setWindow(Windows.GAME, mouseX, mouseY);
                 } else if (menuButtons.get(MenuButtons.LEADERBOARD).isHovered(mouseX, mouseY)) {
                     windowController.setWindow(Windows.LEADERBOARD, mouseX, mouseY);
-                } else if (menuButtons.get(MenuButtons.EXIT).isHovered(mouseX, mouseY)) {
-                    Platform.exit();
                 } else if (infoButton.isHovered(mouseX, mouseY)) {
                     windowController.setWindow(Windows.INFO, mouseX, mouseY);
-                } else if (menuButtons.get(MenuButtons.RESUME_GAME).isHovered(mouseX, mouseY)) {
-                    windowController.setWindow(Windows.GAME, mouseX, mouseY);
+                } else if (menuButtons.get(MenuButtons.EXIT).isHovered(mouseX, mouseY)) {
+                    Platform.exit();
                 }
             }
         });

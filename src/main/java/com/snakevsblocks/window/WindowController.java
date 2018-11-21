@@ -12,4 +12,6 @@ public interface WindowController {
     void addScore(int score);
 
     void saveGame();
+
+    void loadNewGame();
 }
