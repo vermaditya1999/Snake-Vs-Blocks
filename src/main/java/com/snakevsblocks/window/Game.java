@@ -82,12 +82,14 @@ public class Game extends Window {
                 windowController.passEvent(currentWindow, event);
             } else {
                 if (event.getCode() == KeyCode.ESCAPE) {
-                    if (!(paused || gameOver)) {
+                    boolean resumed = !(paused || gameOver);
+                    if (resumed) {
                         paused = true;
                     } else if (paused) {
                         paused = false;
-                    } else {
-                        exitGame();
+                    } else if (gameOver) {
+                        loadNewGame();
+                        windowController.setWindow(Windows.MENU, mouseX, mouseY);
                     }
                 }
             }
@@ -102,7 +104,8 @@ public class Game extends Window {
                     if (restartButton.isHovered(mouseX, mouseY)) {
                         loadNewGame();
                     } else if (backButton.isHovered(mouseX, mouseY)) {
-                        exitGame();
+                        loadNewGame();
+                        windowController.setWindow(Windows.MENU, mouseX, mouseY);
                     }
                 } else if (paused) {
                     if (resumeButton.isHovered(mouseX, mouseY)) {
@@ -467,11 +470,6 @@ public class Game extends Window {
                 burst.run(gc);
             }
         }
-    }
-
-    private void exitGame() {
-        loadNewGame();
-        windowController.setWindow(Windows.MENU, mouseX, mouseY);
     }
 
     public void serialize() {
