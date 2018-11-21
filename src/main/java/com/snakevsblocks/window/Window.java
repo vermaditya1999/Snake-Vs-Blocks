@@ -21,6 +21,16 @@ abstract public class Window implements Serializable {
         init(windowController, canvas);
     }
 
+    public void init(WindowController windowController, Canvas canvas) {
+        this.windowController = windowController;
+        this.canvas = canvas;
+
+        gc = canvas.getGraphicsContext2D();
+
+        loadDefaults();
+        addEventHandlers();
+    }
+
     private void loadDefaults() {
 
         // Enable KeyEvent detection
@@ -47,12 +57,4 @@ abstract public class Window implements Serializable {
     abstract protected void addEventHandlers();
 
     abstract public void show();
-
-    public void init(WindowController windowController, Canvas canvas) {
-        this.windowController = windowController;
-        this.canvas = canvas;
-        gc = canvas.getGraphicsContext2D();
-        loadDefaults();
-        addEventHandlers();
-    }
 }

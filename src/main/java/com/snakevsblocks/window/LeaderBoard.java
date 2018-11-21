@@ -121,9 +121,9 @@ public class LeaderBoard extends Window {
 
         // Show message if there is no saved score
         if (scorePanes.size() == 0) {
-            gc.setFont(Font.GOTHAM_SMALL);
+            gc.setFont(Font.CONSOLAS_SMALL);
             gc.setFill(LeaderBoard.FG_COLOR);
-            gc.fillText("No games played :(", App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
+            gc.fillText("No games completed!", App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
         } else {
             // Set Score bars' hovered variable
             for (int rank = 1; rank <= scorePanes.size(); rank++) {

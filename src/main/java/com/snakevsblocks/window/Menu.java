@@ -37,7 +37,7 @@ public class Menu extends Window {
     // Boolean variable true if a saved game is available
     private boolean savedGame;
 
-    // Score of the previous score
+    // Score of the previous game
     private int prevScore;
 
     // Info button
