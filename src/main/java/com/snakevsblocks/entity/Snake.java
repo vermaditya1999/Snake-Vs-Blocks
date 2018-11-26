@@ -1,8 +1,10 @@
 package com.snakevsblocks.entity;
 
 import com.snakevsblocks.App;
+import com.snakevsblocks.util.Font;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -83,10 +85,16 @@ public class Snake implements Serializable {
     }
 
     public void show(GraphicsContext gc) {
+        if (!isDead()) {
+            Vector head = snakeBalls.get(0).getPos();
+            gc.setFont(Font.CONSOLAS_XSMALL);
+            gc.setFill(Color.WHITE);
+            gc.fillText(Integer.toString(snakeBalls.size()), head.x, head.y - SnakeBall.RADIUS - 8);
 
-        // Show all the balls
-        for (SnakeBall snakeBall : snakeBalls) {
-            snakeBall.show(gc);
+            // Show all the balls
+            for (SnakeBall snakeBall : snakeBalls) {
+                snakeBall.show(gc);
+            }
         }
     }
 
