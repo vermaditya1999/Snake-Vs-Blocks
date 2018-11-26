@@ -48,6 +48,14 @@ public class Snake implements Serializable {
     // Prerequisite: Snake has at least one ball
     public void update(double mouseX, double mouseY) {
 
+        // Prevent half snake from leaving the screen
+        if (mouseX > App.SCREEN_WIDTH - SnakeBall.RADIUS) {
+            mouseX = App.SCREEN_WIDTH - SnakeBall.RADIUS;
+        }
+        if (mouseX < SnakeBall.RADIUS) {
+            mouseX = SnakeBall.RADIUS;
+        }
+
         // Set the coordinates of the head to the coordinates of mouse
         Vector head = snakeBalls.get(0).getPos();
         head.x = lerp(head.x, mouseX, 0.2);
