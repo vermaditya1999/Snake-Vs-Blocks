@@ -17,11 +17,15 @@ public class Block implements Serializable {
 
     private Vector pos;
 
+    private double size;
+
     public Block(int x, int y) {
 
         value = 1 + Random.nextInt(10);
 
         pos = new Vector((x - 1) * App.TILE_SIZE + App.TILE_SIZE / 2, (y - 1) * App.TILE_SIZE + App.TILE_SIZE / 2);
+
+        size = App.TILE_SIZE;
     }
 
     public void show(GraphicsContext gc) {
@@ -29,9 +33,13 @@ public class Block implements Serializable {
         double xOffset = 2;
         double yOffset = 2;
 
+        if (size < App.TILE_SIZE) {
+            size += 0.5;
+        }
+
         // Display block
         gc.setFill(Block.COLOR);
-        gc.fillRoundRect(pos.x - App.TILE_SIZE / 2 + xOffset, pos.y - App.TILE_SIZE / 2 + yOffset, App.TILE_SIZE - 2 * xOffset, App.TILE_SIZE - 2 * yOffset, 10, 10);
+        gc.fillRoundRect(pos.x - size / 2 + xOffset, pos.y - size / 2 + yOffset, size - 2 * xOffset, size - 2 * yOffset, 10, 10);
 
         // Show value
         gc.setFill(Color.BLACK);
@@ -57,5 +65,15 @@ public class Block implements Serializable {
 
     public boolean isOver() {
         return pos.y - App.TILE_SIZE / 2 >= App.SCREEN_HEIGHT;
+    }
+
+    public boolean shrink() {
+        size = App.TILE_SIZE - 5;
+        if (value == 1) {
+            return true;
+        } else {
+            value--;
+            return false;
+        }
     }
 }

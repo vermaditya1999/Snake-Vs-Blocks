@@ -27,4 +27,9 @@ public class SnakeBall implements Serializable {
     public Vector getPos() {
         return pos;
     }
+
+    public void setPos(double x, double y) {
+        pos.x = x;
+        pos.y = y;
+    }
 }

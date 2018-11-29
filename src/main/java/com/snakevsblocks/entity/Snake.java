@@ -93,10 +93,6 @@ public class Snake implements Serializable {
                 double left = bPos.x - App.TILE_SIZE / 2 - SnakeBall.RADIUS;
                 double right = bPos.x + App.TILE_SIZE / 2 + SnakeBall.RADIUS;
 
-                if (Math.abs(head.x - bPos.x) <= App.TILE_SIZE / 2 + SnakeBall.RADIUS) {
-                    // Burst the block
-                }
-
                 if (prevHeadX <= left && head.x > left) {
                     head.x = left;
                 }
@@ -104,6 +100,11 @@ public class Snake implements Serializable {
                     head.x = right;
                 }
             }
+        }
+
+        Vector headVec = snakeBalls.getFirst().getPos();
+        if (headVec.y > App.SCREEN_HEIGHT / 2 + App.TILE_SIZE) {
+            snakeBalls.getFirst().setPos(headVec.x, headVec.y - 2);
         }
 
         // Update rest of the balls
@@ -163,5 +164,14 @@ public class Snake implements Serializable {
 
     public int getLength() {
         return snakeBalls.size();
+    }
+
+    // This method must be called after adding a small burst at the snake's head pos
+    public void burstHead() {
+        snakeBalls.removeFirst();
+    }
+
+    public boolean inPos() {
+        return snakeBalls.getFirst().getPos().y <= App.SCREEN_HEIGHT / 2 + App.TILE_SIZE;
     }
 }
