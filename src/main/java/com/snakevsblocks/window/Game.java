@@ -390,7 +390,7 @@ public class Game extends Window {
         }
 
         // Update snake
-        snake.update(mouseX, mouseY);
+        snake.update(mouseX, mouseY, walls, blocks);
 
         // Update score and coin labels
         scoreLabel.update(Integer.toString(score));

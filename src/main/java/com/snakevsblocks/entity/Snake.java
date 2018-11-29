@@ -24,9 +24,8 @@ public class Snake implements Serializable {
         addBalls(9);
     }
 
-    // Linear interpolation, reference: https://en.wikipedia.org/wiki/Linear_interpolation
-    private double lerp(double v0, double v1, double t) {
-        return (1 - t) * v0 + t * v1;
+    private double lerp(double x, double y) {
+        return x + (y - x) * 0.2;
     }
 
     // Prerequisite: Snake has at least one ball
@@ -46,7 +45,7 @@ public class Snake implements Serializable {
     }
 
     // Prerequisite: Snake has at least one ball
-    public void update(double mouseX, double mouseY) {
+    public void update(double mouseX, double mouseY, LinkedList<Wall> walls, LinkedList<Block> blocks) {
 
         // Prevent half snake from leaving the screen
         if (mouseX > App.SCREEN_WIDTH - SnakeBall.RADIUS) {
@@ -58,7 +57,54 @@ public class Snake implements Serializable {
 
         // Set the coordinates of the head to the coordinates of mouse
         Vector head = snakeBalls.get(0).getPos();
-        head.x = lerp(head.x, mouseX, 0.2);
+        double prevHeadX = head.x;
+        head.x = lerp(head.x, mouseX);
+
+        // Handle collision with walls
+        for (Wall w : walls) {
+            Vector wPos = w.getPos();
+            double diff = head.y - SnakeBall.RADIUS - wPos.y;
+            if (diff <= w.getLength() && diff >= -2 * SnakeBall.RADIUS) {
+                double left = wPos.x - Wall.WIDTH / 2 - SnakeBall.RADIUS;
+                double right = wPos.x + Wall.WIDTH / 2 + SnakeBall.RADIUS;
+
+                if (Math.abs(head.x - wPos.x) <= Wall.WIDTH / 2 + SnakeBall.RADIUS) {
+                    if (head.x < wPos.x) {
+                        head.x = left;
+                    } else {
+                        head.x = right;
+                    }
+                }
+                if (prevHeadX <= left && head.x > left) {
+                    head.x = left;
+                }
+                if (prevHeadX >= right && head.x < right) {
+                    head.x = right;
+                }
+            }
+        }
+
+        // Handle collision with Blocks
+        for (Block b : blocks) {
+            Vector bPos = b.getPos();
+            double diff = head.y - SnakeBall.RADIUS - bPos.y + App.TILE_SIZE / 2;
+
+            if (diff <= App.TILE_SIZE && diff >= -2 * SnakeBall.RADIUS) {
+                double left = bPos.x - App.TILE_SIZE / 2 - SnakeBall.RADIUS;
+                double right = bPos.x + App.TILE_SIZE / 2 + SnakeBall.RADIUS;
+
+                if (Math.abs(head.x - bPos.x) <= App.TILE_SIZE / 2 + SnakeBall.RADIUS) {
+                    // Burst the block
+                }
+
+                if (prevHeadX <= left && head.x > left) {
+                    head.x = left;
+                }
+                if (prevHeadX >= right && head.x < right) {
+                    head.x = right;
+                }
+            }
+        }
 
         // Update rest of the balls
         for (int i = 1; i < snakeBalls.size(); i++) {
