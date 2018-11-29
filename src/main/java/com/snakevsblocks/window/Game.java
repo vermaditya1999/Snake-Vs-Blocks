@@ -420,12 +420,13 @@ public class Game extends Window {
                     Vector snakePos = snake.getHeadVector();
                     if (block.shrink()) {
                         blockIterator.remove();
-                        bursts.add(new LargeBurst(snakePos.x, snakePos.y));
+                        bursts.add(new LargeBurst(snakePos.x, snakePos.y - SnakeBall.RADIUS));
+                        snake.removeTail();
                     } else {
                         bursts.add(new SmallBurst(snakePos.x, snakePos.y));
+                        snake.removeHead();  // Burst snake Head
                     }
 
-                    snake.burstHead();  // Burst snake Head
                     score++;  // Increase score
                     break;
                 }

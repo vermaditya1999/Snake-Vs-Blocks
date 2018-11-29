@@ -104,7 +104,8 @@ public class Snake implements Serializable {
 
         Vector headVec = snakeBalls.getFirst().getPos();
         if (headVec.y > App.SCREEN_HEIGHT / 2 + App.TILE_SIZE) {
-            snakeBalls.getFirst().setPos(headVec.x, headVec.y - 2);
+            double y = Math.max(headVec.y - 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE);
+            snakeBalls.getFirst().setPos(headVec.x, y);
         }
 
         // Update rest of the balls
@@ -167,8 +168,12 @@ public class Snake implements Serializable {
     }
 
     // This method must be called after adding a small burst at the snake's head pos
-    public void burstHead() {
+    public void removeHead() {
         snakeBalls.removeFirst();
+    }
+
+    public void removeTail() {
+        snakeBalls.removeLast();
     }
 
     public boolean inPos() {
