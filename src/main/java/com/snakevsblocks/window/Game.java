@@ -21,7 +21,6 @@ import com.snakevsblocks.util.Random;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -481,7 +480,7 @@ public class Game extends Window {
         gc.setFill(new Color(0, 0, 0, 0.75));
         gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
-        gc.applyEffect(new BoxBlur(10, 10, 10));
+//        gc.applyEffect(new BoxBlur(10, 10, 10));
 
         backButton.show(gc);
         resumeButton.show(gc);
@@ -493,7 +492,7 @@ public class Game extends Window {
         gc.setFill(new Color(0, 0, 0, 0.75));
         gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
-        gc.applyEffect(new BoxBlur(10, 10, 10));
+//        gc.applyEffect(new BoxBlur(10, 10, 10));
         gc.setFont(Font.CONSOLAS_LARGE);
         gc.setFill(Color.WHITE);
         gc.fillText("GAME OVER", App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE);
