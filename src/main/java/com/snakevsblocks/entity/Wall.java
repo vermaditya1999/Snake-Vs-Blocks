@@ -10,6 +10,8 @@ import java.io.Serializable;
 
 public class Wall implements Serializable {
 
+    public static final double WIDTH = 6;
+
     private Vector pos;
     private double length;
 
@@ -27,7 +29,7 @@ public class Wall implements Serializable {
     }
 
     public void show(GraphicsContext gc) {
-        gc.setLineWidth(6);
+        gc.setLineWidth(Wall.WIDTH);
         gc.setStroke(Color.WHITE);
         gc.strokeLine(pos.x, pos.y, pos.x, pos.y + length);
     }
@@ -38,5 +40,13 @@ public class Wall implements Serializable {
 
     public boolean isOver() {
         return pos.y >= App.SCREEN_HEIGHT;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public Vector getPos() {
+        return pos;
     }
 }
