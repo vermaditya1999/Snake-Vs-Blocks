@@ -375,22 +375,22 @@ public class Game extends Window {
             }
         }
 
+        // Update snake
+        snake.update(mouseX, mouseY, walls, blocks);
+
         // Temporary collision of snake with blocks
         blockIterator = blocks.iterator();
         while (blockIterator.hasNext()) {
             Block block = (Block) blockIterator.next();
             Vector pos = block.getPos();
             Vector head = snake.getHeadVector();
-            if ((Math.abs(head.x - pos.x) <= App.TILE_SIZE / 2) &&
-                    Math.abs(head.y - (pos.y + App.TILE_SIZE / 2)) <= SnakeBall.RADIUS / 2) {
+            if ((Math.abs(head.x - pos.x) <= App.TILE_SIZE / 2 + SnakeBall.RADIUS) &&
+                    head.y - (pos.y + App.TILE_SIZE / 2) <= SnakeBall.RADIUS / 2 && head.y - (pos.y + App.TILE_SIZE / 2) >= 0) {
                 bursts.add(new LargeBurst(head.x, head.y - SnakeBall.RADIUS));
                 score += block.getValue();
                 blockIterator.remove();
             }
         }
-
-        // Update snake
-        snake.update(mouseX, mouseY, walls, blocks);
 
         // Update score and coin labels
         scoreLabel.update(Integer.toString(score));
