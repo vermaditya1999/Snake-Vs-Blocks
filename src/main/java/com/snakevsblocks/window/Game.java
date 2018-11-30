@@ -391,6 +391,7 @@ public class Game extends Window {
         // Update snake
         snake.update(mouseX, mouseY, walls, blocks);
 
+        // Collision of snake with Blocks when shield is active
         if (shieldIsActive) {
             blockIterator = blocks.iterator();
             while (blockIterator.hasNext()) {
@@ -406,6 +407,7 @@ public class Game extends Window {
             }
         }
 
+        // Collision of snake with blocks
         if (!snake.isDead()) {
             blockIterator = blocks.iterator();
             while (blockIterator.hasNext()) {
@@ -489,7 +491,7 @@ public class Game extends Window {
 
     private void showGameOver() {
 
-        gc.setFill(new Color(0, 0, 0, 0.75));
+        gc.setFill(new Color(0, 0, 0, 0.95));
         gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
 //        gc.applyEffect(new BoxBlur(10, 10, 10));
