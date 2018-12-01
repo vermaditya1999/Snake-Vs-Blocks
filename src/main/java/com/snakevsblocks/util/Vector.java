@@ -57,6 +57,11 @@ public class Vector implements Serializable {
         y *= m;
     }
 
+    public void lerp(Vector dest, double val) {
+        this.x += (dest.x - this.x) * val;
+        this.y += (dest.y - this.y) * val;
+    }
+
     public double mag() {
         return Math.sqrt(x * x + y * y);
     }
