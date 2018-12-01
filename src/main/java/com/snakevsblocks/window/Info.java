@@ -21,7 +21,7 @@ public class Info extends Window {
     public Info(WindowController wc, Canvas canvas) {
         super(wc, canvas);
 
-        backButton = new BlackBackButton(App.TILE_SIZE / 4 + 5, App.TILE_SIZE / 4);
+        backButton = new BlackBackButton(App.TILE_SIZE / 4 + 10, App.TILE_SIZE / 4);
     }
 
     @Override

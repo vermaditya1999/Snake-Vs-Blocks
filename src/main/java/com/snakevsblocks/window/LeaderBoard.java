@@ -34,7 +34,7 @@ public class LeaderBoard extends Window {
         super(wc, canvas);
         scorePanes = new LinkedList<ScorePane>();
 
-        backButton = new BlackBackButton(App.TILE_SIZE / 4 + 5, App.TILE_SIZE / 4);
+        backButton = new BlackBackButton(App.TILE_SIZE / 4 + 10, App.TILE_SIZE / 4);
     }
 
     public void addScore(int score) {
