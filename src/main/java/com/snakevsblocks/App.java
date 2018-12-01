@@ -13,7 +13,7 @@ import java.util.EnumMap;
 
 public class App implements WindowController {
 
-    public final static String PATH = System.getProperty("user.dir") + File.separator + ".save" + File.separator;
+    public final static String PATH = System.getProperty("user.home") + File.separator + ".SnakeVsBlocks" + File.separator;
 
     public final static int NUM_ROWS = 8;
     public final static int NUM_COLS = 5;
