@@ -1,10 +1,7 @@
 package com.snakevsblocks.window;
 
 import com.snakevsblocks.App;
-import com.snakevsblocks.entity.Block;
-import com.snakevsblocks.entity.Snake;
-import com.snakevsblocks.entity.SnakeBall;
-import com.snakevsblocks.entity.Wall;
+import com.snakevsblocks.entity.*;
 import com.snakevsblocks.entity.burst.Burst;
 import com.snakevsblocks.entity.burst.LargeBurst;
 import com.snakevsblocks.entity.burst.SmallBurst;
@@ -218,58 +215,139 @@ public class Game extends Window {
 
     private void populate() {
 
-        for (int i = 1; i <= 5; i++) {
+        // 40% chances of a full row of blocks
+        int choice = Random.nextInt(5);
 
-            // 33% chances of a block
-            int choose = Random.nextInt(3);
-            if (choose == 0) {
-                blocks.add(new Block(i, -2));
+        // Adding complete row of blocks
+        if (choice <= 1) {
+            Chain chain = new Chain(snake.getLength());
+            for (int i = 1; i <= 5; i++) {
 
-                // 20% chance of a wall, given there is a block
-                choose = Random.nextInt(5);
-                if (choose == 0) {
+                if (chain.getBlockRow().get(i - 1) != null) {
+                    blocks.add(chain.getBlockRow().get(i - 1));
+                    //blocks.add(new Block(i, -2));
 
-                    // Check any overlap of existing tokens with wall
-                    boolean flag = false;
-                    for (Token token : tokens) {
-                        Vector pos = token.getPos();
-                        if (pos.x == ((i - 1) * App.TILE_SIZE + App.TILE_SIZE / 2) &&
-                                (pos.y == -App.TILE_SIZE / 2 || pos.y == -2 * App.TILE_SIZE + App.TILE_SIZE / 2)) {
-                            flag = true;
-                            break;
+
+                    // 20% chance of a wall, given there is a block
+                    int choose = Random.nextInt(5);
+                    if (choose == 0) {
+
+                        // Check any overlap of existing tokens with wall
+                        boolean flag = false;
+                        for (Token token : tokens) {
+                            Vector pos = token.getPos();
+                            if (pos.x == ((i - 1) * App.TILE_SIZE + App.TILE_SIZE / 2) &&
+                                    (pos.y == -App.TILE_SIZE / 2 || pos.y == -2 * App.TILE_SIZE + App.TILE_SIZE / 2)) {
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if (!flag) {
+                            walls.add(new Wall(i, -2));
                         }
                     }
-                    if (!flag) {
-                        walls.add(new Wall(i, -2));
-                    }
-                }
-            } else {
+                } else {
 
-                // No Block/ Wall has been added, a token can be added
-                choose = Random.nextInt(15);
-                if (choose == 1) {
-                    choose = Random.nextInt(5);
-                    switch (choose) {
-                        case 0:
-                            tokens.add(new Shield(i, -2));
-                            break;
-                        case 1:
-                            tokens.add(new Magnet(i, -2));
-                            break;
-                        case 2:
-                            tokens.add(new PickupBall(i, -2));
-                            break;
-                        case 3:
-                            tokens.add(new Destroyer(i, -2));
-                            break;
-                        case 4:
-                            tokens.add(new Coin(i, -2));
-                            break;
+                    // No Block/ Wall has been added, a token can be added
+                    /* Probabilities of tokens:
+                     * Shield : 0.2%
+                     * Magnet : 0.2%
+                     * Destroyer : 0.2%
+                     * Coin : 2%
+                     * PickupBall : 4%
+                     */
+
+                    int choose = Random.nextInt(1000);
+
+                    if (choose <= 1) {
+                        tokens.add(new Shield(i, -2));
+                        break;
+
+                    } else if (choose <= 3) {
+                        tokens.add(new Magnet(i, -2));
+                        break;
+
+                    } else if (choose <= 5) {
+                        tokens.add(new Destroyer(i, -2));
+                        break;
+
+                    } else if (choose <= 25) {
+                        tokens.add(new Coin(i, -2));
+                        break;
+
+                    } else if (choose <= 85) {
+                        tokens.add(new PickupBall(i, -2));
+                        break;
                     }
                 }
             }
+
+            // 60% chances of partial row of blocks
+        } else {
+            for (int i = 1; i <= 5; i++) {
+
+                // 33% chances of a block
+                int choose = Random.nextInt(3);
+                if (choose == 0) {
+                    blocks.add(new Block(i, -2));
+
+                    // 20% chance of a wall, given there is a block
+                    choose = Random.nextInt(5);
+                    if (choose == 0) {
+
+                        // Check any overlap of existing tokens with wall
+                        boolean flag = false;
+                        for (Token token : tokens) {
+                            Vector pos = token.getPos();
+                            if (pos.x == ((i - 1) * App.TILE_SIZE + App.TILE_SIZE / 2) &&
+                                    (pos.y == -App.TILE_SIZE / 2 || pos.y == -2 * App.TILE_SIZE + App.TILE_SIZE / 2)) {
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if (!flag) {
+                            walls.add(new Wall(i, -2));
+                        }
+                    }
+                } else {
+
+                    // No Block/ Wall has been added, a token can be added
+                    /* Probabilities of tokens:
+                     * Shield : 0.2%
+                     * Magnet : 0.2%
+                     * Destroyer : 0.2%
+                     * Coin : 2%
+                     * PickupBall : 4%
+                     */
+
+                    choose = Random.nextInt(1000);
+
+                    if (choose <= 1) {
+                        tokens.add(new Shield(i, -2));
+                        break;
+
+                    } else if (choose <= 3) {
+                        tokens.add(new Magnet(i, -2));
+                        break;
+
+                    } else if (choose <= 5) {
+                        tokens.add(new Destroyer(i, -2));
+                        break;
+
+                    } else if (choose <= 25) {
+                        tokens.add(new Coin(i, -2));
+                        break;
+
+                    } else if (choose <= 85) {
+                        tokens.add(new PickupBall(i, -2));
+                        break;
+                    }
+                }
+
+            }
         }
     }
+
 
     private void updateGame() {
         trigger += speed;
@@ -279,32 +357,32 @@ public class Game extends Window {
         } else if (trigger % App.TILE_SIZE == 0) {
 
             /* Probabilities of tokens:
-             * Shield : 0.5%
-             * Magnet : 0.5%
-             * Destroyer : 0.5%
+             * Shield : 0.2%
+             * Magnet : 0.2%
+             * Destroyer : 0.2%
              * Coin : 2%
-             * PickupBall : 4%
+             * PickupBall : 6%
              */
             for (int i = 1; i <= 5; i++) {
-                int choose = Random.nextInt(200);
+                int choose = Random.nextInt(1000);
 
-                if (choose == 0) {
+                if (choose <= 1) {
                     tokens.add(new Shield(i, -2));
                     break;
 
-                } else if (choose == 1) {
+                } else if (choose <= 3) {
                     tokens.add(new Magnet(i, -2));
                     break;
 
-                } else if (choose == 2) {
+                } else if (choose <= 5) {
                     tokens.add(new Destroyer(i, -2));
                     break;
 
-                } else if (choose <= 6) {
+                } else if (choose <= 25) {
                     tokens.add(new Coin(i, -2));
                     break;
 
-                } else if (choose <= 14) {
+                } else if (choose <= 85) {
                     tokens.add(new PickupBall(i, -2));
                     break;
                 }

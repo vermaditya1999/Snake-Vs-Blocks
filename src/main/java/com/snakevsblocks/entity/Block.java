@@ -76,4 +76,8 @@ public class Block implements Serializable {
             return false;
         }
     }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
 }
