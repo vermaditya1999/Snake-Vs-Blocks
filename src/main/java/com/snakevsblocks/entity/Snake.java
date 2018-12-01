@@ -56,7 +56,7 @@ public class Snake implements Serializable {
         }
 
         // Set the coordinates of the head to the coordinates of mouse
-        Vector head = snakeBalls.get(0).getPos();
+        Vector head = snakeBalls.getFirst().getPos();
         double prevHeadX = head.x;
         head.x = lerp(head.x, mouseX);
 
@@ -84,7 +84,7 @@ public class Snake implements Serializable {
             }
         }
 
-        // Handle collision with Blocks
+        // Handle side collision with Blocks
         for (Block b : blocks) {
             Vector bPos = b.getPos();
             double diff = head.y - SnakeBall.RADIUS - bPos.y + App.TILE_SIZE / 2;
@@ -102,10 +102,10 @@ public class Snake implements Serializable {
             }
         }
 
-        Vector headVec = snakeBalls.getFirst().getPos();
-        if (headVec.y > App.SCREEN_HEIGHT / 2 + App.TILE_SIZE) {
-            double y = Math.max(headVec.y - 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE);
-            snakeBalls.getFirst().setPos(headVec.x, y);
+        // Prevent snake from going above its line
+        if (head.y > App.SCREEN_HEIGHT / 2 + App.TILE_SIZE) {
+            double y = Math.max(head.y - 2, App.SCREEN_HEIGHT / 2 + App.TILE_SIZE);
+            snakeBalls.getFirst().setPos(head.x, y);
         }
 
         // Update rest of the balls
