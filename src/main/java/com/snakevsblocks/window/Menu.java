@@ -46,10 +46,8 @@ public class Menu extends Window {
     public Menu(WindowController wc, Canvas canvas) {
         super(wc, canvas);
 
-        // Set temporary value for demonstration
-        prevScore = 0;
+        prevScore = -1;  // -1 indicates that no game has been completed
 
-        // Set temporary value for demonstration
         savedGame = false;
 
         // Initialize the menuButtons HashMap
@@ -160,21 +158,23 @@ public class Menu extends Window {
         gc.fillText("vs", App.SCREEN_WIDTH / 2, App.TILE_SIZE * 1.75);
         gc.fillText("Blocks", App.SCREEN_WIDTH / 2, App.TILE_SIZE * 2.5);
 
-        // Show previous score
-        gc.setFont(Font.MUSEO);
-        gc.setFill(Menu.FG_COLOR);
-        gc.fillText(Integer.toString(prevScore), App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
+        if (prevScore != -1) {
+            // Show previous score
+            gc.setFont(Font.MUSEO);
+            gc.setFill(Menu.FG_COLOR);
+            gc.fillText(Integer.toString(prevScore), App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
 
-        // Show the horizontal rule, how to change its length with width of the prevScore?
-        gc.setLineWidth(2.0);
-        gc.setStroke(Menu.FG_COLOR);
-        gc.beginPath();
-        gc.moveTo(0, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
-        gc.lineTo(App.TILE_SIZE * 1.5, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
-        gc.moveTo(App.SCREEN_WIDTH, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
-        gc.lineTo(App.SCREEN_WIDTH - App.TILE_SIZE * 1.5, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
-        gc.stroke();
-        gc.closePath();
+            // Show the horizontal rule, how to change its length with width of the prevScore?
+            gc.setLineWidth(2.0);
+            gc.setStroke(Menu.FG_COLOR);
+            gc.beginPath();
+            gc.moveTo(0, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
+            gc.lineTo(App.TILE_SIZE * 1.5, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
+            gc.moveTo(App.SCREEN_WIDTH, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
+            gc.lineTo(App.SCREEN_WIDTH - App.TILE_SIZE * 1.5, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE / 3);
+            gc.stroke();
+            gc.closePath();
+        }
 
         // Show Menu buttons
         entries = menuButtons.entrySet().iterator();
