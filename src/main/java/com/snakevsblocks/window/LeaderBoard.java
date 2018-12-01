@@ -20,7 +20,7 @@ import java.util.LinkedList;
 
 public class LeaderBoard extends Window {
 
-    public static final String PATH = App.PATH + "lb.ser";
+    public static final String PATH = App.PATH + "leaderboard.ser";
 
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
