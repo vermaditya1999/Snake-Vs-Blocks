@@ -1,4 +1,4 @@
-package com.snakevsblocks.gui;
+package com.snakevsblocks.gui.timer;
 
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
