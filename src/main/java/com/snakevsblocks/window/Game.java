@@ -9,6 +9,8 @@ import com.snakevsblocks.entity.burst.Burst;
 import com.snakevsblocks.entity.burst.LargeBurst;
 import com.snakevsblocks.entity.burst.SmallBurst;
 import com.snakevsblocks.entity.token.*;
+import com.snakevsblocks.gui.MagnetTimer;
+import com.snakevsblocks.gui.ShieldTimer;
 import com.snakevsblocks.gui.button.BackButton;
 import com.snakevsblocks.gui.button.RestartButton;
 import com.snakevsblocks.gui.button.ResumeButton;
@@ -46,9 +48,6 @@ public class Game extends Window {
     private boolean paused;
     private boolean gameOver;
 
-    private int shieldDuration;
-    private int magnetDuration;
-
     private Snake snake;
 
     private LinkedList<Burst> bursts;
@@ -59,6 +58,9 @@ public class Game extends Window {
     private Label scoreLabel;
     private Label coinLabel;
 
+    private ShieldTimer shieldTimer;
+    private MagnetTimer magnetTimer;
+
     private BackButton backButton;
     private ResumeButton resumeButton;
     private RestartButton restartButton;
@@ -68,6 +70,9 @@ public class Game extends Window {
 
         scoreLabel = new ScoreLabel();
         coinLabel = new CoinLabel();
+
+        shieldTimer = new ShieldTimer();
+        magnetTimer = new MagnetTimer();
 
         resumeButton = new ResumeButton(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
         backButton = new WhiteBackButton(App.TILE_SIZE / 2, App.TILE_SIZE / 2);
@@ -191,9 +196,6 @@ public class Game extends Window {
 
         paused = false;
         gameOver = false;
-
-        shieldDuration = 0;
-        magnetDuration = 0;
 
         mouseX = App.SCREEN_WIDTH / 2;
 
@@ -359,9 +361,9 @@ public class Game extends Window {
                         }
                     }
                 } else if (token instanceof Magnet) {
-                    magnetDuration = 300;  // 5 seconds at 60 FPS
+                    magnetTimer.reset();
                 } else if (token instanceof Shield) {
-                    shieldDuration = 300;  // 5 seconds at 60 FPs
+                    shieldTimer.reset();
                 }
 
                 // Add SmallBurst
@@ -383,7 +385,7 @@ public class Game extends Window {
         snake.update(mouseX, mouseY, walls, blocks);
 
         // Collision of snake with Blocks when shield is active
-        if (shieldDuration > 0) {
+        if (shieldTimer.isActive()) {
             blockIterator = blocks.iterator();
             while (blockIterator.hasNext()) {
                 Block block = (Block) blockIterator.next();
@@ -396,11 +398,11 @@ public class Game extends Window {
                     blockIterator.remove();
                 }
             }
-            shieldDuration--;
+            shieldTimer.update();
         }
 
         // Attract coins when magnet is active
-        if (magnetDuration > 0) {
+        if (magnetTimer.isActive()) {
             tokenIterator = tokens.iterator();
             while (tokenIterator.hasNext()) {
                 Token token = (Token) tokenIterator.next();
@@ -413,7 +415,7 @@ public class Game extends Window {
                     }
                 }
             }
-            magnetDuration--;
+            magnetTimer.update();
         }
 
         // Horizontal Collision of snake with blocks
@@ -481,6 +483,15 @@ public class Game extends Window {
         // Show Labels
         scoreLabel.show(gc);
         coinLabel.show(gc);
+
+        // Show Timers
+        if (shieldTimer.isActive()) {
+            shieldTimer.run(gc);
+        }
+
+        if (magnetTimer.isActive()) {
+            magnetTimer.run(gc);
+        }
 
         // Run bursts
         runBursts();
