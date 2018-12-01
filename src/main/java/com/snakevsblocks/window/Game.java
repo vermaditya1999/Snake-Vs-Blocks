@@ -267,8 +267,17 @@ public class Game extends Window {
     private void updateGame() {
         trigger += curSpeed;
         if (trigger % (App.TILE_SIZE * 3) == 0) {
-            populate();
             trigger = 0;
+            populate();
+
+            // Set gameSpeed
+            if (snake.getLength() >= 100) {
+                gameSpeed = 8;
+            } else if (snake.getLength() >= 50) {
+                gameSpeed = 6;
+            } else {
+                gameSpeed = 4;
+            }
         } else if (trigger % App.TILE_SIZE == 0) {
 
             /* Probabilities of tokens:
