@@ -1,11 +1,15 @@
 package com.snakevsblocks.gui.timer;
 
+import com.snakevsblocks.App;
+import com.snakevsblocks.entity.Wall;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 
 abstract public class Timer {
 
     public final static double MAX_VAL = 300;  // 5 seconds at 60 FPS
+    public final static double BAR_WIDTH = App.TILE_SIZE;
+    public final static double BAR_HEIGHT = Wall.WIDTH;
 
     protected Vector pos;
     protected double val;
