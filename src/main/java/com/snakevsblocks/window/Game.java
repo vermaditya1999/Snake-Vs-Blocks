@@ -361,7 +361,7 @@ public class Game extends Window {
                 } else if (token instanceof Magnet) {
                     magnetDuration = 300;  // 5 seconds at 60 FPS
                 } else if (token instanceof Shield) {
-                    shieldDuration = 300; // 5 seconds at 60 FPs
+                    shieldDuration = 300;  // 5 seconds at 60 FPs
                 }
 
                 // Add SmallBurst
@@ -401,7 +401,18 @@ public class Game extends Window {
 
         // Attract coins when magnet is active
         if (magnetDuration > 0) {
-
+            tokenIterator = tokens.iterator();
+            while (tokenIterator.hasNext()) {
+                Token token = (Token) tokenIterator.next();
+                if (token instanceof Coin) {
+                    Coin coin = (Coin) token;
+                    Vector snakePos = snake.getHeadVector();
+                    Vector coinPos = coin.getPos();
+                    if (Math.abs(coinPos.y - snakePos.y) <= App.TILE_SIZE && Math.abs(coinPos.x - snakePos.x) <= App.SCREEN_WIDTH / 2) {
+                        coin.attract(snake.getHeadVector());
+                    }
+                }
+            }
             magnetDuration--;
         }
 

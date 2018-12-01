@@ -1,6 +1,7 @@
 package com.snakevsblocks.entity.token;
 
 import com.snakevsblocks.util.Image;
+import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -12,6 +13,10 @@ public class Coin extends Token {
 
     public void update(double speed) {
         pos.y += speed;
+    }
+
+    public void attract(Vector pos) {
+        this.pos.lerp(pos, 0.25);
     }
 
     @Override
