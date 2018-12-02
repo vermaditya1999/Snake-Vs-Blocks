@@ -8,7 +8,6 @@ public class Image {
     private static javafx.scene.image.Image SHIELD = new javafx.scene.image.Image("img/shield.png");
     private static javafx.scene.image.Image STAR = new javafx.scene.image.Image("img/star.png");
 
-
     private static javafx.scene.image.Image B_BACK = new javafx.scene.image.Image("img/back-black.png");
     private static javafx.scene.image.Image W_BACK = new javafx.scene.image.Image("img/back-white.png");
     private static javafx.scene.image.Image RESTART = new javafx.scene.image.Image("img/restart.png");

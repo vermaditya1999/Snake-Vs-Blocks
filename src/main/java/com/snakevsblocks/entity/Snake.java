@@ -140,7 +140,7 @@ public class Snake implements Serializable {
         }
     }
 
-    public void show(GraphicsContext gc) {
+    public void show(GraphicsContext gc, int[] color) {
         if (!isDead()) {
             Vector head = snakeBalls.get(0).getPos();
             gc.setFont(Font.CONSOLAS_XSMALL);
@@ -149,7 +149,7 @@ public class Snake implements Serializable {
 
             // Show all the balls
             for (SnakeBall snakeBall : snakeBalls) {
-                snakeBall.show(gc);
+                snakeBall.show(gc, color);
             }
         }
     }
