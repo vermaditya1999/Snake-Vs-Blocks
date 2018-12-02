@@ -31,41 +31,123 @@ import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/**
+ * This class is used to create the game window.
+ */
 public class Game extends Window {
 
+    /**
+     * The path to save the serialized files.
+     */
     public static final String PATH = App.PATH + "game.ser";
 
     public static final Color BG_COLOR = Color.rgb(23, 29, 43);
 
+    /**
+     * Current score of the game.
+     */
     private int score;
+
+    /**
+     * Coins collected in the current game.
+     */
     private int coins;
+
+    /**
+     * Current speed of the game.
+     */
     private int curSpeed;
+
+    /**
+     * Desired speed of the game.
+     */
     private int gameSpeed;
 
+    /**
+     * This variable is used to populate the game with entities after every fixed distance.
+     */
     private int trigger;
+
+    /**
+     * True if game is paused.
+     */
     private boolean paused;
+
+    /**
+     * True if game is over.
+     */
     private boolean gameOver;
+
+    /**
+     * True if chain has been added.
+     */
     private boolean chainAdded;
 
+    /**
+     * Snake of the game.
+     */
     private Snake snake;
+
+    /**
+     * Current snake color.
+     */
     private int[] snakeColor;
 
+    /**
+     * This collections holds the bursts.
+     */
     private LinkedList<Burst> bursts;
+
+    /**
+     * This collection holds the blocks.
+     */
     private LinkedList<Block> blocks;
+
+    /**
+     * This collection holds the walls.
+     */
     private LinkedList<Wall> walls;
+
+    /**
+     * This collection holds the tokens.
+     */
     private LinkedList<Token> tokens;
 
+    /**
+     * The score label.
+     */
     private Label scoreLabel;
+
+    /**
+     * The coin label.
+     */
     private Label coinLabel;
 
+    /**
+     * The shield timer.
+     */
     private ShieldTimer shieldTimer;
+
+    /**
+     * The magnet timer.
+     */
     private MagnetTimer magnetTimer;
+
+    /**
+     * The star timer.
+     */
     private StarTimer starTimer;
 
     private BackButton backButton;
     private ResumeButton resumeButton;
     private RestartButton restartButton;
 
+    /**
+     * Creates a new Game Window.
+     *
+     * @param wc     The window controller.
+     * @param canvas The canvas.
+     */
     public Game(WindowController wc, Canvas canvas) {
         super(wc, canvas);
 
@@ -189,6 +271,9 @@ public class Game extends Window {
         }
     }
 
+    /**
+     * This methods loads a new game.
+     */
     public void loadNewGame() {
         coins = 0;
         score = 0;
@@ -216,6 +301,9 @@ public class Game extends Window {
         populate();
     }
 
+    /**
+     * This methods populates the game with entities.
+     */
     private void populate() {
 
         /*
@@ -369,6 +457,9 @@ public class Game extends Window {
         }
     }
 
+    /**
+     * This methods updates the game.
+     */
     private void updateGame() {
 
         // Set game speed
@@ -591,6 +682,9 @@ public class Game extends Window {
         coinLabel.update(Integer.toString(coins));
     }
 
+    /**
+     * This method shows the game play.
+     */
     private void showGamePlay() {
 
         // Set background
@@ -636,6 +730,9 @@ public class Game extends Window {
         runBursts();
     }
 
+    /**
+     * This methods shows the pause overlay.
+     */
     private void showPauseOverlay() {
 
         gc.setFill(new Color(0, 0, 0, 0.75));
@@ -646,6 +743,9 @@ public class Game extends Window {
         restartButton.show(gc);
     }
 
+    /**
+     * This methods show the game over overlay.
+     */
     private void showGameOver() {
 
         gc.setFill(new Color(0, 0, 0, 0.95));
@@ -663,6 +763,9 @@ public class Game extends Window {
         restartButton.show(gc);
     }
 
+    /**
+     * This methods is used to run the bursts.
+     */
     private void runBursts() {
         gc.setFill(Color.WHITE);
         Iterator burstIterator = bursts.iterator();
@@ -676,6 +779,9 @@ public class Game extends Window {
         }
     }
 
+    /**
+     * Serialize the window.
+     */
     public void serialize() {
         ObjectOutputStream out = null;
         try {
@@ -692,6 +798,10 @@ public class Game extends Window {
         }
     }
 
+    /**
+     * Set the snake color.
+     * @param snakeColor the snake color.
+     */
     public void setSnakeColor(int[] snakeColor) {
         this.snakeColor = snakeColor;
     }
