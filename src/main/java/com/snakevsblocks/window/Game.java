@@ -18,6 +18,7 @@ import com.snakevsblocks.gui.label.Label;
 import com.snakevsblocks.gui.label.ScoreLabel;
 import com.snakevsblocks.gui.timer.MagnetTimer;
 import com.snakevsblocks.gui.timer.ShieldTimer;
+import com.snakevsblocks.gui.timer.StarTimer;
 import com.snakevsblocks.util.Font;
 import com.snakevsblocks.util.Random;
 import com.snakevsblocks.util.Vector;
@@ -60,6 +61,7 @@ public class Game extends Window {
 
     private ShieldTimer shieldTimer;
     private MagnetTimer magnetTimer;
+    private StarTimer starTimer;
 
     private BackButton backButton;
     private ResumeButton resumeButton;
@@ -73,6 +75,7 @@ public class Game extends Window {
 
         shieldTimer = new ShieldTimer();
         magnetTimer = new MagnetTimer();
+        starTimer = new StarTimer();
 
         resumeButton = new ResumeButton(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
         backButton = new WhiteBackButton(App.TILE_SIZE / 2, App.TILE_SIZE / 2);
@@ -190,11 +193,10 @@ public class Game extends Window {
     public void loadNewGame() {
         coins = 0;
         score = 0;
+        curSpeed = gameSpeed;
+        gameSpeed = 4;
 
         trigger = 0;
-        gameSpeed = 4;
-        curSpeed = gameSpeed;
-
         paused = false;
         gameOver = false;
 
@@ -209,6 +211,7 @@ public class Game extends Window {
 
         shieldTimer.reset();
         magnetTimer.reset();
+        starTimer.reset();
 
         populate();
     }
@@ -269,18 +272,30 @@ public class Game extends Window {
     }
 
     private void updateGame() {
+
+        // Set game speed
+        if (starTimer.isActive()) {
+            gameSpeed = 12;
+        } else if (snake.getLength() >= 100) {
+            gameSpeed = 8;
+        } else if (snake.getLength() >= 50) {
+            gameSpeed = 6;
+        } else {
+            gameSpeed = 4;
+        }
+
+        if (!snake.isDead() && !snake.inPos()) {
+            curSpeed = 0;
+        } else {
+            curSpeed = gameSpeed;
+        }
+
         trigger += curSpeed;
+        if (trigger > App.TILE_SIZE * 3) {
+            trigger = 0;
+        }
         if (trigger % (App.TILE_SIZE * 3) == 0) {
             populate();
-
-            // Set gameSpeed
-            if (snake.getLength() >= 100) {
-                gameSpeed = 8;
-            } else if (snake.getLength() >= 50) {
-                gameSpeed = 6;
-            } else {
-                gameSpeed = 4;
-            }
             trigger = 0;
         } else if (trigger % App.TILE_SIZE == 0) {
 
@@ -312,6 +327,9 @@ public class Game extends Window {
 
                 } else if (choose <= 14) {
                     tokens.add(new PickupBall(i, -2));
+                    break;
+                } else if (choose <= 16) {
+                    tokens.add(new Star(i, -2));
                     break;
                 }
             }
@@ -377,6 +395,8 @@ public class Game extends Window {
                     magnetTimer.set();
                 } else if (token instanceof Shield) {
                     shieldTimer.set();
+                } else if (token instanceof Star) {
+                    starTimer.set();
                 }
 
                 // Add SmallBurst
@@ -397,8 +417,8 @@ public class Game extends Window {
         // Update snake
         snake.update(mouseX, mouseY, walls, blocks);
 
-        // Collision of snake with Blocks when shield is active
-        if (shieldTimer.isActive()) {
+        // Collision of snake with Blocks when shield or star is active
+        if (shieldTimer.isActive() || starTimer.isActive()) {
             blockIterator = blocks.iterator();
             while (blockIterator.hasNext()) {
                 Block block = (Block) blockIterator.next();
@@ -411,7 +431,14 @@ public class Game extends Window {
                     blockIterator.remove();
                 }
             }
+        }
+
+        if (shieldTimer.isActive()) {
             shieldTimer.update();
+        }
+
+        if (starTimer.isActive()) {
+            starTimer.update();
         }
 
         // Attract coins when magnet is active
@@ -458,12 +485,6 @@ public class Game extends Window {
             }
         }
 
-        if (!snake.isDead() && !snake.inPos()) {
-            curSpeed = 0;
-        } else {
-            curSpeed = gameSpeed;
-        }
-
         // Update score and coin labels
         scoreLabel.update(Integer.toString(score));
         coinLabel.update(Integer.toString(coins));
@@ -504,6 +525,10 @@ public class Game extends Window {
 
         if (magnetTimer.isActive()) {
             magnetTimer.run(gc);
+        }
+
+        if (starTimer.isActive()) {
+            starTimer.run(gc);
         }
 
         // Run bursts
