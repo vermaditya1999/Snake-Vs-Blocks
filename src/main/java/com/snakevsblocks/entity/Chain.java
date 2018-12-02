@@ -28,7 +28,7 @@ public class Chain {
             }
         }
 
-        if (minValue >= snakeLength / 2) {
+        if (minValue >= snakeLength) {
             blockRow.get(minIndex).setValue(snakeLength/2);
 
             if (snakeLength == 1) {
