@@ -21,7 +21,7 @@ public class Wall implements Serializable {
         pos = new Vector((x - 1) * App.TILE_SIZE + App.TILE_SIZE / 2, y * App.TILE_SIZE);
         length = App.TILE_SIZE;
 
-        // 30% chances of double length wall
+        // 33% chances of double length wall
         int choose = Random.nextInt(3);
         if (choose == 1) {
             length += App.TILE_SIZE;
