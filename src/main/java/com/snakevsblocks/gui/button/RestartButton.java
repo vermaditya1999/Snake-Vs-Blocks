@@ -4,10 +4,22 @@ import com.snakevsblocks.App;
 import com.snakevsblocks.util.Image;
 import javafx.scene.canvas.GraphicsContext;
 
+/**
+ * This class is used to create the Restart Button.
+ */
 public class RestartButton extends Button {
 
+    /**
+     * Size of the button.
+     */
     private double size;
 
+    /**
+     * Creates an new Restart Button.
+     *
+     * @param x x coordinate.
+     * @param y y coordinate.
+     */
     public RestartButton(double x, double y) {
         super(x, y);
         size = App.TILE_SIZE;

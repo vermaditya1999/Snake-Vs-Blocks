@@ -1,5 +1,8 @@
 package com.snakevsblocks.util;
 
+/**
+ * This class contains the static Image objects used to avoid the creation of image objects repeatedly across the application.
+ */
 public class Image {
 
     private static javafx.scene.image.Image COIN = new javafx.scene.image.Image("img/coin.png");

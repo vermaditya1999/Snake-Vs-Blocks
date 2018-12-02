@@ -18,13 +18,30 @@ import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * Menu class.
+ * This window is the first window shown in the Application. User has the option to goto different Windows from here.
+ */
 public class Menu extends Window {
 
+    /**
+     * Path to save the serialized file.
+     */
     public static final String PATH = App.PATH + "menu.ser";
 
+    /**
+     * Background color of the window.
+     */
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
+
+    /**
+     * Foreground color of the window.
+     */
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
 
+    /**
+     * Menu buttons enum holds the named constants of all the Menu Buttons.
+     */
     private enum MenuButtons {
         RESUME_GAME,
         START_GAME,
@@ -32,13 +49,19 @@ public class Menu extends Window {
         EXIT
     }
 
-    // ArrayList to hold all menu buttons
+    /**
+     * ArrayList to hold all menu buttons.
+     */
     private EnumMap<MenuButtons, MenuButton> menuButtons;
 
-    // Boolean variable true if a saved game is available
+    /**
+     * Boolean variable true if a saved game is available.
+     */
     private boolean savedGame;
 
-    // Score of the previous game
+    /**
+     * Score of the previous game.
+     */
     private int prevScore;
 
     // Info button
@@ -47,6 +70,12 @@ public class Menu extends Window {
     // Store button
     private StoreButton storeButton;
 
+    /**
+     * Creates a new Menu window.
+     *
+     * @param wc     The window controller.
+     * @param canvas The canvas.
+     */
     public Menu(WindowController wc, Canvas canvas) {
         super(wc, canvas);
 
@@ -67,6 +96,9 @@ public class Menu extends Window {
         storeButton = new StoreButton(App.SCREEN_WIDTH - App.TILE_SIZE / 2, App.TILE_SIZE / 3);
     }
 
+    /**
+     * Initialize or reinitialize the menu buttons.
+     */
     public void initButtons() {
 
         menuButtons.clear();
@@ -200,14 +232,25 @@ public class Menu extends Window {
         storeButton.show(gc);
     }
 
+    /**
+     * Set score of the previous played game.
+     * @param prevScore The previous score.
+     */
     public void setPrevScore(int prevScore) {
         this.prevScore = prevScore;
     }
 
+    /**
+     * Boolean to check if there is a saved game available.
+     * @param savedGame true if there is a saved game available.
+     */
     public void setSavedGame(boolean savedGame) {
         this.savedGame = savedGame;
     }
 
+    /**
+     * Serialize the window.
+     */
     public void serialize() {
         ObjectOutputStream out = null;
         try {

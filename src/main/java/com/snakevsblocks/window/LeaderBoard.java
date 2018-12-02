@@ -18,18 +18,45 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
+/**
+ * This window shows the top ten scores of all the games played.
+ */
 public class LeaderBoard extends Window {
 
+    /**
+     * Path to save the serialized file.
+     */
     public static final String PATH = App.PATH + "leaderboard.ser";
 
+    /**
+     * Background color of the window.
+     */
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
+
+    /**
+     * Foreground color of the window.
+     */
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
+
+    /**
+     * Maximum number of scores to be shown.
+     */
     private static final int MAX_SIZE = 10;
 
+    /**
+     * This collections holds all the scorepanes of the scores.
+     *
+     * @see ScorePane
+     */
     private LinkedList<ScorePane> scorePanes;
 
     private BackButton backButton;
 
+    /**
+     * Creates a new Leaderboard window.
+     * @param wc The window controller.
+     * @param canvas The canvas.
+     */
     public LeaderBoard(WindowController wc, Canvas canvas) {
         super(wc, canvas);
         scorePanes = new LinkedList<ScorePane>();
@@ -37,6 +64,10 @@ public class LeaderBoard extends Window {
         backButton = new BlackBackButton(App.TILE_SIZE / 4 + 10, App.TILE_SIZE / 4);
     }
 
+    /**
+     * The the score to the Leaderboard.
+     * @param score the score to be added.
+     */
     public void addScore(int score) {
 
         // Get current date
@@ -141,6 +172,9 @@ public class LeaderBoard extends Window {
         backButton.show(gc);
     }
 
+    /**
+     * Serialize the window.
+     */
     public void serialize() {
         ObjectOutputStream out = null;
         try {

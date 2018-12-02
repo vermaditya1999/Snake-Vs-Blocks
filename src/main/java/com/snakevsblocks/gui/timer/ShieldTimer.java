@@ -6,8 +6,14 @@ import com.snakevsblocks.util.Image;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/**
+ * Timer for shield.
+ */
 public class ShieldTimer extends Timer {
 
+    /**
+     * Creates a new shield timer.
+     */
     public ShieldTimer() {
         super(App.SCREEN_WIDTH / 2 - App.TILE_SIZE / 2, App.TILE_SIZE);
     }

@@ -1,31 +1,57 @@
 package com.snakevsblocks.window;
 
 import com.snakevsblocks.App;
-import com.snakevsblocks.entity.SnakeBall;
+import com.snakevsblocks.entity.token.Token;
 import com.snakevsblocks.gui.button.BackButton;
 import com.snakevsblocks.gui.button.BlackBackButton;
 import com.snakevsblocks.gui.button.BuyButton;
 import com.snakevsblocks.util.Font;
+import com.snakevsblocks.util.Image;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Store class.
+ * This window gives the user the option to choose different skins for the snake, buying them with the coins.
+ */
 public class Store extends Window {
 
+    /**
+     * Path to save the serialized file.
+     */
     public static final String PATH = App.PATH + "store.ser";
 
+    /**
+     * Background color of the window.
+     */
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
+
+    /**
+     * Foreground color of the window.
+     */
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
 
+    /**
+     * Total coins collected from the beginning of the game.
+     */
     private int coins;
+
+    /**
+     * The current color of the snake.
+     */
     private int[] snakeColor;
 
+    /**
+     * Back-button go back to Menu.
+     */
     private BackButton backButton;
     private BuyButton one;
     private BuyButton two;
@@ -35,6 +61,11 @@ public class Store extends Window {
 
     private BuyButton curSelectedbtn;
 
+    /**
+     * Creates a new store.
+     * @param wc The window Controller.
+     * @param canvas The canvas.
+     */
     public Store(WindowController wc, Canvas canvas) {
         super(wc, canvas);
 
@@ -42,14 +73,14 @@ public class Store extends Window {
         backButton = new BlackBackButton(App.TILE_SIZE / 4 + 10, App.TILE_SIZE / 4);
 
         one = new BuyButton(App.TILE_SIZE * 2.5, BuyButton.ButtonState.SELECTED, 0, new int[]{150, 204, 208}, "Egg Blue");
-        two = new BuyButton(App.TILE_SIZE * 3.5, BuyButton.ButtonState.NA, 1, new int[]{194, 232, 18}, "Bitter Lemon");
-        three = new BuyButton(App.TILE_SIZE * 4.5, BuyButton.ButtonState.NA, 2, new int[]{176, 132, 204}, "African Violet");
-        four = new BuyButton(App.TILE_SIZE * 5.5, BuyButton.ButtonState.NA, 3, new int[]{237, 180, 88}, "Sunray");
-        five = new BuyButton(App.TILE_SIZE * 6.5, BuyButton.ButtonState.NA, 4, new int[]{219, 84, 97}, "Terra Cotta");
+        two = new BuyButton(App.TILE_SIZE * 3.5, BuyButton.ButtonState.NA, 10, new int[]{194, 232, 18}, "Bitter Lemon");
+        three = new BuyButton(App.TILE_SIZE * 4.5, BuyButton.ButtonState.NA, 20, new int[]{176, 132, 204}, "African Violet");
+        four = new BuyButton(App.TILE_SIZE * 5.5, BuyButton.ButtonState.NA, 30, new int[]{237, 180, 88}, "Sunray");
+        five = new BuyButton(App.TILE_SIZE * 6.5, BuyButton.ButtonState.NA, 40, new int[]{219, 84, 97}, "Terra Cotta");
 
         curSelectedbtn = one;
         snakeColor = one.getColor();
-        SnakeBall.COLOR = snakeColor;
+        windowController.setSnakeColor(snakeColor);
     }
 
     /**
@@ -135,7 +166,7 @@ public class Store extends Window {
                         curSelectedbtn.setState(BuyButton.ButtonState.SELECT);
                         one.setState(BuyButton.ButtonState.SELECTED);
                         snakeColor = one.getColor();
-                        SnakeBall.COLOR = snakeColor;
+                        windowController.setSnakeColor(snakeColor);
                         curSelectedbtn = one;
                         refreshButtons();
                         serialize();
@@ -143,7 +174,7 @@ public class Store extends Window {
                         curSelectedbtn.setState(BuyButton.ButtonState.SELECT);
                         one.setState(BuyButton.ButtonState.SELECTED);
                         snakeColor = one.getColor();
-                        SnakeBall.COLOR = snakeColor;
+                        windowController.setSnakeColor(snakeColor);
                         curSelectedbtn = one;
                         serialize();
                     }
@@ -153,7 +184,7 @@ public class Store extends Window {
                         curSelectedbtn.setState(BuyButton.ButtonState.SELECT);
                         two.setState(BuyButton.ButtonState.SELECTED);
                         snakeColor = two.getColor();
-                        SnakeBall.COLOR = snakeColor;
+                        windowController.setSnakeColor(snakeColor);
                         curSelectedbtn = two;
                         refreshButtons();
                         serialize();
@@ -161,7 +192,7 @@ public class Store extends Window {
                         curSelectedbtn.setState(BuyButton.ButtonState.SELECT);
                         two.setState(BuyButton.ButtonState.SELECTED);
                         snakeColor = two.getColor();
-                        SnakeBall.COLOR = snakeColor;
+                        windowController.setSnakeColor(snakeColor);
                         curSelectedbtn = two;
                         serialize();
                     }
@@ -171,7 +202,7 @@ public class Store extends Window {
                         curSelectedbtn.setState(BuyButton.ButtonState.SELECT);
                         three.setState(BuyButton.ButtonState.SELECTED);
                         snakeColor = three.getColor();
-                        SnakeBall.COLOR = snakeColor;
+                        windowController.setSnakeColor(snakeColor);
                         curSelectedbtn = three;
                         refreshButtons();
                         serialize();
@@ -179,7 +210,7 @@ public class Store extends Window {
                         curSelectedbtn.setState(BuyButton.ButtonState.SELECT);
                         three.setState(BuyButton.ButtonState.SELECTED);
                         snakeColor = three.getColor();
-                        SnakeBall.COLOR = snakeColor;
+                        windowController.setSnakeColor(snakeColor);
                         curSelectedbtn = three;
                         serialize();
                     }
@@ -189,7 +220,7 @@ public class Store extends Window {
                         curSelectedbtn.setState(BuyButton.ButtonState.SELECT);
                         four.setState(BuyButton.ButtonState.SELECTED);
                         snakeColor = four.getColor();
-                        SnakeBall.COLOR = snakeColor;
+                        windowController.setSnakeColor(snakeColor);
                         curSelectedbtn = four;
                         refreshButtons();
                         serialize();
@@ -197,7 +228,7 @@ public class Store extends Window {
                         curSelectedbtn.setState(BuyButton.ButtonState.SELECT);
                         four.setState(BuyButton.ButtonState.SELECTED);
                         snakeColor = four.getColor();
-                        SnakeBall.COLOR = snakeColor;
+                        windowController.setSnakeColor(snakeColor);
                         curSelectedbtn = four;
                         serialize();
                     }
@@ -207,7 +238,7 @@ public class Store extends Window {
                         curSelectedbtn.setState(BuyButton.ButtonState.SELECT);
                         five.setState(BuyButton.ButtonState.SELECTED);
                         snakeColor = five.getColor();
-                        SnakeBall.COLOR = snakeColor;
+                        windowController.setSnakeColor(snakeColor);
                         curSelectedbtn = five;
                         refreshButtons();
                         serialize();
@@ -215,7 +246,7 @@ public class Store extends Window {
                         curSelectedbtn.setState(BuyButton.ButtonState.SELECT);
                         five.setState(BuyButton.ButtonState.SELECTED);
                         snakeColor = five.getColor();
-                        SnakeBall.COLOR = snakeColor;
+                        windowController.setSnakeColor(snakeColor);
                         curSelectedbtn = five;
                         serialize();
                     }
@@ -266,12 +297,38 @@ public class Store extends Window {
         three.show(gc);
         four.show(gc);
         five.show(gc);
+
+        // Show coins
+        double x = App.SCREEN_WIDTH - App.TILE_SIZE / 2;
+        double y = App.TILE_SIZE / 2;
+        gc.setTextAlign(TextAlignment.RIGHT);
+
+        gc.setFont(Font.CONSOLAS_MEDIUM);
+        gc.setFill(Store.FG_COLOR);
+        gc.fillText(Integer.toString(coins), x - Token.RADIUS - App.TILE_SIZE / 4, y + 1);
+
+        gc.setTextAlign(TextAlignment.CENTER);
+
+        if (Image.getCOIN() == null) {
+            gc.setFill(Color.YELLOW);
+            gc.fillOval(x - Token.RADIUS, y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+        } else {
+            gc.drawImage(Image.getCOIN(), x - Token.RADIUS,
+                    y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+        }
     }
 
+    /**
+     * Add coins to the store.
+     * @param coins The number of coins to be added.
+     */
     public void addCoins(int coins) {
         this.coins += coins;
     }
 
+    /**
+     * Serialize the window.
+     */
     public void serialize() {
         ObjectOutputStream out = null;
         try {
@@ -288,6 +345,10 @@ public class Store extends Window {
         }
     }
 
+    /**
+     * Get current snake color.
+     * @return The current snake color.
+     */
     public int[] getSnakeColor() {
         return snakeColor;
     }
@@ -295,6 +356,6 @@ public class Store extends Window {
     @Override
     public void init(WindowController windowController, Canvas canvas) {
         super.init(windowController, canvas);
-        SnakeBall.COLOR = snakeColor;
+        windowController.setSnakeColor(snakeColor);
     }
 }

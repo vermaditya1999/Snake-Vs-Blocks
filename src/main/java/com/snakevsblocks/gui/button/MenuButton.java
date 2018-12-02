@@ -5,14 +5,34 @@ import com.snakevsblocks.util.Font;
 import com.snakevsblocks.window.Menu;
 import javafx.scene.canvas.GraphicsContext;
 
+/**
+ * This class is used to create Menu Buttons.
+ */
 public class MenuButton extends Button {
 
+    /**
+     * Height of the button.
+     */
     private static final double HEIGHT = App.TILE_SIZE / 2;
+
+    /**
+     * Width of the button.
+     */
     private static final double WIDTH = App.TILE_SIZE * 3;
 
+    /**
+     * Text of the button.
+     */
     private String text;
+
     private boolean hovered;
 
+    /**
+     * Creates a Menu button.
+     *
+     * @param text Text to display.
+     * @param posY y coordinate.
+     */
     public MenuButton(String text, double posY) {
         super(App.SCREEN_WIDTH / 2, posY);
         this.text = text;

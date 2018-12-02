@@ -4,8 +4,17 @@ import javafx.scene.canvas.GraphicsContext;
 
 import java.util.Iterator;
 
+/**
+ * Creates Small Bursts.
+ */
 public class SmallBurst extends Burst {
 
+    /**
+     * Creates a new Small burst.
+     *
+     * @param x x coordinate of the burst.
+     * @param y y coordinate of the burst.
+     */
     public SmallBurst(double x, double y) {
         super(x, y);
 
@@ -13,6 +22,10 @@ public class SmallBurst extends Burst {
         particles.add(new SmallParticle(x, y));
     }
 
+    /**
+     * Run the burst.
+     * @param gc Graphics Context on which to run the burst.
+     */
     @Override
     public void run(GraphicsContext gc) {
 

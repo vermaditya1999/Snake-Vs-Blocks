@@ -78,7 +78,8 @@ public class BuyButton extends Button {
         gc.setFill(Info.FG_COLOR);
         gc.setFont(Font.CONSOLAS_SMALL);
         gc.setTextAlign(TextAlignment.LEFT);
-        gc.fillText(colorName, pos.x - App.TILE_SIZE * 3.5, pos.y);
+        gc.fillText(colorName, pos.x - App.TILE_SIZE * 3.75, pos.y);
+        gc.fillText("$" + Integer.toString(value), pos.x - App.TILE_SIZE * 1.4, pos.y);
         gc.setTextAlign(TextAlignment.CENTER);
     }
 
