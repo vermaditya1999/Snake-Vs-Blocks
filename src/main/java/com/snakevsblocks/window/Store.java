@@ -1,16 +1,19 @@
 package com.snakevsblocks.window;
 
 import com.snakevsblocks.App;
+import com.snakevsblocks.entity.token.Token;
 import com.snakevsblocks.gui.button.BackButton;
 import com.snakevsblocks.gui.button.BlackBackButton;
 import com.snakevsblocks.gui.button.BuyButton;
 import com.snakevsblocks.util.Font;
+import com.snakevsblocks.util.Image;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -47,7 +50,7 @@ public class Store extends Window {
     private int[] snakeColor;
 
     /**
-     * Backbuttonto go back to Menu.
+     * Back-button go back to Menu.
      */
     private BackButton backButton;
     private BuyButton one;
@@ -60,8 +63,7 @@ public class Store extends Window {
 
     /**
      * Creates a new store.
-     *
-     * @param wc     The window Controller.
+     * @param wc The window Controller.
      * @param canvas The canvas.
      */
     public Store(WindowController wc, Canvas canvas) {
@@ -295,6 +297,25 @@ public class Store extends Window {
         three.show(gc);
         four.show(gc);
         five.show(gc);
+
+        // Show coins
+        double x = App.SCREEN_WIDTH - App.TILE_SIZE / 2;
+        double y = App.TILE_SIZE / 2;
+        gc.setTextAlign(TextAlignment.RIGHT);
+
+        gc.setFont(Font.CONSOLAS_MEDIUM);
+        gc.setFill(Store.FG_COLOR);
+        gc.fillText(Integer.toString(coins), x - Token.RADIUS - App.TILE_SIZE / 4, y + 1);
+
+        gc.setTextAlign(TextAlignment.CENTER);
+
+        if (Image.getCOIN() == null) {
+            gc.setFill(Color.YELLOW);
+            gc.fillOval(x - Token.RADIUS, y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+        } else {
+            gc.drawImage(Image.getCOIN(), x - Token.RADIUS,
+                    y - Token.RADIUS, 2 * Token.RADIUS, 2 * Token.RADIUS);
+        }
     }
 
     /**

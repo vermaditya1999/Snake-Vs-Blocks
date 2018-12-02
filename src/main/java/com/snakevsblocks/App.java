@@ -108,11 +108,33 @@ public class App implements WindowController {
             windowMap.put(Windows.MENU, new Menu(this, canvasMap.get(Windows.MENU)));
         }
 
-
         if (!windowMap.containsKey(Windows.GAME)) {
             canvasMap.put(Windows.GAME, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
             windowMap.put(Windows.GAME, new Game(this, canvasMap.get(Windows.GAME)));
         }
+
+        // Deserialize Store here
+        if ((new File(Store.PATH)).exists()) {
+            try {
+                ObjectInputStream in = null;
+                try {
+                    in = new ObjectInputStream(new FileInputStream(Store.PATH));
+                    Store store = (Store) in.readObject();
+
+                    canvasMap.put(Windows.STORE, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+                    store.init(this, canvasMap.get(Windows.STORE));
+
+                    windowMap.put(Windows.STORE, store);
+                } finally {
+                    if (in != null) {
+                        in.close();
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
         if (!windowMap.containsKey(Windows.STORE)) {
             canvasMap.put(Windows.STORE, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
             windowMap.put(Windows.STORE, new Store(this, canvasMap.get(Windows.STORE)));
@@ -189,27 +211,6 @@ public class App implements WindowController {
                     game.init(this, canvasMap.get(Windows.GAME));
 
                     windowMap.put(Windows.GAME, game);
-                } finally {
-                    if (in != null) {
-                        in.close();
-                    }
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        if ((new File(Store.PATH)).exists()) {
-            try {
-                ObjectInputStream in = null;
-                try {
-                    in = new ObjectInputStream(new FileInputStream(Store.PATH));
-                    Store store = (Store) in.readObject();
-
-                    canvasMap.put(Windows.STORE, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
-                    store.init(this, canvasMap.get(Windows.STORE));
-
-                    windowMap.put(Windows.STORE, store);
                 } finally {
                     if (in != null) {
                         in.close();
