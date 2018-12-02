@@ -8,6 +8,7 @@ public class LargeParticle extends Particle {
     public LargeParticle(double x, double y) {
         super(x, y);
         radius = 7;
+        vel.mult(1.2);
     }
 
     @Override

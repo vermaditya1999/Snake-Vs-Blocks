@@ -33,13 +33,18 @@ public class Block implements Serializable {
         double xOffset = 2;
         double yOffset = 2;
 
-        if (size < App.TILE_SIZE) {
-            size += 0.5;
+        if (size > App.TILE_SIZE) {
+            size -= 0.5;
         }
 
         // Display block
         gc.setFill(Block.COLOR);
         gc.fillRoundRect(pos.x - size / 2 + xOffset, pos.y - size / 2 + yOffset, size - 2 * xOffset, size - 2 * yOffset, 10, 10);
+
+        if (size > App.TILE_SIZE) {
+            gc.setFill(new Color(1, 1, 1, 0.25));
+            gc.fillRoundRect(pos.x - size / 2 + xOffset, pos.y - size / 2 + yOffset, size - 2 * xOffset, size - 2 * yOffset, 10, 10);
+        }
 
         // Show value
         gc.setFill(Color.BLACK);
@@ -67,8 +72,8 @@ public class Block implements Serializable {
         return pos.y - App.TILE_SIZE / 2 >= App.SCREEN_HEIGHT;
     }
 
-    public boolean shrink() {
-        size = App.TILE_SIZE - 5;
+    public boolean expand() {
+        size = App.TILE_SIZE + 5;
         if (value == 1) {
             return true;
         } else {

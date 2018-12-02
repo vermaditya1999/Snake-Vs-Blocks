@@ -13,6 +13,8 @@ import com.snakevsblocks.gui.button.WhiteBackButton;
 import com.snakevsblocks.gui.label.CoinLabel;
 import com.snakevsblocks.gui.label.Label;
 import com.snakevsblocks.gui.label.ScoreLabel;
+import com.snakevsblocks.gui.timer.MagnetTimer;
+import com.snakevsblocks.gui.timer.ShieldTimer;
 import com.snakevsblocks.util.Font;
 import com.snakevsblocks.util.Random;
 import com.snakevsblocks.util.Vector;
@@ -36,14 +38,12 @@ public class Game extends Window {
 
     private int score;
     private int coins;
-    private int speed;
+    private int curSpeed;
+    private int gameSpeed;
 
     private int trigger;
     private boolean paused;
     private boolean gameOver;
-
-    private boolean shieldIsActive;
-    private boolean magnetIsActive;
 
     private Snake snake;
 
@@ -55,6 +55,9 @@ public class Game extends Window {
     private Label scoreLabel;
     private Label coinLabel;
 
+    private ShieldTimer shieldTimer;
+    private MagnetTimer magnetTimer;
+
     private BackButton backButton;
     private ResumeButton resumeButton;
     private RestartButton restartButton;
@@ -64,6 +67,9 @@ public class Game extends Window {
 
         scoreLabel = new ScoreLabel();
         coinLabel = new CoinLabel();
+
+        shieldTimer = new ShieldTimer();
+        magnetTimer = new MagnetTimer();
 
         resumeButton = new ResumeButton(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2);
         backButton = new WhiteBackButton(App.TILE_SIZE / 2, App.TILE_SIZE / 2);
@@ -115,17 +121,6 @@ public class Game extends Window {
                     } else if (restartButton.isHovered(mouseX, mouseY)) {
                         loadNewGame();
                     }
-                } else {
-                    // Temporary: Remove a snakeBall on click
-//                    snake.removeBall();
-//                    for (Block block : blocks) {
-//                        Vector pos = block.getPos();
-//                        if (Math.abs(pos.x - mouseX) <= App.TILE_SIZE / 2 &&
-//                                Math.abs(pos.y - mouseY) <= App.TILE_SIZE / 2) {
-//                            block.shrink();
-//                        }
-//                    }
-
                 }
             }
         });
@@ -193,13 +188,11 @@ public class Game extends Window {
         score = 0;
 
         trigger = 0;
-        speed = 4;
+        gameSpeed = 4;
+        curSpeed = gameSpeed;
 
         paused = false;
         gameOver = false;
-
-        shieldIsActive = false;
-        magnetIsActive = false;
 
         mouseX = App.SCREEN_WIDTH / 2;
 
@@ -289,7 +282,7 @@ public class Game extends Window {
                 // 33% chances of a block
                 int choose = Random.nextInt(3);
                 if (choose == 0) {
-                    blocks.add(new Block(i, -2));
+                    blocks.add(new Block(i, -2, snake.getLength()));
 
                     // 20% chance of a wall, given there is a block
                     choose = Random.nextInt(5);
@@ -350,7 +343,7 @@ public class Game extends Window {
 
 
     private void updateGame() {
-        trigger += speed;
+        trigger += curSpeed;
         if (trigger % (App.TILE_SIZE * 3) == 0) {
             populate();
             trigger = 0;
@@ -390,7 +383,7 @@ public class Game extends Window {
         }
 
         /*
-         * Blocks, walls and tokens are updated with the game speed.
+         * Blocks, walls and tokens are updated with the game curSpeed.
          * They are removed from the Collection if they are out of the screen.
          */
 
@@ -401,7 +394,7 @@ public class Game extends Window {
             if (block.isOver()) {
                 blockIterator.remove();
             } else {
-                block.update(speed);
+                block.update(curSpeed);
             }
         }
 
@@ -412,7 +405,7 @@ public class Game extends Window {
             if (wall.isOver()) {
                 wallIterator.remove();
             } else {
-                wall.update(speed);
+                wall.update(curSpeed);
             }
         }
 
@@ -446,9 +439,9 @@ public class Game extends Window {
                         }
                     }
                 } else if (token instanceof Magnet) {
-
+                    magnetTimer.reset();
                 } else if (token instanceof Shield) {
-
+                    shieldTimer.reset();
                 }
 
                 // Add SmallBurst
@@ -462,14 +455,15 @@ public class Game extends Window {
             if (token.isOver()) {
                 tokenIterator.remove();
             } else {
-                token.update(speed);
+                token.update(curSpeed);
             }
         }
 
         // Update snake
         snake.update(mouseX, mouseY, walls, blocks);
 
-        if (shieldIsActive) {
+        // Collision of snake with Blocks when shield is active
+        if (shieldTimer.isActive()) {
             blockIterator = blocks.iterator();
             while (blockIterator.hasNext()) {
                 Block block = (Block) blockIterator.next();
@@ -482,8 +476,27 @@ public class Game extends Window {
                     blockIterator.remove();
                 }
             }
+            shieldTimer.update();
         }
 
+        // Attract coins when magnet is active
+        if (magnetTimer.isActive()) {
+            tokenIterator = tokens.iterator();
+            while (tokenIterator.hasNext()) {
+                Token token = (Token) tokenIterator.next();
+                if (token instanceof Coin) {
+                    Coin coin = (Coin) token;
+                    Vector snakePos = snake.getHeadVector();
+                    Vector coinPos = coin.getPos();
+                    if (Math.abs(coinPos.y - snakePos.y) <= App.TILE_SIZE && Math.abs(coinPos.x - snakePos.x) <= App.SCREEN_WIDTH / 2) {
+                        coin.attract(snake.getHeadVector());
+                    }
+                }
+            }
+            magnetTimer.update();
+        }
+
+        // Horizontal Collision of snake with blocks
         if (!snake.isDead()) {
             blockIterator = blocks.iterator();
             while (blockIterator.hasNext()) {
@@ -495,7 +508,7 @@ public class Game extends Window {
 
                     // Add burst
                     Vector snakePos = snake.getHeadVector();
-                    if (block.shrink()) {
+                    if (block.expand()) {
                         blockIterator.remove();
                         bursts.add(new LargeBurst(snakePos.x, snakePos.y - SnakeBall.RADIUS));
                         snake.removeTail();
@@ -511,9 +524,9 @@ public class Game extends Window {
         }
 
         if (!snake.isDead() && !snake.inPos()) {
-            speed = 0;
+            curSpeed = 0;
         } else {
-            speed = 4;
+            curSpeed = gameSpeed;
         }
 
         // Update score and coin labels
@@ -549,6 +562,15 @@ public class Game extends Window {
         scoreLabel.show(gc);
         coinLabel.show(gc);
 
+        // Show Timers
+        if (shieldTimer.isActive()) {
+            shieldTimer.run(gc);
+        }
+
+        if (magnetTimer.isActive()) {
+            magnetTimer.run(gc);
+        }
+
         // Run bursts
         runBursts();
     }
@@ -567,10 +589,9 @@ public class Game extends Window {
 
     private void showGameOver() {
 
-        gc.setFill(new Color(0, 0, 0, 0.75));
+        gc.setFill(new Color(0, 0, 0, 0.95));
         gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
 
-//        gc.applyEffect(new BoxBlur(10, 10, 10));
         gc.setFont(Font.CONSOLAS_LARGE);
         gc.setFill(Color.WHITE);
         gc.fillText("GAME OVER", App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2 - App.TILE_SIZE);
