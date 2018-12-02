@@ -19,9 +19,9 @@ public class Block implements Serializable {
 
     private double size;
 
-    public Block(int x, int y) {
+    public Block(int x, int y, int snakeLength) {
 
-        value = 1 + Random.nextInt(10);
+        value = generateValue(snakeLength);
 
         pos = new Vector((x - 1) * App.TILE_SIZE + App.TILE_SIZE / 2, (y - 1) * App.TILE_SIZE + App.TILE_SIZE / 2);
 
@@ -50,6 +50,18 @@ public class Block implements Serializable {
         gc.setFill(Color.BLACK);
         gc.setFont(Font.GOTHAM_MEDIUM);
         gc.fillText(Integer.toString(value), pos.x, pos.y);
+    }
+
+    private int generateValue(int snakeLength) {
+
+        int offSet = 10;
+        value = snakeLength / 2 - offSet + Random.nextInt(2 * offSet);
+
+        while (value < 1) {
+            value = Random.nextInt(snakeLength / 2 + 2);
+        }
+
+        return value;
     }
 
     public void update(double speed) {

@@ -19,7 +19,7 @@ public class Chain {
         int minIndex = 0;
 
         for (int i = 1; i <= 5; i++) {
-            Block block = new Block(i, -2);
+            Block block = new Block(i, -2, snakeLength);
             blockRow.add(block);
 
             if (minValue > block.getValue()) {
@@ -28,7 +28,7 @@ public class Chain {
             }
         }
 
-        if (minValue >= snakeLength) {
+        if (minValue >= snakeLength / 2) {
             blockRow.get(minIndex).setValue(snakeLength/2);
 
             if (snakeLength == 1) {

@@ -44,6 +44,7 @@ public class Game extends Window {
     private int trigger;
     private boolean paused;
     private boolean gameOver;
+    private boolean chainAdded;
 
     private Snake snake;
 
@@ -193,6 +194,7 @@ public class Game extends Window {
 
         paused = false;
         gameOver = false;
+        chainAdded = false;
 
         mouseX = App.SCREEN_WIDTH / 2;
 
@@ -208,11 +210,17 @@ public class Game extends Window {
 
     private void populate() {
 
-        // 40% chances of a full row of blocks
-        int choice = Random.nextInt(5);
+        /*
+         * 50% chance of chain if previous added row was not chain
+         * 20% chance of chain if previous added row was chain
+         */
+        int choice = Random.nextInt(10);
 
         // Adding complete row of blocks
-        if (choice <= 1) {
+        if ((chainAdded && choice <= 1) || (!chainAdded && choice <= 4)) {
+
+            chainAdded = true;
+
             Chain chain = new Chain(snake.getLength());
             for (int i = 1; i <= 5; i++) {
 
@@ -275,8 +283,10 @@ public class Game extends Window {
                 }
             }
 
-            // 60% chances of partial row of blocks
+            // Adding partial row of blocks
         } else {
+            chainAdded = false;
+
             for (int i = 1; i <= 5; i++) {
 
                 // 33% chances of a block
@@ -579,8 +589,6 @@ public class Game extends Window {
 
         gc.setFill(new Color(0, 0, 0, 0.75));
         gc.fillRect(0, 0, App.SCREEN_WIDTH, App.SCREEN_HEIGHT);
-
-//        gc.applyEffect(new BoxBlur(10, 10, 10));
 
         backButton.show(gc);
         resumeButton.show(gc);
