@@ -11,6 +11,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.awt.*;
+
 public class Info extends Window {
 
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
@@ -79,6 +81,18 @@ public class Info extends Window {
         gc.setFill(LeaderBoard.FG_COLOR);
         gc.setFont(Font.GOTHAM_MEDIUM);
         gc.fillText("About", App.SCREEN_WIDTH / 2, App.TILE_SIZE);
+
+        // List
+        gc.setFont(Font.CONSOLAS_XSMALL);
+        gc.fillText("Snake-Vs-Blocks is an endless game that\n requires you to guide the snake to reach\n as far as you can.\n\n" +
+                "Grab pickup balls to increase your\n snake's length.\n" +
+                "Avoid blocks as much as you can.\n Hitting a block decreases the value of\n block and length of your snake by 1.\n" +
+                "The following pickups help you breeze\n through the game:\n" +
+                "1. Destroy: Destroys all the blocks\n currently on the screen\n" +
+                "2. Shield: Protects your snake from\n incoming blocks\n" +
+                "3. Magnet: Attracts coins towards\n the snake\n" +
+                "4. Special Ball: This rare ball sends\n the snake into ultimate nirvana.\n Play the game to check this out.\n\n" +
+                "Collect coins through the game-play.\n Special snake skins can be bought \nusing these coins.", App.SCREEN_WIDTH / 2, 4.5 * App.TILE_SIZE);
 
         // Show buttons
         backButton.show(gc);
