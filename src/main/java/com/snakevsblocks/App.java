@@ -1,5 +1,6 @@
 package com.snakevsblocks;
 
+import com.snakevsblocks.entity.SnakeBall;
 import com.snakevsblocks.window.*;
 import javafx.animation.AnimationTimer;
 import javafx.event.Event;
@@ -64,14 +65,14 @@ public class App implements WindowController {
             windowMap.put(Windows.MENU, new Menu(this, canvasMap.get(Windows.MENU)));
         }
 
-        if (!windowMap.containsKey(Windows.STORE)) {
-            canvasMap.put(Windows.STORE, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
-            windowMap.put(Windows.STORE, new Store(this, canvasMap.get(Windows.STORE)));
-        }
 
         if (!windowMap.containsKey(Windows.GAME)) {
             canvasMap.put(Windows.GAME, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
             windowMap.put(Windows.GAME, new Game(this, canvasMap.get(Windows.GAME)));
+        }
+        if (!windowMap.containsKey(Windows.STORE)) {
+            canvasMap.put(Windows.STORE, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+            windowMap.put(Windows.STORE, new Store(this, canvasMap.get(Windows.STORE)));
         }
 
         if (!windowMap.containsKey(Windows.LEADERBOARD)) {
@@ -275,5 +276,11 @@ public class App implements WindowController {
     @Override
     public int[] getSnakeColor() {
         return ((Store) windowMap.get(Windows.STORE)).getSnakeColor();
+    }
+
+    @Override
+    public void setSnakeColor(int[] color) {
+        ((Game) windowMap.get(Windows.GAME)).setSnakeColor(color);
+        SnakeBall.COLOR = color;
     }
 }

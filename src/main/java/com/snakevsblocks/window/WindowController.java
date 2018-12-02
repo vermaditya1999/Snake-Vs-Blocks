@@ -16,4 +16,6 @@ public interface WindowController {
     void loadNewGame();
 
     int[] getSnakeColor();
+
+    void setSnakeColor(int[] color);
 }

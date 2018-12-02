@@ -203,7 +203,6 @@ public class Game extends Window {
         mouseX = App.SCREEN_WIDTH / 2;
 
         snake = new Snake();
-        snakeColor = windowController.getSnakeColor();
 
         bursts = new LinkedList<Burst>();
         blocks = new LinkedList<Block>();
@@ -690,5 +689,9 @@ public class Game extends Window {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void setSnakeColor(int[] snakeColor) {
+        this.snakeColor = snakeColor;
     }
 }
