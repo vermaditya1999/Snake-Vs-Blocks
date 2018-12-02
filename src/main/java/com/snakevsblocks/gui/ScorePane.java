@@ -8,17 +8,46 @@ import javafx.scene.canvas.GraphicsContext;
 
 import java.io.Serializable;
 
+/**
+ * This class is used as Pane to display the scores in LeaderBoard.
+ *
+ * @see LeaderBoard
+ */
 public class ScorePane implements Serializable {
 
     public static final double RADIUS = App.TILE_SIZE / 4;
+
+    /**
+     * Width of the score pane.
+     */
     private static final double HEIGHT = ScorePane.RADIUS * 2;
+
+    /**
+     * Height of the score pane.
+     */
     private static final double WIDTH = App.TILE_SIZE * 3.5;
 
+    /**
+     * Position vector of the score pane.
+     */
     private Vector pos;
+
+    /**
+     * The date of the logging the score.
+     */
     private String date;
+
+    /**
+     * The score.
+     */
     private int score;
     private boolean hovered;
 
+    /**
+     * Creates a new Score Pane.
+     * @param date Date of the logging of the score.
+     * @param score Score of the score pane.
+     */
     public ScorePane(String date, int score) {
         this.date = date;
         this.score = score;
@@ -26,6 +55,11 @@ public class ScorePane implements Serializable {
         hovered = false;
     }
 
+    /**
+     * Show the score pane.
+     * @param gc Graphics context on which to show the score pane.
+     * @param rank Rank of the score.
+     */
     public void show(GraphicsContext gc, int rank) {
 
         // Set font
@@ -60,6 +94,10 @@ public class ScorePane implements Serializable {
         gc.fillText(Integer.toString(score), pos.x + App.TILE_SIZE * 1.5, pos.y);
     }
 
+    /**
+     * Get the score.
+     * @return score.
+     */
     public int getScore() {
         return score;
     }

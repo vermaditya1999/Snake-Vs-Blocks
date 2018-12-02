@@ -5,8 +5,17 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Main class.
+ * The application must be started from this class.
+ */
 public class Main extends Application {
 
+    /**
+     * Initialize the JavaFx application.
+     *
+     * @param primaryStage The primary stage of the JavaFx application.
+     */
     @Override
     public void start(Stage primaryStage) {
 

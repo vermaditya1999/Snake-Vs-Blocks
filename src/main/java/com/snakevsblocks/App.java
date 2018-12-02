@@ -12,29 +12,68 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.EnumMap;
 
+/**
+ * App class.
+ * This class represents a single instance of a game.
+ * The App is represented by a grid of tiles.
+ */
 public class App implements WindowController {
 
+    /**
+     * The path where all the serialized files will be saved.
+     */
     public final static String PATH = System.getProperty("user.home") + File.separator + ".SnakeVsBlocks" + File.separator;
 
+    /**
+     * Number of rows in App.
+     */
     public final static int NUM_ROWS = 8;
+
+    /**
+     * Number of columns in App.
+     */
     public final static int NUM_COLS = 5;
 
-    // Divisors of 72 : 1,2,3,4,6,8,9,12,18,24,36,72
-    public final static double TILE_SIZE = 72;
+    /**
+     * The Tile Size of the App.
+     */
+    public final static double TILE_SIZE = 72;  // Divisors of 72 : 1,2,3,4,6,8,9,12,18,24,36,72
 
+    /**
+     * Screen Width of the App.
+     */
     public final static double SCREEN_WIDTH = App.TILE_SIZE * App.NUM_COLS;
+
+    /**
+     * Screen Height of the App.
+     */
     public final static double SCREEN_HEIGHT = App.TILE_SIZE * App.NUM_ROWS;
 
+    /**
+     * Animation Timer on which the Application will run.
+     */
     private static AnimationTimer animationTimer;
 
+    /**
+     * This enum holds the current window constant.
+     */
     private Windows currentWindow;
 
-    // EnumMap from Windows enum constant to Windows object
+    /**
+     * EnumMap from Windows enum constant to Windows object
+     */
     private EnumMap<Windows, Window> windowMap;
 
-    // EnumMap from Windows enum constant to Canvas for each Window
+    /**
+     * EnumMap from Windows enum constant to Canvas for each Window
+     */
     private EnumMap<Windows, Canvas> canvasMap;
 
+    /**
+     * Creates a new App.
+     *
+     * @param root the root group on which all the windows of the App will be added.
+     */
     public App(Group root) {
 
         // Create the save directory, if not already created
@@ -56,6 +95,10 @@ public class App implements WindowController {
         setWindow(Windows.MENU, 0, 0);
     }
 
+    /**
+     * Initialize the windows.
+     * @param root the root group on which all the windows of the App will be added.
+     */
     private void initWindows(Group root) {
         deserializeWindows();
 
@@ -89,6 +132,9 @@ public class App implements WindowController {
         root.getChildren().addAll(canvasMap.values());
     }
 
+    /**
+     * Deserialize windows.
+     */
     private void deserializeWindows() {
         if ((new File(LeaderBoard.PATH)).exists()) {
             try {
@@ -175,6 +221,9 @@ public class App implements WindowController {
         }
     }
 
+    /**
+     * Start the application.
+     */
     public void start() {
 
         if (App.animationTimer == null) {

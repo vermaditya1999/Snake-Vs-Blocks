@@ -15,16 +15,40 @@ import javafx.scene.paint.Color;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Store class.
+ * This window gives the user the option to choose different skins for the snake, buying them with the coins.
+ */
 public class Store extends Window {
 
+    /**
+     * Path to save the serialized file.
+     */
     public static final String PATH = App.PATH + "store.ser";
 
+    /**
+     * Background color of the window.
+     */
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
+
+    /**
+     * Foreground color of the window.
+     */
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
 
+    /**
+     * Total coins collected from the beginning of the game.
+     */
     private int coins;
+
+    /**
+     * The current color of the snake.
+     */
     private int[] snakeColor;
 
+    /**
+     * Backbuttonto go back to Menu.
+     */
     private BackButton backButton;
     private BuyButton one;
     private BuyButton two;
@@ -34,6 +58,12 @@ public class Store extends Window {
 
     private BuyButton curSelectedbtn;
 
+    /**
+     * Creates a new store.
+     *
+     * @param wc     The window Controller.
+     * @param canvas The canvas.
+     */
     public Store(WindowController wc, Canvas canvas) {
         super(wc, canvas);
 
@@ -41,10 +71,10 @@ public class Store extends Window {
         backButton = new BlackBackButton(App.TILE_SIZE / 4 + 10, App.TILE_SIZE / 4);
 
         one = new BuyButton(App.TILE_SIZE * 2.5, BuyButton.ButtonState.SELECTED, 0, new int[]{150, 204, 208}, "Egg Blue");
-        two = new BuyButton(App.TILE_SIZE * 3.5, BuyButton.ButtonState.NA, 1, new int[]{194, 232, 18}, "Bitter Lemon");
-        three = new BuyButton(App.TILE_SIZE * 4.5, BuyButton.ButtonState.NA, 2, new int[]{176, 132, 204}, "African Violet");
-        four = new BuyButton(App.TILE_SIZE * 5.5, BuyButton.ButtonState.NA, 3, new int[]{237, 180, 88}, "Sunray");
-        five = new BuyButton(App.TILE_SIZE * 6.5, BuyButton.ButtonState.NA, 4, new int[]{219, 84, 97}, "Terra Cotta");
+        two = new BuyButton(App.TILE_SIZE * 3.5, BuyButton.ButtonState.NA, 10, new int[]{194, 232, 18}, "Bitter Lemon");
+        three = new BuyButton(App.TILE_SIZE * 4.5, BuyButton.ButtonState.NA, 20, new int[]{176, 132, 204}, "African Violet");
+        four = new BuyButton(App.TILE_SIZE * 5.5, BuyButton.ButtonState.NA, 30, new int[]{237, 180, 88}, "Sunray");
+        five = new BuyButton(App.TILE_SIZE * 6.5, BuyButton.ButtonState.NA, 40, new int[]{219, 84, 97}, "Terra Cotta");
 
         curSelectedbtn = one;
         snakeColor = one.getColor();
@@ -267,10 +297,17 @@ public class Store extends Window {
         five.show(gc);
     }
 
+    /**
+     * Add coins to the store.
+     * @param coins The number of coins to be added.
+     */
     public void addCoins(int coins) {
         this.coins += coins;
     }
 
+    /**
+     * Serialize the window.
+     */
     public void serialize() {
         ObjectOutputStream out = null;
         try {
@@ -287,6 +324,10 @@ public class Store extends Window {
         }
     }
 
+    /**
+     * Get current snake color.
+     * @return The current snake color.
+     */
     public int[] getSnakeColor() {
         return snakeColor;
     }

@@ -4,8 +4,18 @@ import javafx.scene.canvas.GraphicsContext;
 
 import java.util.Iterator;
 
+/**
+ * Creates Large bursts.
+ *
+ * @see Burst
+ */
 public class LargeBurst extends Burst {
 
+    /**
+     * Creates a new large burst.
+     * @param x x coordinate of the burst.
+     * @param y y coordinate of the burst.
+     */
     public LargeBurst(double x, double y) {
         super(x, y);
 
@@ -17,6 +27,10 @@ public class LargeBurst extends Burst {
         }
     }
 
+    /**
+     * Run the burst.
+     * @param gc Graphics Context on which to run the burst.
+     */
     @Override
     public void run(GraphicsContext gc) {
 

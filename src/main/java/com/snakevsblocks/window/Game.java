@@ -497,6 +497,7 @@ public class Game extends Window {
                     shieldTimer.set();
                 } else if (token instanceof Star) {
                     starTimer.set();
+                    windowController.saveGame();
                 }
 
                 // Add SmallBurst

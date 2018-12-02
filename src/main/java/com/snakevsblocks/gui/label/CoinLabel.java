@@ -8,8 +8,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * This class is used to create a Coin Label.
+ */
 public class CoinLabel extends Label {
 
+    /**
+     * Create a new Coin Label.
+     */
     public CoinLabel() {
         super(App.SCREEN_WIDTH - App.TILE_SIZE / 2, App.TILE_SIZE / 2);
     }

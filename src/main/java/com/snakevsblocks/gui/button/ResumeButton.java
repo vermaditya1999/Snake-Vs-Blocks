@@ -4,10 +4,22 @@ import com.snakevsblocks.App;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/**
+ * This class is used to create the Resume Button.
+ */
 public class ResumeButton extends Button {
 
+    /**
+     * Size of the button.
+     */
     private double size;
 
+    /**
+     * Creates a new Resume Button.
+     *
+     * @param x x coordinate.
+     * @param y y coordinate.
+     */
     public ResumeButton(double x, double y) {
         super(x, y);
         size = App.TILE_SIZE * 0.75;

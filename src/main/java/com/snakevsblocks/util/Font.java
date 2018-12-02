@@ -1,5 +1,8 @@
 package com.snakevsblocks.util;
 
+/**
+ * This class contains the static Font objects used to avoid the creation of font objects repeatedly across the application.
+ */
 public class Font {
 
     public static final javafx.scene.text.Font GOTHAM_LARGE = javafx.scene.text.Font.loadFont(Font.class.getClassLoader().getResourceAsStream("fonts/Gotham-Light.otf"), 65);

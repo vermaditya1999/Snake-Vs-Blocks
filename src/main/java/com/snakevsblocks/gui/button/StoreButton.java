@@ -5,11 +5,24 @@ import com.snakevsblocks.util.Font;
 import com.snakevsblocks.window.Menu;
 import javafx.scene.canvas.GraphicsContext;
 
+/**
+ * This class is used to create the Store Button used in Menu.
+ */
 public class StoreButton extends Button {
 
+    /**
+     * Radius of the button.
+     */
     private double radius;
+
     private boolean hovered;
 
+    /**
+     * Creates a new Store Button.
+     *
+     * @param x x coordinate.
+     * @param y y coordinate.
+     */
     public StoreButton(double x, double y) {
         super(x, y);
         radius = App.TILE_SIZE / 6;

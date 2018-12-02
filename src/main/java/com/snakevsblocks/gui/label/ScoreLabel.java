@@ -7,8 +7,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * This class is used to create a Score label.
+ */
 public class ScoreLabel extends Label {
 
+    /**
+     * Create a new Score label.
+     */
     public ScoreLabel() {
         super(App.TILE_SIZE / 2, App.TILE_SIZE / 2);
     }

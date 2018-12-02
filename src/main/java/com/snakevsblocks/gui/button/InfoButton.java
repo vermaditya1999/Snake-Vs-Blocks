@@ -5,11 +5,24 @@ import com.snakevsblocks.util.Font;
 import com.snakevsblocks.window.Menu;
 import javafx.scene.canvas.GraphicsContext;
 
+/**
+ * This class creates the Info Button for the Menu.
+ */
 public class InfoButton extends Button {
 
+    /**
+     * Radius of the button.
+     */
     private double radius;
+
     private boolean hovered;
 
+    /**
+     * Creates an Info Button.
+     *
+     * @param x x coordinate.
+     * @param y y coordinate.
+     */
     public InfoButton(double x, double y) {
         super(x, y);
         radius = App.TILE_SIZE / 6;

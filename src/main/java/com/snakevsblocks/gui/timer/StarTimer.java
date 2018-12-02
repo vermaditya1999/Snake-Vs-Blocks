@@ -6,8 +6,14 @@ import com.snakevsblocks.util.Image;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/**
+ * Timer for Star pickup.
+ */
 public class StarTimer extends Timer {
 
+    /**
+     * Creates a new Star timer.
+     */
     public StarTimer() {
         super(App.SCREEN_WIDTH / 2 - App.TILE_SIZE / 2, App.TILE_SIZE + App.TILE_SIZE / 2);
     }
