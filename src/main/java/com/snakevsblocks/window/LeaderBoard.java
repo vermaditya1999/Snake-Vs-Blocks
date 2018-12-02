@@ -20,7 +20,7 @@ import java.util.LinkedList;
 
 public class LeaderBoard extends Window {
 
-    public static final String PATH = App.PATH + "lb.ser";
+    public static final String PATH = App.PATH + "leaderboard.ser";
 
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
@@ -34,7 +34,7 @@ public class LeaderBoard extends Window {
         super(wc, canvas);
         scorePanes = new LinkedList<ScorePane>();
 
-        backButton = new BlackBackButton(App.TILE_SIZE / 4 + 5, App.TILE_SIZE / 4);
+        backButton = new BlackBackButton(App.TILE_SIZE / 4 + 10, App.TILE_SIZE / 4);
     }
 
     public void addScore(int score) {

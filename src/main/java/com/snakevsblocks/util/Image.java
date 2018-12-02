@@ -6,6 +6,8 @@ public class Image {
     private static javafx.scene.image.Image DESTROYER = new javafx.scene.image.Image("img/destroyer.png");
     private static javafx.scene.image.Image MAGNET = new javafx.scene.image.Image("img/magnet.png");
     private static javafx.scene.image.Image SHIELD = new javafx.scene.image.Image("img/shield.png");
+    private static javafx.scene.image.Image STAR = new javafx.scene.image.Image("img/star.png");
+
 
     private static javafx.scene.image.Image B_BACK = new javafx.scene.image.Image("img/back-black.png");
     private static javafx.scene.image.Image W_BACK = new javafx.scene.image.Image("img/back-white.png");
@@ -37,5 +39,9 @@ public class Image {
 
     public static javafx.scene.image.Image getRESTART() {
         return RESTART;
+    }
+
+    public static javafx.scene.image.Image getSTAR() {
+        return STAR;
     }
 }

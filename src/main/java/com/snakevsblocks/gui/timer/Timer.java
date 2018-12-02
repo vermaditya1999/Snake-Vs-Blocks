@@ -5,7 +5,9 @@ import com.snakevsblocks.entity.Wall;
 import com.snakevsblocks.util.Vector;
 import javafx.scene.canvas.GraphicsContext;
 
-abstract public class Timer {
+import java.io.Serializable;
+
+abstract public class Timer implements Serializable {
 
     public final static double MAX_VAL = 300;  // 5 seconds at 60 FPS
     public final static double BAR_WIDTH = App.TILE_SIZE;
@@ -20,6 +22,10 @@ abstract public class Timer {
     }
 
     public void reset() {
+        val = 0;
+    }
+
+    public void set() {
         val = Timer.MAX_VAL;
     }
 
