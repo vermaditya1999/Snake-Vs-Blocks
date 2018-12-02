@@ -11,8 +11,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-import java.awt.*;
-
 /**
  * The Info Window provides the basic information about the
  * game-play, its objective, and how to play the game.
@@ -36,9 +34,8 @@ public class Info extends Window {
 
     /**
      * Constructs a new Info Window
-     *
-     * @param wc     TODO
-     * @param canvas TODO
+     * @param wc The window controller.
+     * @param canvas The canvas.
      */
     public Info(WindowController wc, Canvas canvas) {
         super(wc, canvas);

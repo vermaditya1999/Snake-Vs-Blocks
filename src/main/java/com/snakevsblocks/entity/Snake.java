@@ -39,7 +39,7 @@ public class Snake implements Serializable {
      *
      * @param x x coordinate of the position vector
      * @param y y coordinate of the position vector
-     * @return TODO
+     * @return The interpolated value.
      */
     private double lerp(double x, double y) {
         return x + (y - x) * 0.2;
