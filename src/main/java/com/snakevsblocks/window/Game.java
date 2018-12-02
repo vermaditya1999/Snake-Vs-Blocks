@@ -35,7 +35,7 @@ public class Game extends Window {
 
     public static final String PATH = App.PATH + "game.ser";
 
-    public static final Color BG_COLOR = Color.rgb(23, 29, 43);
+    private static final Color BG_COLOR = Color.rgb(23, 29, 43);
 
     private int score;
     private int coins;
@@ -203,10 +203,10 @@ public class Game extends Window {
 
         snake = new Snake();
 
-        bursts = new LinkedList<Burst>();
-        blocks = new LinkedList<Block>();
-        walls = new LinkedList<Wall>();
-        tokens = new LinkedList<Token>();
+        bursts = new LinkedList<>();
+        blocks = new LinkedList<>();
+        walls = new LinkedList<>();
+        tokens = new LinkedList<>();
 
         shieldTimer.reset();
         magnetTimer.reset();
@@ -233,8 +233,6 @@ public class Game extends Window {
 
                 if (chain.getBlockRow().get(i - 1) != null) {
                     blocks.add(chain.getBlockRow().get(i - 1));
-                    //blocks.add(new Block(i, -2));
-
 
                     // 20% chance of a wall, given there is a block
                     int choose = Random.nextInt(5);
@@ -304,7 +302,6 @@ public class Game extends Window {
             }
         }
     }
-
 
     private void updateGame() {
 
@@ -495,15 +492,16 @@ public class Game extends Window {
         coinLabel.update(Integer.toString(coins));
     }
 
-    /* Probabilities of tokens:
-     * Shield : 0.2%
-     * Magnet : 0.2%
-     * Destroyer : 0.2%
-     * Coin : 3%
-     * PickupBall : 6%
-     * Special PowerUp : 0.05%
-     */
     private boolean generateTokenProbability(int index) {
+
+        /* Probabilities of tokens:
+         * Shield : 0.2%
+         * Magnet : 0.2%
+         * Destroyer : 0.2%
+         * Coin : 3%
+         * PickupBall : 6%
+         * Special PowerUp : 0.05%
+         */
 
         int choose = Random.nextInt(2000);
 
