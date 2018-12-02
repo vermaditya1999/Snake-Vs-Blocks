@@ -93,6 +93,7 @@ public class Game extends Window {
                     boolean resumed = !(paused || gameOver);
                     if (resumed) {
                         paused = true;
+                        windowController.saveGame();
                     } else if (paused) {
                         paused = false;
                     } else if (gameOver) {
