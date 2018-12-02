@@ -1,18 +1,37 @@
 package com.snakevsblocks.entity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
+/**
+ * Chain is a row of five blocks.
+ *
+ * @see Block
+ */
 public class Chain {
 
+    /**
+     * List of blocks in a row.
+     */
     private ArrayList<Block> blockRow;
 
+    /**
+     * Creates a new Chain.
+     *
+     * @param snakeLength Length of the snake
+     */
     public Chain(int snakeLength) {
         blockRow = new ArrayList<>(5);
 
         addBlocks(snakeLength);
     }
 
+    /**
+     * Adds blocks in the chain, with the condition that
+     * length of snake cannot be less than/equal to all
+     * the blocks in the chain.
+     *
+     * @param snakeLength Length of the snake
+     */
     private void addBlocks(int snakeLength) {
 
         int minValue = Integer.MAX_VALUE;
@@ -35,14 +54,9 @@ public class Chain {
                 blockRow.set(minIndex, null);
             }
         }
-
-
-
     }
 
     public ArrayList<Block> getBlockRow() {
         return blockRow;
     }
-
-
 }

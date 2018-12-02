@@ -9,16 +9,39 @@ import javafx.scene.paint.Color;
 
 import java.io.Serializable;
 
+/**
+ * Block is an entity of the game, which acts as an
+ * obstacle for snake in the game-play.
+ */
 public class Block implements Serializable {
 
+    /**
+     * Represents the color of the block.
+     */
     public static final Color COLOR = Color.rgb(241, 233, 218);
 
+    /**
+     * Represents the numeric value of the block.
+     */
     private int value;
 
+    /**
+     * Represents the position vector of the centre of the block.
+     */
     private Vector pos;
 
+    /**
+     * Represents the length of a side of the block.
+     */
     private double size;
 
+    /**
+     * Creates a new Block.
+     *
+     * @param x           x coordinate of the Block centre.
+     * @param y           y coordinate of the Block centre.
+     * @param snakeLength length of the snake.
+     */
     public Block(int x, int y, int snakeLength) {
 
         value = generateValue(snakeLength);
@@ -28,6 +51,10 @@ public class Block implements Serializable {
         size = App.TILE_SIZE;
     }
 
+    /**
+     * Displays block on the screen.
+     * @param gc Graphic context on which to show the token.
+     */
     public void show(GraphicsContext gc) {
 
         double xOffset = 2;
@@ -52,6 +79,11 @@ public class Block implements Serializable {
         gc.fillText(Integer.toString(value), pos.x, pos.y);
     }
 
+    /**
+     * Generates value of the block.
+     * @param snakeLength Length of the snake
+     * @return value of the block
+     */
     private int generateValue(int snakeLength) {
 
         int offSet = 10;
@@ -64,10 +96,18 @@ public class Block implements Serializable {
         return value;
     }
 
+    /**
+     * Updates speed of the block to that of game-play.
+     * @param speed speed of the game-play.
+     */
     public void update(double speed) {
         pos.y += speed;
     }
 
+    /**
+     * Checks if block has entered the screen
+     * @return true if block has entered the screen
+     */
     public boolean isOnScreen() {
         return pos.y >= 0;
     }
@@ -80,10 +120,18 @@ public class Block implements Serializable {
         return value;
     }
 
+    /**
+     * Checks if block has exited the screen
+     * @return true if block has exited the screen
+     */
     public boolean isOver() {
         return pos.y - App.TILE_SIZE / 2 >= App.SCREEN_HEIGHT;
     }
 
+    /**
+     * Expands the block momentarily on collision.
+     * @return true if value of block is 1
+     */
     public boolean expand() {
         size = App.TILE_SIZE + 5;
         if (value == 1) {

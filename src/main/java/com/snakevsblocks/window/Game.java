@@ -47,6 +47,9 @@ public class Game extends Window {
     private boolean gameOver;
     private boolean chainAdded;
 
+    private boolean speedLimit1;
+    private boolean speedLimit2;
+
     private Snake snake;
     private int[] snakeColor;
 
@@ -214,6 +217,9 @@ public class Game extends Window {
         magnetTimer.reset();
         starTimer.reset();
 
+        speedLimit1 = false;
+        speedLimit2 = false;
+
         populate();
     }
 
@@ -310,11 +316,13 @@ public class Game extends Window {
         // Set game speed
         if (starTimer.isActive()) {
             gameSpeed = 12;
-        } else if (snake.getLength() >= 100) {
+        } else if (snake.getLength() >= 40) {
             gameSpeed = 8;
-        } else if (snake.getLength() >= 50) {
+            speedLimit2 = true;
+        } else if (snake.getLength() >= 25 && !speedLimit2) {
             gameSpeed = 6;
-        } else {
+            speedLimit1 = true;
+        } else if (!speedLimit1) {
             gameSpeed = 4;
         }
 

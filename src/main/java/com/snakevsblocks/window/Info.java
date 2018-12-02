@@ -13,13 +13,33 @@ import javafx.scene.paint.Color;
 
 import java.awt.*;
 
+/**
+ * The Info Window provides the basic information about the
+ * game-play, its objective, and how to play the game.
+ */
 public class Info extends Window {
 
+    /**
+     * Background color of the window.
+     */
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
+
+    /**
+     * Foreground color of the window.
+     */
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
 
+    /**
+     * Button used to jump back to the Main menu.
+     */
     private BackButton backButton;
 
+    /**
+     * Constructs a new Info Window
+     *
+     * @param wc     TODO
+     * @param canvas TODO
+     */
     public Info(WindowController wc, Canvas canvas) {
         super(wc, canvas);
 
