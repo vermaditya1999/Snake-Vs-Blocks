@@ -207,6 +207,9 @@ public class Game extends Window {
         walls = new LinkedList<Wall>();
         tokens = new LinkedList<Token>();
 
+        shieldTimer.reset();
+        magnetTimer.reset();
+
         populate();
     }
 
@@ -268,7 +271,6 @@ public class Game extends Window {
     private void updateGame() {
         trigger += curSpeed;
         if (trigger % (App.TILE_SIZE * 3) == 0) {
-            trigger = 0;
             populate();
 
             // Set gameSpeed
@@ -279,6 +281,7 @@ public class Game extends Window {
             } else {
                 gameSpeed = 4;
             }
+            trigger = 0;
         } else if (trigger % App.TILE_SIZE == 0) {
 
             /* Probabilities of tokens:
