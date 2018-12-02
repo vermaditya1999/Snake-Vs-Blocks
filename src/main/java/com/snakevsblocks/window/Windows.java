@@ -4,5 +4,6 @@ public enum Windows {
     MENU,
     LEADERBOARD,
     GAME,
-    INFO
+    INFO,
+    STORE
 }

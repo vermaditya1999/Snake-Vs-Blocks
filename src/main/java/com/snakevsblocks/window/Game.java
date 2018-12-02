@@ -48,6 +48,7 @@ public class Game extends Window {
     private boolean chainAdded;
 
     private Snake snake;
+    private int[] snakeColor;
 
     private LinkedList<Burst> bursts;
     private LinkedList<Block> blocks;
@@ -170,7 +171,7 @@ public class Game extends Window {
          * Check if gameOver is already true so that setPrevScore should be called only once per game.
          */
         if (!gameOver && snake.isDead()) {
-            windowController.addScore(score);
+            windowController.addScore(score, coins);
             gameOver = true;
         }
 
@@ -202,6 +203,7 @@ public class Game extends Window {
         mouseX = App.SCREEN_WIDTH / 2;
 
         snake = new Snake();
+        snakeColor = windowController.getSnakeColor();
 
         bursts = new LinkedList<>();
         blocks = new LinkedList<>();
@@ -555,7 +557,7 @@ public class Game extends Window {
         }
 
         // Show snake
-        snake.show(gc);
+        snake.show(gc, snakeColor);
 
         // Show Labels
         scoreLabel.show(gc);

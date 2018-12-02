@@ -24,7 +24,7 @@ public class ScoreLabel extends Label {
 
         gc.setTextAlign(TextAlignment.CENTER);
 
-        gc.setFill(SnakeBall.COLOR);
+        gc.setFill(Color.rgb(SnakeBall.COLOR[0], SnakeBall.COLOR[1], SnakeBall.COLOR[2]));
         gc.fillOval(pos.x - SnakeBall.RADIUS, pos.y - SnakeBall.RADIUS, 2 * SnakeBall.RADIUS, 2 * SnakeBall.RADIUS);
     }
 }

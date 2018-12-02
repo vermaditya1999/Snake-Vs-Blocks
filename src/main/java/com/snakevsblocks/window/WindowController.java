@@ -9,9 +9,11 @@ public interface WindowController {
 
     void passEvent(Windows window, Event event);
 
-    void addScore(int score);
+    void addScore(int score, int coins);
 
     void saveGame();
 
     void loadNewGame();
+
+    int[] getSnakeColor();
 }

@@ -18,7 +18,7 @@ public class Info extends Window {
     public static final Color BG_COLOR = Color.rgb(245, 245, 245);
     public static final Color FG_COLOR = Color.rgb(60, 60, 60);
 
-    public BackButton backButton;
+    private BackButton backButton;
 
     public Info(WindowController wc, Canvas canvas) {
         super(wc, canvas);

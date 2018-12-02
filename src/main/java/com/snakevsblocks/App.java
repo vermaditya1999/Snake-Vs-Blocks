@@ -64,6 +64,11 @@ public class App implements WindowController {
             windowMap.put(Windows.MENU, new Menu(this, canvasMap.get(Windows.MENU)));
         }
 
+        if (!windowMap.containsKey(Windows.STORE)) {
+            canvasMap.put(Windows.STORE, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+            windowMap.put(Windows.STORE, new Store(this, canvasMap.get(Windows.STORE)));
+        }
+
         if (!windowMap.containsKey(Windows.GAME)) {
             canvasMap.put(Windows.GAME, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
             windowMap.put(Windows.GAME, new Game(this, canvasMap.get(Windows.GAME)));
@@ -146,6 +151,27 @@ public class App implements WindowController {
                 ex.printStackTrace();
             }
         }
+
+        if ((new File(Store.PATH)).exists()) {
+            try {
+                ObjectInputStream in = null;
+                try {
+                    in = new ObjectInputStream(new FileInputStream(Store.PATH));
+                    Store store = (Store) in.readObject();
+
+                    canvasMap.put(Windows.STORE, new Canvas(App.SCREEN_WIDTH, App.SCREEN_HEIGHT));
+                    store.init(this, canvasMap.get(Windows.STORE));
+
+                    windowMap.put(Windows.STORE, store);
+                } finally {
+                    if (in != null) {
+                        in.close();
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public void start() {
@@ -190,9 +216,10 @@ public class App implements WindowController {
     }
 
     @Override
-    public void addScore(int score) {
+    public void addScore(int score, int coins) {
         Menu menu = (Menu) windowMap.get(Windows.MENU);
         LeaderBoard leaderBoard = (LeaderBoard) windowMap.get(Windows.LEADERBOARD);
+        Store store = (Store) windowMap.get(Windows.STORE);
 
         // Set previous score in Menu
         menu.setPrevScore(score);
@@ -201,7 +228,7 @@ public class App implements WindowController {
         menu.setSavedGame(false);
 
         // Reinitialize the Menu buttons
-        menu.initMenuButtons();
+        menu.initButtons();
 
         // Serialize Menu
         menu.serialize();
@@ -211,6 +238,15 @@ public class App implements WindowController {
 
         // Serialize Leader Board
         leaderBoard.serialize();
+
+        // Add coins to store
+        store.addCoins(coins);
+
+        // Refresh buy buttons
+        store.refreshButtons();
+
+        // Serialize Store
+        store.serialize();
     }
 
     @Override
@@ -225,7 +261,7 @@ public class App implements WindowController {
         menu.setSavedGame(true);
 
         // Reinitialize the Menu buttons
-        menu.initMenuButtons();
+        menu.initButtons();
 
         // Serialize Menu
         menu.serialize();
@@ -234,5 +270,10 @@ public class App implements WindowController {
     @Override
     public void loadNewGame() {
         ((Game) windowMap.get(Windows.GAME)).loadNewGame();
+    }
+
+    @Override
+    public int[] getSnakeColor() {
+        return ((Store) windowMap.get(Windows.STORE)).getSnakeColor();
     }
 }

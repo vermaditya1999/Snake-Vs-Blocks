@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class SnakeBall implements Serializable {
 
     public static final double RADIUS = 10;
-    public static final Color COLOR = Color.rgb(150, 204, 208);
+    public static int[] COLOR;
 
     private Vector pos;
 
@@ -17,10 +17,10 @@ public class SnakeBall implements Serializable {
         pos = new Vector(x, y);
     }
 
-    public void show(GraphicsContext gc) {
+    public void show(GraphicsContext gc, int[] color) {
 
         // Display ball
-        gc.setFill(SnakeBall.COLOR);
+        gc.setFill(Color.rgb(color[0], color[1], color[2]));
         gc.fillOval(pos.x - SnakeBall.RADIUS, pos.y - SnakeBall.RADIUS, 2 * SnakeBall.RADIUS, 2 * SnakeBall.RADIUS);
     }
 

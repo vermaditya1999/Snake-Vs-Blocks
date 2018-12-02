@@ -3,6 +3,7 @@ package com.snakevsblocks.window;
 import com.snakevsblocks.App;
 import com.snakevsblocks.gui.button.InfoButton;
 import com.snakevsblocks.gui.button.MenuButton;
+import com.snakevsblocks.gui.button.StoreButton;
 import com.snakevsblocks.util.Font;
 import javafx.application.Platform;
 import javafx.scene.Cursor;
@@ -43,6 +44,9 @@ public class Menu extends Window {
     // Info button
     private InfoButton infoButton;
 
+    // Store button
+    private StoreButton storeButton;
+
     public Menu(WindowController wc, Canvas canvas) {
         super(wc, canvas);
 
@@ -54,13 +58,16 @@ public class Menu extends Window {
         menuButtons = new EnumMap<MenuButtons, MenuButton>(MenuButtons.class);
 
         // Add menu buttons
-        initMenuButtons();
+        initButtons();
 
         // Add info button
         infoButton = new InfoButton(App.TILE_SIZE / 3, App.TILE_SIZE / 3);
+
+        // Add Store button
+        storeButton = new StoreButton(App.SCREEN_WIDTH - App.TILE_SIZE / 2, App.TILE_SIZE / 3);
     }
 
-    public void initMenuButtons() {
+    public void initButtons() {
 
         menuButtons.clear();
 
@@ -105,6 +112,8 @@ public class Menu extends Window {
                     windowController.setWindow(Windows.LEADERBOARD, mouseX, mouseY);
                 } else if (infoButton.isHovered(mouseX, mouseY)) {
                     windowController.setWindow(Windows.INFO, mouseX, mouseY);
+                } else if (storeButton.isHovered(mouseX, mouseY)) {
+                    windowController.setWindow(Windows.STORE, mouseX, mouseY);
                 } else if (menuButtons.get(MenuButtons.EXIT).isHovered(mouseX, mouseY)) {
                     Platform.exit();
                 }
@@ -136,7 +145,7 @@ public class Menu extends Window {
             }
         }
 
-        if (infoButton.isHovered(mouseX, mouseY)) {
+        if (infoButton.isHovered(mouseX, mouseY) || storeButton.isHovered(mouseX, mouseY)) {
             hovered = true;
         }
 
@@ -186,6 +195,9 @@ public class Menu extends Window {
 
         // Show Info button
         infoButton.show(gc);
+
+        // Show Store button
+        storeButton.show(gc);
     }
 
     public void setPrevScore(int prevScore) {
