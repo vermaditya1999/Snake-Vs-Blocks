@@ -218,13 +218,13 @@ public class Game extends Window {
     private void populate() {
 
         /*
-         * 50% chance of chain if previous added row was not chain
-         * 20% chance of chain if previous added row was chain
+         * 45% chance of chain if previous added row was not chain
+         * 15% chance of chain if previous added row was chain
          */
-        int choice = Random.nextInt(10);
+        int choice = Random.nextInt(20);
 
         // Adding complete row of blocks
-        if ((chainAdded && choice <= 1) || (!chainAdded && choice <= 4)) {
+        if ((chainAdded && choice <= 2) || (!chainAdded && choice <= 8)) {
 
             chainAdded = true;
 
@@ -257,41 +257,10 @@ public class Game extends Window {
                 } else {
 
                     // No Block/ Wall has been added, a token can be added
-                    /* Probabilities of tokens:
-                     * Shield : 0.2%
-                     * Magnet : 0.2%
-                     * Destroyer : 0.2%
-                     * Coin : 2%
-                     * PickupBall : 4%
-                     * Special PowerUp : 0.1%
-                     */
-
-                    int choose = Random.nextInt(1000);
-
-                    if (choose <= 1) {
-                        tokens.add(new Shield(i, -2));
-                        break;
-
-                    } else if (choose <= 3) {
-                        tokens.add(new Magnet(i, -2));
-                        break;
-
-                    } else if (choose <= 5) {
-                        tokens.add(new Destroyer(i, -2));
-                        break;
-
-                    } else if (choose <= 25) {
-                        tokens.add(new Coin(i, -2));
-                        break;
-
-                    } else if (choose <= 85) {
-                        tokens.add(new PickupBall(i, -2));
-                        break;
-
-                    } else if (choose == 999) {
-                        tokens.add(new Star(i, -2));
+                    if (generateTokenProbability(i)) {
                         break;
                     }
+
                 }
             }
 
@@ -327,39 +296,7 @@ public class Game extends Window {
                 } else {
 
                     // No Block/ Wall has been added, a token can be added
-                    /* Probabilities of tokens:
-                     * Shield : 0.2%
-                     * Magnet : 0.2%
-                     * Destroyer : 0.2%
-                     * Coin : 2%
-                     * PickupBall : 4%
-                     * Special PowerUp : 0.1%
-                     */
-
-                    choose = Random.nextInt(1000);
-
-                    if (choose <= 1) {
-                        tokens.add(new Shield(i, -2));
-                        break;
-
-                    } else if (choose <= 3) {
-                        tokens.add(new Magnet(i, -2));
-                        break;
-
-                    } else if (choose <= 5) {
-                        tokens.add(new Destroyer(i, -2));
-                        break;
-
-                    } else if (choose <= 25) {
-                        tokens.add(new Coin(i, -2));
-                        break;
-
-                    } else if (choose <= 85) {
-                        tokens.add(new PickupBall(i, -2));
-                        break;
-
-                    } else if (choose == 999) {
-                        tokens.add(new Star(i, -2));
+                    if (generateTokenProbability(i)) {
                         break;
                     }
                 }
@@ -397,44 +334,12 @@ public class Game extends Window {
             trigger = 0;
         } else if (trigger % App.TILE_SIZE == 0) {
 
-            /* Probabilities of tokens:
-             * Shield : 0.2%
-             * Magnet : 0.2%
-             * Destroyer : 0.2%
-             * Coin : 2%
-             * PickupBall : 6%
-             * Special PowerUp : 0.1%
-             */
             for (int i = 1; i <= 5; i++) {
-                int choose = Random.nextInt(1000);
-
-                if (choose <= 1) {
-                    tokens.add(new Shield(i, -2));
-                    break;
-
-                } else if (choose <= 3) {
-                    tokens.add(new Magnet(i, -2));
-                    break;
-
-                } else if (choose <= 5) {
-                    tokens.add(new Destroyer(i, -2));
-                    break;
-
-                } else if (choose <= 25) {
-                    tokens.add(new Coin(i, -2));
-                    break;
-
-                } else if (choose <= 85) {
-                    tokens.add(new PickupBall(i, -2));
-                    break;
-
-                } else if (choose == 999) {
-                    tokens.add(new Star(i, -2));
+                if (generateTokenProbability(i)) {
                     break;
                 }
             }
         }
-
         /*
          * Blocks, walls and tokens are updated with the game curSpeed.
          * They are removed from the Collection if they are out of the screen.
@@ -588,6 +493,46 @@ public class Game extends Window {
         // Update score and coin labels
         scoreLabel.update(Integer.toString(score));
         coinLabel.update(Integer.toString(coins));
+    }
+
+    /* Probabilities of tokens:
+     * Shield : 0.2%
+     * Magnet : 0.2%
+     * Destroyer : 0.2%
+     * Coin : 3%
+     * PickupBall : 6%
+     * Special PowerUp : 0.05%
+     */
+    private boolean generateTokenProbability(int index) {
+
+        int choose = Random.nextInt(2000);
+
+        if (choose <= 3) {
+            tokens.add(new Shield(index, -2));
+            return true;
+
+        } else if (choose <= 7) {
+            tokens.add(new Magnet(index, -2));
+            return true;
+
+        } else if (choose <= 11) {
+            tokens.add(new Destroyer(index, -2));
+            return true;
+
+        } else if (choose <= 71) {
+            tokens.add(new Coin(index, -2));
+            return true;
+
+        } else if (choose <= 191) {
+            tokens.add(new PickupBall(index, -2));
+            return true;
+
+        } else if (choose == 999) {
+            tokens.add(new Star(index, -2));
+            return true;
+        }
+
+        return false;
     }
 
     private void showGamePlay() {
