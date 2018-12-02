@@ -263,6 +263,7 @@ public class Game extends Window {
                      * Destroyer : 0.2%
                      * Coin : 2%
                      * PickupBall : 4%
+                     * Special PowerUp : 0.1%
                      */
 
                     int choose = Random.nextInt(1000);
@@ -285,6 +286,10 @@ public class Game extends Window {
 
                     } else if (choose <= 85) {
                         tokens.add(new PickupBall(i, -2));
+                        break;
+
+                    } else if (choose == 999) {
+                        tokens.add(new Star(i, -2));
                         break;
                     }
                 }
@@ -328,6 +333,7 @@ public class Game extends Window {
                      * Destroyer : 0.2%
                      * Coin : 2%
                      * PickupBall : 4%
+                     * Special PowerUp : 0.1%
                      */
 
                     choose = Random.nextInt(1000);
@@ -350,6 +356,10 @@ public class Game extends Window {
 
                     } else if (choose <= 85) {
                         tokens.add(new PickupBall(i, -2));
+                        break;
+
+                    } else if (choose == 999) {
+                        tokens.add(new Star(i, -2));
                         break;
                     }
                 }
@@ -393,6 +403,7 @@ public class Game extends Window {
              * Destroyer : 0.2%
              * Coin : 2%
              * PickupBall : 6%
+             * Special PowerUp : 0.1%
              */
             for (int i = 1; i <= 5; i++) {
                 int choose = Random.nextInt(1000);
@@ -416,7 +427,8 @@ public class Game extends Window {
                 } else if (choose <= 85) {
                     tokens.add(new PickupBall(i, -2));
                     break;
-                } else if (choose <= 16) {
+
+                } else if (choose == 999) {
                     tokens.add(new Star(i, -2));
                     break;
                 }
