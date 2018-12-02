@@ -22,6 +22,10 @@ abstract public class Timer implements Serializable {
     }
 
     public void reset() {
+        val = 0;
+    }
+
+    public void set() {
         val = Timer.MAX_VAL;
     }
 

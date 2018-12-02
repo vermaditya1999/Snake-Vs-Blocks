@@ -374,9 +374,9 @@ public class Game extends Window {
                         }
                     }
                 } else if (token instanceof Magnet) {
-                    magnetTimer.reset();
+                    magnetTimer.set();
                 } else if (token instanceof Shield) {
-                    shieldTimer.reset();
+                    shieldTimer.set();
                 }
 
                 // Add SmallBurst
