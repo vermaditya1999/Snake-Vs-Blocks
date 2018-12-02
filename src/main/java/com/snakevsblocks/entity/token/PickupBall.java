@@ -6,32 +6,51 @@ import com.snakevsblocks.util.Random;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/**
+ * PickupBall is a Token which, when consumed, increases the
+ * length of the snake by its value.
+ *
+ * @see Token
+ * <p>
+ * The value of the PickupBall is set as per the following
+ * Probability chart:
+ * 1 : 50%
+ * 2 : 30%
+ * 3 : 10%
+ * 4 : 6%
+ * 5 : 4%
+ */
 public class PickupBall extends Token {
 
+    /**
+     * Value of the ball.
+     */
     private int value;
 
+    /**
+     * Creates new PickupBall.
+     * @param x x coordinate of the PickupBall centre
+     * @param y y coordinate of the PickupBall centre
+     */
     public PickupBall(double x, double y) {
 
         super(x, y);
         assignValue();
     }
 
+    /**
+     * Assigns value to the Ball as per the probability chart.
+     */
     private void assignValue() {
-        /* Probability chart for Ball value:
-         * 1 : 60%
-         * 2 : 30%
-         * 3 : 5%
-         * 4 : 3%
-         * 5 : 2%
-         */
+
         int choose = Random.nextInt(100);
-        if (choose < 60) {
+        if (choose < 50) {
             value = 1;
-        } else if (choose < 90) {
+        } else if (choose < 80) {
             value = 2;
-        } else if (choose < 95) {
+        } else if (choose < 90) {
             value = 3;
-        } else if (choose < 98) {
+        } else if (choose < 96) {
             value = 4;
         } else {
             value = 5;

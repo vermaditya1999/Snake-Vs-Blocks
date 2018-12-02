@@ -9,10 +9,20 @@ import javafx.scene.paint.Color;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+/**
+ * Snake is the main entity of the game, which needs to survive
+ * for the game-play to proceed.
+ */
 public class Snake implements Serializable {
 
+    /**
+     * List of Snake Balls
+     */
     private LinkedList<SnakeBall> snakeBalls;
 
+    /**
+     * Constructs a new Snake.
+     */
     public Snake() {
 
         snakeBalls = new LinkedList<SnakeBall>();
@@ -24,11 +34,21 @@ public class Snake implements Serializable {
         addBalls(9);
     }
 
+    /**
+     * Generates formula for linear interpolation.
+     *
+     * @param x x coordinate of the position vector
+     * @param y y coordinate of the position vector
+     * @return TODO
+     */
     private double lerp(double x, double y) {
         return x + (y - x) * 0.2;
     }
 
-    // Prerequisite: Snake has at least one ball
+    /**
+     * Adds snakeBalls to the snake.
+     * @param n number of balls to be added
+     */
     public void addBalls(int n) {
 
         for (int i = 0; i < n; i++) {
@@ -37,14 +57,26 @@ public class Snake implements Serializable {
         }
     }
 
-    // Prerequisite: Snake has at least one ball
+    /**
+     * Removes one ball from the snake.
+     * Prerequisite: Snake has at least one ball
+     */
     public void removeBall() {
         if (snakeBalls.size() > 0) {
             snakeBalls.removeLast();
         }
     }
 
-    // Prerequisite: Snake has at least one ball
+    /**
+     * Updates position of the snake.
+     *
+     * Prerequisite: Snake has at least one ball
+     *
+     * @param mouseX x coordinate of the mouse position
+     * @param mouseY y coordinate of the mouse position
+     * @param walls LinkedList of walls on the screen
+     * @param blocks LinkedList of blocks on the screen
+     */
     public void update(double mouseX, double mouseY, LinkedList<Wall> walls, LinkedList<Block> blocks) {
 
         // Prevent half snake from leaving the screen
@@ -127,8 +159,6 @@ public class Snake implements Serializable {
             // The slant vector
             // Direction: From dir to down
             // Magnitude: Experimental hardcoded value
-            // Could we make it better by multiplying teh slant according to the distance between
-            // prev and cur?
             Vector slant = Vector.sub(down, dir);
             slant.mult(0.2);
 
@@ -140,6 +170,11 @@ public class Snake implements Serializable {
         }
     }
 
+    /**
+     * Displays the snake on the screen.
+     * @param gc Graphic context on which to show the token
+     * @param color Color of the snake balls
+     */
     public void show(GraphicsContext gc, int[] color) {
         if (!isDead()) {
             Vector head = snakeBalls.get(0).getPos();
@@ -154,11 +189,14 @@ public class Snake implements Serializable {
         }
     }
 
+    /**
+     * Checks if snake is dead.
+     * @return true if number of snake balls is zero
+     */
     public boolean isDead() {
         return snakeBalls.size() == 0;
     }
 
-    // Prerequisite: Snake has at least one ball
     public Vector getHeadVector() {
         return snakeBalls.get(0).getPos();
     }
@@ -167,15 +205,24 @@ public class Snake implements Serializable {
         return snakeBalls.size();
     }
 
-    // This method must be called after adding a small burst at the snake's head pos
+    /**
+     * Removes the head of the snake.
+     */
     public void removeHead() {
         snakeBalls.removeFirst();
     }
 
+    /**
+     * Removes the tail of the snake.
+     */
     public void removeTail() {
         snakeBalls.removeLast();
     }
 
+    /**
+     * Checks if snake head is at the correct position.
+     * @return true if snake head is at the middle of the screen
+     */
     public boolean inPos() {
         return snakeBalls.getFirst().getPos().y <= App.SCREEN_HEIGHT / 2 + App.TILE_SIZE;
     }
