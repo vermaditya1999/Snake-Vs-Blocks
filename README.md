@@ -2,13 +2,9 @@
 
 Clone of the famous Snake vs Blocks game, made purely in JavaFX Canvas.  
 
-Menu                       | In Game
-:-------------------------:|:-------------------------:
-![](screenshots/001.png) | ![](screenshots/002.png)
-
-Pause                      | Store
-:-------------------------:|:-------------------------:
-![](screenshots/003.png)   | ![](screenshots/004.png)
+Menu                       | In Game                   | Pause                     | Store
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![](screenshots/001.png)   | ![](screenshots/002.png)  | ![](screenshots/003.png)  | ![](screenshots/004.png)
 
 ## Features
 - Pause you game and never let anything hold you to score a highscore!
