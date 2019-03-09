@@ -1,15 +1,15 @@
 # Snake Vs Blocks
 
-Clone of the famous Snake vs Blocks game, made purely in JavaFX Canvas. Watch a 1 minute [gameplay](https://www.youtube.com/watch?v=CPC02BDkRFw&feature=youtu.be).
+Clone of the famous Snake VS Blocks game, made purely in JavaFX Canvas. Watch a 1 minute [gameplay](https://www.youtube.com/watch?v=CPC02BDkRFw&feature=youtu.be).
 
 Menu                       | In Game                   | Pause                     | Store
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](screenshots/001.png)   | ![](screenshots/002.png)  | ![](screenshots/003.png)  | ![](screenshots/004.png)
 
 ## Features
-- Pause you game and never let anything hold you to score a highscore!
+- Pause your game and never let anything hold you to score a highscore!
 - Save your progress by hitting the pause button.
-- Change your snake color by purchasing skins from store using in game collected coins.
+- Change your snake color by purchasing skins from the store using in-game collected coins.
 - View top ten scores in the Leaderboard.
 - Rare special powerup to send you into ultimate nirvana!
 - Smooth animations and modern UI.
