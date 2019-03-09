@@ -9,7 +9,8 @@ Menu                       | In Game                   | Pause                  
 ## Features
 - Pause you game and never let anything hold you to score a highscore!
 - Save your progress by hitting the pause button.
-- Change your snake color by purchasing skins from Store using in game collected coins.
+- Change your snake color by purchasing skins from store using in game collected coins.
+- View top ten scores in the Leaderboard.
 - Rare special powerup to send you into ultimate nirvana!
 - Smooth animations and modern UI.
 
