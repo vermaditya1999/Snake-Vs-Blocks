@@ -1,6 +1,6 @@
 # Snake Vs Blocks
 
-Clone of the famous Snake vs Blocks game, made purely in JavaFX Canvas.  
+Clone of the famous Snake vs Blocks game, made purely in JavaFX Canvas. Watch a 1 minute [gameplay](https://www.youtube.com/watch?v=CPC02BDkRFw&feature=youtu.be).
 
 Menu                       | In Game                   | Pause                     | Store
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
